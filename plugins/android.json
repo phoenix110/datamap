@@ -1,0 +1,27 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-backbutton": {
+      "PACKAGE_NAME": "com.maicedata.datamap"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.maicedata.datamap"
+    },
+    "cordova-plugin-ionic-keyboard": {
+      "PACKAGE_NAME": "com.maicedata.datamap"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "com.maicedata.datamap"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.maicedata.datamap"
+    }
+  },
+  "dependent_plugins": {}
+}

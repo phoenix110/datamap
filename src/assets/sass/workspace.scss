@@ -1,0 +1,135 @@
+.workspace-nav-tit {
+  align-self: stretch;
+  flex: 1;
+  align-items: center;
+  display: flex!important;
+  flex-direction: row;
+  justify-content: center;
+  .f7-icons {
+    font-size: 10px !important;
+    margin-left: 5px;
+    transition: all 0.1s;
+    transform: translate3d(0px, 0px, 0px);
+    margin-bottom: 3px;
+  }
+  &.open {
+    .f7-icons {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.ws-top-fade-enter-active, .ws-top-fade-leave-active {
+  transition: all 0.3s;
+}
+
+.ws-top-fade-enter, .ws-top-fade-leave-to {
+  opacity: 0;
+}
+
+.ws-nav-top-list {
+  transform: translate3d(0px, 0px, 0px);
+  position: fixed;
+  z-index: 999999;
+  left: 0;
+  right: 0;
+  width: 100%;
+  top: 44px;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  border-bottom: 0;
+  .list {
+    margin: 0;
+    padding: 12px 0 15px 0;
+    background: rgba(255,255,255,0.95);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    ul {
+      background: transparent;
+      height: 265px;
+      overflow: auto;
+      opacity: 1;
+      transition: all 0.3s;
+      transform: translate3d(0px, 0px, 0px);
+    }
+    ul:before, ul:after {
+      display: none;
+    }
+    .item-content {
+      padding-left: 0;
+    }
+    .item-inner {
+      min-height: 44px;
+      padding-right: 15px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: inline-block;
+      padding-left: 60px;
+    }
+    .item-inner:after {
+      display: none;
+    }
+    .item-inner.active-state {
+      background: rgba(237, 237, 237, 0.4);
+    }
+    li.selected .item-inner {
+      color: #007AFF;
+    }
+  }
+
+  .ios .ptr-refreshing .ws-nav-top-list {
+    top: 0;
+  }
+  &.ws-top-fade-enter, &.ws-top-fade-leave-to {
+    .list ul {
+      height: 0;
+      opacity: 0;
+    }
+  }
+}
+
+
+.echart_card {
+  width: 100%;
+  margin-right: 15px;
+  height: 300px;
+}
+
+.chart_title {
+  height: 24px;
+}
+.echarts_cus.echarts {
+  width: 100%;
+  height: 100%;
+}
+
+.echarts_loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.ws-searchbar-comp-list.list {
+  margin-top: 0;
+  ul {
+    background: transparent;
+    &:before {
+      display: none;
+    }
+    li {
+      margin: 8px;
+      background: #fff;
+      border-radius: 6px;
+      .item-inner:after {
+        display: none;
+      }
+    }
+  }
+}
+
+.chart_inner {
+  height: 100%;
+  width: 100%;
+}

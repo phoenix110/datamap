@@ -1,0 +1,111 @@
+.ios, .md {
+  .login-screen-content {
+    background-image: url("../../static/images/m_login_bg.png");
+    background-size: cover;
+    padding-top: 144px!important;
+    color: #fff;
+
+    .login-screen-title {
+      width: 240px;
+      height: 74px;
+      background-image: url("../../static/images/datamap_logo.png");
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    input {
+      color: #fff !important;
+    }
+    input[type="text"]::placeholder, input[type="password"]::placeholder, input[type="search"]::placeholder, input[type="email"]::placeholder, input[type="tel"]::placeholder, input[type="url"]::placeholder, input[type="date"]::placeholder, input[type="datetime-local"]::placeholder, input[type="time"]::placeholder, input[type="number"]::placeholder, select::placeholder {
+      color: rgba(255, 255, 255, 0.5) !important;
+    }
+    .item-input-focused .item-input-wrap:after,
+    .input-focused:after {
+      background: #2196f3;
+    }
+
+    .login_btn {
+      margin: 40px 28px 0;
+      background: #2D9FEA;
+      border-radius: 2px;
+      //&:hover,&:active,&:focus {
+      //  background: #61C0FF;
+      //}
+      a.list-button {
+        color: #fff !important;
+        &.active-state {
+          background: #61C0FF;
+        }
+      }
+    }
+
+    .wx_login_btn {
+      margin-top: 153px;
+    }
+
+    .list li:last-child li:last-child > .item-content > .item-inner:after, .list li:last-child li:last-child > .item-inner:after, .list li:last-child li:last-child > .item-link > .item-content > .item-inner:after, .list li:last-child > .item-content > .item-inner:after, .list li:last-child > .item-inner:after, .list li:last-child > .item-link > .item-content > .item-inner:after {
+      display: block !important;
+    }
+  }
+}
+.ios {
+  .login-screen-content {
+    .list .item-content {
+      padding-left: 28px;
+      padding-right: 28px;
+    }
+  }
+}
+.md {
+  .login-screen-content {
+    .list .item-content {
+      padding-left: 28px;
+      padding-right: 14px;
+    }
+    .item-input-wrap:after {
+      content: '';
+      position: absolute;
+      background-color: #c8c7cc;
+      display: block;
+      z-index: 15;
+      top: auto;
+      right: auto;
+      bottom: 0;
+      left: 0;
+      height: 1px;
+      width: 100%;
+      -webkit-transform-origin: 50% 100%;
+      transform-origin: 50% 100%;
+    }
+  }
+}
+
+@keyframes login-loading {
+  @for $i from 0 through 25 {
+    #{$i * 4}% {
+      background-position: -#{$i * 45}px 0;
+    }
+  }
+}
+
+.loading-bg {
+  width: 45px;
+  height: 45px;
+  background: url('../../static/images/loading-sprite.png');
+  -webkit-animation:login-loading 1s steps(1) 0s infinite both;
+  animation:login-loading 1s steps(1) 0s infinite both;
+}
+
+.login-loading-panel {
+  background: rgba(62, 62, 62, 0.6);
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
