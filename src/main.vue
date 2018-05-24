@@ -13,6 +13,7 @@
     </div>
 </template>
 <script>
+import tokenUtil from './assets/js/utils/tokenUtil'
 export default {
     data() {
         return {
@@ -22,6 +23,8 @@ export default {
     },
     mounted() {
         let self = this;
+        // this.needStatusbarOverlay = true;
+        // self.$$("html").addClass("isandroid");
         document.addEventListener("deviceready", function(){
             console.log(`device.version: ${device.version}, isandroid: ${self.$device.android}`);
             setTimeout(() => {
@@ -30,6 +33,13 @@ export default {
                     window.StatusBar && window.StatusBar.overlaysWebView(true);
                     self.needStatusbarOverlay = true;
                     self.$$("html").addClass("isandroid");
+                    if (tokenUtil.get()) {
+                        window.StatusBar && window.StatusBar.styleDefault();
+                    }
+                }else if (!self.isAndroid) {
+                    if (tokenUtil.get()) {
+                        window.StatusBar && window.StatusBar.styleDefault();
+                    }
                 }
             })
             window.addEventListener('keyboardDidShow', (ev) => {

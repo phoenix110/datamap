@@ -1278,6 +1278,14 @@ cliui@^3.2.0:
     strip-ansi "^3.0.1"
     wrap-ansi "^2.0.0"
 
+cliui@^4.0.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/cliui/-/cliui-4.1.0.tgz#348422dbe82d800b3022eef4f6ac10bf2e4d1b49"
+  dependencies:
+    string-width "^2.1.1"
+    strip-ansi "^4.0.0"
+    wrap-ansi "^2.0.0"
+
 clone-deep@^2.0.1:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/clone-deep/-/clone-deep-2.0.2.tgz#00db3a1e173656730d1188c3d6aced6d7ea97713"
@@ -1471,6 +1479,10 @@ cookie@0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.3.1.tgz#e7e0a1f9ef43b4c8ba925c5c5a96e806d16873bb"
 
+coordtransform@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/coordtransform/-/coordtransform-2.1.2.tgz#090349cd62b1dc05fae47b291bf9f0b7ce827f66"
+
 copy-concurrently@^1.0.0:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/copy-concurrently/-/copy-concurrently-1.0.5.tgz#92297398cae34937fcafd6ec8139c18051f0b5e0"
@@ -1556,13 +1568,25 @@ cordova-ios@^4.5.4:
     xcode "^0.9.0"
     xml-escape "^1.1.0"
 
+cordova-plugin-advanced-http@^1.11.1:
+  version "1.11.1"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-advanced-http/-/cordova-plugin-advanced-http-1.11.1.tgz#56b76d37486500f357ee511c0fadcd126e167002"
+
 cordova-plugin-backbutton@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/cordova-plugin-backbutton/-/cordova-plugin-backbutton-0.3.0.tgz#752fd68fff83d3917ae1eff6de2cd50fcce024e3"
 
+cordova-plugin-crosswalk-webview@^2.4.1:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-crosswalk-webview/-/cordova-plugin-crosswalk-webview-2.4.0.tgz#90717bc4315c92d3182782fcba6b7ad89e532311"
+
 cordova-plugin-device@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/cordova-plugin-device/-/cordova-plugin-device-2.0.1.tgz#9b9e2313e682119ff8402f68096a38bcc5013593"
+
+cordova-plugin-file@^6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-file/-/cordova-plugin-file-6.0.1.tgz#49606b8c15a5688d4728f92e4a7325a061de07f5"
 
 cordova-plugin-ionic-keyboard@^2.0.5:
   version "2.0.5"
@@ -1572,9 +1596,17 @@ cordova-plugin-statusbar@^2.4.1:
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/cordova-plugin-statusbar/-/cordova-plugin-statusbar-2.4.1.tgz#222628a78aa54d34d4c927990020d0a3bace5545"
 
+cordova-plugin-wechat@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-wechat/-/cordova-plugin-wechat-2.3.0.tgz#6f5af9c8a077ee8a5ec81bb511b50becd78a77b2"
+
 cordova-plugin-whitelist@^1.3.3:
   version "1.3.3"
   resolved "https://registry.yarnpkg.com/cordova-plugin-whitelist/-/cordova-plugin-whitelist-1.3.3.tgz#b5e85ecdbbfe5aeded40a1bf4ee2372e67d96fb4"
+
+"cordova-plugin-wkwebview-engine@git+https://github.com/apache/cordova-plugin-wkwebview-engine.git#master":
+  version "1.1.5-dev"
+  resolved "git+https://github.com/apache/cordova-plugin-wkwebview-engine.git#81eeadeb542fefc05c4cd5e68ba0221e6a965c73"
 
 cordova-registry-mapper@^1.1.8:
   version "1.1.15"
@@ -1786,6 +1818,16 @@ cyclist@~0.2.2:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/cyclist/-/cyclist-0.2.2.tgz#1b33792e11e914a2fd6d6ed6447464444e5fa640"
 
+d3-color@1:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/d3-color/-/d3-color-1.1.0.tgz#73957299b63ca935bf19c6c9d835e90066028329"
+
+d3-interpolate@^1.1.6:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/d3-interpolate/-/d3-interpolate-1.1.6.tgz#2cf395ae2381804df08aa1bf766b7f97b5f68fb6"
+  dependencies:
+    d3-color "1"
+
 d@1:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/d/-/d-1.0.0.tgz#754bb5bfe55451da69a58b94d45f4c5b0462d58f"
@@ -1954,9 +1996,9 @@ dom-serializer@0, dom-serializer@~0.1.0:
     domelementtype "~1.1.1"
     entities "~1.1.1"
 
-dom7@^2.0.3:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/dom7/-/dom7-2.0.3.tgz#610c530d32ebd9690d3959b19a0f379584f24fc4"
+dom7@^2.0.5:
+  version "2.0.5"
+  resolved "http://registry.npm.taobao.org/dom7/download/dom7-2.0.5.tgz#d99e1f416cacd627c6d3ed7b90be47c8f3c7b258"
   dependencies:
     ssr-window "^1.0.0"
 
@@ -2025,11 +2067,11 @@ ecc-jsbn@~0.1.1:
   dependencies:
     jsbn "~0.1.0"
 
-echarts@^4.0.4:
-  version "4.0.4"
-  resolved "https://registry.yarnpkg.com/echarts/-/echarts-4.0.4.tgz#36aa8a47d33543d3dfe6a7bc1228ddc3a1e41157"
+echarts@^4.0.4, echarts@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/echarts/-/echarts-4.1.0.tgz#d588c95f73c1a9928b9c73d5b769751c3185bcdc"
   dependencies:
-    zrender "4.0.3"
+    zrender "4.0.4"
 
 editorconfig@^0.13.2:
   version "0.13.3"
@@ -2551,15 +2593,15 @@ framework7-icons@^0.9.0:
   version "0.9.1"
   resolved "https://registry.yarnpkg.com/framework7-icons/-/framework7-icons-0.9.1.tgz#01f089ce9f71eae112f516630b17009929a8b384"
 
-framework7-vue@^2.0.0:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/framework7-vue/-/framework7-vue-2.1.2.tgz#483d5b92ad7c1e25a24dcf987504aa0abb5c77f6"
+framework7-vue@^2.2.5:
+  version "2.2.5"
+  resolved "http://registry.npm.taobao.org/framework7-vue/download/framework7-vue-2.2.5.tgz#f937e79d85b0aeca22e25d15d8f0cad60219e5c8"
 
-framework7@^2.0.6:
-  version "2.1.3"
-  resolved "https://registry.yarnpkg.com/framework7/-/framework7-2.1.3.tgz#f61944723951fc3dbcf6cd2b35438ff43ce0092c"
+framework7@^2.2.5:
+  version "2.2.5"
+  resolved "http://registry.npm.taobao.org/framework7/download/framework7-2.2.5.tgz#417a27e88aa8c9bb09738852cf74ddd1af408185"
   dependencies:
-    dom7 "^2.0.3"
+    dom7 "^2.0.5"
     path-to-regexp "^2.1.0"
     ssr-window "^1.0.0"
     template7 "^1.3.5"
@@ -2587,6 +2629,10 @@ fs-write-stream-atomic@^1.0.8:
 fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/fs.realpath/-/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
+
+fs@^0.0.1-security:
+  version "0.0.1-security"
+  resolved "https://registry.yarnpkg.com/fs/-/fs-0.0.1-security.tgz#8a7bd37186b6dddf3813f23858b57ecaaf5e41d4"
 
 fsevents@^1.0.0, fsevents@^1.1.2:
   version "1.1.3"
@@ -3698,6 +3744,10 @@ lru-cache@^4.0.1, lru-cache@^4.1.1:
     pseudomap "^1.0.2"
     yallist "^2.1.2"
 
+lz-string@^1.4.4:
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/lz-string/-/lz-string-1.4.4.tgz#c0d8eaf36059f705796e1e344811cf4c498d3a26"
+
 macaddress@^0.2.8:
   version "0.2.8"
   resolved "https://registry.yarnpkg.com/macaddress/-/macaddress-0.2.8.tgz#5904dc537c39ec6dbefeae902327135fa8511f12"
@@ -3969,6 +4019,10 @@ no-case@^2.2.0, no-case@^2.3.2:
 node-forge@0.7.1:
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/node-forge/-/node-forge-0.7.1.tgz#9da611ea08982f4b94206b3beb4cc9665f20c300"
+
+node-forge@^0.7.5:
+  version "0.7.5"
+  resolved "https://registry.yarnpkg.com/node-forge/-/node-forge-0.7.5.tgz#6c152c345ce11c52f465c2abd957e8639cd674df"
 
 node-gyp@^3.3.1:
   version "3.6.2"
@@ -5189,9 +5243,9 @@ requires-port@1.0.x, requires-port@1.x.x, requires-port@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
 
-resize-detector@^0.1.5:
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/resize-detector/-/resize-detector-0.1.5.tgz#7b7458ec7427d9373d2e6f6f6e661465c0481aef"
+resize-detector@^0.1.6:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/resize-detector/-/resize-detector-0.1.6.tgz#8c3fcb9e44913576c9981d8bec0c7e02e31bc1b1"
 
 resolve-cwd@^2.0.0:
   version "2.0.0"
@@ -5461,6 +5515,10 @@ simple-plist@^0.2.1:
     bplist-parser "0.1.1"
     plist "2.0.1"
 
+simple-statistics@^5.4.0:
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/simple-statistics/-/simple-statistics-5.4.0.tgz#d54c8394d6d611b5f21ad538cc761efe889df018"
+
 slash@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
@@ -5716,7 +5774,7 @@ string-width@^1.0.1, string-width@^1.0.2:
     is-fullwidth-code-point "^1.0.0"
     strip-ansi "^3.0.0"
 
-string-width@^2.0.0:
+string-width@^2.0.0, string-width@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/string-width/-/string-width-2.1.1.tgz#ab93f27a8dc13d28cac815c462143a6d9012ae9e"
   dependencies:
@@ -6182,7 +6240,7 @@ uuid@3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.0.1.tgz#6544bba2dfda8c1cf17e629a3a305e2bb1fee6c1"
 
-uuid@^3.0.0, uuid@^3.0.1, uuid@^3.1.0:
+uuid@^3.0.0, uuid@^3.0.1, uuid@^3.1.0, uuid@^3.2.1:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.2.1.tgz#12c528bb9d58d0b9265d9a2f6f0fe8be17ff1f14"
 
@@ -6215,13 +6273,13 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
-vue-echarts@^3.0.5:
-  version "3.0.5"
-  resolved "https://registry.yarnpkg.com/vue-echarts/-/vue-echarts-3.0.5.tgz#40dfa70e26e5aae30a59c3546760cdc48676a774"
+vue-echarts@^3.0.7:
+  version "3.0.7"
+  resolved "https://registry.yarnpkg.com/vue-echarts/-/vue-echarts-3.0.7.tgz#d1ce3a51156c7a83799e575ccbae53f7524eb655"
   dependencies:
     echarts "^4.0.4"
     lodash "^4.17.4"
-    resize-detector "^0.1.5"
+    resize-detector "^0.1.6"
 
 vue-hot-reload-api@^2.0.11, vue-hot-reload-api@^2.1.0:
   version "2.3.0"
@@ -6382,6 +6440,10 @@ websocket-extensions@>=0.1.1:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/websocket-extensions/-/websocket-extensions-0.1.3.tgz#5d2ff22977003ec687a4b87073dfbbac146ccf29"
 
+whatwg-fetch@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-2.0.4.tgz#dde6a5df315f9d39991aa17621853d720b85566f"
+
 whet.extend@~0.9.9:
   version "0.9.9"
   resolved "https://registry.yarnpkg.com/whet.extend/-/whet.extend-0.9.9.tgz#f877d5bf648c97e5aa542fadc16d6a259b9c11a1"
@@ -6409,6 +6471,12 @@ wide-align@^1.1.0:
 window-size@0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/window-size/-/window-size-0.1.0.tgz#5438cd2ea93b202efa3a19fe8887aee7c94f9c9d"
+
+wkx@^0.4.4:
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/wkx/-/wkx-0.4.4.tgz#cf751b672e4b45e162f9fd30124878e73d96c9b2"
+  dependencies:
+    "@types/node" "*"
 
 wordwrap@0.0.2:
   version "0.0.2"
@@ -6495,6 +6563,12 @@ yargs-parser@^7.0.0:
   dependencies:
     camelcase "^4.1.0"
 
+yargs-parser@^9.0.2:
+  version "9.0.2"
+  resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-9.0.2.tgz#9ccf6a43460fe4ed40a9bb68f48d43b8a68cc077"
+  dependencies:
+    camelcase "^4.1.0"
+
 yargs@6.6.0:
   version "6.6.0"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-6.6.0.tgz#782ec21ef403345f830a808ca3d513af56065208"
@@ -6512,6 +6586,23 @@ yargs@6.6.0:
     which-module "^1.0.0"
     y18n "^3.2.1"
     yargs-parser "^4.2.0"
+
+yargs@^11.0.0:
+  version "11.0.0"
+  resolved "https://registry.yarnpkg.com/yargs/-/yargs-11.0.0.tgz#c052931006c5eee74610e5fc0354bedfd08a201b"
+  dependencies:
+    cliui "^4.0.0"
+    decamelize "^1.1.1"
+    find-up "^2.1.0"
+    get-caller-file "^1.0.1"
+    os-locale "^2.0.0"
+    require-directory "^2.1.1"
+    require-main-filename "^1.0.1"
+    set-blocking "^2.0.0"
+    string-width "^2.0.0"
+    which-module "^2.0.0"
+    y18n "^3.2.1"
+    yargs-parser "^9.0.2"
 
 yargs@^7.0.0:
   version "7.1.0"
@@ -6558,6 +6649,6 @@ yargs@~3.10.0:
     decamelize "^1.0.0"
     window-size "0.1.0"
 
-zrender@4.0.3:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/zrender/-/zrender-4.0.3.tgz#801ef001101750a61857f84e64c4d5fb3c88cca7"
+zrender@4.0.4:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/zrender/-/zrender-4.0.4.tgz#910e60d888f00c9599073f23758dd23345fe48fd"

@@ -7,6 +7,9 @@
     "files": {}
   },
   "installed_plugins": {
+    "cordova-plugin-advanced-http": {
+      "PACKAGE_NAME": "com.maicedata.datamap"
+    },
     "cordova-plugin-backbutton": {
       "PACKAGE_NAME": "com.maicedata.datamap"
     },
@@ -19,9 +22,23 @@
     "cordova-plugin-statusbar": {
       "PACKAGE_NAME": "com.maicedata.datamap"
     },
+    "cordova-plugin-wechat": {
+      "WECHATAPPID": "wx876af3b122110aed",
+      "PACKAGE_NAME": "com.maicedata.datamap"
+    },
     "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.maicedata.datamap"
+    },
+    "cordova-plugin-wkwebview-engine": {
+      "PACKAGE_NAME": "com.maicedata.datamap"
+    },
+    "cordova-hot-code-push-plugin": {
       "PACKAGE_NAME": "com.maicedata.datamap"
     }
   },
-  "dependent_plugins": {}
+  "dependent_plugins": {
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "com.maicedata.datamap"
+    }
+  }
 }

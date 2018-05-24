@@ -12,6 +12,9 @@ const path = require('path'),
   devServerPort = 8081
 
 let config = function (env) {
+  console.log("=================");
+  console.log("env: ",env);
+  console.log("=================");
   let resolve = function (pt) {return path.resolve(__dirname, pt)};
   let returner = {
     entry: entryFile,
@@ -51,7 +54,9 @@ let config = function (env) {
     plugins: [
       new webpack.DefinePlugin({
         'process.env': {
-          'NODE_ENV': JSON.stringify((env && typeof env !== "undefined" && env.release) ? 'production' : 'development')
+          'NODE_ENV': JSON.stringify((env && typeof env !== "undefined" && env.release) ? 'production' : 'development'),
+          'DEPLOY_ENV': JSON.stringify(env && typeof env !== "undefined" && env.deploy_env),
+          'API_URL': env && typeof env !== "undefined" && env.api_url !== "undefined"  ? JSON.stringify(env.api_url) : undefined,
         }
       }),
       new HtmlWebpackPlugin({

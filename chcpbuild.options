@@ -1,0 +1,38 @@
+{
+    "dev": {
+        "config-file": "http://127.0.0.1/chcp.json",
+        "auto-download": {
+            "enabled": false
+        },
+        "auto-install": {
+            "enabled": false
+        },
+        "native-interface": {
+            "version": 1
+        }
+    },
+    "staging": {
+        "config-file": "http://ms.lite.maicedata.com/chcp.json",
+        "auto-download": {
+            "enabled": false
+        },
+        "auto-install": {
+            "enabled": false
+        },
+        "native-interface": {
+            "version": 1
+        }
+    },
+    "prod": {
+        "config-file": "http://m.lite.maicedata.com/chcp.json",
+        "auto-download": {
+            "enabled": false
+        },
+        "auto-install": {
+            "enabled": false
+        },
+        "native-interface": {
+            "version": 1
+        }
+    }
+}

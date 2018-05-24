@@ -1,0 +1,8 @@
+{
+    "name": "datamap_app",
+    "update": "start",
+    "content_url": "http://m.lite.maicedata.com",
+    "ios_identifier": "*********",
+    "android_identifier": "com.maicedata.datamap",
+    "min_native_interface": 1
+}

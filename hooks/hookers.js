@@ -171,14 +171,14 @@ module.exports = function (ctx) {
 			return defer.promise
 		},
 
-		startWebpackBuild(isRelease) {
+		startWebpackBuild(isRelease, deployEnv, apiUrl) {
 			let defer = new Q.defer()
 
 			console.log('Starting webpack build...')
 
       let wpPath = webpackPath + (os.platform() === 'win32' ? '.cmd' : '')
 
-			exec(`"${wpPath}"` + (isRelease ? ' --env.release' : ''), {cwd: pRoot, maxBuffer: 1024 * 1024 * 5}, (error) => {
+			exec(`"${wpPath}"` + (isRelease ? ' --env.release' : '') + (deployEnv ? ' --env.deploy_env='+deployEnv : '') + (apiUrl ? ' --env.api_url='+apiUrl:''), {cwd: pRoot, maxBuffer: 1024 * 1024 * 5}, (error) => {
 				if (error) {
 					console.error(`Error happened when webpack build: ${error}`);
 					defer.reject(new Error(`Error happened when webpack build: ${error}`))
@@ -196,15 +196,48 @@ module.exports = function (ctx) {
 			return defer.promise
 		},
 
-		startWebpackDevServer() {
+		copyCHCPconfig(deployEnv) {
+			let defer = new Q.defer()
+			
+			console.log('Starting copy hcp config...')
+			exec(`cp -f cordova-hcp-${deployEnv}.json cordova-hcp.json`, (error) => {
+				if (error) {
+					console.error(`Error happened when copy hcp config: ${error}`);
+					defer.reject(new Error(`Error happened when copy hcp config: ${error}`))
+				}
+
+				console.log('copy hcp config successfully!')
+				defer.resolve()
+			})
+			return defer.promise
+		},
+
+		buildCHCP() {
+			let defer = new Q.defer()
+
+			console.log('Starting hcp build...')
+
+			exec('cordova-hcp build', (error) => {
+				if (error) {
+					console.error(`Error happened when hcp build: ${error}`);
+					defer.reject(new Error(`Error happened when hcp build: ${error}`))
+				}
+				console.log('hcp build completed to www folder successfully!')
+				defer.resolve()
+			})
+
+			return defer.promise
+		},
+
+		startWebpackDevServer(deployEnv, apiUrl) {
 			let defer = new Q.defer(),
 				outText = '',
 				isResultFound = false,
-				args = [`"${webpackDevServerPath}"`, '--hot', '--inline', '--env.devserver', `--public ${getRouterIpAddr()}:8081`],
+				args = [`"${webpackDevServerPath}"`, '--hot', '--inline', '--env.devserver', '--env.deploy_env='+deployEnv, '--env.api_url='+apiUrl, `--public ${getRouterIpAddr()}:8081`],
 				run = epipeBombPath
 
 			if( os.platform() === 'win32' ) {
-				args = ['--hot', '--inline', '--env.devserver', `--public ${getRouterIpAddr()}:8081`]
+				args = ['--hot', '--inline', '--env.devserver', '--env.deploy_env='+deployEnv, '--env.api_url='+apiUrl, `--public ${getRouterIpAddr()}:8081`]
 				run = `"${webpackDevServerPath}.cmd"`
 			}
 
@@ -266,6 +299,13 @@ module.exports = function (ctx) {
 					ctx.opts.options.argv.indexOf(name) > -1 ||
 					ctx.opts.options.argv[name] === true
 				)
+			)
+		},
+
+		getArgv(name) {
+			return (typeof ctx.opts !== 'undefined' &&
+				typeof ctx.opts.options !== 'undefined' &&
+				ctx.opts.options[name]
 			)
 		},
 
@@ -385,7 +425,14 @@ module.exports = function (ctx) {
 		isServe = sys.isFoundInCmdline('serve'),
 		isLiveReload = sys.checkArgv('--live-reload') || sys.checkArgv('--lr') || sys.checkArgv('lr') || sys.checkArgv('live-reload'),
 		isNoBuild = sys.checkOption('no-build'),
-		isRelease = sys.checkOption('release')
+		isRelease = sys.checkOption('release'),
+		deployEnv = sys.getArgv('deploy'),
+		apiUrl = sys.getArgv('api')
+
+		console.log("=====================");
+		console.log("deployEnv: ",deployEnv);
+		console.log("apiUrl: ",apiUrl);
+		console.log("=====================");
 
 	if (ctx.opts.platforms.length === 0 && !isPrepare) {
 		console.log('Update happened. Skipping...')
@@ -400,9 +447,9 @@ module.exports = function (ctx) {
 		sys.checkNodeModules()
 		.then(() => {
 			if (isBuild || ((isRun || isEmulate || isPrepare) && !isLiveReload && !isNoBuild)) {
-				return sys.makeNonDevServerChanges().then(() => sys.startWebpackBuild(isRelease))
+				return sys.makeNonDevServerChanges().then(() => sys.startWebpackBuild(isRelease, deployEnv, apiUrl)).then(() => sys.copyCHCPconfig(deployEnv)).then(() => sys.buildCHCP())
 			} else if (isServe || (isRun || isEmulate) && isLiveReload) {
-				return sys.makeDevServerChanges().then(() => sys.startWebpackDevServer())
+				return sys.makeDevServerChanges().then(() => sys.startWebpackDevServer(deployEnv, apiUrl)).then(() => sys.copyCHCPconfig(deployEnv)).then(() => sys.buildCHCP())
 			}
 			else
 				return sys.emptyDefer()

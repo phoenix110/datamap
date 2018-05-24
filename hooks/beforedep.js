@@ -71,7 +71,7 @@ module.exports = function (ctx) {
 				)
 			)
 		},
-		
+
 		isFoundInCmdline( cmdCommand ) {
 			return (
 				ctx.cmdLine.indexOf(`cordova ${cmdCommand}`) > -1 ||

@@ -1,0 +1,67 @@
+{
+  "_from": "git+https://github.com/apache/cordova-plugin-wkwebview-engine.git#master",
+  "_id": "cordova-plugin-wkwebview-engine@1.1.5-dev",
+  "_inBundle": false,
+  "_integrity": "sha1-XRSJLtPvczQ3CAgqCZDT1BgQCwQ=",
+  "_location": "/cordova-plugin-wkwebview-engine",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "git",
+    "raw": "https://github.com/apache/cordova-plugin-wkwebview-engine.git#master",
+    "rawSpec": "https://github.com/apache/cordova-plugin-wkwebview-engine.git#master",
+    "saveSpec": "git+https://github.com/apache/cordova-plugin-wkwebview-engine.git#master",
+    "fetchSpec": "https://github.com/apache/cordova-plugin-wkwebview-engine.git",
+    "gitCommittish": "master"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "git+https://github.com/apache/cordova-plugin-wkwebview-engine.git#81eeadeb542fefc05c4cd5e68ba0221e6a965c73",
+  "_spec": "https://github.com/apache/cordova-plugin-wkwebview-engine.git#master",
+  "_where": "/Users/hzz/Mission/datamap_app",
+  "author": {
+    "name": "Apache Cordova"
+  },
+  "bugs": {
+    "url": "https://issues.apache.org/jira/browse/CB"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "The official Apache Cordova WKWebView Engine Plugin",
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-semistandard": "^11.0.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.3.0",
+    "eslint-plugin-node": "^5.0.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1"
+  },
+  "engines": {
+    "cordovaDependencies": {
+      "2.0.0": {
+        "cordova": ">100"
+      }
+    }
+  },
+  "homepage": "https://github.com/apache/cordova-plugin-wkwebview-engine#readme",
+  "keywords": [
+    "cordova",
+    "wkwebview"
+  ],
+  "license": "Apache-2.0",
+  "main": "index.js",
+  "name": "cordova-plugin-wkwebview-engine",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/apache/cordova-plugin-wkwebview-engine.git"
+  },
+  "scripts": {
+    "eslint": "eslint src",
+    "objc-tests": "cd tests/ios && npm test",
+    "preobjc-tests": "cd tests/ios && npm install",
+    "test": "npm run eslint && npm run objc-tests"
+  },
+  "version": "1.1.5-dev"
+}

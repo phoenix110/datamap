@@ -16,10 +16,10 @@
 		3047A5131AB8059700498E2A /* build-release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3047A5101AB8059700498E2A /* build-release.xcconfig */; };
 		3047A5141AB8059700498E2A /* build.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3047A5111AB8059700498E2A /* build.xcconfig */; };
 		6AFF5BF91D6E424B00AB3073 /* CDVLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AFF5BF81D6E424B00AB3073 /* CDVLaunchScreen.storyboard */; };
-		0B767B03A47042DF845C8544 /* CDVDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = F069EC98130E428A8CDEC4DB /* CDVDevice.m */; };
-		CE63DC6F9CC34108A272803B /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 601D1A410E594B19BE86AECD /* libz.tbd */; };
-		DC7602F016C44FB8A359209C /* CDVIonicKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 913AAB34FF6641D094B85855 /* CDVIonicKeyboard.m */; };
-		2D8175EF681B45C3AC2E1C1E /* CDVStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = B6416DCBB28546DCA30218A6 /* CDVStatusBar.m */; };
+		6360B113D8604365AF352E3F /* CDVDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = E51EC0EF989A4B0EBFD61F19 /* CDVDevice.m */; };
+		0265B422DE3848AEADC8D143 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E6397DAE0154CE2AEC18437 /* libz.tbd */; };
+		17198B7BBCC640089D5221A5 /* CDVIonicKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = C354156DE07D400D8512EDBD /* CDVIonicKeyboard.m */; };
+		E48EBC821650494BBD894E6B /* CDVStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EFD98DB448E4F10B972CDA9 /* CDVStatusBar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,13 +60,13 @@
 		EB87FDF41871DAF40020F90C /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = ../../config.xml; sourceTree = "<group>"; };
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = "DataMap/config.xml"; sourceTree = "<group>"; };
 		ED33DF2A687741AEAF9F8254 /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Bridging-Header.h"; path = "Bridging-Header.h"; sourceTree = "<group>"; };
-		F069EC98130E428A8CDEC4DB /* CDVDevice.m */ = {isa = PBXFileReference; name = "CDVDevice.m"; path = "cordova-plugin-device/CDVDevice.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
-		77D68F411E9942A7AA871CC4 /* CDVDevice.h */ = {isa = PBXFileReference; name = "CDVDevice.h"; path = "cordova-plugin-device/CDVDevice.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
-		601D1A410E594B19BE86AECD /* libz.tbd */ = {isa = PBXFileReference; name = "libz.tbd"; path = "usr/lib/libz.tbd"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = sourcecode.text-based-dylib-definition; explicitFileType = undefined; includeInIndex = 0; };
-		913AAB34FF6641D094B85855 /* CDVIonicKeyboard.m */ = {isa = PBXFileReference; name = "CDVIonicKeyboard.m"; path = "cordova-plugin-ionic-keyboard/CDVIonicKeyboard.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
-		B18E82361DB648BCB280585A /* CDVIonicKeyboard.h */ = {isa = PBXFileReference; name = "CDVIonicKeyboard.h"; path = "cordova-plugin-ionic-keyboard/CDVIonicKeyboard.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
-		B6416DCBB28546DCA30218A6 /* CDVStatusBar.m */ = {isa = PBXFileReference; name = "CDVStatusBar.m"; path = "cordova-plugin-statusbar/CDVStatusBar.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
-		140D9ACD38D6441DA9B81A31 /* CDVStatusBar.h */ = {isa = PBXFileReference; name = "CDVStatusBar.h"; path = "cordova-plugin-statusbar/CDVStatusBar.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		E51EC0EF989A4B0EBFD61F19 /* CDVDevice.m */ = {isa = PBXFileReference; name = "CDVDevice.m"; path = "cordova-plugin-device/CDVDevice.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		D96864C9938F414FA3A58B24 /* CDVDevice.h */ = {isa = PBXFileReference; name = "CDVDevice.h"; path = "cordova-plugin-device/CDVDevice.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		0E6397DAE0154CE2AEC18437 /* libz.tbd */ = {isa = PBXFileReference; name = "libz.tbd"; path = "usr/lib/libz.tbd"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = sourcecode.text-based-dylib-definition; explicitFileType = undefined; includeInIndex = 0; };
+		C354156DE07D400D8512EDBD /* CDVIonicKeyboard.m */ = {isa = PBXFileReference; name = "CDVIonicKeyboard.m"; path = "cordova-plugin-ionic-keyboard/CDVIonicKeyboard.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		46E17CA253074A888E906229 /* CDVIonicKeyboard.h */ = {isa = PBXFileReference; name = "CDVIonicKeyboard.h"; path = "cordova-plugin-ionic-keyboard/CDVIonicKeyboard.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		9EFD98DB448E4F10B972CDA9 /* CDVStatusBar.m */ = {isa = PBXFileReference; name = "CDVStatusBar.m"; path = "cordova-plugin-statusbar/CDVStatusBar.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		9F47A75C81944769B8376A99 /* CDVStatusBar.h */ = {isa = PBXFileReference; name = "CDVStatusBar.h"; path = "cordova-plugin-statusbar/CDVStatusBar.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,7 +75,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				301BF552109A68D80062928A /* libCordova.a in Frameworks */,
-				CE63DC6F9CC34108A272803B /* libz.tbd in Frameworks */,
+				0265B422DE3848AEADC8D143 /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,7 +146,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				601D1A410E594B19BE86AECD /* libz.tbd */,
+				0E6397DAE0154CE2AEC18437 /* libz.tbd */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -172,12 +172,12 @@
 		307C750510C5A3420062BCA9 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
-				F069EC98130E428A8CDEC4DB /* CDVDevice.m */,
-				77D68F411E9942A7AA871CC4 /* CDVDevice.h */,
-				913AAB34FF6641D094B85855 /* CDVIonicKeyboard.m */,
-				B18E82361DB648BCB280585A /* CDVIonicKeyboard.h */,
-				B6416DCBB28546DCA30218A6 /* CDVStatusBar.m */,
-				140D9ACD38D6441DA9B81A31 /* CDVStatusBar.h */,
+				E51EC0EF989A4B0EBFD61F19 /* CDVDevice.m */,
+				D96864C9938F414FA3A58B24 /* CDVDevice.h */,
+				C354156DE07D400D8512EDBD /* CDVIonicKeyboard.m */,
+				46E17CA253074A888E906229 /* CDVIonicKeyboard.h */,
+				9EFD98DB448E4F10B972CDA9 /* CDVStatusBar.m */,
+				9F47A75C81944769B8376A99 /* CDVStatusBar.h */,
 			);
 			name = Plugins;
 			path = "DataMap/Plugins";
@@ -290,9 +290,9 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
-				0B767B03A47042DF845C8544 /* CDVDevice.m in Sources */,
-				DC7602F016C44FB8A359209C /* CDVIonicKeyboard.m in Sources */,
-				2D8175EF681B45C3AC2E1C1E /* CDVStatusBar.m in Sources */,
+				6360B113D8604365AF352E3F /* CDVDevice.m in Sources */,
+				17198B7BBCC640089D5221A5 /* CDVIonicKeyboard.m in Sources */,
+				E48EBC821650494BBD894E6B /* CDVStatusBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

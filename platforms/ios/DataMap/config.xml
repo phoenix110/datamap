@@ -31,6 +31,7 @@
     </feature>
     <hook src="hooks/hookers.js" type="before_prepare" />
     <hook src="hooks/beforedep.js" type="before_deploy" />
+    <hook src="hooks/copy_build_extras.js" type="after_platform_add" />
     <name>DataMap</name>
     <description>
         Brand new cordova project!
@@ -67,4 +68,5 @@
     <preference name="android-minSdkVersion" value="19" />
     <preference name="StatusBarOverlaysWebView" value="true" />
     <preference name="KeyboardResizeMode" value="true" />
+    <preference name="xwalkMultipleApk" value="true" />
 </widget>

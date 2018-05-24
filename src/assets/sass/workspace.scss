@@ -89,11 +89,16 @@
   }
 }
 
-
+.charts-draw-area {
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 4px;
+  padding-right: 4px;
+}
 .echart_card {
   width: 100%;
-  margin-right: 15px;
-  height: 300px;
+  // margin-right: 15px;
+  // height: 300px;
 }
 
 .chart_title {
@@ -111,25 +116,46 @@
   height: 100%;
 }
 
-.ws-searchbar-comp-list.list {
-  margin-top: 0;
-  ul {
-    background: transparent;
-    &:before {
-      display: none;
-    }
-    li {
-      margin: 8px;
-      background: #fff;
-      border-radius: 6px;
-      .item-inner:after {
-        display: none;
-      }
-    }
-  }
-}
-
 .chart_inner {
   height: 100%;
   width: 100%;
+}
+
+.ios .ws_nodata {
+  background: url('../../static/images/home.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.ios .ws_nodata:after {
+  content: '暂无数据，请在PC端添加';
+  font-size: 20px;
+  position: absolute;
+  text-align: center;
+  left: 0;
+  right: 0;
+  bottom: 15vh;
+  color: #a8a8a8;
+}
+.ios .ws_page .page-content {
+  margin-top: 0px;
+}
+.ios .ws_nodata .page-content {
+  margin-top: -44px;
+}
+.ios .ws_page .ptr-preloader {
+  margin-top: -44px;
+}
+.ios .ws_nodata .ptr-preloader {
+  margin-top: -44px;
+}
+.ios .ws_nodata .ptr-no-navbar .ptr-preloader {
+  margin-top: 0;
+}
+
+.ios .ws_page .ptr-no-navbar {
+    height: 100%;
+}
+.ios .ws_nodata .ptr-no-navbar {
+    height: calc(100%+44px);
 }

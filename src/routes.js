@@ -25,6 +25,14 @@ export default [
     path: paths.chart_detail,
     component: require('./assets/vue/pages/chart-detail.vue')
   },
+  {
+    path: paths.city_choose,
+    component: require('./assets/vue/pages/city-choose.vue')
+  },
+  {
+    path: paths.my_data,
+    component: require('./assets/vue/pages/my-data-page.vue')
+  },
 
   //example
   {

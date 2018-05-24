@@ -2,6 +2,7 @@
 <widget id="com.maicedata.datamap" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <hook src="hooks/hookers.js" type="before_prepare" />
     <hook src="hooks/beforedep.js" type="before_deploy" />
+    <hook src="hooks/copy_build_extras.js" type="after_platform_add" />
     <name>DataMap</name>
     <description>
         Brand new cordova project!
@@ -23,4 +24,6 @@
     <preference name="StatusBarStyle" value="blacktranslucent" />
     <preference name="StatusBarOverlaysWebView" value="true" />
     <preference name="KeyboardResizeMode" value="true" />
+    <preference name="xwalkMultipleApk" value="true" />
+    <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
 </widget>

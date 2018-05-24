@@ -40,7 +40,8 @@ module.exports.metadata =
   "cordova-plugin-device": "2.0.1",
   "cordova-plugin-ionic-keyboard": "2.0.5",
   "cordova-plugin-statusbar": "2.4.1",
-  "cordova-plugin-whitelist": "1.3.3"
+  "cordova-plugin-whitelist": "1.3.3",
+  "cordova-plugin-crosswalk-webview": "2.4.0"
 };
 // BOTTOM OF METADATA
 });
