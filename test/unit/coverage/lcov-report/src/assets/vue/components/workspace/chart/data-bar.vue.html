@@ -1,0 +1,2486 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/assets/vue/components/workspace/chart/data-bar.vue</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../../../index.html">all files</a> / <a href="index.html">src/assets/vue/components/workspace/chart/</a> data-bar.vue
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">2.7% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>9/333</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0.36% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>1/277</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/36</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">2.99% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>9/301</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628
+629
+630
+631
+632
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665
+666
+667
+668
+669
+670
+671
+672
+673
+674
+675
+676
+677
+678
+679
+680
+681
+682
+683
+684
+685
+686
+687
+688
+689
+690
+691
+692
+693
+694
+695
+696
+697
+698
+699
+700
+701
+702
+703
+704
+705
+706
+707
+708
+709
+710
+711
+712
+713
+714
+715
+716
+717
+718
+719
+720
+721
+722
+723
+724
+725
+726
+727
+728
+729
+730
+731
+732
+733
+734
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752
+753
+754
+755
+756
+757
+758
+759
+760
+761
+762
+763
+764
+765
+766
+767
+768
+769
+770
+771
+772
+773
+774
+775
+776
+777
+778
+779
+780
+781
+782
+783
+784
+785
+786
+787
+788
+789
+790
+791
+792
+793
+794
+795
+796
+797
+798
+799
+800
+801
+802
+803
+804
+805
+806
+807
+808</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
+    &lt;div :class="isDetailPg ? 'data-bar-isDetailPg' : 'data-bar-style'"&gt;
+        &lt;div :class="['chart_loading', isDetailPg ? 'detailpg-loading' : '']" v-if="!loaded"&gt;
+            &lt;f7-preloader&gt;&lt;/f7-preloader&gt;
+            &lt;span class="ml5"&gt;努力加载中...&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div class="content-area" v-else&gt;
+            &lt;div class="chart-title"&gt;{{cData.title}}&lt;/div&gt;
+            &lt;div class="detail-info" v-if="isDetailPg"&gt;
+                &lt;div class="filter-area"&gt;
+                    &lt;ul&gt;
+                        &lt;li v-for="(value, i1) in filterList" :key="i1"&gt;{{value.name}}、&lt;/li&gt;
+                        &lt;li class="open"&gt;展开&lt;/li&gt;
+                    &lt;/ul&gt;
+                &lt;/div&gt;
+                &lt;div class="tooltip-info" v-if="legendInfo.list.length != 0"&gt;
+                    &lt;div class="tip-name"&gt;{{legendInfo.name}}&lt;/div&gt;
+                    &lt;div class="number-info"&gt;
+                        &lt;div class="ele-info" v-for="(value, i2) in legendInfo.list" :key="i2"&gt;
+                            &lt;div class="num" :style="{'color': value.color}"&gt;{{value.value}}&lt;/div&gt;
+                            &lt;div class="title"&gt;{{value.name}}&lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="chart-draw"&gt;
+                &lt;vchart ref="bar" :options="options" class="echarts_bar" theme="ovilia-green" :init-options="initOptions"/&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+import echarts from 'echarts';
+import size from 'lodash/size';
+import map from 'lodash/map';
+import forEach from 'lodash/forEach';
+import round from 'lodash/round';
+import orderBy from 'lodash/orderBy';
+import keys from 'lodash/keys';
+import cloneDeep from 'lodash/cloneDeep';
+import pick from 'lodash/pick';
+import {defaultExtraValues, editYAxiNumberMenus} from '../../../../js/constants/Constants.js';
+import {h_type_text,formulaWordMap, new_chart_colors as chart_colors, sort_desc,sort_asc, defaultChartExtraValues, barMaxWidth, connectNulls,
+defaultSortedFilter, sorted_filter_all, sorted_filter_percent_percent,
+rotate_type_right, rotate_type_left, maxItemLen, defaultLegendStyle, lineOnlyPoint,
+} from '../../../../js/constants/Constants'
+import fetchUtil from '../../../../js/utils/fetchUtil';
+import {model_api_url, headers, paramFake} from '../../../../js/constants/ApiConfig'
+const hide = {show: false};
+const stackMap = {
+    stack: '纵轴堆积',
+    per_stack: '纵轴百分比堆积'
+}
+const fixedColor = "#000000"; //由于设计稿背景白色，这里设置成固定值
+const colorLen = size(chart_colors);
+const xKeys = keys(defaultChartExtraValues.xAxisExt);
+const yKeys = keys(defaultChartExtraValues.yAxisExt);
+const nyKeys = keys(defaultChartExtraValues.newYAxisExt);
+export default {
+    name: "DataBar",
+    props: ['cData', 'isDetailPg'],
+    data(){
+        return {
+            initOptions: {
+                renderer: 'canvas',
+            },
+            result: '',
+            options: {},
+            filterList: [],
+            legendInfo: {name: '', list: []},
+            loaded: false,
+            preViewExtraValue: {},
+        }
+    },
+    created(){
+        size(this.cData) ? <span class="branch-0 cbranch-no" title="branch not covered" >this.getFillData() </span>: null;
+    },
+    watch: {
+        cData: function()<span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >            size(this.cData) ? this.getFillData() : null;</span>
+        }
+    },
+    methods: {
+        getFillData(force_update=false){
+<span class="cstat-no" title="statement not covered" >            fetchUtil(`${model_api_url}graph/config?force_update=${force_update}${paramFake}`,</span>
+            {method: 'POST', headers, body: JSON.stringify(this.cData)})
+            .then(resp=&gt;<span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >                this.getOption(resp.result);</span>
+<span class="cstat-no" title="statement not covered" >                this.loaded = true;</span>
+            })
+        },
+        getExtraVal(key) {
+            let val = <span class="cstat-no" title="statement not covered" >this.preViewExtraValue;</span>
+<span class="cstat-no" title="statement not covered" >            return cloneDeep(val &amp;&amp; val[key] ? val[key] :</span>
+                defaultChartExtraValues[key]);
+        },
+        getDataVal(val, force, roundNum, def='') {
+<span class="cstat-no" title="statement not covered" >            return val ? (force ? val.toFixed(roundNum) : round(val, roundNum)) : def;</span>
+        },
+        getLabelFormatter(value, splitNum) {
+            let formatter = <span class="cstat-no" title="statement not covered" >[1, ''],</span> w = <span class="cstat-no" title="statement not covered" >10000,</span> k = <span class="cstat-no" title="statement not covered" >1000;</span>
+            // 第一个超过1w或有一半数字超过1w
+<span class="cstat-no" title="statement not covered" >            if (value &gt;= w || Math.ceil(splitNum * 0.5) * value &gt;= w) {</span>
+<span class="cstat-no" title="statement not covered" >                formatter = [w, 'w'];</span>
+            } else <span class="cstat-no" title="statement not covered" >if (value &gt;= k || Math.ceil(splitNum * 0.5) * value &gt;= k) {</span>
+<span class="cstat-no" title="statement not covered" >                formatter = [k, 'k'];</span>
+            }
+<span class="cstat-no" title="statement not covered" >            return formatter;</span>
+        },
+        omitColor(t) {
+<span class="cstat-no" title="statement not covered" >            if (typeof t === 'object') {</span>
+<span class="cstat-no" title="statement not covered" >                forEach(t, (v, k) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >                    if (k === 'color' || k === 'fontSize'){</span>
+<span class="cstat-no" title="statement not covered" >                        delete t[k];</span>
+                    }else {
+<span class="cstat-no" title="statement not covered" >                        this.omitColor(v)</span>
+                    }
+                })
+            }
+        },
+        fillExtDefault(ext, def) {
+<span class="cstat-no" title="statement not covered" >            forEach(def, (val,key)=&gt;<span class="fstat-no" title="function not covered" >{<span class="cstat-no" title="statement not covered" >!ext[key] &amp;&amp; (ext[key] = val)}</span>)</span>;</span>
+        },
+        getOption(chartData) {
+            let _this = <span class="cstat-no" title="statement not covered" >this;</span>
+            let {title, extra, object_type, chart_type} = <span class="cstat-no" title="statement not covered" >_this.cData;</span>
+            let yAxis_m = <span class="cstat-no" title="statement not covered" >_this.cData.yAxis;</span>
+            let xAxis_m = <span class="cstat-no" title="statement not covered" >_this.cData.xAxis;</span>
+<span class="cstat-no" title="statement not covered" >            _this.preViewExtraValue = extra;</span>
+            let xAlis = <span class="cstat-no" title="statement not covered" >xAxis_m || [];</span>
+            let yAlis = <span class="cstat-no" title="statement not covered" >yAxis_m[0].items;</span>
+            let newYAlis = <span class="cstat-no" title="statement not covered" >[],</span> newYAliType = <span class="cstat-no" title="statement not covered" >'',</span> showNewYAli = <span class="cstat-no" title="statement not covered" >false;</span>
+<span class="cstat-no" title="statement not covered" >            showNewYAli = size(yAxis_m) &gt;= 2;</span>
+<span class="cstat-no" title="statement not covered" >            if (showNewYAli) {</span>
+<span class="cstat-no" title="statement not covered" >                newYAlis = yAxis_m[1].items;</span>
+<span class="cstat-no" title="statement not covered" >                newYAliType = yAxis_m[1].chart_type;</span>
+            }
+&nbsp;
+            // 编辑属性
+            let legendExt = <span class="cstat-no" title="statement not covered" >this.getExtraVal('legendExt');</span>
+            // 新追加属性
+<span class="cstat-no" title="statement not covered" >            this.fillExtDefault(legendExt, defaultLegendStyle);</span>
+            let xAxisExt = <span class="cstat-no" title="statement not covered" >this.getExtraVal('xAxisExt');</span>
+            let yAxisExt = <span class="cstat-no" title="statement not covered" >this.getExtraVal('yAxisExt');</span>
+            let newYAxisExt = <span class="cstat-no" title="statement not covered" >this.getExtraVal('newYAxisExt');</span>
+            let labelExt = <span class="cstat-no" title="statement not covered" >this.getExtraVal('labelExt');</span>
+            let newLabelExt = <span class="cstat-no" title="statement not covered" >this.getExtraVal('newLabelExt');</span>
+            let xAxisExt_new = <span class="cstat-no" title="statement not covered" >pick(xAxisExt, xKeys);</span>
+            let yAxisExt_new = <span class="cstat-no" title="statement not covered" >pick(yAxisExt, yKeys);</span>
+            let newYAxisExt_new = <span class="cstat-no" title="statement not covered" >pick(newYAxisExt, nyKeys);</span>
+&nbsp;
+            let preViewExtraValue = <span class="cstat-no" title="statement not covered" >{legendExt, labelExt, newLabelExt, </span>
+                xAxisExt: xAxisExt_new, yAxisExt: yAxisExt_new};// 预览值
+            let defaultExtraValue = <span class="cstat-no" title="statement not covered" >cloneDeep(defaultChartExtraValues);</span>// 默认值
+            let xData = <span class="cstat-no" title="statement not covered" >[],</span> sData = <span class="cstat-no" title="statement not covered" >[],</span> legend = <span class="cstat-no" title="statement not covered" >[],</span> yAxis = <span class="cstat-no" title="statement not covered" >[];</span>
+            let yItems = <span class="cstat-no" title="statement not covered" >[[chart_type, yAlis]],</span> hasNewY = <span class="cstat-no" title="statement not covered" >size(newYAlis);</span>
+<span class="cstat-no" title="statement not covered" >            if (hasNewY) {</span>
+<span class="cstat-no" title="statement not covered" >                yItems.push([newYAliType || chart_type, newYAlis]);</span>
+<span class="cstat-no" title="statement not covered" >                preViewExtraValue.newYAxisExt = newYAxisExt_new;</span>
+            } else {// 删除冗余属性
+<span class="cstat-no" title="statement not covered" >                delete defaultExtraValue.newYAxisExt;</span>
+            }
+            let saveExtraValue = <span class="cstat-no" title="statement not covered" >cloneDeep(preViewExtraValue);</span>// 存储值
+            let isDetailPg = <span class="cstat-no" title="statement not covered" >_this.isDetailPg;</span>
+&nbsp;
+            let hasX = <span class="cstat-no" title="statement not covered" >size(xAlis);</span>
+<span class="cstat-no" title="statement not covered" >            if (hasX) {</span>
+                let isContinue = <span class="cstat-no" title="statement not covered" >true;</span>
+<span class="cstat-no" title="statement not covered" >                forEach(yItems, ([type, list], i)=&gt;<span class="fstat-no" title="function not covered" >{</span></span>
+                    let isPer = <span class="cstat-no" title="statement not covered" >type === 'per_stack',</span> totals = <span class="cstat-no" title="statement not covered" >{};</span>
+<span class="cstat-no" title="statement not covered" >                    if (isPer) {</span>
+<span class="cstat-no" title="statement not covered" >                        forEach(list, (item, j)=&gt;<span class="fstat-no" title="function not covered" >{</span></span>
+                            let cIndex = <span class="cstat-no" title="statement not covered" >i === 0 ? j : size(yItems[i - 1][1]) + j;</span>
+<span class="cstat-no" title="statement not covered" >                            forEach((chartData[cIndex] || {}).result, (val, key)=&gt;<span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >                                totals[key] = (val || 0) + (totals[key] || 0);</span>
+                            })
+                        })
+                    }
+<span class="cstat-no" title="statement not covered" >                    forEach(list, (item, j)=&gt;<span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >                        if (item.sort === sort_asc || item.sort === sort_desc) {</span>
+                            let cIndex = <span class="cstat-no" title="statement not covered" >i === 0 ? j : size(yItems[i - 1][1]) + j;</span>
+<span class="cstat-no" title="statement not covered" >                            isContinue = false;</span>
+                            let data_tmp = <span class="cstat-no" title="statement not covered" >(chartData[cIndex] || {}).result,</span> tmp = <span class="cstat-no" title="statement not covered" >{};</span>
+<span class="cstat-no" title="statement not covered" >                            xData = map(data_tmp, (val,key)=&gt;<span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >                                tmp[key]=val;</span>
+<span class="cstat-no" title="statement not covered" >                                return key;</span>
+                            });
+<span class="cstat-no" title="statement not covered" >                            if (isPer) {</span>
+<span class="cstat-no" title="statement not covered" >                                xData = orderBy(xData, x=&gt;<span class="fstat-no" title="function not covered" >{</span></span>
+                                    let val = <span class="cstat-no" title="statement not covered" >tmp[x],</span> t = <span class="cstat-no" title="statement not covered" >totals[x];</span>
+<span class="cstat-no" title="statement not covered" >                                    return t ? (val * 100 / t) : 0;</span>
+                                }, item.sort);
+                            } else {
+<span class="cstat-no" title="statement not covered" >                                xData = orderBy(xData, x=&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >tmp[x],</span></span> item.sort);</span>
+                            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                            defaultExtraValue.xAxisExt.filter = defaultSortedFilter;/</span>/ 默认值
+                            let filter = <span class="cstat-no" title="statement not covered" >xAxisExt.filter || defaultSortedFilter;</span>
+<span class="cstat-no" title="statement not covered" >                            xAxisExt_new.filter = filter; </span>// 预览值
+<span class="cstat-no" title="statement not covered" >                            xAxisExt_new.showFilter = true; </span>// 预览值
+<span class="cstat-no" title="statement not covered" >                            saveExtraValue.xAxisExt.filter = filter; </span>// 存储值
+<span class="cstat-no" title="statement not covered" >                            if (filter.type !== sorted_filter_all) {</span>
+                                let sliceNum = <span class="cstat-no" title="statement not covered" >filter.percent !== sorted_filter_percent_percent ?</span>
+                                    filter.value : filter.value * xData.length / 100;
+<span class="cstat-no" title="statement not covered" >                                sliceNum = parseFloat(filter.type + sliceNum);</span>
+<span class="cstat-no" title="statement not covered" >                                xData = sliceNum &gt; 0 ? xData.slice(0, sliceNum) : xData.slice(sliceNum);</span>
+                            }
+                        }
+<span class="cstat-no" title="statement not covered" >                        return isContinue;</span>
+                    })
+<span class="cstat-no" title="statement not covered" >                    return isContinue;</span>
+                })
+<span class="cstat-no" title="statement not covered" >                if (isContinue) {</span>
+                    // xData = map((chartData[0] || {}).result, (_,key)=&gt;key);
+                    // // 数量太多不建议用户自定义顺序
+                    // let xLen = size(xData);
+                    // if (xAlis[0].h_type === h_type_text &amp;&amp; xLen &lt;= maxItemLen) {
+                    //     defaultExtraValue.xAxisExt.sort = xData;// 默认值
+                    //     let oldSort = {}, i = xLen;
+                    //     forEach(xAxisExt.sort, (it,index)=&gt;{oldSort[it] = index + 1});
+                    //     xData = orderBy(xData, it=&gt;(oldSort[it] || ++i), 'asc');
+                    //     xAxisExt_new.sort = xData; // 预览值
+                    //     saveExtraValue.xAxisExt.sort = xData; // 存储值
+                    // }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                    xData = map((chartData[0] || {}).result, (_,key)=&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >key)</span></span>;</span>
+                    let isText = <span class="cstat-no" title="statement not covered" >xAlis[0].h_type === h_type_text;</span>
+<span class="cstat-no" title="statement not covered" >                    if (isText) {</span>
+<span class="cstat-no" title="statement not covered" >                        xAxisExt_new.showCustom = true; </span> // 用户自定义过滤
+<span class="cstat-no" title="statement not covered" >                        xAxisExt_new.allCustom = xData; </span>// 全部数据供用户选择
+<span class="cstat-no" title="statement not covered" >                        if (size(xAxisExt.custom)) {</span>
+                            let tmp = <span class="cstat-no" title="statement not covered" >{};</span>
+<span class="cstat-no" title="statement not covered" >                            forEach(xAxisExt.custom, it=&gt;<span class="fstat-no" title="function not covered" >{<span class="cstat-no" title="statement not covered" >tmp[it]=true}</span>)</span></span>
+                            let newXData= <span class="cstat-no" title="statement not covered" >filter(xData, it=&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >tmp[it])</span></span>;</span>
+<span class="cstat-no" title="statement not covered" >                            if (size(newXData)) {</span>
+<span class="cstat-no" title="statement not covered" >                                xAxisExt_new.custom = newXData; </span> // 预览值
+<span class="cstat-no" title="statement not covered" >                                saveExtraValue.xAxisExt.custom = newXData; </span> // 存储值
+<span class="cstat-no" title="statement not covered" >                                xData = newXData;</span>
+                            }
+                        }
+                    }
+                    // 数量太多不建议用户自定义顺序
+                    let xLen = <span class="cstat-no" title="statement not covered" >size(xData);</span>
+<span class="cstat-no" title="statement not covered" >                    if (isText &amp;&amp; xLen &lt;= maxItemLen) {</span>
+<span class="cstat-no" title="statement not covered" >                        defaultExtraValue.xAxisExt.sort = xData;/</span>/ 默认值
+                        let oldSort = <span class="cstat-no" title="statement not covered" >{},</span> i = <span class="cstat-no" title="statement not covered" >xLen;</span>
+<span class="cstat-no" title="statement not covered" >                        forEach(xAxisExt.sort, (it,index)=&gt;<span class="fstat-no" title="function not covered" >{<span class="cstat-no" title="statement not covered" >oldSort[it] = index + 1}</span>)</span>;</span>
+<span class="cstat-no" title="statement not covered" >                        xData = orderBy(xData, it=&gt;(<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >oldSort[it] || ++i)</span></span>, 'asc');</span>
+<span class="cstat-no" title="statement not covered" >                        xAxisExt_new.sort = xData; </span>// 预览值
+<span class="cstat-no" title="statement not covered" >                        saveExtraValue.xAxisExt.sort = xData; </span> // 存储值
+                    }
+                }
+            }
+&nbsp;
+            let tipItem = <span class="cstat-no" title="statement not covered" >!hasX,</span> colors = <span class="cstat-no" title="statement not covered" >[],</span>
+                // {force, roundNum} = labelExt,
+                {position: xPos} = <span class="cstat-no" title="statement not covered" >xAxisExt_new;</span>
+            // 坐标轴旋转
+            let isPosRight = <span class="cstat-no" title="statement not covered" >xPos === rotate_type_right,</span>
+                isPosLeft = <span class="cstat-no" title="statement not covered" >xPos === rotate_type_left,</span>
+                isXYRotate = <span class="cstat-no" title="statement not covered" >isPosLeft || isPosRight;</span>
+            let indexKey = <span class="cstat-no" title="statement not covered" >isXYRotate ? 'xAxisIndex' : 'yAxisIndex';</span>
+            let labelPosition = <span class="cstat-no" title="statement not covered" >isPosRight ? 'left' : isPosLeft ? 'right' : 'top';</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            forEach(yItems, ([type, list], i)=&gt;<span class="fstat-no" title="function not covered" >{</span></span>
+                let totals = <span class="cstat-no" title="statement not covered" >{},</span> stack, allTotal = <span class="cstat-no" title="statement not covered" >0,</span>  isFirst = <span class="cstat-no" title="statement not covered" >i === 0,</span>
+                    isPre = <span class="cstat-no" title="statement not covered" >type === 'per_stack',</span> isSta = <span class="cstat-no" title="statement not covered" >type === 'stack';</span>
+                let labelOpt = <span class="cstat-no" title="statement not covered" >isFirst ? labelExt : newLabelExt;</span>
+                let {force, roundNum} = <span class="cstat-no" title="statement not covered" >labelOpt;</span>
+<span class="cstat-no" title="statement not covered" >                if (isPre) {</span>
+<span class="cstat-no" title="statement not covered" >                    forEach(list, (item, j)=&gt;<span class="fstat-no" title="function not covered" >{</span></span>
+                        let cIndex = <span class="cstat-no" title="statement not covered" >isFirst ? j : size(yItems[i - 1][1]) + j;</span>
+<span class="cstat-no" title="statement not covered" >                        forEach((chartData[cIndex] || {}).result, (val, key)=&gt;<span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >                            totals[key] = (val || 0) + (totals[key] || 0);</span>
+                        })
+                    })
+<span class="cstat-no" title="statement not covered" >                    stack = `百分比堆积-${i}`;</span>
+                }
+<span class="cstat-no" title="statement not covered" >                isSta &amp;&amp; (stack = `堆积-${i}`);</span>
+&nbsp;
+                let preSize = <span class="cstat-no" title="statement not covered" >0;</span>
+<span class="cstat-no" title="statement not covered" >                if (tipItem) {</span>
+<span class="cstat-no" title="statement not covered" >                    isPre &amp;&amp; forEach(totals, val=&gt;<span class="fstat-no" title="function not covered" >{<span class="cstat-no" title="statement not covered" >allTotal += val}</span>)</span>;/</span>/ 做统计
+<span class="cstat-no" title="statement not covered" >                    preSize = size(xData);</span>
+<span class="cstat-no" title="statement not covered" >                    if((isFirst || hasNewY) &amp;&amp; (isSta || isPre) &amp;&amp; size(list) &gt; 1) {</span>
+<span class="cstat-no" title="statement not covered" >                        xData.push(i ? `${stackMap[type]}-${i}` : `${stackMap[type]}`);</span>
+                    } else {
+<span class="cstat-no" title="statement not covered" >                        isFirst ? forEach(list, (item)=&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >xData.push(`${item.h_value}-${formulaWordMap[item.func]}`))</span></span></span>
+                            : forEach(list, (item)=&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >xData.push(`${item.h_value}-${formulaWordMap[item.func]}-${i}`))</span></span>;
+                    }
+                }
+&nbsp;
+                let yExt = <span class="cstat-no" title="statement not covered" >yAxisExt,</span> yExt_new = <span class="cstat-no" title="statement not covered" >yAxisExt_new </span>,
+                    aliasMapTmp = <span class="cstat-no" title="statement not covered" >{},</span> colorMapTmp = <span class="cstat-no" title="statement not covered" >{},</span>
+                    yExt_default = <span class="cstat-no" title="statement not covered" >defaultExtraValue.yAxisExt,</span>
+                    yExt_save = <span class="cstat-no" title="statement not covered" >saveExtraValue.yAxisExt;</span>
+<span class="cstat-no" title="statement not covered" >                if (i) {</span>
+<span class="cstat-no" title="statement not covered" >                    yExt = newYAxisExt;</span>
+<span class="cstat-no" title="statement not covered" >                    yExt_new = newYAxisExt_new;</span>
+<span class="cstat-no" title="statement not covered" >                    yExt_default = defaultExtraValue.newYAxisExt;</span>
+<span class="cstat-no" title="statement not covered" >                    yExt_save = saveExtraValue.newYAxisExt;</span>
+                }
+&nbsp;
+                let alias = <span class="cstat-no" title="statement not covered" >yExt.aliasMap || {},</span>
+                    color = <span class="cstat-no" title="statement not covered" >yExt.colorMap || {};</span>
+                let isLine = <span class="cstat-no" title="statement not covered" >type === 'line';</span>
+                let legendMap = <span class="cstat-no" title="statement not covered" >{};</span>
+<span class="cstat-no" title="statement not covered" >                if (isLine &amp;&amp; tipItem) {</span>
+                    let cIndex = <span class="cstat-no" title="statement not covered" >0,</span> name = <span class="cstat-no" title="statement not covered" >object_type;</span>
+<span class="cstat-no" title="statement not covered" >                    if (i) {</span>
+<span class="cstat-no" title="statement not covered" >                        cIndex = yItems[i-1][0] === 'line' ? 1 : size(yItems[i - 1][1]);</span>
+<span class="cstat-no" title="statement not covered" >                        name = `${object_type}-${i}`;</span>
+                    }
+                    let nc = <span class="cstat-no" title="statement not covered" >color[name];</span>
+<span class="cstat-no" title="statement not covered" >                    nc ? (colorMapTmp[name] = nc) : (nc = chart_colors[cIndex % colorLen] || chart_colors[0]);</span>
+<span class="cstat-no" title="statement not covered" >                    colors.push(nc);</span>
+                    let nameVal = <span class="cstat-no" title="statement not covered" >alias[name];</span>
+<span class="cstat-no" title="statement not covered" >                    nameVal ? (aliasMapTmp[name] = nameVal) : (nameVal = name);</span>
+<span class="cstat-no" title="statement not covered" >                    legend.push({name: nameVal, icon: 'circle'});</span>
+<span class="cstat-no" title="statement not covered" >                    legendMap[name] = {color: nc, alias: nameVal};</span>
+                    let data = <span class="cstat-no" title="statement not covered" >new Array(preSize);</span>
+<span class="cstat-no" title="statement not covered" >                    forEach(list, (item, j)=&gt;<span class="fstat-no" title="function not covered" >{</span></span>
+                        let vIndex = <span class="cstat-no" title="statement not covered" >isFirst ? j : size(yItems[i - 1][1]) + j;</span>
+                        let vals = (<span class="cstat-no" title="statement not covered" >(chartData[vIndex] || {}).result || {})</span>;
+                        let val = <span class="cstat-no" title="statement not covered" >vals[item.key];</span>
+<span class="cstat-no" title="statement not covered" >                        data.push(this.getDataVal(val, force, roundNum, 0));</span>
+                    })
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                    sData.push({</span>
+                        name: nameVal,
+                        data,
+                        type: 'line',
+                        [indexKey]: i,
+                        label: {normal: {
+                            show: labelExt.show,
+                            color: labelExt.fontColor,
+                            fontSize: labelExt.fontColor,
+                            position: labelPosition,
+                            // formatter: ({value})=&gt;value
+                            formatter: ({value})=&gt;<span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >                                if (labelOpt.percent) {</span>
+                                    let rd = <span class="cstat-no" title="statement not covered" >roundNum - 2;</span>
+<span class="cstat-no" title="statement not covered" >                                    rd &lt; 0 &amp;&amp; (rd = 0);</span>
+<span class="cstat-no" title="statement not covered" >                                    value = `${this.getDataVal(value * 100, force, rd)}%`;</span>
+                                }
+<span class="cstat-no" title="statement not covered" >                                return value;</span>
+                            }
+                        }},
+                        legendHoverLink: true,
+                    })
+                } else {
+<span class="cstat-no" title="statement not covered" >                    if (isLine) {</span>
+                        // yExt_new.seriesType = 'line';
+                        // let lineVal = yExt.connectNulls || connectNulls;
+                        // yExt_new.connectNulls = lineVal; // 预览值
+                        // yExt_default.connectNulls = connectNulls;// 默认值
+                        // yExt_save.connectNulls = lineVal;// 存储值
+<span class="cstat-no" title="statement not covered" >                        yExt_new.seriesType = 'line';</span>
+                        let lineVal = <span class="cstat-no" title="statement not covered" >yExt.connectNulls || connectNulls;</span>
+                        let lineVal2 = <span class="cstat-no" title="statement not covered" >yExt.lineOnlyPoint || lineOnlyPoint;</span>
+<span class="cstat-no" title="statement not covered" >                        yExt_new.connectNulls = lineVal; </span>// 预览值
+<span class="cstat-no" title="statement not covered" >                        yExt_default.connectNulls = connectNulls;/</span>/ 默认值
+<span class="cstat-no" title="statement not covered" >                        yExt_save.connectNulls = lineVal;/</span>/ 存储值
+<span class="cstat-no" title="statement not covered" >                        yExt_new.lineOnlyPoint = lineVal2; </span>// 预览值
+<span class="cstat-no" title="statement not covered" >                        yExt_default.lineOnlyPoint = lineOnlyPoint;/</span>/ 默认值
+<span class="cstat-no" title="statement not covered" >                        yExt_save.lineOnlyPoint = lineVal2;/</span>/ 存储值
+                    } else {
+<span class="cstat-no" title="statement not covered" >                        yExt_new.seriesType = 'bar';</span>
+                        let barVal = <span class="cstat-no" title="statement not covered" >yExt.barMaxWidth || barMaxWidth;</span>
+<span class="cstat-no" title="statement not covered" >                        yExt_new.barMaxWidth = barVal;/</span>/ 预览值
+<span class="cstat-no" title="statement not covered" >                        yExt_default.barMaxWidth = barMaxWidth; </span>// 默认值
+<span class="cstat-no" title="statement not covered" >                        yExt_save.barMaxWidth = barVal; </span>// 存储值
+                    }
+<span class="cstat-no" title="statement not covered" >                    forEach(list, (item, j)=&gt;<span class="fstat-no" title="function not covered" >{</span></span>
+                        let vIndex = <span class="cstat-no" title="statement not covered" >isFirst ? j : size(yItems[i - 1][1]) + j;</span>
+                        let vals = (<span class="cstat-no" title="statement not covered" >(chartData[vIndex] || {}).result || {})</span>, data;
+<span class="cstat-no" title="statement not covered" >                        if (hasX) {</span>
+<span class="cstat-no" title="statement not covered" >                            data = [];</span>
+<span class="cstat-no" title="statement not covered" >                            if (isPre) {</span>
+<span class="cstat-no" title="statement not covered" >                                forEach(xData, k=&gt;<span class="fstat-no" title="function not covered" >{</span></span>
+                                    let val = <span class="cstat-no" title="statement not covered" >vals[k] || 0,</span> t = <span class="cstat-no" title="statement not covered" >totals[k];</span>
+<span class="cstat-no" title="statement not covered" >                                    data.push(t ? this.getDataVal(val * 100 / t, force, roundNum) : '');</span>
+                                })
+                            } else {
+                                let valDef = <span class="cstat-no" title="statement not covered" >isLine &amp;&amp; yExt_new.connectNulls ? 0 : '';</span>
+<span class="cstat-no" title="statement not covered" >                                forEach(xData, k=&gt;<span class="fstat-no" title="function not covered" >{</span></span>
+                                    let val = <span class="cstat-no" title="statement not covered" >vals[k];</span>
+<span class="cstat-no" title="statement not covered" >                                    data.push(this.getDataVal(val, force, roundNum, valDef));</span>
+                                })
+                            }
+                        } else {
+<span class="cstat-no" title="statement not covered" >                            stack = `辅助-${i}`;</span>
+<span class="cstat-no" title="statement not covered" >                            data = new Array(preSize);</span>
+<span class="cstat-no" title="statement not covered" >                            if (isSta) {</span>
+                                let val = <span class="cstat-no" title="statement not covered" >vals[item.key];</span>
+<span class="cstat-no" title="statement not covered" >                                data.push(this.getDataVal(val, force, roundNum));</span>
+                            } else <span class="cstat-no" title="statement not covered" >if (isPre) {</span>
+                                let v = <span class="cstat-no" title="statement not covered" >vals[item.key] || 0;</span>
+<span class="cstat-no" title="statement not covered" >                                v = allTotal ? this.getDataVal(v * 100 / allTotal, force, roundNum) : '';</span>
+<span class="cstat-no" title="statement not covered" >                                data.push(v);</span>
+                            } else {
+<span class="cstat-no" title="statement not covered" >                                forEach(list, (it)=&gt;<span class="fstat-no" title="function not covered" >{</span></span>
+                                    let val = <span class="cstat-no" title="statement not covered" >vals[it.key];</span>
+<span class="cstat-no" title="statement not covered" >                                    data.push(this.getDataVal(val, force, roundNum));</span>
+                                });
+                            }
+                        }
+&nbsp;
+                        let name = <span class="cstat-no" title="statement not covered" >`${item.h_value}-${formulaWordMap[item.func]}`;</span>
+<span class="cstat-no" title="statement not covered" >                        name = isFirst ? name : `${name}-${i}`;</span>
+                        let cIndex = <span class="cstat-no" title="statement not covered" >isFirst ? j : (yItems[i-1][0] === 'line' ?</span>
+                            1 + j : size(yItems[i - 1][1]) + j);
+                        let nc = <span class="cstat-no" title="statement not covered" >color[name];</span>
+<span class="cstat-no" title="statement not covered" >                        nc ? (colorMapTmp[name] = nc) : (nc = chart_colors[cIndex % colorLen] || chart_colors[0]);</span>
+                        // colors.push(nc);
+<span class="cstat-no" title="statement not covered" >                        if (!isLine &amp;&amp; !yExt.notGradient) {</span>
+                            let ct = <span class="cstat-no" title="statement not covered" >nc.split(',');</span>
+<span class="cstat-no" title="statement not covered" >                            ct.pop();</span>
+                            let lg = <span class="cstat-no" title="statement not covered" >isPosRight ? [0,0,1,0] : isPosLeft ? [1,0,0,0] : [0,0,0,1];</span>
+<span class="cstat-no" title="statement not covered" >                            colors.push(new echarts.graphic.LinearGradient(...lg, [</span>
+                                {offset: 0.1, color: [...ct, '1)'].join(',')},
+                                {offset: 0.5, color: [...ct, '0.5)'].join(',')},
+                                {offset: 1.0, color: [...ct, '0.1)'].join(',')}
+                            ]));
+                        } else {
+<span class="cstat-no" title="statement not covered" >                            colors.push(nc);</span>
+                        }
+                        let nameVal = <span class="cstat-no" title="statement not covered" >alias[name];</span>
+<span class="cstat-no" title="statement not covered" >                        nameVal ? (aliasMapTmp[name] = nameVal) : (nameVal = name);</span>
+<span class="cstat-no" title="statement not covered" >                        legend.push({name: nameVal, icon: 'circle'});</span>
+<span class="cstat-no" title="statement not covered" >                        legendMap[name] = {color: nc, alias: nameVal};</span>
+&nbsp;
+                        let sd = <span class="cstat-no" title="statement not covered" >{</span>
+                            name:nameVal,
+                            data,
+                            stack,
+                            [indexKey]: i,
+                            label: {normal: {
+                                show: labelExt.show,
+                                color: labelExt.fontColor,
+                                fontSize: labelExt.fontColor,
+                                position: labelPosition,
+                                formatter: ({value})=&gt;<span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >                                    if (labelOpt.percent) {</span>
+                                        let rd = <span class="cstat-no" title="statement not covered" >roundNum - 2;</span>
+<span class="cstat-no" title="statement not covered" >                                        rd &lt; 0 &amp;&amp; (rd = 0);</span>
+<span class="cstat-no" title="statement not covered" >                                        value = `${this.getDataVal(value * 100, force, rd)}%`;</span>
+                                    }
+<span class="cstat-no" title="statement not covered" >                                    return value;</span>
+                                }
+                            }},
+                            legendHoverLink: true,
+                        };
+                        // 依据状态设置属性
+<span class="cstat-no" title="statement not covered" >                        if (isLine) {</span>
+<span class="cstat-no" title="statement not covered" >                            sd.type = 'line';</span>
+                            // sd.label.normal.formatter=({value})=&gt;value;
+<span class="cstat-no" title="statement not covered" >                            sd.lineStyle = {normal: {opacity: yExt_new.lineOnlyPoint ? 0 : 1}}</span>
+                        } else {
+<span class="cstat-no" title="statement not covered" >                            sd.type = 'bar';</span>
+<span class="cstat-no" title="statement not covered" >                            sd.barMaxWidth = yExt_new.barMaxWidth;</span>
+<span class="cstat-no" title="statement not covered" >                            tipItem &amp;&amp; (sd.barGap = '-100%');</span>
+                        }
+<span class="cstat-no" title="statement not covered" >                        sData.push(sd);</span>
+                    })
+                }
+<span class="cstat-no" title="statement not covered" >                yExt_new.aliasMap = aliasMapTmp;/</span>/ 预览值
+<span class="cstat-no" title="statement not covered" >                yExt_new.colorMap = colorMapTmp;</span>
+<span class="cstat-no" title="statement not covered" >                yExt_new.legendMap = legendMap;</span>
+<span class="cstat-no" title="statement not covered" >                yExt_default.aliasMap = {};/</span>/ 默认值
+<span class="cstat-no" title="statement not covered" >                yExt_default.colorMap = {};</span>
+<span class="cstat-no" title="statement not covered" >                yExt_save.aliasMap = aliasMapTmp;/</span>/ 存储值
+<span class="cstat-no" title="statement not covered" >                yExt_save.colorMap = colorMapTmp;</span>
+            });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if(tipItem) {</span>
+                let alias = <span class="cstat-no" title="statement not covered" >Object.assign({}, yAxisExt_new.aliasMap, newYAxisExt_new.aliasMap);</span>
+<span class="cstat-no" title="statement not covered" >                forEach(xData,(v,k)=&gt;<span class="fstat-no" title="function not covered" >{<span class="cstat-no" title="statement not covered" >alias[v] &amp;&amp; (xData[k] = alias[v])}</span>)</span>;</span>
+            }
+&nbsp;
+            let yOpt = <span class="cstat-no" title="statement not covered" >{</span>
+                name: yAxisExt_new.title,
+                type: 'value',
+                splitLine: {
+                    show: yAxisExt_new.show,
+                    lineStyle: {color: '#39456A', type: 'dashed', opacity: 0.4}
+                },
+                axisLine: hide,
+                axisTick: hide,
+                triggerEvent: true,
+                splitNumber: yAxisExt_new.splitNum,
+                inverse: isPosRight,
+                axisLabel:{
+                    show: yAxisExt_new.show,
+                    fontSize: yAxisExt_new.fontSize,
+                    // color: yAxisExt_new.fontColor,
+                    color: "rgb(170, 170, 170)",
+                }
+            };
+<span class="cstat-no" title="statement not covered" >            if (yAxisExt_new.shortLabel) {</span>
+                let model = <span class="cstat-no" title="statement not covered" >1,</span> unit = <span class="cstat-no" title="statement not covered" >'';</span>
+<span class="cstat-no" title="statement not covered" >                yOpt.axisLabel.formatter = (value, index)=&gt;<span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >                    index === 1 &amp;&amp; ([model, unit] = this.getLabelFormatter(</span>
+                        value, yAxisExt_new.splitNum));
+<span class="cstat-no" title="statement not covered" >                    index &amp;&amp; (value = `${value / model}${unit}`);</span>
+<span class="cstat-no" title="statement not covered" >                    return value;</span>
+                }
+            }
+<span class="cstat-no" title="statement not covered" >            yAxis.push(yOpt);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (showNewYAli) {</span>
+                let newYOpt = <span class="cstat-no" title="statement not covered" >{</span>
+                    name: newYAxisExt_new.title,
+                    type: 'value',
+                    splitLine: {
+                        show: newYAxisExt_new.show,
+                        lineStyle: {color: '#39456A', type: 'dashed', opacity: 0.4}
+                    },
+                    axisLine: hide,
+                    axisTick: hide,
+                    triggerEvent: true,
+                    splitNumber: newYAxisExt_new.splitNum,
+                    inverse: isPosRight,
+                    axisLabel:{
+                        show: newYAxisExt_new.show,
+                        fontSize: newYAxisExt_new.fontSize,
+                        // color: newYAxisExt_new.fontColor,
+                        color: "rgb(170, 170, 170)",
+                    }
+                };
+<span class="cstat-no" title="statement not covered" >                if (newYAxisExt_new.shortLabel) {</span>
+                    let model = <span class="cstat-no" title="statement not covered" >1,</span> unit = <span class="cstat-no" title="statement not covered" >'';</span>
+<span class="cstat-no" title="statement not covered" >                    newYOpt.axisLabel.formatter = (value, index)=&gt;<span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >                        index === 1 &amp;&amp; ([model, unit] = this.getLabelFormatter(</span>
+                            value, newYAxisExt_new.splitNum));
+<span class="cstat-no" title="statement not covered" >                        index &amp;&amp; (value = `${value / model}${unit}`);</span>
+<span class="cstat-no" title="statement not covered" >                        return value;</span>
+                    }
+                }
+<span class="cstat-no" title="statement not covered" >                yAxis.push(newYOpt);</span>
+            }
+&nbsp;
+            let xAxis = <span class="cstat-no" title="statement not covered" >{</span>
+                type: 'category',
+                data: xData,
+                axisLine: {
+                    show: xAxisExt_new.show,
+                    lineStyle: {color: '#39456A'}
+                },
+                axisTick: hide,
+                triggerEvent: true,
+                axisLabel: {
+                    show: xAxisExt_new.show,
+                    interval: xAxisExt_new.showAllTick ? 0 : 'auto',
+                    rotate: xAxisExt_new.fontRotate,
+                    textStyle: {
+                        color: "rgb(170, 170, 170)",
+                        // color: xAxisExt_new.fontColor,
+                        fontSize: xAxisExt_new.fontSize,
+                    }
+                }
+            };
+<span class="cstat-no" title="statement not covered" >            if (isXYRotate) {</span>
+<span class="cstat-no" title="statement not covered" >                xAxis.position = xPos;</span>
+<span class="cstat-no" title="statement not covered" >                xAxis.axisLine.onZero = isPosLeft;</span>
+            }
+&nbsp;
+            let options = <span class="cstat-no" title="statement not covered" >{</span>
+                color: colors,
+                animationDuration: 1000,
+                textStyle: {
+                    color: '#AFB8DB',
+                    fontSize: 12
+                },
+                yAxis: isXYRotate ? xAxis : yAxis,
+                xAxis: isXYRotate ? yAxis : xAxis,
+                series: sData,
+            };
+<span class="cstat-no" title="statement not covered" >            options.grid = {</span>
+                containLabel: true,
+                right: 30,
+                left: 20,
+                top: 10,
+                bottom: isDetailPg &amp;&amp; legendExt.show ? 40 : 20,
+            };
+<span class="cstat-no" title="statement not covered" >            options.tooltip = isDetailPg ? {</span>
+                trigger: tipItem ? 'item' : 'axis',
+                confine: true,
+                axisPointer: {
+                    handle: {
+                        show: true,
+                    },
+                },
+                formatter: function(params, ticket, callback)<span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >                    if(Object.prototype.toString.call(params)=='[object Array]'){</span>
+                        let list = <span class="cstat-no" title="statement not covered" >params.map((value, index) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >                            return {</span>
+                                "name": value.seriesName,
+                                "value": value.data.length === 0 ? 0 : value.data,
+                                "color": value.seriesType === 'line' ? value.color : (!!value.color.colorStops ? value.color.colorStops[0].color : '#555555'),
+                            }
+                        });
+<span class="cstat-no" title="statement not covered" >                        if (!_this.legendInfo.name) {</span>
+<span class="cstat-no" title="statement not covered" >                            setTimeout(() =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >                                _this.$refs.bar.resize();</span>
+                            })
+                        }
+<span class="cstat-no" title="statement not covered" >                        _this.legendInfo = {</span>
+                            "name": !!params &amp;&amp; params.length != 0 ? params[0].name : "",
+                            "list": list,
+                        };
+                        
+                    } else{
+                        let list = <span class="cstat-no" title="statement not covered" >[];</span>
+<span class="cstat-no" title="statement not covered" >                        list.push({</span>
+                            "name": params.seriesName,
+                            "value": params.data.length === 0 ? 0 : params.data,
+                            "color": params.seriesType === 'line' ? params.color : (!!params.color.colorStops ? params.color.colorStops[0].color : '#555555'),
+                        })
+<span class="cstat-no" title="statement not covered" >                        if (!_this.legendInfo.name) {</span>
+<span class="cstat-no" title="statement not covered" >                            setTimeout(() =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >                                _this.$refs.bar.resize();</span>
+                            })
+                        }
+<span class="cstat-no" title="statement not covered" >                        _this.legendInfo = {</span>
+                            "name": params.name,
+                            "list": list,
+                        };
+                        
+                    }
+                }
+            } : hide;
+<span class="cstat-no" title="statement not covered" >            options.textStyle = {</span>
+                // color: '#AFB8DB',
+                color: "rgb(170, 170, 170)",
+                fontSize: 12
+            };
+<span class="cstat-no" title="statement not covered" >            if(isDetailPg &amp;&amp; legendExt.show){</span>
+<span class="cstat-no" title="statement not covered" >                options.legend = {</span>
+                    animation: true,
+                    data: legend,
+                    orient: 'horizontal',
+                    bottom: 12,
+                    type: 'scroll',
+                    itemWidth: 10,
+                    itemHeight: 10,
+                    pageButtonGap: 10,
+                    padding: [0, 20, 0, 20],
+                    left: 'center',
+                    textStyle: {color: "rgb(170, 170, 170)"},
+                    pageTextStyle: {color: "rgb(170, 170, 170)"},
+                    pageIconColor: {color: "rgb(170, 170, 170)"},
+                    // left: 30,
+                    // right: 30,
+                }
+            }
+            else{
+<span class="cstat-no" title="statement not covered" >                this.filterList = legend;</span>
+            }
+<span class="cstat-no" title="statement not covered" >            this.options = options;</span>
+<span class="cstat-no" title="statement not covered" >            return "";</span>
+        }
+    }
+}
+&lt;/script&gt;
+&lt;style scoped lang="scss"&gt;
+.data-bar-style {
+    width: 100%;
+    background-color: #FFFFFF;
+    font-family: PingFang SC;
+    .chart-title {
+        line-height: 18px;
+        font-size: 15px;
+        font-weight: 700;
+        color: #4A4D51;
+        box-sizing: border-box;
+        padding: 25px 21px;
+        word-wrap: break-word;
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    .chart-draw {
+        width: 100%;
+        height: 232px;
+        position: relative;
+        .echarts_bar{
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .chart_loading {
+        width: 100%;
+        height: 100%;
+        min-height: 300px;
+    }
+}
+.data-bar-isDetailPg {
+    width: 100%;
+    height: 100%;
+    background-color: #FFFFFF;
+    position: relative;
+    .detailpg-loading {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        background-color: rgba(0, 0, 0, 0.2);
+        .preloader {
+            width: 35px;
+            height: 35px;
+        }
+        .ml5 {
+            font-size: 30px;
+            margin-left: 10px;
+        }
+    }
+    .content-area {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .chart-title {
+            display: none;
+        }
+        .detail-info {
+            width: 100%;
+            .filter-area {
+                display: none;
+                width: 100%;
+                box-sizing: border-box;
+                padding-left: 24px;
+                ul {
+                    width: 100%;
+                    line-height: 39px;
+                    padding: 0;
+                    margin: 0;
+                    border-bottom: solid 1px #EAECEF;
+                    li {
+                        list-style-type: none;
+                        display: inline-block;
+                        font-size: 12px;
+                        color: #6D737A;
+                    }
+                    .open {
+                        color: #007AFF;
+                    }
+                }
+            }
+            .tooltip-info {
+                width: 100%;
+                box-sizing: border-box;
+                padding: 14px 24px 0px 24px;
+                font-family: PingFang SC;
+                .tip-name {
+                    font-size: 14px;
+                    color: #555555;
+                    word-wrap: break-word;
+                }
+                .number-info {
+                    width: 100%;
+                    overflow-x: auto;
+                    display: inline-flex;
+                    flex-wrap: nowrap;
+                    .ele-info {
+                        // height: 87px;
+                        display: inline-table;
+                        // margin-right: 20px;
+                        box-sizing: border-box;
+                        padding-right: 20px;
+                        .num {
+                            line-height: 67px;
+                            font-size: 48px;
+                            white-space: nowrap;
+                        }
+                        .title {
+                            line-height: 20px;
+                            font-size: 14px;
+                            color: #6D737A;
+                            white-space: nowrap;
+                        }
+                    }
+                }
+            }
+        }
+        .chart-draw {
+            flex: 1;
+            width: 100%;
+            position: relative;
+            margin-bottom: 15px;
+            margin-top: 21px;
+            .echarts {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+}
+&lt;/style&gt;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat Jun 09 2018 20:38:52 GMT+0800 (CST)
+</div>
+</div>
+<script src="../../../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../../../sorter.js"></script>
+</body>
+</html>

@@ -10,11 +10,13 @@ document.addEventListener("deviceready", function () {
     deviceready = true;
 })
 
-let orifetch = fetch;
 function httpPromise(url, options) {
-    return window.cordova && cordova.plugin ? new Promise((resolve, reject) => {
+    if (!window.cordova) return new Promise((resolve, reject) => {reject()});
+    return new Promise((resolve, reject) => {
         options = options || {};
-        options = { method: options.method, data: options.body && JSON.parse(options.body), headers: options.headers };
+        let headers = options.headers || {};
+        let {'Content-Type': contentType, ...others } = headers;
+        options = { method: options.method, data: options.body && JSON.parse(options.body), headers: { ...others}};
         cordova.plugin.http.setDataSerializer('json');
         cordova.plugin.http.sendRequest(url, options, (resp) => {
             resp.json = function() {
@@ -34,31 +36,18 @@ function httpPromise(url, options) {
             }
             resolve(resp);
         })
-    }) : orifetch(url, options);
+    });
 }
 
 function injectFetch(url, options) {
     if (deviceready) {
         return httpPromise(url, options)
     }else{
-        return Promise.all([
-            httpPromise(url, options),
-            Promise.race([
-                new Promise((resolve) => {
-                    document.addEventListener("deviceready", function () {
-                        deviceready = true;
-                        resolve();
-                    })
-                }),
-                new Promise((resolve) => {
-                    setTimeout(() => {
-                        deviceready = true;
-                        resolve();
-                    }, 500)
-                })
-            ])
-        ]).then(([resp]) => {
-            return resp;
+        return new Promise((resolve) => {
+            document.addEventListener("deviceready", function () {
+                deviceready = true;
+                resolve(httpPromise(url, options));
+            })
         })
     }
     
@@ -68,7 +57,7 @@ window.fetch = function (input, opts) {//定义新的fetch方法，封装原有�
     opts = opts || {};
     return new Promise(function (resolve, reject) {
         var timeoutId;
-        opts.timeout = 2 * 60 * 1000;
+        // opts.timeout = 2 * 60 * 1000;
         if (opts.timeout) {
             timeoutId = setTimeout(function () {
                 let err = new Error("fetch timeout");
@@ -138,9 +127,7 @@ export default function(url, opt) {
                     slackHooks.sendToSlack({url: url, options: JSON.stringify(opt), err: err});
                 })
             }
-            setTimeout(() => {
-                resolve(resp);
-            })
+            resolve(resp);
         }).catch(err => {
             if (url.indexOf('index.php') !== -1) {
                 slackHooks.sendToSlack({url: url, options: JSON.stringify(opt), err: err});

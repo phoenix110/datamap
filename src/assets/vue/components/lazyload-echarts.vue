@@ -28,8 +28,8 @@
                         v-for="vl2 in vl1.cards"
                         :key="JSON.stringify(vl2)"
                         media-item
-                        @click="$f7Router.navigate('/chart_detail/vault_type/chart/vault_id/hs1281/?some2=ssd', {context: {data: vl2, isDetailPg: true, pageTitle: pageList[selectPageIndex], isStatic: vl1.is_static, title: vl2.cbData ? vl2.cbData.title : ''}})">
-                        <ChartPanel :listData="vl2" :key="JSON.stringify(vl2)" :isStatic="vl1.is_static"></ChartPanel>
+                        @click="$f7Router.navigate('/chart_detail/vault_type/chart/vault_id/hs1281/?some2=ssd', {context: {data: vl2, isDetailPg: true, pageTitle: pageList[selectPageIndex], isStatic: vl1.is_static}})">
+                        <ChartPanel :listData="vl2" :key="JSON.stringify(vl2)" :isStatic="vl1.is_static" :rfRandom="rfRandom"></ChartPanel>
                     </f7-list-item>
                 </f7-list>
             </div>
@@ -37,13 +37,12 @@
     </div>
 </template>
 <script>
-import fetchUtil from '../../js/utils/fetchUtil';
-import queryUrl from '../../js/utils/queryUrl'
+import {getData} from 'src/assets/apis/pageList';
 import bus from '../../js/utils/bus';
 import ChartPanel from './workspace/chart-panel.vue';
 import cloneDeep from 'lodash/cloneDeep';
 import size from 'lodash/size';
-import {model_api_url, headers, paramFake, static_map_url} from '../../js/constants/ApiConfig';
+import {static_map_url} from '../../js/constants/ApiConfig';
 import {market_label_tip, vault_interactive_map} from '../../js/constants/Constants.js';
 import PinYin from '../../js/utils/PinYin';
 // let mockerData = require('../../../mocker');
@@ -62,7 +61,6 @@ const chart_type_file = 'file';
 export default {
     components: {ChartPanel, MdPagination},
     props: {
-        item: Object,
         animate: Boolean,
         selectPageIndex: Number,
         searchContent: String,
@@ -78,9 +76,10 @@ export default {
             pageList: [],
             static_url: static_map_url,
             geoPolyFlag: false,
-
             pageSizeList: [5, 10, 20, 30],
             currentPage: 1,
+            rfRandom: '',
+            isRefresh: false,
         }
     },
     created(){
@@ -100,6 +99,7 @@ export default {
             this.searchCard(newVl);
         },
         reRandom: function(){
+            this.isRefresh = true;
             this.getPageData();
         },
         // '$f7Route.url': {
@@ -117,12 +117,14 @@ export default {
             this.allPageData = this.allPageData || [];
             this.currentPageData = this.currentPageData || [];
             this.filterCardList = this.filterCardList || [];
-            fetchUtil(`${model_api_url}vault/page?detail=true&filter_type=filter_type_mobile${paramFake}`)
-                .then(resp => {
+            getData().then(resp => {
                     if (!resp.Status) {
                         this.resolvePageData(resp.result);
                     }else{
                         this.resolvePageData([]);                        
+                    }
+                    if(this.isRefresh){
+                        this.rfRandom = Date();
                     }
                 }).catch(err => {
                     console.log(err);
@@ -146,7 +148,7 @@ export default {
                 };
                 allPageData.push(pageData);
             });
-            console.log('allPageData', allPageData);
+            // console.log('allPageData', allPageData);
             this.pageList = pageList;
             this.allPageData = allPageData;
             this.$emit("getPageList", pageList);
@@ -177,7 +179,9 @@ export default {
             this.filterCardList = this.cardList;
             console.log('this.filterCardList', this.filterCardList);
         },
+        testTransition(){},
         openGeo(index){
+            // console.log(this.$refs['select'+index][0].classList);
             if(this.$refs['select'+index][0].classList.value.indexOf('icon_dir') === -1){
                 this.$refs['select'+index][0].classList.add('icon_dir');
             }
@@ -187,14 +191,17 @@ export default {
             if(this.$refs['snap'+index][0].classList.value.indexOf('is-snapshot-open') === -1){
                 this.$refs['snap'+index][0].children[0].style.display = 'block';
                 this.$refs['snap'+index][0].classList.add('is-snapshot-open');
+                clearTimeout(this.timer);
             }
             else{
                 let _this = this;
                 this.$refs['snap'+index][0].classList.remove('is-snapshot-open');
-                let timer = setTimeout(()=>{
-                    clearTimeout(timer);
+                let height = this.$refs['snap'+index][0].getClientRects()[0].height;
+                let time = height/254.0*1000;
+                clearTimeout(this.timer);
+                this.timer = setTimeout(()=>{
                     _this.$refs['snap'+index][0].children[0].style.display = 'none';
-                }, 800);
+                }, time - 300);
             }
         },
         searchCard(searchText){
@@ -224,7 +231,7 @@ export default {
         },
         onTouchstart(e) {
             return false;
-        }
+        },
     }
 }
 </script>
@@ -337,7 +344,7 @@ export default {
                 padding: 0 22px;
                 transition: height 1s;
                 .img-display {
-                    transition: height 1s;
+                    // transition: height 1s;
                     z-index: 10;
                     width: 100%;
                     height: 244px;

@@ -1,0 +1,560 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/assets/vue/components/upload/normal/map-center.vue</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../../../index.html">all files</a> / <a href="index.html">src/assets/vue/components/upload/normal/</a> map-center.vue
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">16.88% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>13/77</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">18.18% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>2/11</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/7</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">18.57% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>13/70</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
+    &lt;div class="map_center"&gt;
+        &lt;mapPanelCom ref="upload_map" :mapProps="mapProps" :loading="mapLoading"&gt;&lt;/mapPanelCom&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+import mapPanelCom from '../../commons/map-panel-comp.vue';
+import amapUtil from '../../../../js/utils/amapUtil'
+import {forEach,filter,pull,find,indexOf,findIndex,slice,difference,assign,size,orderBy,pullAll,keys,cloneDeep,uniq, uniqBy,map,concat,has, merge,get, set, unset, isNaN, flatten, trimStart} from 'lodash'
+import {visualization_colors} from '../../../../js/constants/Constants';
+import bus from '../../../../js/utils/bus';
+let AMap = window.AMap;
+const toolOffset = [-3, 125];
+const scaleOffset = [12, 5];
+const markerOffset = [-3, 125];
+var lastLeftWidth = 0;
+let icon_type = "icomoon icon-location_1";
+const normalOpt = {strokeColor: '#73C3FF', strokeOpacity: 1, strokeWeight: 1,fillColor: '#73C3FF',fillOpacity: 0.35, zIndex: 1};
+const activeOpt = {strokeColor: '#1465f7', strokeOpacity: 1, strokeWeight: 2,fillColor: '#1465f7', fillOpacity: 0.5, zIndex: 1
+}
+const polygonStyle = {
+    color:"rgba(59, 102, 233, 1)",
+    fillOpacity:0.5,
+    strokeDasharray:[0, 0, 0, 0],
+    strokeOpacity:1,
+    strokeStyle:"solid",
+    strokeWeight:1
+};
+const lineStyle = {
+    color:"#FF4FFF",
+    strokeDasharray:[0, 0, 0, 0],
+    strokeStyle:"solid",
+    strokeWeight:1,
+}
+export default {
+    name: "mapCenter",
+    props: ['mapProps', 'mapData', 'loading'],
+    data(){
+        return {
+            map: {},
+            markers: [],
+            cluster: null,
+            haveCluster: false,
+            mapLoading: this.loading,
+        }
+    },
+    beforeDestroy(){
+        size(this.map) ? <span class="branch-0 cbranch-no" title="branch not covered" >this.map.clearMap() </span>: null;
+        size(this.map) ? <span class="branch-0 cbranch-no" title="branch not covered" >this.map.destroy() </span>: null ;
+    },
+    components: {
+        mapPanelCom,
+    },
+    watch: {
+        mapData: function()<span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >            this.map = this.$refs.upload_map.map;</span>
+            // this.addLayerToMap();
+        }
+    },
+    methods: {
+        getPanelMap(){
+<span class="cstat-no" title="statement not covered" >            return this.$refs.upload_map.map;</span>
+        },
+        addLayerToMap(){
+            let {mapData, map} = <span class="cstat-no" title="statement not covered" >this;</span>
+<span class="cstat-no" title="statement not covered" >            switch(mapData.geometry_type){</span>
+                case "point": <span class="cstat-no" title="statement not covered" >this.addPointCluser(); <span class="cstat-no" title="statement not covered" ></span>break;</span>
+                case "polygon": <span class="cstat-no" title="statement not covered" >this.addPolygonMap(); <span class="cstat-no" title="statement not covered" ></span>break;</span>
+                case "line": <span class="cstat-no" title="statement not covered" >this.addLineMap(); <span class="cstat-no" title="statement not covered" ></span>break;</span>
+            }
+<span class="cstat-no" title="statement not covered" >            this.mapLoading = false;</span>
+            // bus.$emit("setUploadTabbar", true);
+<span class="cstat-no" title="statement not covered" >            if(!this.haveCluster){</span>
+<span class="cstat-no" title="statement not covered" >                this.map.setFitView();</span>
+            }
+        },
+        addPointCluser(){
+<span class="cstat-no" title="statement not covered" >            this.setMapMarkers();</span>
+            let {cluster, markers, map, mapProps: {setZoom, setMapCenter}} = <span class="cstat-no" title="statement not covered" >this;</span>
+<span class="cstat-no" title="statement not covered" >            cluster = new AMap.MarkerClusterer(map, markers, </span>
+            {
+                gridSize:80,
+                averageCenter: true,
+                minClusterSize: 5,
+                renderCluserMarker: this.setPointMergeRule
+            });
+            var {mapData: {data}} = <span class="cstat-no" title="statement not covered" >this;</span>
+<span class="cstat-no" title="statement not covered" >            if(size(data)){</span>
+<span class="cstat-no" title="statement not covered" >                this.haveCluster = true;</span>
+                let len = <span class="cstat-no" title="statement not covered" >data.length;</span>
+                let coords = <span class="cstat-no" title="statement not covered" >data.map(d =&gt; <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >d.lnglat)</span></span>;</span>
+                let center = <span class="cstat-no" title="statement not covered" >coords.reduce((t, n) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+                    let c1 = <span class="cstat-no" title="statement not covered" >t.lnglat;</span>
+                    let c2 = <span class="cstat-no" title="statement not covered" >n.lnglat;</span>
+<span class="cstat-no" title="statement not covered" >                    return [t[0]+n[0], t[1]+n[1]]</span>
+                }).map(t =&gt; <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >t / len)</span></span>;
+<span class="cstat-no" title="statement not covered" >                map.setZoomAndCenter(6, center);</span>
+            }
+        },
+        setMapMarkers(){
+            let {mapData: {data}} = <span class="cstat-no" title="statement not covered" >this,</span> markers = <span class="cstat-no" title="statement not covered" >[];</span>
+<span class="cstat-no" title="statement not covered" >            data.map((vl, dx)=&gt;<span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >                markers.push(new AMap.Marker({</span>
+                    position: data[dx]['lnglat'],
+                    content: `&lt;i class="${icon_type}" style="color: ${visualization_colors[0]}"&gt;&lt;/i&gt;`,
+                    offset: new AMap.Pixel(-9,-14),
+                }))
+            });
+<span class="cstat-no" title="statement not covered" >            this.markers = markers;</span>
+        },
+        setPointMergeRule(context){
+            let count  = <span class="cstat-no" title="statement not covered" >this.markers.length;</span>
+            var div = <span class="cstat-no" title="statement not covered" >document.createElement('div');</span>
+            var bgColor = <span class="cstat-no" title="statement not covered" >"rgba(32, 150, 243, 60)";</span>
+            var fontColor = <span class="cstat-no" title="statement not covered" >'rgba(255, 255, 255, 255)';</span>
+<span class="cstat-no" title="statement not covered" >            div.style.backgroundColor = bgColor</span>
+            var size = <span class="cstat-no" title="statement not covered" >Math.round(30 + Math.pow(context.count/count,1/5) * 20);</span>
+<span class="cstat-no" title="statement not covered" >            div.style.width = div.style.height = size+'px';</span>
+<span class="cstat-no" title="statement not covered" >            div.style.borderRadius = size/2 + 'px';</span>
+<span class="cstat-no" title="statement not covered" >            div.innerHTML = context.count;</span>
+<span class="cstat-no" title="statement not covered" >            div.style.lineHeight = size+'px';</span>
+<span class="cstat-no" title="statement not covered" >            div.style.color = fontColor;</span>
+<span class="cstat-no" title="statement not covered" >            div.style.fontSize = '17px';</span>
+<span class="cstat-no" title="statement not covered" >            div.style.textAlign = 'center';</span>
+<span class="cstat-no" title="statement not covered" >            context.marker.setOffset(new AMap.Pixel(-size/2,-size/2));</span>
+<span class="cstat-no" title="statement not covered" >            context.marker.setContent(div)</span>
+        },
+        addPolygonMap(){
+            let {mapData: {data}, map} = <span class="cstat-no" title="statement not covered" >this;</span>
+            let {color} = <span class="cstat-no" title="statement not covered" >polygonStyle,</span> layers = <span class="cstat-no" title="statement not covered" >[];</span>
+<span class="cstat-no" title="statement not covered" >            data.map(t=&gt;<span class="fstat-no" title="function not covered" >{</span></span>
+                let layer = <span class="cstat-no" title="statement not covered" >amapUtil.addPolygon(t, {</span>
+                    ...normalOpt,
+                    ...polygonStyle,
+                    strokeColor: color,
+                    fillColor: color,
+                });
+<span class="cstat-no" title="statement not covered" >                layers = layers.concat(layer);</span>
+            });
+<span class="cstat-no" title="statement not covered" >            map.add(layers);</span>
+<span class="cstat-no" title="statement not covered" >            map.setFitView();</span>
+        },
+        addLineMap(){
+            let {mapData: {data}, map} = <span class="cstat-no" title="statement not covered" >this;</span>
+            let {color} = <span class="cstat-no" title="statement not covered" >lineStyle,</span> layers = <span class="cstat-no" title="statement not covered" >[];</span>
+<span class="cstat-no" title="statement not covered" >            data.map(t=&gt;<span class="fstat-no" title="function not covered" >{</span></span>
+                let layer = <span class="cstat-no" title="statement not covered" >amapUtil.addPolyline(t, {</span>
+                    ...normalOpt,
+                    ...lineStyle,
+                    strokeColor: color,
+                    fillColor: color,
+                });
+<span class="cstat-no" title="statement not covered" >                layers = layers.concat(layer);</span>
+            });
+<span class="cstat-no" title="statement not covered" >            map.add(layers);</span>
+<span class="cstat-no" title="statement not covered" >            map.setFitView();</span>
+        },
+    }
+}
+&lt;/script&gt;
+&lt;style lang="scss" scoped&gt;
+.map_center {
+    height: 100%;
+    width: 100%;
+}
+&lt;/style&gt;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat Jun 09 2018 20:38:52 GMT+0800 (CST)
+</div>
+</div>
+<script src="../../../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../../../sorter.js"></script>
+</body>
+</html>

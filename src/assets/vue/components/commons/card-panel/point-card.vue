@@ -5,7 +5,7 @@
             <div class="visual-panel" v-for="(vl1, i1) in iData.filters" :key="i1">
                 <div class="visual-header">
                     <div class="header-icon">
-                        <div :class="['icon', vl1.style.icon.icon]" :style="{'color': vl1.style.color}"></div>
+                        <div :class="['icomoon', vl1.style.icon.icon]" :style="{'color': vl1.style.color}"></div>
                         <div class="tag-text">{{getFilterDesc(vl1.filters)}}</div>
                     </div>
                     <div class="count">{{vl1.data && vl1.data.length}}</div>
@@ -19,12 +19,13 @@
 </template>
 <script>
 import map from 'lodash/map';
+import {h_type_text, h_type_number, h_type_date} from 'src/assets/js/constants/Constants'
 const PoiVisualTags = {
     1: "PointVisualization",
     2: "PointVisualTag",
     3: "PoiHotMap",
-    4: "PoiHotMap4",
-    5: "PoiHotMap6",
+    4: "PoiHotMap",
+    5: "PoiHotMap",
 }
 export default {
     name: "PointCard",
@@ -35,19 +36,8 @@ export default {
     components: {
         VisualTag: {
             props: ['filter'],
-            // watch: {
-            //     filter: {
-            //         handler: function(){
-            //             console.log('point-card')
-            //         },
-            //         deep: true,
-            //     },
-            //     'filter.data': function(){
-            //         console.log('hhhhh')
-            //     }
-            // },
             render: function(createElement){
-                return createElement(PoiVisualTags[this.filter.cur_visual.type], {props: {mData: this.filter}});
+                return createElement(PoiVisualTags[this.filter.cur_visual.type], {props: {mData: this.filter, hotType: this.filter.cur_visual.type}});
             }
         }
     },

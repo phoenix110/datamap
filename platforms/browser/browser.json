@@ -9,6 +9,10 @@
         "parents": {
           "/*": [
             {
+              "xml": "<preference name=\"loadUrlTimeoutValue\" value=\"60000\" />",
+              "count": 1
+            },
+            {
               "xml": "<feature name=\"CordovaHttpPlugin\"><param name=\"browser-package\" value=\"CordovaHttpPlugin\" /></feature>",
               "count": 1
             },
@@ -22,40 +26,65 @@
     }
   },
   "installed_plugins": {
+    "cordova-custom-config": {
+      "PACKAGE_NAME": "com.metrodata.datamap"
+    },
+    "cordova-fix-blackscreen": {
+      "PACKAGE_NAME": "com.metrodata.datamap"
+    },
+    "cordova-hot-code-push-plugin": {
+      "PACKAGE_NAME": "com.metrodata.datamap"
+    },
     "cordova-plugin-file": {
-      "PACKAGE_NAME": "com.maicedata.datamap"
+      "PACKAGE_NAME": "com.metrodata.datamap"
     },
     "cordova-plugin-advanced-http": {
-      "PACKAGE_NAME": "com.maicedata.datamap"
+      "PACKAGE_NAME": "com.metrodata.datamap"
     },
     "cordova-plugin-backbutton": {
-      "PACKAGE_NAME": "com.maicedata.datamap"
-    },
-    "cordova-plugin-crosswalk-webview": {
-      "PACKAGE_NAME": "com.maicedata.datamap"
+      "PACKAGE_NAME": "com.metrodata.datamap"
     },
     "cordova-plugin-device": {
-      "PACKAGE_NAME": "com.maicedata.datamap"
+      "PACKAGE_NAME": "com.metrodata.datamap"
     },
     "cordova-plugin-ionic-keyboard": {
-      "PACKAGE_NAME": "com.maicedata.datamap"
+      "PACKAGE_NAME": "com.metrodata.datamap"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.metrodata.datamap"
     },
     "cordova-plugin-statusbar": {
-      "PACKAGE_NAME": "com.maicedata.datamap"
+      "PACKAGE_NAME": "com.metrodata.datamap"
     },
     "cordova-plugin-wechat": {
       "WECHATAPPID": "wx876af3b122110aed",
-      "PACKAGE_NAME": "com.maicedata.datamap"
+      "PACKAGE_NAME": "com.metrodata.datamap"
     },
     "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "com.maicedata.datamap"
+      "PACKAGE_NAME": "com.metrodata.datamap"
     },
     "cordova-plugin-wkwebview-engine": {
-      "PACKAGE_NAME": "com.maicedata.datamap"
+      "PACKAGE_NAME": "com.metrodata.datamap"
     }
   },
   "dependent_plugins": {},
   "modules": [
+    {
+      "file": "plugins/cordova-fix-blackscreen/www/cordova-fix-blackscreen.js",
+      "id": "cordova-fix-blackscreen.cordova-fix-blackscreen",
+      "pluginId": "cordova-fix-blackscreen",
+      "clobbers": [
+        "cordova-fix-blackscreen"
+      ]
+    },
+    {
+      "file": "plugins/cordova-hot-code-push-plugin/www/chcp.js",
+      "id": "cordova-hot-code-push-plugin.chcp",
+      "pluginId": "cordova-hot-code-push-plugin",
+      "clobbers": [
+        "chcp"
+      ]
+    },
     {
       "file": "plugins/cordova-plugin-file/www/DirectoryEntry.js",
       "id": "cordova-plugin-file.DirectoryEntry",
@@ -307,6 +336,20 @@
       "runs": true
     },
     {
+      "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
+      "id": "cordova-plugin-splashscreen.SplashScreen",
+      "pluginId": "cordova-plugin-splashscreen",
+      "clobbers": [
+        "navigator.splashscreen"
+      ]
+    },
+    {
+      "file": "plugins/cordova-plugin-splashscreen/src/browser/SplashScreenProxy.js",
+      "id": "cordova-plugin-splashscreen.SplashScreenProxy",
+      "pluginId": "cordova-plugin-splashscreen",
+      "runs": true
+    },
+    {
       "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
       "id": "cordova-plugin-statusbar.statusbar",
       "pluginId": "cordova-plugin-statusbar",
@@ -330,12 +373,15 @@
     }
   ],
   "plugin_metadata": {
+    "cordova-custom-config": "5.0.2",
+    "cordova-fix-blackscreen": "0.0.1",
+    "cordova-hot-code-push-plugin": "1.5.3",
     "cordova-plugin-file": "6.0.1",
     "cordova-plugin-advanced-http": "1.11.1",
     "cordova-plugin-backbutton": "0.3.0",
-    "cordova-plugin-crosswalk-webview": "2.4.0",
     "cordova-plugin-device": "2.0.1",
     "cordova-plugin-ionic-keyboard": "2.0.5",
+    "cordova-plugin-splashscreen": "5.0.2",
     "cordova-plugin-statusbar": "2.4.1",
     "cordova-plugin-wechat": "2.3.0",
     "cordova-plugin-whitelist": "1.3.3",

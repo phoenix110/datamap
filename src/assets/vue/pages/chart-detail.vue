@@ -4,10 +4,9 @@
             <f7-nav-left>
                 <f7-link back text="返回"></f7-link>
             </f7-nav-left>
-            <!-- <div class="title">{{!!pageData.pageTitle ? pageData.pageTitle.title: ''}}</div> -->
-            <div class="title">{{!!pageData.title ? pageData.title: ''}}</div>
+            <div class="title">{{title}}</div>
         </f7-navbar>
-        <ChartPanel :listData="pageData.data" :isDetailPg="pageData.isDetailPg" :isStatic="pageData.isStatic"></ChartPanel>
+        <ChartPanel :listData="pageData.data" :isDetailPg="pageData.isDetailPg" :isStatic="pageData.isStatic" @setPageTitle="setPageTitle"></ChartPanel>
     </f7-page>
 </template>
 
@@ -21,8 +20,22 @@ export default {
     props: [],
     data(){
         return {
-            pageData: this.$f7Route.context
+            pageData: this.$f7Route.context,
+            title: ''
         }
     },
+    methods: {
+        setPageTitle(vl){
+            this.title = vl;
+        }
+    }
 }
 </script>
+<style lang="scss" scoped>
+.title {
+    max-width: 12em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+</style>

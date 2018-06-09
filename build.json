@@ -3,7 +3,7 @@
       "release": {
         "keystore": "release-key.keystore",
         "storePassword": "",
-        "alias": "mdt",
+        "alias": "metrodata",
         "password" : "",
         "keystoreType": ""
       }

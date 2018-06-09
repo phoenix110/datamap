@@ -1,6 +1,6 @@
 <template>
     <div class="map-card-panel">
-        <i class="close-btn" @click="onClose">&#xe607;</i>
+        <i class="f7-icons close-btn" @click="onClose">close</i>
         <div class="map-card-list" v-for="(vl1, i1) in cards" :key="i1">
             <div class="panel-title">
                 <div class="text">{{getPaneltitle(vl1.geo_filters)}}</div>
@@ -76,9 +76,8 @@ export default {
     position: relative;
     // background-color: #000;
     .close-btn {
-        font-family: 'iconfont';
         font-style: normal;
-        font-size: 16px;
+        font-size: 18px;
         position: absolute;
         top: 7px;
         right: 7px;

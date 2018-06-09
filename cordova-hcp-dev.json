@@ -1,8 +1,0 @@
-{
-    "name": "datamap_app",
-    "update": "start",
-    "content_url": "http://127.0.0.1",
-    "ios_identifier": "*********",
-    "android_identifier": "com.maicedata.datamap",
-    "min_native_interface": 1
-}

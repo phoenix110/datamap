@@ -1,14 +1,14 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.maicedata.datamap" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.metrodata.datamap" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <hook src="hooks/hookers.js" type="before_prepare" />
     <hook src="hooks/beforedep.js" type="before_deploy" />
     <hook src="hooks/copy_build_extras.js" type="after_platform_add" />
-    <name>DataMap</name>
+    <name>Datamap</name>
     <description>
-        Brand new cordova project!
+        Datamap mobile
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
+    <author email="service@metrodata.cn" href="http://www.metrodata.cn">
+        Shanghai Metrodata Tech Co., Ltd.
     </author>
     <content src="index.html" />
     <access origin="*" />
@@ -18,12 +18,27 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <custom-preference name="android-manifest/application/activity/@android:theme" value="@style/WelcomeStyle" />
     <allow-navigation href="*" />
+    <chcp>
+        <config-file url="http://m.lite.maicedata.com/chcp.json" />
+        <native-interface version="1" />
+        <auto-download enabled="false" />
+        <auto-install enabled="false" />
+    </chcp>
     <preference name="android-minSdkVersion" value="19" />
     <preference name="DisallowOverscroll" value="true" />
+    <preference name="cdvStartInBackground" value="true" />
     <preference name="StatusBarStyle" value="blacktranslucent" />
     <preference name="StatusBarOverlaysWebView" value="true" />
     <preference name="KeyboardResizeMode" value="true" />
-    <preference name="xwalkMultipleApk" value="true" />
+    <preference name="xwalkMultipleApk" value="false" />
     <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
+    <preference name="SplashScreen" value="./static/images/datamap_logo.png" />
+    <preference name="AutoHideSplashScreen" value="true" />
+    <preference name="SplashScreenDelay" value="3000" />
+    <preference name="SplashScreenBackgroundColor" value="green" />
+    <preference name="ShowSplashScreen" value="false" />
+    <preference name="SplashScreenWidth" value="600" />
+    <preference name="SplashScreenHeight" value="300" />
 </widget>

@@ -42,7 +42,6 @@
         <div v-show="hasData" :class="searchpage && searchContent.length === 0 ? 'content-noscroll' : ''">
             <div class="charts-draw-area">
                 <lazyload-echarts class="echart_card" @getPageList="getPageList" :selectPageIndex="selectedPageId" :searchContent="searchContent" :reRandom="reRandom"></lazyload-echarts>
-                <!-- <div class="layer" @click="layerClick"></div> -->
             </div>
         </div>
         <main-tabbar :selected-index="0" v-if="!searchpage"></main-tabbar>
@@ -81,9 +80,6 @@ export default {
         }
     },
     methods: {
-        layerClick(e){
-            console.log(e);
-        },
         onSearchDisable(){
             this.searchpage=false;
             this.searchContent = '';
@@ -119,6 +115,7 @@ export default {
         onPageBeforeout() {
             let self = this;
             this.pageContent && this.pageContent.removeEventListener('scroll', self.onScroll, false)
+            this.pageContent = null;
         },
         //处理选择pages
         toggleShowWorkspaces: function () {

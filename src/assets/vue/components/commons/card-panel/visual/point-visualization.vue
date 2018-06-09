@@ -5,7 +5,7 @@
         </div>
         <div class="poi_visual_list">
             <div class="poi_visual_item" v-for="(vl, i) in breaks" :key="i" :style="{'width': (breaks.length-1)>0 ? `${100/breaks.length}%` : ''}">
-                <div class="poi_visual_item_icon"><i :class="icon.icon" :style="{'color': current_colors[i] || visualization_colors[i] || visualization_colors[0]}"></i></div>
+                <div class="poi_visual_item_icon"><i class="icomoon" :class="icon.icon" :style="{'color': current_colors[i] || visualization_colors[i] || visualization_colors[0]}"></i></div>
                 <div class="poi_visual_item_line" :style="{'backgroundColor': current_colors[i] || visualization_colors[i] || visualization_colors[0]}"></div>
                 <div class="poi_visual_item_val">{{vl}}</div>
             </div>
@@ -14,6 +14,7 @@
 </template>
 <script>
 import bus from '../../../../../js/utils/bus'
+import {visualization_colors} from '../../../../../js/constants/Constants'
 import {calculateAverageBreaks, calculateNBC} from '../../../../../js/utils/numberUtil';
 export default {
     name: "PointVisualization",
@@ -44,27 +45,6 @@ export default {
             this.cLen = vconfig.cLen || 7;
             this.breaks = vconfig.domain;
         },
-        getBreaks() {
-            var data = this.mData.data;
-            var {cLen, breaks, poiVisualCol} = this;
-            var max = 0, min = Infinity;
-            var allVals = [];
-            forEach(data, item => {
-                let val = parseFloat(get(item, poiVisualCol));
-                if (max < val) {
-                    max = val
-                }
-                if (min > val) {
-                    min = val
-                }
-                if (val == val) { //去除NaN
-                    allVals.push(val);
-                }
-            });
-            cLen = parseInt(cLen) || 1;
-            var vals = breaks || calculateAverageBreaks(min, max, cLen);
-            return [vals, allVals, min, max];
-        }
     }
 }
 </script>

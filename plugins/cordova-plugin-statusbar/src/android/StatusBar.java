@@ -233,6 +233,7 @@ public class StatusBar extends CordovaPlugin {
             final Window window = cordova.getActivity().getWindow();
             if (transparent) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
                     window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
                     window.getDecorView().setSystemUiVisibility(
                             View.SYSTEM_UI_FLAG_HIDE_NAVIGATION//

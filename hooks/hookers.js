@@ -178,7 +178,7 @@ module.exports = function (ctx) {
 
       let wpPath = webpackPath + (os.platform() === 'win32' ? '.cmd' : '')
 
-			exec(`"${wpPath}"` + (isRelease ? ' --env.release' : '') + (deployEnv ? ' --env.deploy_env='+deployEnv : '') + (apiUrl ? ' --env.api_url='+apiUrl:''), {cwd: pRoot, maxBuffer: 1024 * 1024 * 5}, (error) => {
+			exec(`"${wpPath}"` + (isRelease ? ' --env.release' : '') + (deployEnv ? ' --env.deploy_env='+deployEnv : '') + (apiUrl ? ' --env.api_url='+apiUrl:'') + ' --config build/webpack.config.js', {cwd: pRoot, maxBuffer: 1024 * 1024 * 5}, (error) => {
 				if (error) {
 					console.error(`Error happened when webpack build: ${error}`);
 					defer.reject(new Error(`Error happened when webpack build: ${error}`))
@@ -200,7 +200,7 @@ module.exports = function (ctx) {
 			let defer = new Q.defer()
 			
 			console.log('Starting copy hcp config...')
-			exec(`cp -f cordova-hcp-${deployEnv}.json cordova-hcp.json`, (error) => {
+			exec(`cp -f cordova-hcp-conf/cordova-hcp-${deployEnv}.json cordova-hcp.json`, (error) => {
 				if (error) {
 					console.error(`Error happened when copy hcp config: ${error}`);
 					defer.reject(new Error(`Error happened when copy hcp config: ${error}`))
@@ -220,7 +220,9 @@ module.exports = function (ctx) {
 			exec('cordova-hcp build', (error) => {
 				if (error) {
 					console.error(`Error happened when hcp build: ${error}`);
-					defer.reject(new Error(`Error happened when hcp build: ${error}`))
+					// defer.reject(new Error(`Error happened when hcp build: ${error}`))
+					//开发时可不需要hcp
+					defer.resolve()
 				}
 				console.log('hcp build completed to www folder successfully!')
 				defer.resolve()
@@ -233,11 +235,11 @@ module.exports = function (ctx) {
 			let defer = new Q.defer(),
 				outText = '',
 				isResultFound = false,
-				args = [`"${webpackDevServerPath}"`, '--hot', '--inline', '--env.devserver', '--env.deploy_env='+deployEnv, '--env.api_url='+apiUrl, `--public ${getRouterIpAddr()}:8081`],
+				args = [`"${webpackDevServerPath}"`, '--hot', '--inline', '--env.devserver', '--env.deploy_env='+deployEnv, '--env.api_url='+apiUrl, `--public ${getRouterIpAddr()}:8081`, '--config build/webpack.config.js'],
 				run = epipeBombPath
 
 			if( os.platform() === 'win32' ) {
-				args = ['--hot', '--inline', '--env.devserver', '--env.deploy_env='+deployEnv, '--env.api_url='+apiUrl, `--public ${getRouterIpAddr()}:8081`]
+				args = ['--hot', '--inline', '--env.devserver', '--env.deploy_env='+deployEnv, '--env.api_url='+apiUrl, `--public ${getRouterIpAddr()}:8081`, '--config build/webpack.config.js']
 				run = `"${webpackDevServerPath}.cmd"`
 			}
 

@@ -24,12 +24,17 @@ import forEach from 'lodash/forEach';
 import map from 'lodash/map';
 import round from 'lodash/round';
 import max from 'lodash/max';
+import cloneDeep from 'lodash/cloneDeep';
+import keys from 'lodash/keys';
+import pick from 'lodash/pick';
 import fetchUtil from '../../../../js/utils/fetchUtil';
 import {model_api_url, headers, paramFake} from '../../../../js/constants/ApiConfig';
 import {radar_colors, radarMenus, defaultRadarExtraValues,
-    max_setting_type_1, maxItemLen} from '../../../../js/constants/Constants'
+    max_setting_type_1, maxItemLen, h_type_formula, defaultLegendStyle} from '../../../../js/constants/Constants'
 const hide = {show: false};
 const colorLen = size(radar_colors);
+const xKeys = keys(defaultRadarExtraValues.xAxisExt);
+const yKeys = keys(defaultRadarExtraValues.yAxisExt);
 export default {
     name: 'data-radar',
     props: ['cData', 'isDetailPg'],
@@ -48,7 +53,12 @@ export default {
         };
     },
     created(){
-        this.getFillData();
+        size(this.cData) ? this.getFillData() : null;
+    },
+    watch: {
+        cData: function(){
+            size(this.cData) ? this.getFillData() : null;
+        }
     },
     methods: {
         getFillData(force_update=false){
@@ -70,76 +80,120 @@ export default {
                 })
             }
         },
-        getExtraVal(val, key) {
-            return val && val[key] ? val[key] : defaultRadarExtraValues[key];
+        getExtraVal(key) {
+            let val = this.preViewExtraValue;
+            return cloneDeep(val && val[key] ? val[key] : defaultRadarExtraValues[key]);
         },
         getDataVal(val, force, roundNum, def='') {
             return val ? (force ? val.toFixed(roundNum) : round(val, roundNum)) : def;
         },
+        fillExtDefault(ext, def) {
+            forEach(def, (val,key)=>{!ext[key] && (ext[key] = val)});
+        },
         getOption(chartData) {
             let _this = this;
+            let {xAxis, yAxis, extra} = _this.cData;
+            let xAlis = yAxis[0].items;
+            let yAlis = xAxis;
+            _this.preViewExtraValue = extra;
             let isDetailPg = _this.isDetailPg;
-            let {xAxis: yAlis, yAxis: xAlis, title, extra} = _this.cData;
-
             // 编辑属性
-            let legendExt = this.getExtraVal(extra, 'legendExt');
-            let xAxisExt = this.getExtraVal(extra, 'xAxisExt');
-            let yAxisExt = this.getExtraVal(extra, 'yAxisExt');
+            let legendExt = _this.getExtraVal('legendExt');
+            // 新追加属性
+            this.fillExtDefault(legendExt, defaultLegendStyle);
+            let xAxisExt = _this.getExtraVal('xAxisExt');
+            let yAxisExt = _this.getExtraVal('yAxisExt');
+            let xAxisExt_new = pick(xAxisExt, xKeys);
+            let yAxisExt_new = pick(yAxisExt, yKeys);
+            let preViewExtraValue = {legendExt, xAxisExt: xAxisExt_new, yAxisExt: yAxisExt_new};// 预览值
+            let defaultExtraValue = cloneDeep(defaultRadarExtraValues);// 默认值
+            let saveExtraValue = cloneDeep(preViewExtraValue); // 存储值
+            let defaultMaxLen = defaultRadarExtraValues.xAxisExt.maxLen;
+            !xAxisExt.maxLen && (saveExtraValue.xAxisExt.maxLen = defaultMaxLen);
 
-            let data = [], legend = [], indicator = [], colors = [];
-            xAlis = (xAlis[0] || {}).items;
+            let data = [], legend = [], indicator = [],
+                colors = [], legendMap = {};
             if (size(xAlis) >= 3 && size(yAlis)) {
                 let names = chartData[yAlis[0].key] || [];
-                let {type, settingValue} = yAxisExt.maxSetting;
+                let {type, settingValue} = yAxisExt_new.maxSetting;
                 settingValue = settingValue || {};
-                let isToggle = type === max_setting_type_1;
-                forEach(xAlis, ({key})=>{
-                    let v = isToggle ? settingValue : (settingValue[key] ||
-                        Math.ceil(max(chartData[key])) || 1);
+                let maxMap = {}, isToggle = type === max_setting_type_1;
+                forEach(xAlis, ({ key, h_type, h_value})=>{
+                    maxMap[key] = Math.ceil(max(chartData[key])) || 1;
+                    let v = isToggle ? settingValue : (settingValue[key] || maxMap[key]);
+                    key = h_type === h_type_formula ? h_value : key ;
                     indicator.push({name: key, max: v});
                 })
-                if (xAxisExt.maxLen !== -1) {// 全部显示
-                    names = names.slice(0, xAxisExt.maxLen ||
-                        defaultRadarExtraValues.xAxisExt.maxLen);
+                xAxisExt_new.showAll = size(names) > defaultMaxLen;
+                xAxisExt_new.defaultMaxLen = defaultMaxLen;
+                if (xAxisExt_new.maxLen !== -1) {// 全部显示
+                    names = names.slice(0, xAxisExt_new.maxLen || defaultMaxLen);
                 }
 
-                let {valueForce: force, valueRoundNum: roundNum} = yAxisExt;
+                let {valueForce:force, valueRoundNum:roundNum} = yAxisExt_new;
                 let alias = yAxisExt.aliasMap || {},
-                    color = yAxisExt.colorMap || {};
+                    color = yAxisExt.colorMap || {},
+                    aliasMapTmp = {}, colorMapTmp = {};
                 data = map(names, (name, i)=>{
                     let value = [];
                     forEach(xAlis, it=>{
-                        let val = (chartData[it.key] || [])[i];
-                        value.push(this.getDataVal(val, force, roundNum, 0));
+                        let val = (chartData[it.key] || [])[i] ;
+                        value.push(_this.getDataVal(val, force, roundNum, 0));
                     })
-                    let nc = color[name] || radar_colors[i % colorLen] || radar_colors[0];
+                    let nc = color[name];
+                    nc ? (colorMapTmp[name] = nc) : (nc = radar_colors[i % colorLen] || radar_colors[0]);
                     colors.push(nc);
-                    let nameVal = alias[name] || name;
+                    let nameVal = alias[name];
+                    nameVal ? (aliasMapTmp[name] = nameVal) : (nameVal = name);
                     legend.push({name: nameVal, icon: 'circle'});
-                    return {name: nameVal, value, areaStyle: {emphasis: {color: nc, opacity: 0.3}}};
+                    legendMap[name] = {color: nc, alias: nameVal};
+                    // return {name: nameVal, value, areaStyle: {emphasis: {color: nc, opacity: 0.3}}};
+                    return {name: nameVal, value};
                 })
+                yAxisExt_new.aliasMap = aliasMapTmp;// 预览值
+                yAxisExt_new.colorMap = colorMapTmp;
+                yAxisExt_new.legendMap = legendMap;
+                yAxisExt_new.maxMap = maxMap;
+                defaultExtraValue.yAxisExt.aliasMap = {};// 默认值
+                defaultExtraValue.yAxisExt.colorMap = {};
+                saveExtraValue.yAxisExt.aliasMap = aliasMapTmp;// 存储值
+                saveExtraValue.yAxisExt.colorMap = colorMapTmp;
             }
 
-            let labelShow = true;
-            let isHide = !labelShow;
             let options = {
-                color: radar_colors,
-                animation: true,
-                radar: {
-                    name: {show: true, color:'#AFB8DB'},
+                color: colors,
+                animationDuration: 1000,
+                textStyle: {
+                    color: '#AFB8DB',
+                    fontSize: 12
+                },
+                radar:{
+                    // triggerEvent: true,
                     splitArea: {show:false},
+                    center: ['50%', '45%'],
+                    radius: '60%',
                     splitLine: {lineStyle: {color: '#6C7692'}},
-                    axisLine:{lineStyle: {color: '#6C7692'}},
-                    indicator: indicator
+                    axisLine: {lineStyle: {color: '#6C7692'}},
+                    indicator: indicator,
+                    name: {show: false, color:'#AFB8DB'},
                 },
                 series: {
                     data,
                     type: 'radar',
                     symbol: 'roundRect',
                     silent: _this.isDetailPg ? false : true,
+                    label: {
+                        show: false,
+                    }
                 }
             }
-
+            options.grid = {
+                containLabel: true,
+                right: 30,
+                left: 30,
+                top: 10,
+                bottom: isDetailPg ? 40 : 20,
+            }
             options.tooltip = _this.isDetailPg ? {
                 trigger: 'item',
                 confine: true,
@@ -164,21 +218,19 @@ export default {
                     fontSize: 15
                 }
             };
-            options.legend = {
-                type: 'scroll',
-                orient: 'horizontal',
-                bottom: _this.isDetailPg ? 30 : 12,
-                itemWidth:10,
-                itemHeight:10,
-                data: legend,
-                pageButtonGap: 10,
-                padding: [0, 20, 0, 20],
-                left: 'center',
+            if(isDetailPg && legendExt.show){
+                options.legend = {
+                    type: 'scroll',
+                    orient: 'horizontal',
+                    bottom: _this.isDetailPg ? 30 : 12,
+                    itemWidth:10,
+                    itemHeight:10,
+                    data: legend,
+                    pageButtonGap: 10,
+                    padding: [0, 20, 0, 20],
+                    left: 'center',
+                }
             }
-
-            // forEach(options, (t, key) => {
-            //     key !== 'color' && this.omitColor(t);
-            // })
 
             this.options = options;
             return "";

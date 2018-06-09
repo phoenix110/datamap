@@ -12,8 +12,15 @@ import GaugeLoadPanel from './workspace/gauge/gauge-panel.vue';
 import GeoVisualizationMap from './workspace/map/geo-visualization-map.vue';
 import InteractiveMap from './workspace/map/interactive-map.vue';
 import PointCard from './commons/card-panel/point-card.vue';
-import PointVisualTag from './commons/card-panel/visual/point-visual-card.vue';
+import PointVisualTag from './commons/card-panel/visual/point-visual-tag.vue';
 import PointVisualization from './commons/card-panel/visual/point-visualization.vue';
+import PoiHotMap from './commons/card-panel/visual/point-hot-map.vue';
+import PolygonCard from './commons/card-panel/polygon-card.vue';
+import PolygonVisualization from './commons/card-panel/visual/polygon-visualization.vue';
+import PolygonVisualizationByType from './commons/card-panel/visual/polygon-visualization-type.vue';;
+import PolylineCard from './commons/card-panel/polyline-card.vue';
+import PolylineVisualization from './commons/card-panel/visual/polyline-visualization.vue';
+import PolylineVisualizationByType from './commons/card-panel/visual/polyline-visualization-type.vue';
 
 let comInit = {
     install: function(Vue){
@@ -31,6 +38,13 @@ let comInit = {
         Vue.component('PointCard', PointCard);
         Vue.component('PointVisualTag', PointVisualTag);
         Vue.component('PointVisualization', PointVisualization);
+        Vue.component('PoiHotMap', PoiHotMap);
+        Vue.component('PolygonCard', PolygonCard);
+        Vue.component('PolygonVisualization', PolygonVisualization);
+        Vue.component('PolygonVisualizationByType', PolygonVisualizationByType);
+        Vue.component('PolylineCard', PolylineCard);
+        Vue.component('PolylineVisualization', PolylineVisualization);
+        Vue.component('PolylineVisualizationByType', PolylineVisualizationByType);
     }
 }
 

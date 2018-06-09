@@ -16,8 +16,8 @@ export const paths = {
   data: '/data/',
   profile: '/profile/',
   chart_detail: '/chart_detail/vault_type/:vault_type/vault_id/:vault_id/',
-  city_choose: '/city_choose/:cityId',
-  my_data: '/my_data/'
+  my_data: '/my_data/',
+  map_draw: '/map_draw/',
 };
 
 
@@ -296,6 +296,7 @@ export const formulaWordMap = {
     ...editYAxiNumberMenus,
     formula: '公式'
 }
+export const lineOnlyPoint = false;
 export const rotate_type_normal = 'normal';
 export const defaultLegendPosition = 'top_right';
 export const max_setting_type_0 = '0';
@@ -305,7 +306,8 @@ export const sorted_filter_left = '+';
 export const sorted_filter_right = '-';
 export const sorted_filter_percent_column = 'column';
 export const defaultPieLabelPosition = 'outside';
-export const sorted_filter_percent_percent = 'percent'
+export const sorted_filter_percent_percent = 'percent';
+export const gauge_target_type_static = 'static';
 
 export const defaultSortedFilter = {
     type: sorted_filter_all,
@@ -313,11 +315,17 @@ export const defaultSortedFilter = {
     percent: sorted_filter_percent_percent,
 };
 
+//柱状图图例默认样式
+export const defaultLegendStyle = {
+    fontSize: 12, // 字体大小
+    fontColor: '#000', // 字体颜色
+}
 // 柱状图默认属性值
 export const defaultChartExtraValues = {
     legendExt: {
         show: true,
         position: defaultLegendPosition,// 图例位置
+        ...defaultLegendStyle
     },
     xAxisExt: {
         show: true,
@@ -334,6 +342,7 @@ export const defaultChartExtraValues = {
         splitNum: 5, // y轴分割段数
         fontSize: 12, // y轴字体大小
         fontColor: '#fff',// y轴颜色
+        notGradient: false, // 是否渐变
     },
     newYAxisExt: {
         show: true,
@@ -342,13 +351,23 @@ export const defaultChartExtraValues = {
         splitNum: 5, // 新y轴分割段数
         fontSize: 12, // 新y轴字体大小
         fontColor: '#fff',// 新y轴颜色
+        notGradient: false, // 是否渐变
     },
     labelExt: {
         show: false,
         fontColor: '#fff',
         fontSize: 12,
         roundNum: 2,
-        force: false
+        force: false,
+        percent: false,
+    },
+    newLabelExt: {
+        show: false,
+        fontColor: '#fff',
+        fontSize: 12,
+        roundNum: 2,
+        force: false,
+        percent: false,
     }
 };
 // 雷达图默认属性值
@@ -356,6 +375,7 @@ export const defaultRadarExtraValues = {
     legendExt: {
         show: true,
         position: defaultLegendPosition,// 图例位置
+        ...defaultLegendStyle
     },
     yAxisExt: {
         showLabel: true,
@@ -378,6 +398,7 @@ export  const defaultGaugeExtraValues = {
     legendExt: {
         show: false,
         position: defaultLegendPosition, // 图例位置
+        ...defaultLegendStyle
     },
     yAxisExt: {
         showPercent: true, // 默认显示百分比
@@ -401,6 +422,7 @@ export const defaultPieExtraValues = {
     legendExt: {
         show: true,
         position: defaultLegendPosition, // 图例位置
+        ...defaultLegendStyle
     },
     xAxisExt: {
         filter: {
@@ -408,7 +430,8 @@ export const defaultPieExtraValues = {
             value: maxItemLen,
             percent: sorted_filter_percent_column,
         },
-        showRemain: true // 是否汇总剩余数据
+        showRemain: true, // 是否汇总剩余数据
+        anticlockwise: false, // 逆时针展示
     },
     yAxisExt: {
         showPercent: false, // 默认显示百分比
@@ -469,4 +492,31 @@ export const defaultHotTableExtraValues = {
         valueColor: '#fff'
     },
     xAxisExt:{}
+}
+
+//请求地图服务器参数配置
+export const mapServerPointConfig = {
+    "marker": {
+        "file": "marker-15.svg",
+        "fill": "#5181E4",
+        "fill_opacity": 0.5,
+        "stroke_opacity":0,
+        "transform": {"scale": [1.5]},
+    }
+}
+export const mapServerLineConfig = {
+    "background_color": "#00000000",
+    "line": {
+        "stroke": "#F78D48",
+        "stroke_width": 3
+    }
+}
+export const mapServerPolygonConfig = {
+    "background_color": "#00000000",
+    "polygon": {
+        "fill": "#9BCC66"
+    },
+    "line": {
+        "stroke": "#F78D48"
+    }
 }

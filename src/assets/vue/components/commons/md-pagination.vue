@@ -48,7 +48,7 @@ export default {
             this.totalPage = Math.ceil(this.total/this.pageSize);
             if(this.totalPage == 0){
                 this.prependDis = true;
-                this.prependDis = true;
+                this.appendDis = true;
             }
             else{
                 this.prependDis = this.currentPage == 1;
@@ -61,7 +61,7 @@ export default {
         this.totalPage = Math.ceil(this.total/this.pageSize);
         if(this.totalPage == 0){
             this.prependDis = true;
-            this.prependDis = true;
+            this.appendDis = true;
         }
         else{
             this.prependDis = this.currentPage == 1;

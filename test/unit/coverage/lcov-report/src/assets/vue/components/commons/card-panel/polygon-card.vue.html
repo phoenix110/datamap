@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/assets/vue/components/commons/card-panel/polygon-card.vue</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../../../index.html">all files</a> / <a href="index.html">src/assets/vue/components/commons/card-panel/</a> polygon-card.vue
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">32% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>8/25</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">26.92% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>7/26</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">50% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/2</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">33.33% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>8/24</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
+    &lt;div class="polygon-card-style"&gt;
+        &lt;div class="polygon-card-title"&gt;{{iData.object_type}}&lt;/div&gt;
+        &lt;div class="polygon-visual-list"&gt;
+            &lt;div class="polygon-visual-panel" v-for="(vl1, i1) in iData.filters" :key="i1"&gt;
+                &lt;div class="polygon-visual-header"&gt;
+                    &lt;div class="header-icon"&gt;
+                        &lt;div class="icon" :style="setIconStyle(vl1)"&gt;&lt;/div&gt;
+                        &lt;div class="tag-text"&gt;{{getFilterDesc(vl1.filters)}}&lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="count"&gt;{{vl1.data &amp;&amp; vl1.data.length}}&lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="polygon-visual-content" v-if="!!vl1.cur_visual"&gt;
+                    &lt;VisualTag :filter="vl1"&gt;&lt;/VisualTag&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;       
+    &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+import map from 'lodash/map';
+import {h_type_text, h_type_number, h_type_date} from 'src/assets/js/constants/Constants'
+const PolygonVisualTags = {
+    1: "PolygonVisualization",
+    2: "PolygonVisualizationByType",
+}
+export default {
+    name: "PolygonCard",
+    props: ['iData'],
+    data(){
+        return {}
+    },
+    components: {
+        VisualTag: {
+            props: ['filter'],
+            render: function(createElement){
+                return createElement(PolygonVisualTags[this.filter.cur_visual.type], {props: {mData: this.filter}});
+            }
+        },
+    },
+    methods: {
+        getLabel(column) {
+            let sub = <span class="cstat-no" title="statement not covered" >'';</span>
+<span class="cstat-no" title="statement not covered" >            if (column.h_type === h_type_text) {</span>
+<span class="cstat-no" title="statement not covered" >                sub = column.list.join("、");</span>
+            } else <span class="cstat-no" title="statement not covered" >if (column.h_type === h_type_number) {</span>
+                let {min, max} = <span class="cstat-no" title="statement not covered" >column;</span>
+<span class="cstat-no" title="statement not covered" >                if (min !== undefined &amp;&amp; max !== undefined) {</span>
+<span class="cstat-no" title="statement not covered" >                    sub = `${min}-${max}`</span>
+                } else <span class="cstat-no" title="statement not covered" >if (max !== undefined) {</span>
+<span class="cstat-no" title="statement not covered" >                    sub = `${max}以下`</span>
+                } else <span class="cstat-no" title="statement not covered" >if (min !== undefined) {</span>
+<span class="cstat-no" title="statement not covered" >                    sub = `${min}以上`</span>
+                }
+            } else <span class="cstat-no" title="statement not covered" >if (column.h_type === h_type_date) {</span>
+                let {start, end} = <span class="cstat-no" title="statement not covered" >column;</span>
+<span class="cstat-no" title="statement not covered" >                sub = start ? `${start} - ${end}` : '';</span>
+            }
+<span class="cstat-no" title="statement not covered" >            return sub;</span>
+        },
+        getFilterDescItem(col) {
+<span class="cstat-no" title="statement not covered" >            return `${col.h_value}: ${this.getLabel(col)}`</span>
+        },
+        getFilterDesc(filters) {
+            return map(filters, t =&gt; <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >this.getFilterDescItem(t))</span></span>.join('/') || '全部';
+        },
+        setIconStyle(vl){
+            let {hidden, uid, data, style: polygon_icon, filters, fake, info_cfg} = vl || <span class="branch-1 cbranch-no" title="branch not covered" >{};</span>
+            let borderColor = !hidden ? polygon_icon &amp;&amp; polygon_icon.color : <span class="branch-1 cbranch-no" title="branch not covered" >'#687495';</span>
+            let borderStyle = polygon_icon.strokeStyle || <span class="branch-1 cbranch-no" title="branch not covered" >"solid";</span>
+            return {
+                'borderColor': borderColor,
+                'borderStyle': borderStyle,
+            }
+        }
+    }
+}
+&lt;/script&gt;
+&lt;style lang="scss" scoped&gt;
+.polygon-card-style {
+    width: 100%;
+    .polygon-card-title {
+        line-height: 20px;
+        font-family: PingFang SC;
+        font-size: 14px;
+    }
+    .polygon-visual-list {
+        .polygon-visual-panel {
+            width: 100%;
+            .polygon-visual-header {
+                width: 100%;
+                line-height: 30px;
+                display: inline-flex;
+                justify-content: space-between;
+                .header-icon {
+                    flex: 1;
+                    .icon{
+                        width: 10px;
+                        height: 10px;
+                        border-radius: 50%;
+                        border: 1px solid;
+                        vertical-align: center;
+                        display: inline-block;
+                    }
+                    .tag-text {
+                        font-size: 12px;
+                        vertical-align: top;
+                        display: inline-block;
+                    }
+                }
+                .count {
+                    font-size: 12px;
+                }
+            }
+            .polygon-visual-content {
+                width: 100%;
+            }
+        }
+    }
+}
+&lt;/style&gt;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat Jun 09 2018 20:38:52 GMT+0800 (CST)
+</div>
+</div>
+<script src="../../../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../../../sorter.js"></script>
+</body>
+</html>

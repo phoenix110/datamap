@@ -13,9 +13,13 @@
             <f7-list>
                 <f7-list-button class="login_btn" @click.prevent="onLogin">登录平台</f7-list-button>
                 <div class="text-right pr28i block">
-                    <f7-link text="微信登陆" @click.prevent="onWechatLogin"></f7-link>
+                    <f7-link class="wxlogin_btn" text="微信登陆" @click.prevent="onWechatLogin"></f7-link>
                 </div>
             </f7-list>
+        </div>
+        <div v-if="fetching" class="login-loading-panel" @click.stop.prevent>
+            <div class="loading-bg">
+            </div>
         </div>
     </f7-page>
 </template>
@@ -24,16 +28,13 @@ import '../../sass/login.scss'
 import { mapState, mapActions } from 'vuex'
 import {paths} from '../../js/constants/Constants'
 import indexOf from 'lodash/indexOf'
-import uniq from 'lodash/uniq'
-import fetchUtil from '../../js/utils/fetchUtil';
-import queryUrl from '../../js/utils/queryUrl';
-import {getMd5Str} from '../../js/utils/strUtil';
+import {login, wxlogin} from 'src/assets/apis/login'
 import cookieUtil from '../../js/utils/cookieUtil'
 import tokenUtil from '../../js/utils/tokenUtil'
 import bus from '../../js/utils/bus';
 import userUtil from '../../js/utils/userUtil';
-import {model_api_url, headers, paramFake, mdtauth_api_url, auth, user_login, app_id} from '../../js/constants/ApiConfig';
 import {login_type_wx, login_type_np} from '../../js/constants/Constants.js'
+import { setTimeout } from 'timers';
 
 const user_name = 'user_name';
 const user_pass = 'user_pass';
@@ -59,9 +60,6 @@ export default {
         bus.$on('401', this.alert401);
         document.removeEventListener("deviceready", this.onDeviceReady);
         document.addEventListener("deviceready", this.onDeviceReady, false);
-    },
-    beforeDestroy() {
-        
     },
     methods: {
         alert401() {
@@ -104,6 +102,11 @@ export default {
                 this.$$("html").removeClass("no-statusbar");
                 this.userLogged(userUtil.get());
             }
+            console.log('hide splashscreen later');
+            setTimeout(() => {
+                console.log('hide splashscreen now,', navigator.splashscreen);                
+                navigator.splashscreen && navigator.splashscreen.hide();
+            }, 300)
         },
         onPageBeforeout() {
             console.log('login unmount', JSON.stringify(this.$f7route));
@@ -114,9 +117,6 @@ export default {
                 window.StatusBar.styleDefault();
             }
             console.log(this.$$("html").attr('class'));
-        },
-        onChangeLoginType: function (lt) {
-            this.login_type = lt
         },
         onChangeName: function (e) {
             this.name = e.target.value;
@@ -151,20 +151,19 @@ export default {
             this.postToService(self.name, self.password, (resp) => {
                 self.fetching = false;
                 localStorage.setItem(user_pass, self.password);
-                userUtil.set(resp.obj.customer);
+                let userInfo = resp.obj.customer;
+                userInfo.appId = resp.obj.apps.default.id;
+                userUtil.set(userInfo);
                 self.userLogged({...resp.obj.customer});
                 self.$f7router.navigate(paths.home, {reloadCurrent:true});
             }, () => {
                  self.fetching = false;
             });
         },
-       
+
         postToService(name, password, succ, fail) {
             let _this = this;
-            let bodyData = JSON.stringify({name: name, password: getMd5Str(password), appid: app_id});
-            let url = mdtauth_api_url + "login", urlData = {method: "POST", body: bodyData, headers};
-            fetchUtil(url, urlData).then(resp => {
-                let errorMsg = ''; // 记录日志
+            login(name, password).then(resp => {
                 if (resp.rc == 0) {
                     cookieUtil.setCookie("login_type", login_type_np);
                     succ && succ(resp);
@@ -199,13 +198,14 @@ export default {
             this.fetching = false;
         },
 
-        loginByUnionId(unionid, openid, access_token) {
-            this.fetching = false;
-        },
-
         onWechatLogin() {
             let _this = this;
             _this.fetching = true;
+            if (!window.Wechat) {
+                _this.fetching = false;
+                 _this.loginFailed('暂不支持!');
+                return;
+            }
             window.Wechat.isInstalled(function(installed) {
                 if (!installed) {
                     _this.loginFailed('微信未安装!');
@@ -215,25 +215,23 @@ export default {
                     Wechat.auth(scope, state, function (response) {
                         // you may use response.code to get the access token.
                         console.log(JSON.stringify(response));
-                        let postdata = {
-                            code: response.code,
-                        }
-                        let url = `${model_api_url}mobile/auth/loginwx`;
-                        fetchUtil(url, {method: 'POST', headers, body: JSON.stringify(postdata)}).then((resp) => {
+                        wxlogin(response.code).then((resp) => {
                             console.log(JSON.stringify(resp));
                             if (resp.rc || resp.Status) {//出错
                                 console.log('fetch access_token err:', JSON.stringify(resp));
                                 _this.loginFailed(resp.obj || resp.Msg || '微信登陆失败');
                             }else {
                                 cookieUtil.setCookie("login_type", login_type_wx);
-                                userUtil.set(resp.obj.customer);
+                                let userInfo = resp.obj.customer;
+                                userInfo.appId = resp.obj.apps.default.id;
+                                userUtil.set(userInfo);
                                 _this.userLogged({...resp.obj.customer});
                                 _this.$f7router.navigate(paths.home, {reloadCurrent:true});
                                 _this.fetching = false;
                             }
                         }).catch(err => {
                             console.log('fetch access_token err1:', err);
-                            _this.loginFailed('授权失败222!');
+                            _this.loginFailed('请求出错!');
                         })
                     }, function (reason) {
                         console.log("Failed: " + reason);
@@ -243,7 +241,7 @@ export default {
             }, function (reason) {
                 console.log("Failed: " + reason);
                 _this.loginFailed('微信是否安装校验失败!');
-            })  
+            })
         },
 
         ...mapActions(['userLogged'])

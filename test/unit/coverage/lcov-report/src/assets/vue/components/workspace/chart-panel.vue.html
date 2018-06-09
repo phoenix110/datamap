@@ -1,0 +1,605 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/assets/vue/components/workspace/chart-panel.vue</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../../index.html">all files</a> / <a href="index.html">src/assets/vue/components/workspace/</a> chart-panel.vue
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">30.77% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>16/52</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">20% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>8/40</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">11.11% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/9</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">30.77% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>16/52</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
+    &lt;div class="chart_wrap" ref="dom"&gt;
+        &lt;div class="chart_inner"&gt;
+            &lt;EleChart v-if="!delayShow" :chartData="listData" :isDetailPg="!!isDetailPg ? true : false" :isStatic="isStatic" :cpRandom="cpRandom" @setTitle="setTitle"&gt;&lt;/EleChart&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+import bus from '../../../js/utils/bus';
+import fetchUtil from '../../../js/utils/fetchUtil';
+import {chart_type_statistics, chart_type_bar,
+    chart_type_stack, chart_type_per_stack, chart_type_line,
+    chart_type_pie_rose, chart_type_pie, chart_type_pie_circle,
+    chart_type_gauge, chart_type_index, chart_type_radar,
+    chart_type_display_table, chart_type_file, chart_type_hot_table,
+    map_type_interactive, map_type_geo_visualization,filter_type_interactive_map, vault_geo_visualization, vault_interactive_map
+} from '../../../js/constants/Constants.js';
+import {model_api_url, headers, paramFake, static_map_url} from '../../../js/constants/ApiConfig';
+const viewConfig = {
+    [chart_type_statistics]: "TableLoadPanel",
+    [chart_type_bar]: "DataBar",
+    [chart_type_stack]: "DataBar",
+    [chart_type_per_stack]: "DataBar",
+    [chart_type_line]: "DataBar",
+    [chart_type_pie]: "DataPie",
+    [chart_type_pie_rose]: "DataPie",
+    [chart_type_pie_circle]: "DataPie",
+    [chart_type_gauge]: "GaugeLoadPanel",
+    [chart_type_index]: "IndexLoadPanel",
+    [chart_type_radar]: "DataRadar",
+    [chart_type_display_table]: "DisplayTable",
+    [chart_type_file]: "FileLoadPanel",
+    [chart_type_hot_table]: "HotTable",
+    [map_type_interactive]: "InteractiveMap",
+    [map_type_geo_visualization]: "GeoVisualizationMap",
+};
+export default {
+    name: "chart-panel",
+    props: ["listData", "isDetailPg", "isStatic", "rfRandom"],
+    data(){
+        return {
+            loaded: false,
+            testData: [],
+            delayShow: true,
+            cpRandom: this.rfRandom,
+        }
+    },
+    watch: {
+        rfRandom: function(newVl, oldVl)<span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >            this.cpRandom = newVl;</span>
+        }
+    },
+    created(){
+        <span class="missing-if-branch" title="if path not taken" >I</span>if(this.listData.vault != 'graph' &amp;&amp; this.isDetailPg){
+<span class="cstat-no" title="statement not covered" >            setTimeout(()=&gt;<span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >                this.delayShow = false;</span>
+            }, 500)
+        }
+        else{
+            this.delayShow = false;
+        }
+    },
+    mounted(){
+        let self = this;
+    },
+    beforeDestroy(){
+        let self = this;
+        clearTimeout(this.timeoutId);
+    },
+    methods: {
+        onPageScroll: function() <span class="fstat-no" title="function not covered" >{</span>
+            let dom = <span class="cstat-no" title="statement not covered" >this.$refs.dom;</span>
+            let top = <span class="cstat-no" title="statement not covered" >this.$$(dom).offset().top;</span>
+<span class="cstat-no" title="statement not covered" >            if (!this.loaded &amp;&amp; top + 50 &lt; this.$f7.height ) {</span>
+<span class="cstat-no" title="statement not covered" >                this.timeoutId = setTimeout(() =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >                    this.loaded = true;</span>
+                }, 250);
+            }
+        },
+        setTitle(vl){
+<span class="cstat-no" title="statement not covered" >            this.$emit('setPageTitle', vl);</span>
+        }
+    },
+    components: {
+        'EleChart': {
+            props: ["chartData", "isDetailPg", "isStatic", "cpRandom"],
+            data(){
+                return {
+                    setProps: null,
+                    panel_type: null,
+                }
+            },
+            watch: {
+                cpRandom: function()<span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >                    this.getConfig();</span>
+                }
+            },
+            created(){
+                this.getConfig();
+            },
+            methods: {
+                getConfig(){
+                    let _this = this;
+                    let {chartData: {vault, graph, chart_type}} = _this;
+                    <span class="missing-if-branch" title="if path not taken" >I</span>if (vault === vault_interactive_map) {
+<span class="cstat-no" title="statement not covered" >                        if(_this.isStatic){</span>
+<span class="cstat-no" title="statement not covered" >                            fetchUtil(`${model_api_url}vault/interactive_map/${graph}`)</span>
+                            .then(resp =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >                                if(!resp.Status){</span>
+<span class="cstat-no" title="statement not covered" >                                    _this.setProps = {</span>
+                                        'config': resp.result[0] ? resp.result[0].extra : [],
+                                        'thumb': _this.chartData.thumb,
+                                    };
+<span class="cstat-no" title="statement not covered" >                                    if(_this.isDetailPg){</span>
+<span class="cstat-no" title="statement not covered" >                                        _this.$emit('setTitle', _this.setProps.config.title);</span>
+                                    }
+                                }
+                                else{
+<span class="cstat-no" title="statement not covered" >                                    _this.setProps = {};</span>
+                                }
+<span class="cstat-no" title="statement not covered" >                                _this.loaded = true;</span>
+                            })
+                        }
+                        else{
+<span class="cstat-no" title="statement not covered" >                            _this.setProps = _this.chartData;</span>
+<span class="cstat-no" title="statement not covered" >                            if(_this.isDetailPg){</span>
+<span class="cstat-no" title="statement not covered" >                                _this.$emit('setTitle', _this.setProps.config.title);</span>
+                            }
+                        }
+                    } else <span class="missing-if-branch" title="if path not taken" >I</span>if (vault === chart_type_file || vault === vault_geo_visualization) {
+                        let vault = <span class="cstat-no" title="statement not covered" >chart_type === chart_type_file ? 'files' : vault_geo_visualization;</span>
+<span class="cstat-no" title="statement not covered" >                        fetchUtil(`${model_api_url}vault/${vault}/${graph}`)</span>
+                            .then(resp=&gt;<span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >                                if(!resp.Status){</span>
+                                    let getData = <span class="cstat-no" title="statement not covered" >resp.result[0] ? resp.result[0].extra : {};</span>
+<span class="cstat-no" title="statement not covered" >                                    _this.setProps = Object.assign({}, _this.chartData, getData);</span>
+<span class="cstat-no" title="statement not covered" >                                    if(_this.isDetailPg){</span>
+<span class="cstat-no" title="statement not covered" >                                        _this.$emit('setTitle', _this.setProps.title);</span>
+                                    }
+                                }
+                                else{
+<span class="cstat-no" title="statement not covered" >                                    _this.setProps = {};</span>
+                                }
+<span class="cstat-no" title="statement not covered" >                                _this.loaded = true;</span>
+                            })
+                    } else {
+                        fetchUtil(`${model_api_url}vault/graph/${graph}`)
+                            .then(resp =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >                                if(!resp.Status){</span>
+<span class="cstat-no" title="statement not covered" >                                    _this.setProps = resp.result[0] ? resp.result[0].extra : [];</span>
+<span class="cstat-no" title="statement not covered" >                                    if(_this.isDetailPg){</span>
+<span class="cstat-no" title="statement not covered" >                                        _this.$emit('setTitle', _this.setProps.title);</span>
+                                    }
+                                }
+                                else{
+<span class="cstat-no" title="statement not covered" >                                    _this.setProps = {};</span>
+                                }
+<span class="cstat-no" title="statement not covered" >                                _this.loaded = true;</span>
+                            })
+                    }
+                }
+            },
+            render: function(createElement){
+                // this.chartData.cbData = this.cbData;
+                // let type = this.chartData.vault === "graph" ? this.panel_type : this.chartData.vault;
+                // return !!type ? createElement(viewConfig[type], {props: {"cData": this.setProps, "isDetailPg": this.isDetailPg}}) : null;
+                //根据vault/page接口返回的数据加载组件
+                let type = this.chartData.vault === "graph" ? <span class="branch-0 cbranch-no" title="branch not covered" >this.chartData.chart_type </span>: this.chartData.vault;
+                return createElement(viewConfig[type], {props: {"cData": this.setProps, "isDetailPg": this.isDetailPg}});
+            }
+        },
+    }
+}
+&lt;/script&gt;
+&lt;style lang="scss" scoped&gt;
+.chart_wrap {
+    width: 100%;
+    height: 100%;
+}
+&lt;/style&gt;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat Jun 09 2018 20:38:52 GMT+0800 (CST)
+</div>
+</div>
+<script src="../../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../../sorter.js"></script>
+</body>
+</html>

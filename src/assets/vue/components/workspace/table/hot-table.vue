@@ -28,6 +28,7 @@
 import {interpolateRgbBasis} from 'd3-interpolate'
 import fetchUtil from '../../../../js/utils/fetchUtil';
 import cloneDeep from 'lodash/cloneDeep';
+import size from 'lodash/size';
 import {tableLoadTableRef , disPlayTabelDefaultVal, example_colors, defaultHotTableExtraValues} from '../../../../js/constants/Constants.js';
 import {model_api_url, headers, paramFake} from '../../../../js/constants/ApiConfig';
 import MdPagination from '../../commons/md-pagination.vue';
@@ -38,7 +39,7 @@ export default {
         return {
             header: [],
             tableData: [],
-            title: this.cData.title,
+            title: '',
             maxVal: '',
             minVal: '',
             tab_bgColor: [],
@@ -54,7 +55,13 @@ export default {
         }
     },
     created(){
-        this.getFillData();
+        size(this.cData) ? this.getFillData() : null;
+    },
+    watch: {
+        cData: function(){
+            this.title = this.cData.title;
+            size(this.cData) ? this.getFillData() : null;
+        }
     },
     methods: {
         onPageChange(currentPage){

@@ -59,8 +59,9 @@ function sendToSlackBasic(text, info_text, attachments) {
 }
 
 function sendToSlack(text_msg, attachments) {
+    console.log('reportError', text_msg, attachments);
+    if (process.env.NODE_ENV === 'development') return;
     try { //try catch 避免被reportError捕捉
-        console.log('reportError', text_msg, attachments);
         if (!hookUrl) return;
         let userInfo = userUtil.get() || {};
         let token = tokenUtil.get() || '';
@@ -89,7 +90,7 @@ function sendToSlack(text_msg, attachments) {
         map(text_msg, (value, key) => {
             try { //try catch 避免被reportError捕捉
                 if (value && (value instanceof Error)) {
-                    value = value.stack;
+                    value = "Error:" + value.message + ", Stack:" + value.stack;
                 }
                 value = JSON.stringify(value);
                 if (value && value.replace && encodeURIComponent) {

@@ -80,5 +80,29 @@
     },
     "is_top_level": true,
     "variables": {}
+  },
+  "cordova-plugin-splashscreen": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-splashscreen@5.0.2"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-custom-config": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-custom-config"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-fix-blackscreen": {
+    "source": {
+      "type": "local",
+      "path": "/Users/hzz/Mission/datamap_app/node_modules/cordova-fix-blackscreen"
+    },
+    "is_top_level": true,
+    "variables": {}
   }
 }

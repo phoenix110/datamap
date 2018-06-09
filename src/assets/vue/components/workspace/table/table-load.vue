@@ -41,7 +41,7 @@ export default {
         return {
             header: [],
             tableData: [],
-            title: this.cData.title,
+            title: '',
             currentPage: 1,
             pageSizeList: [5, 10, 20, 30],
             allDataList: [],
@@ -51,7 +51,13 @@ export default {
         }
     },
     created(){
-        this.getFillData();
+        size(this.cData) ? this.getFillData() : null;
+    },
+    watch: {
+        cData: function(){
+            this.title = this.cData.title;
+            size(this.cData) ? this.getFillData() : null;
+        }
     },
     components: {
         MdPagination,

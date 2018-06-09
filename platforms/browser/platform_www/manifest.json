@@ -1,6 +1,6 @@
 {
-  "name": "DataMap",
-  "short_name": "DataMap",
+  "name": "Datamap",
+  "short_name": "Datamap",
   "description": "Description of your app from template",
   "start_url": "index.html",
   "scope": "index.html",

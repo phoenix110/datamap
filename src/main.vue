@@ -3,9 +3,6 @@
     <div id="app">
         <f7-statusbar v-if="!isAndroid"></f7-statusbar>
         <div class="custom-statusbar" v-if="isAndroid && needStatusbarOverlay"></div>
-        <f7-panel left cover>
-            <f7-view url="/panel-left/" links-view=".view-main" />
-        </f7-panel>
         <f7-views>
             <f7-view main id="main-view" navbar-through :dynamic-navbar="true" url="/" class="ios-edges">
             </f7-view>
@@ -14,6 +11,7 @@
 </template>
 <script>
 import tokenUtil from './assets/js/utils/tokenUtil'
+import { setTimeout } from 'timers';
 export default {
     data() {
         return {
@@ -22,6 +20,10 @@ export default {
         }
     },
     mounted() {
+        setTimeout(() => {
+            let $startLoading = document.getElementById('start-loading-panel');
+            $startLoading && $startLoading.remove();
+        }, 250)
         let self = this;
         // this.needStatusbarOverlay = true;
         // self.$$("html").addClass("isandroid");

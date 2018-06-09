@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/assets/vue/components/com-grobal-init.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../index.html">all files</a> / <a href="index.html">src/assets/vue/components/</a> com-grobal-init.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>22/22</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/1</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>22/22</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import Vue from 'vue'
+&nbsp;
+import DataPie from "./workspace/pie/data-pie.vue";
+import DataRadar from "./workspace/radar/data-radar.vue";
+import DataBar from "./workspace/chart/data-bar.vue";
+import DisplayTable from './workspace/table/display-table.vue';
+import HotTable from './workspace/table/hot-table.vue';
+import TableLoadPanel from './workspace/table/table-load.vue';
+import FileLoadPanel from './workspace/file-panel/file-load.vue';
+import IndexLoadPanel from './workspace/index-panel';
+import GaugeLoadPanel from './workspace/gauge/gauge-panel.vue';
+import GeoVisualizationMap from './workspace/map/geo-visualization-map.vue';
+import InteractiveMap from './workspace/map/interactive-map.vue';
+import PointCard from './commons/card-panel/point-card.vue';
+import PointVisualTag from './commons/card-panel/visual/point-visual-tag.vue';
+import PointVisualization from './commons/card-panel/visual/point-visualization.vue';
+import PoiHotMap from './commons/card-panel/visual/point-hot-map.vue';
+import PolygonCard from './commons/card-panel/polygon-card.vue';
+import PolygonVisualization from './commons/card-panel/visual/polygon-visualization.vue';
+import PolygonVisualizationByType from './commons/card-panel/visual/polygon-visualization-type.vue';;
+import PolylineCard from './commons/card-panel/polyline-card.vue';
+import PolylineVisualization from './commons/card-panel/visual/polyline-visualization.vue';
+import PolylineVisualizationByType from './commons/card-panel/visual/polyline-visualization-type.vue';
+&nbsp;
+let comInit = {
+    install: function(Vue){
+        Vue.component("DataPie", DataPie);
+        Vue.component("DataRadar", DataRadar);
+        Vue.component("DataBar", DataBar);
+        Vue.component("DisplayTable", DisplayTable);
+        Vue.component("HotTable", HotTable);
+        Vue.component("TableLoadPanel", TableLoadPanel);
+        Vue.component("FileLoadPanel", FileLoadPanel);
+        Vue.component("IndexLoadPanel", IndexLoadPanel);
+        Vue.component("GaugeLoadPanel", GaugeLoadPanel);
+        Vue.component('GeoVisualizationMap', GeoVisualizationMap);
+        Vue.component('InteractiveMap', InteractiveMap);
+        Vue.component('PointCard', PointCard);
+        Vue.component('PointVisualTag', PointVisualTag);
+        Vue.component('PointVisualization', PointVisualization);
+        Vue.component('PoiHotMap', PoiHotMap);
+        Vue.component('PolygonCard', PolygonCard);
+        Vue.component('PolygonVisualization', PolygonVisualization);
+        Vue.component('PolygonVisualizationByType', PolygonVisualizationByType);
+        Vue.component('PolylineCard', PolylineCard);
+        Vue.component('PolylineVisualization', PolylineVisualization);
+        Vue.component('PolylineVisualizationByType', PolylineVisualizationByType);
+    }
+}
+&nbsp;
+export default comInit;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat Jun 09 2018 20:38:52 GMT+0800 (CST)
+</div>
+</div>
+<script src="../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../sorter.js"></script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 <template>
     <div class="chart_wrap" ref="dom">
         <div class="chart_inner">
-            <EleChart v-if="!delayShow" :chartData="listData" :isDetailPg="!!isDetailPg ? true : false" :isStatic="isStatic" ></EleChart>
+            <EleChart v-if="!delayShow" :chartData="listData" :isDetailPg="!!isDetailPg ? true : false" :isStatic="isStatic" :cpRandom="cpRandom" @setTitle="setTitle"></EleChart>
         </div>
     </div>
 </template>
@@ -36,12 +36,18 @@ const viewConfig = {
 };
 export default {
     name: "chart-panel",
-    props: ["listData", "isDetailPg", "isStatic"],
+    props: ["listData", "isDetailPg", "isStatic", "rfRandom"],
     data(){
         return {
             loaded: false,
             testData: [],
-            delayShow: true
+            delayShow: true,
+            cpRandom: this.rfRandom,
+        }
+    },
+    watch: {
+        rfRandom: function(newVl, oldVl){
+            this.cpRandom = newVl;
         }
     },
     created(){
@@ -56,13 +62,10 @@ export default {
     },
     mounted(){
         let self = this;
-        // bus.$on('page_scroll', self.onPageScroll);
-        // this.onPageScroll();
     },
     beforeDestroy(){
         let self = this;
         clearTimeout(this.timeoutId);
-        // bus.$off('page_scroll', self.onPageScroll)
     },
     methods: {
         onPageScroll: function() {
@@ -73,80 +76,97 @@ export default {
                     this.loaded = true;
                 }, 250);
             }
+        },
+        setTitle(vl){
+            this.$emit('setPageTitle', vl);
         }
     },
     components: {
         'EleChart': {
-            props: ["chartData", "isDetailPg", "isStatic"],
+            props: ["chartData", "isDetailPg", "isStatic", "cpRandom"],
             data(){
                 return {
                     setProps: null,
                     panel_type: null,
-                    cbData: {},
+                }
+            },
+            watch: {
+                cpRandom: function(){
+                    this.getConfig();
                 }
             },
             created(){
-                let _this = this;
-                let {chartData: {vault, graph, chart_type}} = _this;
-                if (vault === vault_interactive_map) {
-                    if(_this.isStatic){
-                        fetchUtil(`${model_api_url}vault/interactive_map/${graph}`)
-                        .then(resp => {
-                            if(!resp.Status){
-                                _this.setProps = {
-                                    'config': resp.result[0] ? resp.result[0].extra : [],
-                                    'thumb': _this.chartData.thumb,
-                                };
-                                _this.cbData = _this.setProps.config;
-                                _this.panel_type = _this.setProps.config.type;
-                            }
-                            else{
-                                _this.setProps = {};
-                            }
-                            _this.loaded = true;
-                        })
-                    }
-                    else{
-                        _this.setProps = _this.chartData;
-                        _this.cbData = _this.chartData.config;
-                        _this.panel_type = _this.setProps.vault;
-                    }
-                } else if (vault === chart_type_file || vault === vault_geo_visualization) {
-                    let vault = chart_type === chart_type_file ? 'files' : vault_geo_visualization;
-                    fetchUtil(`${model_api_url}vault/${vault}/${graph}`)
-                        .then(resp=>{
-                            if(!resp.Status){
-                                let getData = resp.result[0] ? resp.result[0].extra : {};
-                                _this.setProps = Object.assign({}, _this.chartData, getData);
-                                _this.cbData = {
-                                    "title": _this.setProps.title,
+                this.getConfig();
+            },
+            methods: {
+                getConfig(){
+                    let _this = this;
+                    let {chartData: {vault, graph, chart_type}} = _this;
+                    if (vault === vault_interactive_map) {
+                        if(_this.isStatic){
+                            fetchUtil(`${model_api_url}vault/interactive_map/${graph}`)
+                            .then(resp => {
+                                if(!resp.Status){
+                                    _this.setProps = {
+                                        'config': resp.result[0] ? resp.result[0].extra : [],
+                                        'thumb': _this.chartData.thumb,
+                                    };
+                                    if(_this.isDetailPg){
+                                        _this.$emit('setTitle', _this.setProps.config.title);
+                                    }
                                 }
-                                _this.panel_type = _this.setProps.type;
+                                else{
+                                    _this.setProps = {};
+                                }
+                                _this.loaded = true;
+                            })
+                        }
+                        else{
+                            _this.setProps = _this.chartData;
+                            if(_this.isDetailPg){
+                                _this.$emit('setTitle', _this.setProps.config.title);
                             }
-                            else{
-                                _this.setProps = {};
-                            }
-                            _this.loaded = true;
-                        })
-                } else {
-                    fetchUtil(`${model_api_url}vault/graph/${graph}`)
-                        .then(resp => {
-                            if(!resp.Status){
-                                 _this.setProps = resp.result[0] ? resp.result[0].extra : [];
-                                _this.cbData = _this.setProps;
-                                _this.panel_type = _this.setProps.chart_type;
-                            }
-                            else{
-                                _this.setProps = {};
-                            }
-                            _this.loaded = true;
-                        })
+                        }
+                    } else if (vault === chart_type_file || vault === vault_geo_visualization) {
+                        let vault = chart_type === chart_type_file ? 'files' : vault_geo_visualization;
+                        fetchUtil(`${model_api_url}vault/${vault}/${graph}`)
+                            .then(resp=>{
+                                if(!resp.Status){
+                                    let getData = resp.result[0] ? resp.result[0].extra : {};
+                                    _this.setProps = Object.assign({}, _this.chartData, getData);
+                                    if(_this.isDetailPg){
+                                        _this.$emit('setTitle', _this.setProps.title);
+                                    }
+                                }
+                                else{
+                                    _this.setProps = {};
+                                }
+                                _this.loaded = true;
+                            })
+                    } else {
+                        fetchUtil(`${model_api_url}vault/graph/${graph}`)
+                            .then(resp => {
+                                if(!resp.Status){
+                                    _this.setProps = resp.result[0] ? resp.result[0].extra : [];
+                                    if(_this.isDetailPg){
+                                        _this.$emit('setTitle', _this.setProps.title);
+                                    }
+                                }
+                                else{
+                                    _this.setProps = {};
+                                }
+                                _this.loaded = true;
+                            })
+                    }
                 }
             },
             render: function(createElement){
-                this.chartData.cbData = this.cbData;
-                let type = this.chartData.vault === "graph" ? this.panel_type : this.chartData.vault;
-                return !!type ? createElement(viewConfig[type], {props: {"cData": this.setProps, "isDetailPg": this.isDetailPg}}) : null;
+                // this.chartData.cbData = this.cbData;
+                // let type = this.chartData.vault === "graph" ? this.panel_type : this.chartData.vault;
+                // return !!type ? createElement(viewConfig[type], {props: {"cData": this.setProps, "isDetailPg": this.isDetailPg}}) : null;
+                //根据vault/page接口返回的数据加载组件
+                let type = this.chartData.vault === "graph" ? this.chartData.chart_type : this.chartData.vault;
+                return createElement(viewConfig[type], {props: {"cData": this.setProps, "isDetailPg": this.isDetailPg}});
             }
         },
     }

@@ -27,7 +27,7 @@ var app = {
     },
 
     fetchUpdate: function() {
-        chcp.fetchUpdate(function(error, data){
+        window.chcp && chcp.fetchUpdate(function(error, data){
             if (error) {
                 console.log('Failed to load the update with error code: ' + error.code);
                 console.log(error.description);
@@ -40,11 +40,28 @@ var app = {
     // deviceready Event Handler
 
     onDeviceReady: function() {
+        if (localStorage.getItem("show_changelog") === "true") {
+            var $app = Framework7.$('#app');
+            var myApp = $app && $app[0];
+            let content = '<div style="text-align: left;">';
+            for (let index = 0; index < log.length; index++) {
+                const item = log[index];
+                content += `<div style="${item.style || ""}">${index+1}. ${item.text || ""}</div>`
+            }
+            content += `</div>`;
+            myApp && myApp.f7 && myApp.f7.dialog.create({
+                title: "版本更新",
+                content,
+                buttons: [{text:"确定"}]
+            }).open();   
+            localStorage.setItem("show_changelog", "false");
+        }
+
         app.checkUpdateAvailable();
     },
 
     checkUpdateAvailable() {
-        chcp.isUpdateAvailableForInstallation(function(error, data) {
+        window.chcp && chcp.isUpdateAvailableForInstallation(function(error, data) {
             if (error) {
               console.log('Nothing to install. Executing fetch.');
               app.fetchUpdate();
@@ -60,28 +77,16 @@ var app = {
     },
 
     onUpdateReady: function() {
-        var app1 = Framework7.$('#app')[0];
-        let content = '<div style="text-align: left;">';
-        for (let index = 0; index < log.length; index++) {
-            const item = log[index];
-            content += `<div style="${item.style || ""}">${index+1}. ${item.text || ""}</div>`
-        }
-        content += `</div>`;
-        app1.f7.dialog.create({
-            title: "版本更新",
-            content,
-            buttons: [{text:"确定", onClick:function() {
-                chcp.installUpdate(app.installationCallback);
-            }}]
-        }).open();
+        window.chcp && chcp.installUpdate(app.installationCallback);
     },
 
     installationCallback: function(error) {
         if (error) {
-          console.log('Failed to install the update with error code: ' + error.code);
-          console.log(error.description);
+            console.log('Failed to install the update with error code: ' + error.code);
+            console.log(error.description);
         } else {
           console.log('Update installed!');
+          localStorage.setItem("show_changelog","true");
         }
     },
 
@@ -95,7 +100,7 @@ var app = {
 
             var dialogMessage = '请前往应用市场更新到最新版.';
 
-            chcp.requestApplicationUpdate(dialogMessage, this.userWentToStoreCallback, this.userDeclinedRedirectCallback);
+            window.chcp && chcp.requestApplicationUpdate(dialogMessage, this.userWentToStoreCallback, this.userDeclinedRedirectCallback);
 
         }
 

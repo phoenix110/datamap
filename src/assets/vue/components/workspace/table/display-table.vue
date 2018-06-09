@@ -26,6 +26,7 @@
     </div>
 </template>
 <script>
+import size from 'lodash/size';
 import MdPagination from '../../commons/md-pagination.vue';
 import fetchUtil from '../../../../js/utils/fetchUtil';
 import {tableLoadTableRef , disPlayTabelDefaultVal} from '../../../../js/constants/Constants.js';
@@ -38,7 +39,7 @@ export default {
             rowHeader: [],
             header: [],
             tableData: [],
-            title: this.cData.title,
+            title: '',
             currentPage: 1,
             pageSizeList: [5, 10, 20, 30],
             allDataList: [],
@@ -48,7 +49,13 @@ export default {
         }
     },
     created(){
-        this.getFillData();
+        size(this.cData) ? this.getFillData() : null;
+    },
+    watch: {
+        cData: function(){
+            this.title = this.cData.title;
+            size(this.cData) ? this.getFillData() : null;
+        }
     },
     methods: {
         onPageChange(currentPage){

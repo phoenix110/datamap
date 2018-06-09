@@ -13,9 +13,9 @@
 				<f7-list-item>ID: {{user.id}}</f7-list-item>
 			  <f7-list-item>用户名: {{user.name}}</f7-list-item>
 			</f7-list-group>
-		</f7-list>	
+		</f7-list>
         <f7-list>
-            <f7-list-item  @click="logout">登出</f7-list-item>
+            <f7-list-item class="logout_btn" @click="logout">登出</f7-list-item>
         </f7-list>
         <main-tabbar :selected-index="3"></main-tabbar>
     </f7-page>
@@ -24,7 +24,7 @@
     import mainTabbar from '../../components/main-tabbar.vue'
     import {paths} from '../../../js/constants/Constants'
     import tokenUtil from '../../../js/utils/tokenUtil'
-    import { mapState, mapActions } from 'vuex'
+    import { mapState } from 'vuex'
 
     export default {
         components: {

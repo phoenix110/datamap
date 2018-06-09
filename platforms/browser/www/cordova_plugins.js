@@ -1,6 +1,22 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
 module.exports = [
     {
+        "file": "plugins/cordova-fix-blackscreen/www/cordova-fix-blackscreen.js",
+        "id": "cordova-fix-blackscreen.cordova-fix-blackscreen",
+        "pluginId": "cordova-fix-blackscreen",
+        "clobbers": [
+            "cordova-fix-blackscreen"
+        ]
+    },
+    {
+        "file": "plugins/cordova-hot-code-push-plugin/www/chcp.js",
+        "id": "cordova-hot-code-push-plugin.chcp",
+        "pluginId": "cordova-hot-code-push-plugin",
+        "clobbers": [
+            "chcp"
+        ]
+    },
+    {
         "file": "plugins/cordova-plugin-file/www/DirectoryEntry.js",
         "id": "cordova-plugin-file.DirectoryEntry",
         "pluginId": "cordova-plugin-file",
@@ -251,6 +267,20 @@ module.exports = [
         "runs": true
     },
     {
+        "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
+        "id": "cordova-plugin-splashscreen.SplashScreen",
+        "pluginId": "cordova-plugin-splashscreen",
+        "clobbers": [
+            "navigator.splashscreen"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-splashscreen/src/browser/SplashScreenProxy.js",
+        "id": "cordova-plugin-splashscreen.SplashScreenProxy",
+        "pluginId": "cordova-plugin-splashscreen",
+        "runs": true
+    },
+    {
         "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
         "id": "cordova-plugin-statusbar.statusbar",
         "pluginId": "cordova-plugin-statusbar",
@@ -276,12 +306,15 @@ module.exports = [
 module.exports.metadata = 
 // TOP OF METADATA
 {
+    "cordova-custom-config": "5.0.2",
+    "cordova-fix-blackscreen": "0.0.1",
+    "cordova-hot-code-push-plugin": "1.5.3",
     "cordova-plugin-file": "6.0.1",
     "cordova-plugin-advanced-http": "1.11.1",
     "cordova-plugin-backbutton": "0.3.0",
-    "cordova-plugin-crosswalk-webview": "2.4.0",
     "cordova-plugin-device": "2.0.1",
     "cordova-plugin-ionic-keyboard": "2.0.5",
+    "cordova-plugin-splashscreen": "5.0.2",
     "cordova-plugin-statusbar": "2.4.1",
     "cordova-plugin-wechat": "2.3.0",
     "cordova-plugin-whitelist": "1.3.3",

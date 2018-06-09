@@ -93,11 +93,11 @@ export default {
         z-index: 1;
         background-color: rgba(0, 0, 0, 0.2);
         .preloader {
-            width: 35px;
-            height: 35px;
+            width: 20px;
+            height: 20px;
         }
         .ml5 {
-            font-size: 30px;
+            font-size: 14px;
             margin-left: 10px;
         }
     }

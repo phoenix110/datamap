@@ -15,7 +15,7 @@
         <div class="static-map-show" v-else>
             <div class="map-title">{{cData ? cData.title : ''}}</div>
             <div class="map-img">
-                <div class="img-bg" :style="{'backgroundImage': cData && cData.thumb ? `url(${map_img_url+cData.thumb})` : 'url(/static/images/skeleton.png)'}"></div>
+                <div class="img-bg" :style="{'backgroundImage': cData && cData.thumb ? `url(${map_img_url+cData.thumb})` : 'url(./static/images/skeleton.png)'}"></div>
             </div>
         </div>
     </div>
@@ -483,9 +483,9 @@ export default {
                 }
                 this.massMarkers[card.uid] = this.massMarkers[card.uid] || {};
                 this.massMarkers[card.uid][filter.uid] = amapUtil.createVisualMap(this.map, dataSet, visual_cfg, option)
-                this.massMarkers[card.uid][filter.uid].on('click', e => {
-                    this.onMassClick(e, card.uid, filter.uid)
-                })
+                // this.massMarkers[card.uid][filter.uid].on('click', e => {
+                //     this.onMassClick(e, card.uid, filter.uid)
+                // })
             } else if (type == 3 || type == 4 || type == 5) {
                 this.heatMaps[card.uid] = this.heatMaps[card.uid] || {};
                 this.heatMaps[card.uid][filter.uid] = amapUtil.createHeatMap(this.map, dataSet, visual_cfg, col);
@@ -519,11 +519,11 @@ export default {
                 })
                 layersMap[id] = layer;
                 layers = layers.concat(layer);
-                forEach(layer, p => {
-                    p.on('click',  e => {
-                        this.onShowPolygonInfo(e, card.uid, filter.uid)
-                    })
-                })
+                // forEach(layer, p => {
+                //     p.on('click',  e => {
+                //         this.onShowPolygonInfo(e, card.uid, filter.uid)
+                //     })
+                // })
             })
             this.map.add(layers);
             this.polygonLayers[card.uid] = this.polygonLayers[card.uid] || {}
@@ -557,11 +557,11 @@ export default {
                 })
                 layersMap[id] = layer;
                 layers = layers.concat(layer);
-                forEach(layer, p => {
-                    p.on('click',  e => {
-                        this.onShowPolygonInfo(e, card.uid, filter.uid)
-                    })
-                })
+                // forEach(layer, p => {
+                //     p.on('click',  e => {
+                //         this.onShowPolygonInfo(e, card.uid, filter.uid)
+                //     })
+                // })
             })
             this.map.add(layers);
             this.lineLayers[card.uid] = this.lineLayers[card.uid] || {}

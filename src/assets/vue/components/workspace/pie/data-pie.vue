@@ -30,13 +30,15 @@ import forEach from 'lodash/forEach';
 import cloneDeep from 'lodash/cloneDeep';
 import orderBy from 'lodash/orderBy';
 import difference from 'lodash/difference';
+import keys from 'lodash/keys';
+import pick from 'lodash/pick';
 import {model_api_url, headers, paramFake} from '../../../../js/constants/ApiConfig';
-import {editYAxiNumberMenus, chart_type_pie_circle, chart_type_pie_rose,
-    defaultPieExtraValues, pie_colors, maxItemLen, sorted_filter_all,
-    sorted_filter_percent_column
+import {editYAxiNumberMenus, chart_type_pie_circle, chart_type_pie_rose, defaultPieExtraValues, pie_colors, maxItemLen, sorted_filter_all, sorted_filter_percent_column, formulaWordMap, defaultLegendStyle, 
 } from '../../../../js/constants/Constants'
 const colorLen = size(pie_colors)
 const hide = {show: false};
+const yKeys = keys(defaultPieExtraValues.yAxisExt);
+const xKeys = keys(defaultPieExtraValues.xAxisExt);
 export default {
     name: "DataPie",
     props: ['cData', 'isDetailPg'],
@@ -53,10 +55,16 @@ export default {
                 color: '',
             },
             loaded: false,
+            preViewExtraValue: {},
         }
     },
     created(){
-        this.getFillData();
+        size(this.cData) ? this.getFillData() : null;
+    },
+    watch: {
+        cData: function(){
+            size(this.cData) ? this.getFillData() : null;
+        }
     },
     methods: {
         getFillData(force_update=false){
@@ -73,7 +81,8 @@ export default {
                 }
             })
         },
-        getExtraVal(val, key) {
+        getExtraVal(key) {
+            let val = this.preViewExtraValue;
             return cloneDeep(val && val[key] ? val[key] :
                 defaultPieExtraValues[key]);
         },
@@ -91,31 +100,48 @@ export default {
                 })
             }
         },
+        fillExtDefault(ext, def) {
+            forEach(def, (val,key)=>{!ext[key] && (ext[key] = val)});
+        },
         getOption(chartData) {
             let _this = this;
+            let {xAxis, yAxis, title, extra, chart_type} = _this.cData;
+            let xAlis = xAxis || [];
+            let yAlis = yAxis[0].items;
+            _this.preViewExtraValue = extra;
             let isDetailPg = _this.isDetailPg;
-            let {chart_type, yAxis, title, xAxis,extra} = _this.cData;
 
             // 编辑属性
-            let legendExt = this.getExtraVal(extra, 'legendExt');
-            let xAxisExt = this.getExtraVal(extra, 'xAxisExt');
-            let yAxisExt = this.getExtraVal(extra, 'yAxisExt');
+            let legendExt = _this.getExtraVal('legendExt');
+            // 新追加属性
+            this.fillExtDefault(legendExt, defaultLegendStyle);
+            let xAxisExt = _this.getExtraVal('xAxisExt');
+            let yAxisExt = _this.getExtraVal('yAxisExt');
+            let xAxisExt_new = pick(xAxisExt, xKeys);
+            let yAxisExt_new = pick(yAxisExt, yKeys);
+
+            let preViewExtraValue = {legendExt,
+                xAxisExt: xAxisExt_new, yAxisExt: yAxisExt_new};// 预览值
+            let defaultExtraValue = cloneDeep(defaultPieExtraValues);// 默认值
+            let saveExtraValue = cloneDeep(preViewExtraValue);// 存储值
 
             let data = [];
-            if (size(xAxis)) {
+            if (size(xAlis)) {
                 data = map(((chartData[0] || {}).result || {}), (val, name)=>{
                     return {name, value: val};
                 })
             } else {
-                data = map((yAxis[0] || {}).items, (item, i)=>{
-                    let name = `${item.h_value}-${editYAxiNumberMenus[item.func]}`;
-                    let sum = 0;
-                    let val = ((chartData[i] || {}).result || {})[item.key] || sum;
+                data = map(yAlis, (item, i)=>{
+                    let name = `${item.h_value}-${formulaWordMap[item.func]}`;
+                    let val = ((chartData[i] || {}).result || {})[item.key] || 0;
                     return {name, value: val};
                 })
             }
-            let {filter} = xAxisExt;
-            if(size(data) > maxItemLen && filter.type !== sorted_filter_all){
+
+            let showSetting = size(data) > maxItemLen,
+                settingRemain = false,
+                {filter} = xAxisExt;
+            if (showSetting && filter.type !== sorted_filter_all) {
                 data = orderBy(data, 'value', 'desc');// 降序排列
                 let sliceNum = filter.percent === sorted_filter_percent_column ?
                     filter.value : filter.value * data.length / 100;
@@ -127,43 +153,59 @@ export default {
                     forEach(diff, it=>{value += it.value});
                     value && (data.push({name: '余留汇总', value}));
                 }
+                settingRemain = true;
             }
+            xAxisExt_new.showSetting = showSetting;
+            xAxisExt_new.settingRemain = settingRemain;
 
-            let legend = [], colors = [],
+            let legend = [], colors = [], legendMap = {},
                 alias = yAxisExt.aliasMap || {},
                 color = yAxisExt.colorMap || {},
+                aliasMapTmp = {}, colorMapTmp = {},
                 {valueRoundNum, valueForce} = yAxisExt;
             forEach(data, (it, i)=>{
                 let {name, value} = it;
-                let nc = color[name] || pie_colors[i % colorLen] || pie_colors[0];
+                let nc = color[name];
+                nc ? (colorMapTmp[name] = nc) : (nc = pie_colors[i % colorLen] || pie_colors[0]);
                 colors.push(nc);
-                let nameVal = alias[name] || name;
+                let nameVal = alias[name];
+                nameVal ? (aliasMapTmp[name] = nameVal) : (nameVal = name);
                 legend.push({name: nameVal, icon: 'circle'});
+                legendMap[name] = {color: nc, alias: nameVal};
                 it.name = nameVal;
-                it.value = this.getDataVal(value, valueForce, valueRoundNum, 0);
+                it.value = _this.getDataVal(value, valueForce, valueRoundNum, 0);
             })
 
-            let show = true;
+            yAxisExt_new.aliasMap = aliasMapTmp;// 预览值
+            yAxisExt_new.colorMap = colorMapTmp;
+            yAxisExt_new.legendMap = legendMap;
+            defaultExtraValue.yAxisExt.aliasMap = {};// 默认值
+            defaultExtraValue.yAxisExt.colorMap = {};
+            saveExtraValue.yAxisExt.aliasMap = aliasMapTmp;// 存储值
+            saveExtraValue.yAxisExt.colorMap = colorMapTmp;
+
             let options = {
                 color: colors,
-                animation: true,
+                animationDuration: 1000,
                 series: {
                     data,
+                    label: {normal: {show:false}},
                     type: 'pie',
                     hoverAnimation: isDetailPg ? true : false,
                     silent: isDetailPg ? false : true,
                     stillShowZeroSum: false,
                     label: {normal: {show:false}},
                     labelLine: {normal: {show:false}},
+                    clockwise: !xAxisExt_new.anticlockwise,
                 }
             }
-
             if (chart_type === chart_type_pie_circle) {
                 options.series.radius = ['40%', '55%'];
             }
             if (chart_type === chart_type_pie_rose) {
                 options.series.roseType = 'area';
             }
+
             options.tooltip = isDetailPg ? {
                 trigger: 'item',
                 confine: true,
@@ -182,7 +224,7 @@ export default {
                 }
             } : hide;
 
-            if(isDetailPg){
+            if(isDetailPg && legendExt.show){
                 options.legend = {
                     animation: true,
                     data: legend,
@@ -197,7 +239,6 @@ export default {
                     bottom:30,
                 };
             }
-            
             options.grid = {
                 containLabel: true,
                 right: 30,
@@ -210,13 +251,9 @@ export default {
                 fontSize: 12
             };
 
-            // forEach(options, (t, key) => {
-            //     key !== 'color' && this.omitColor(t);
-            // })
-
             _this.options = options;
             return "";
-        },
+        }
     }
 }
 </script>

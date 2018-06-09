@@ -19,14 +19,17 @@
 </template>
 <script>
 import fetchUtil from '../../../../js/utils/fetchUtil';
-import size from 'lodash/size'
-import forEach from 'lodash/forEach'
-import round from 'lodash/round'
-import cloneDeep from 'lodash/cloneDeep'
+import size from 'lodash/size';
+import forEach from 'lodash/forEach';
+import round from 'lodash/round';
+import keys from 'lodash/keys';
+import pick from 'lodash/pick';
+import cloneDeep from 'lodash/cloneDeep';
 import {EditPoiCardExtraValues} from '../../../../js/constants/Constants.js';
-import {editYAxiNumberMenus, roundNum, defaultIndexExtraValues} from '../../../../js/constants/Constants';
+import {editYAxiNumberMenus, roundNum, defaultIndexExtraValues, formulaWordMap} from '../../../../js/constants/Constants';
 import {model_api_url, headers, paramFake} from '../../../../js/constants/ApiConfig'
-const splitSpan = ' / '
+const splitSpan = ' / ';
+const yKeys = keys(defaultIndexExtraValues.yAxisExt);
 export default {
     name: "index-load-panel",
     props: ['cData', 'isDetailPg'],
@@ -49,10 +52,16 @@ export default {
                 },
             },
             loaded: false,
+            preViewExtraValue: {},
         }
     },
     created(){
-        this.getFillData();
+        size(this.cData) ? this.getFillData() : null;
+    },
+    watch: {
+        cData: function(){
+            size(this.cData) ? this.getFillData() : null;
+        }
     },
     methods: {
         getFillData(force_update=false){
@@ -69,23 +78,8 @@ export default {
                 this.loaded = true;
             })
         },
-        getIndexVal(config, chartData) {
-            let {poiCard:{p_fontSize,p_color,roundNum,digit},title:{editTitle}} =config.extra.poiCard&&config.extra||EditPoiCardExtraValues;
-            let names = [], vals = [];
-            editTitle = editTitle ||{};
-            let sum = config.yAxis[0].items || [];
-            sum.forEach((item, index)=>{
-                let name = `${item.h_value}-${editYAxiNumberMenus[item.func]}`;
-                names.push(editTitle[name]||name);
-                vals.push(round(((chartData[index] || {}).result || {})[item.key] || 0, roundNum));
-            })
-            return [
-                names.join(splitSpan),
-                vals.join(splitSpan)
-            ]
-        },
-
-        getExtraVal(val, key) {
+        getExtraVal(key) {
+            let val = this.preViewExtraValue;
             return cloneDeep(val && val[key] ? val[key] :
                 defaultIndexExtraValues[key]);
         },
@@ -93,15 +87,27 @@ export default {
             return val ? (force ? val.toFixed(roundNum) : round(val, roundNum)) : def;
         },
         getIndexComp(chartData) {
-            let config = this.cData;
-            let yAxisExt = this.getExtraVal(config.extra, 'yAxisExt');
+            this.preViewExtraValue = this.cData ? this.cData.extra : null;
+            let {yAxis} = this.cData;
+            // 编辑属性
+            let yAxisExt = this.getExtraVal('yAxisExt');
+            let yAxisExt_new = pick(yAxisExt, yKeys);
+            let preViewExtraValue = {yAxisExt: yAxisExt_new};// 预览值
+            let defaultExtraValue = cloneDeep(defaultIndexExtraValues);// 默认值
+            let saveExtraValue = cloneDeep(preViewExtraValue);// 存储值
 
-            let aliasMap = yAxisExt.aliasMap || {},
+            let yAlis = yAxis[0].items;
+            let legendMap = {}, aliasMapTmp = {},
+                aliasMap = yAxisExt.aliasMap || {},
                 {valueRoundNum, valueForce, shortValue} = yAxisExt;
             let names = [], values = [];
-            forEach(config.yAxis[0].items, (item, index)=>{
-                let name = `${item.h_value}-${editYAxiNumberMenus[item.func]}`;
-                let nameVal = aliasMap[name] || name;
+            this.showEditBtn = false;
+            forEach(yAlis, (item, index)=>{
+                this.showEditBtn = true;
+                let name = `${item.h_value}-${formulaWordMap[item.func]}`;
+                let nameVal = aliasMap[name];
+                nameVal ? (aliasMapTmp[name] = nameVal) : (nameVal = name);
+                legendMap[name] = {alias: nameVal};
                 let val =((chartData[index] || {}).result || {})[item.key] || 0,
                     unit = '';
                 if (shortValue) {
@@ -116,11 +122,20 @@ export default {
                 val = this.getDataVal(val, valueForce, valueRoundNum, 0);
                 values.push(`${val} ${unit}`);
                 names.push(nameVal);
-            });
+            })
+            yAxisExt_new.aliasMap = aliasMapTmp;// 预览值
+            yAxisExt_new.legendMap = legendMap;
+            defaultExtraValue.yAxisExt.aliasMap = {}; // 默认值
+            saveExtraValue.yAxisExt.aliasMap = aliasMapTmp; // 存储值
+
+            this.preViewExtraValue = preViewExtraValue;
+            this.defaultExtraValue = defaultExtraValue;
+            this.saveExtraValue = saveExtraValue;
+
             let labelContent = {}, valueContent = {};
-            if (yAxisExt.showLabel){
-                let {labelColor: color, labelSize} = yAxisExt;
-                let fontSize = parseFloat(labelSize) || defaultIndexExtraValues.yAxisExt.labelSize;
+            if (yAxisExt_new.showLabel) {
+                let {labelColor: color, labelSize} = yAxisExt_new;
+                let fontSize = parseFloat(labelSize) || defaultExtraValue.yAxisExt.labelSize;
                 labelContent = {
                     // color: color,
                     fontSize: labelSize,
@@ -128,8 +143,8 @@ export default {
                 }
             }
             let hasMore = size(values) > 1;
-            let {valueColor: vlcolor, valueSize} = yAxisExt;
-            let fontSize = parseFloat(valueSize) || defaultIndexExtraValues.yAxisExt.valueSize;
+            let {valueColor: color, valueSize} = yAxisExt_new;
+            let fontSize = parseFloat(valueSize) || defaultExtraValue.yAxisExt.valueSize;
             valueContent = {
                 // color: vlcolor,
                 fontSize: valueSize,
@@ -140,7 +155,7 @@ export default {
                 value: valueContent,
             }
             return "";
-        },
+        }
     }
 }
 </script>

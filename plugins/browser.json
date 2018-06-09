@@ -7,38 +7,47 @@
     "files": {}
   },
   "installed_plugins": {
+    "cordova-custom-config": {
+      "PACKAGE_NAME": "com.metrodata.datamap"
+    },
+    "cordova-fix-blackscreen": {
+      "PACKAGE_NAME": "com.metrodata.datamap"
+    },
+    "cordova-hot-code-push-plugin": {
+      "PACKAGE_NAME": "com.metrodata.datamap"
+    },
     "cordova-plugin-advanced-http": {
-      "PACKAGE_NAME": "com.maicedata.datamap"
+      "PACKAGE_NAME": "com.metrodata.datamap"
     },
     "cordova-plugin-backbutton": {
-      "PACKAGE_NAME": "com.maicedata.datamap"
+      "PACKAGE_NAME": "com.metrodata.datamap"
     },
     "cordova-plugin-device": {
-      "PACKAGE_NAME": "com.maicedata.datamap"
+      "PACKAGE_NAME": "com.metrodata.datamap"
     },
     "cordova-plugin-ionic-keyboard": {
-      "PACKAGE_NAME": "com.maicedata.datamap"
+      "PACKAGE_NAME": "com.metrodata.datamap"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.metrodata.datamap"
     },
     "cordova-plugin-statusbar": {
-      "PACKAGE_NAME": "com.maicedata.datamap"
+      "PACKAGE_NAME": "com.metrodata.datamap"
     },
     "cordova-plugin-wechat": {
       "WECHATAPPID": "wx876af3b122110aed",
-      "PACKAGE_NAME": "com.maicedata.datamap"
+      "PACKAGE_NAME": "com.metrodata.datamap"
     },
     "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "com.maicedata.datamap"
+      "PACKAGE_NAME": "com.metrodata.datamap"
     },
     "cordova-plugin-wkwebview-engine": {
-      "PACKAGE_NAME": "com.maicedata.datamap"
-    },
-    "cordova-hot-code-push-plugin": {
-      "PACKAGE_NAME": "com.maicedata.datamap"
+      "PACKAGE_NAME": "com.metrodata.datamap"
     }
   },
   "dependent_plugins": {
     "cordova-plugin-file": {
-      "PACKAGE_NAME": "com.maicedata.datamap"
+      "PACKAGE_NAME": "com.metrodata.datamap"
     }
   }
 }

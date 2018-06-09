@@ -16,15 +16,18 @@
 import {guageExtraValues} from '../../../../js/constants/Constants.js';
 import round from 'lodash/round';
 import size from 'lodash/size';
+import keys from 'lodash/keys';
 import forEach  from 'lodash/forEach';
 import isArray  from 'lodash/isArray';
 import cloneDeep from 'lodash/cloneDeep';
+import pick from 'lodash/pick';
 import fetchUtil from '../../../../js/utils/fetchUtil';
 import {model_api_url, headers, paramFake} from '../../../../js/constants/ApiConfig';
 import {editYAxiNumberMenus, roundNum, gauge_target_type_column,
-    defaultGaugeExtraValues, new_chart_colors
+    defaultGaugeExtraValues, gauge_target_type_static, formulaWordMap, new_chart_colors as chart_colors, defaultLegendStyle,
 } from '../../../../js/constants/Constants'
-const hide = {show: false}
+const hide = {show: false};
+const yKeys = keys(defaultGaugeExtraValues.yAxisExt);
 export default {
     name: "GaugeLoadPanel",
     props: ["cData", "isDetailPg"],
@@ -40,19 +43,24 @@ export default {
         }
     },
     created(){
-        this.getFillData();
+        size(this.cData) ? this.getFillData() : null;
+    },
+    watch: {
+        cData: function(){
+            size(this.cData) ? this.getFillData() : null;
+        }
     },
     methods: {
         getFillData(force_update=false){
             fetchUtil(`${model_api_url}graph/config?force_update=${force_update}${paramFake}`,
             {method: 'POST', headers, body: JSON.stringify(this.cData)})
             .then(resp=>{
-                // this.getOpt(resp.result);
                 this.getOption(resp.result);
                 this.loaded = true;
             })
         },
-        getExtraVal(val, key) {
+        getExtraVal(key) {
+            let val = this.preViewExtraValue;
             return cloneDeep(val && val[key] ? val[key] :
                 defaultGaugeExtraValues[key]);
         },
@@ -70,37 +78,73 @@ export default {
                 })
             }
         },
+        fillExtDefault(ext, def) {
+            forEach(def, (val,key)=>{!ext[key] && (ext[key] = val)});
+        },
         getOption(chartData) {
             let _this = this;
-            let isHide = !_this.isDetailPg; 
-            let {yAxis, title, target_type, target_value, extra} = this.cData;
-            let legendExt = this.getExtraVal(extra, 'legendExt');
-            let yAxisExt = this.getExtraVal(extra, 'yAxisExt');
-            let item = yAxis[0].items[0], name = '', value = 0, legend = [];
+            let {title, yAxis, extra, target_type: et, target_value: static_value} = _this.cData;
+
+            _this.preViewExtraValue = extra;
+            let yAlis = yAxis[0].items;
+            let newYAlis = [], target_value = 0;
+            if (et === gauge_target_type_static) {
+                target_value = static_value || 0;
+            } else {
+                newYAlis = yAxis[1].items;
+            }
+            let target_type = et;
+            let width = _this.width;
+            let isDetailPg = _this.isDetailPg;
+
+            let legendExt = this.getExtraVal('legendExt');
+            // 新追加属性
+            this.fillExtDefault(legendExt, defaultLegendStyle);
+            let yAxisExt = this.getExtraVal('yAxisExt');
+            let yAxisExt_new = pick(yAxisExt, yKeys);
+            let preViewExtraValue = {legendExt, yAxisExt: yAxisExt_new};// 预览值
+            let defaultExtraValue = cloneDeep(defaultGaugeExtraValues);// 默认值
+            let saveExtraValue = cloneDeep(preViewExtraValue);// 存储值
+
+            let item = yAlis[0], name = '', value = 0, legend = [];
             if (item) {
-                name = `${item.h_value}-${editYAxiNumberMenus[item.func]}`;
+                name = `${item.h_value}-${formulaWordMap[item.func]}`;
                 value = ((chartData[0] || {}).result || {})[item.key] || 0;
             }
             if (target_type === gauge_target_type_column) {
-                let key = (yAxis[1].items[0] || {}).key || '';
+                let key = (newYAlis[0] || {}).key || '';
                 target_value = ((chartData[1] || {}).result || {})[key] || 0;
             }
-
             let target = target_value ? parseFloat(target_value) : 0;
             let pointPercent = target ? value / target : 0;
             let percent = pointPercent * 100;
+
+            let aliasMapTmp = {}, colorMapTmp = {},
+                yExt_new = yAxisExt_new, legendMap = {},
+                yExt_default = defaultExtraValue.yAxisExt,
+                yExt_save = saveExtraValue.yAxisExt;
             let alias = yAxisExt.aliasMap || {},
                 color = yAxisExt.colorMap || {};
-            let nc = color[name] || new_chart_colors[0];
-            let nameVal = alias[name] || name;
+            let nc = color[name];
+            nc ? (colorMapTmp[name] = nc) : (nc = chart_colors[0]);
+            let nameVal = alias[name];
+            nameVal ? (aliasMapTmp[name] = nameVal) : (nameVal = name);
             legend.push({name: nameVal, icon: 'circle'});
+            legendMap[name] = {color: nc, alias: nameVal};
+            yExt_new.aliasMap = aliasMapTmp;// 预览值
+            yExt_new.colorMap = colorMapTmp;
+            yExt_new.legendMap = legendMap;
+            yExt_default.aliasMap = {};// 默认值
+            yExt_default.colorMap = {};
+            yExt_save.aliasMap = aliasMapTmp;// 存储值
+            yExt_save.colorMap = colorMapTmp;
 
-            percent = this.getDataVal(percent, yAxisExt.percentForce,
-                yAxisExt.percentRoundNum, 0); // 百分比格式化
-            target = this.getDataVal(target, yAxisExt.targetForce,
-                yAxisExt.targetRoundNum, 0); // 目标值格式化
-            value = this.getDataVal(value, yAxisExt.valueForce,
-                yAxisExt.valueRoundNum, 0); // 当前值格式化
+            percent = this.getDataVal(percent, yAxisExt_new.percentForce,
+                yAxisExt_new.percentRoundNum, 0); // 百分比格式化
+            target = this.getDataVal(target, yAxisExt_new.targetForce,
+                yAxisExt_new.targetRoundNum, 0); // 目标值格式化
+            value = this.getDataVal(value, yAxisExt_new.valueForce,
+                yAxisExt_new.valueRoundNum, 0); // 当前值格式化
 
             // 设置颜色
             let gaugeColor = nc, bgColor = '#38497B';
@@ -116,14 +160,14 @@ export default {
                     }
                 });
             }
-            let lineWidth = !isHide ? 50 : _this.width * 0.12;
+            let lineWidth = isDetailPg ? 50 : width * 0.12;
             let options = {
-                animation: true,
+                animationDuration: 5000,
                 series: {
-                    radius: !isHide ? "80%" : _this.width * 0.5,
+                    radius: isDetailPg ? "80%" : width * 0.5,
                     name: nameVal,
                     type: "gauge",
-                    center: isHide ? ['50%', '50%'] : ['50%', '45%'],
+                    center: !isDetailPg ? ['50%', '50%'] : ['50%', '45%'],
                     min: 0,
                     max: target,
                     splitNumber:1,
@@ -147,28 +191,29 @@ export default {
                     },
                     data: [{value: value, name: nameVal}]
                 }
-            }
+            };
 
-            let {showPercent, showValue} = yAxisExt;
-            if ((showPercent || showValue) || !isHide) {
-                let formatter = [], rich = {}, fontSize = _this.width * 0.12;
-                if (showPercent || !isHide) {
+            // 处理detail
+            let {showPercent, showValue} = yExt_new;
+            if ((showPercent || showValue) || isDetailPg) {
+                let formatter = [], rich = {}, fontSize = width * 0.12;
+                if (showPercent || isDetailPg) {
                     formatter.push(`{percent|${percent}%}`);
                     rich.percent = {
-                        // color: yAxisExt.percentColor, 
-                        color: gaugeColor,
-                        fontSize
+                        // color: yExt_new.percentColor,
+                        color: gaugeColor, 
+                        fontSize,
                     }
                 }
-                if (showValue || !isHide) {
+                if (showValue || isDetailPg) {
                     formatter.push(`{value|${value}}`);
                     rich.value = {
-                        // color: yAxisExt.valueColor, 
+                        // color: yExt_new.valueColor, 
                         color: "rgb(170, 170, 170)",
-                        fontSize
+                        fontSize,
                     }
                 }
-                if ((showPercent && showValue) || !isHide) {
+                if ((showPercent && showValue) || isDetailPg) {
                     rich.value.fontSize = _this.width * 0.08;
                     rich.value.padding = [5, 3, 5, 3];
                 }
@@ -181,21 +226,22 @@ export default {
             }
 
             // 处理label
-            if (yAxisExt.showTarget) {
+            if (yExt_new.showTarget) {
                 options.series.axisLabel = {
                     distance: -8,
                     formatter:(v)=>`{a|${v ? target : 0}}`,
                     rich:{
                         a: {
                             padding:[0, 15, 0, 15],
-                            // color: yAxisExt.targetColor,
+                            // color: yExt_new.targetColor,
                             color: "rgb(170, 170, 170)",
                             fontSize: 12
                         }
                     }
                 };
             }
-            if (isHide && legendExt.show) {
+
+            if (isDetailPg && legendExt.show) {
                 let [top, left] = legendExt.position.split('_');
                 let orient = top === 'top' || top === 'bottom' ? 'horizontal' : 'vertical';
                 options.series.itemStyle = {normal: {color: gaugeColor}};
@@ -225,15 +271,12 @@ export default {
                 right: 30,
                 left: 20,
                 top: 10,
-                bottom: legendExt.show ? 40 : 10,
+                bottom: legendExt.show ? 20 : 40,
             };
-            // options.series.pointer = _this.isDetailPg ? {width: 12, length: '90%'} : hide;
-            // forEach(options, (t, key) => {
-            //     key !== 'color' && this.omitColor(t);
-            // })
+
             this.options = options;
             return "";
-        },
+        }
     }
 }
 </script>

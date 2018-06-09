@@ -15,7 +15,7 @@
         <div class="static-map-show" v-else>
             <div class="map-title">{{cData ? cData.config.title : ""}}</div>
             <div class="map-img">
-                <div class="img-bg" :style="{'backgroundImage': cData && cData.thumb ? `url(${map_img_url+cData.thumb})` : 'url(/static/images/skeleton.png)'}"></div>
+                <div class="img-bg" :style="{'backgroundImage': cData && cData.thumb ? `url(${map_img_url+cData.thumb})` : 'url(./static/images/skeleton.png)'}"></div>
             </div>
         </div>
     </div>
@@ -55,6 +55,7 @@ const lineOpt = {
     ...normalOpt, strokeOpacity: 0.6, strokeWeight: 6,
 }
 const unusedCols = ['id', 'address', 'lng', 'lat', 'name'];
+const fake_point = [122, 31];
 export default {
     name: "InteractiveMap",
     props: ['cData', 'isDetailPg'],
@@ -232,6 +233,7 @@ export default {
                 buffer_geo = amapUtil.geoJsonToEwkb(geoJson);
                 // buffer_filters = {type: buffer_select, filters: this.buffersData}
             }
+            console.log('cards2222', cards);
             forEach(cards, card => {
                 var {geo_filters, uid} = card
                 var geo_filter
@@ -635,9 +637,9 @@ export default {
                 }
                 this.massMarkers[card.uid] = this.massMarkers[card.uid] || {};
                 this.massMarkers[card.uid][filter.uid] = amapUtil.createVisualMap(this.map, dataSet, visual_cfg, option)
-                this.massMarkers[card.uid][filter.uid].on('click', e => {
-                    this.onMassClick(e, card.uid, filter.uid)
-                })
+                // this.massMarkers[card.uid][filter.uid].on('click', e => {
+                //     this.onMassClick(e, card.uid, filter.uid)
+                // })
             } else if (type == 3 || type == 4 || type == 5) {
                 this.heatMaps[card.uid] = this.heatMaps[card.uid] || {};
                 this.heatMaps[card.uid][filter.uid] = amapUtil.createHeatMap(this.map, dataSet, visual_cfg, col);
@@ -645,7 +647,6 @@ export default {
         },
         addPolygonToMapExt(dataSet, card, item, filter) {
             if (!this.map) return;
-            this.removeDataOnMapFilter(card.uid, filter.uid);
             var {cur_visual, hidden, style: robj} = filter || {}
             var visual_cfg = null
             var {type, col, title} = cur_visual || {};
@@ -671,19 +672,19 @@ export default {
                 })
                 layersMap[id] = layer;
                 layers = layers.concat(layer);
-                forEach(layer, p => {
-                    p.on('click',  e => {
-                        this.onShowPolygonInfo(e, card.uid, filter.uid)
-                    })
-                })
+                // forEach(layer, p => {
+                //     p.on('click',  e => {
+                //         this.onShowPolygonInfo(e, card.uid, filter.uid)
+                //     })
+                // })
             })
             this.map.add(layers);
+            this.map.setFitView(layers);
             this.polygonLayers[card.uid] = this.polygonLayers[card.uid] || {}
             this.polygonLayers[card.uid][filter.uid] = layersMap;
         },
         addLineToMapExt(dataSet, card, item, filter) {
             if (!this.map) return;
-            this.removeDataOnMapFilter(card.uid, filter.uid);
             var {cur_visual, hidden, style: robj} = filter || {}
             var visual_cfg = null
             var {type, col, title} = cur_visual || {};
@@ -709,11 +710,11 @@ export default {
                 })
                 layersMap[id] = layer;
                 layers = layers.concat(layer);
-                forEach(layer, p => {
-                    p.on('click',  e => {
-                        this.onShowPolygonInfo(e, card.uid, filter.uid)
-                    })
-                })
+                // forEach(layer, p => {
+                //     p.on('click',  e => {
+                //         this.onShowPolygonInfo(e, card.uid, filter.uid)
+                //     })
+                // })
             })
             this.map.add(layers);
             this.lineLayers[card.uid] = this.lineLayers[card.uid] || {}
@@ -756,9 +757,9 @@ export default {
                 option.fitView = false
                 this.massMarkers[card_id] = this.massMarkers[card_id] || {};
                 this.massMarkers[card_id][filter_id] = amapUtil.createVisualMap(mapIns, dataSet, visual_cfg, option)
-                this.massMarkers[card_id][filter_id].on('click', e => {
-                    this.onMassClick(e, card_id, filter_id)
-                })
+                // this.massMarkers[card_id][filter_id].on('click', e => {
+                //     this.onMassClick(e, card_id, filter_id)
+                // })
                 this.generateMarkCols();
             } else if (type == 3 || type == 4 || type == 5) {
                 this.heatMaps[card_id] = this.heatMaps[card_id] || {};

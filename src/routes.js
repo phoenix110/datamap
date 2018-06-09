@@ -26,45 +26,12 @@ export default [
     component: require('./assets/vue/pages/chart-detail.vue')
   },
   {
-    path: paths.city_choose,
-    component: require('./assets/vue/pages/city-choose.vue')
-  },
-  {
     path: paths.my_data,
     component: require('./assets/vue/pages/my-data-page.vue')
   },
+  {
+    path: paths.map_draw,
+    component: require('./assets/vue/pages/data-map-draw.vue')
+  },
 
-  //example
-  {
-    path: '/main_test/',
-    component: require('./assets/vue/pages/main_test.vue')
-  },
-  {
-    path: '/about/',
-    component: require('./assets/vue/pages/example/about.vue')
-  },
-  {
-    path: '/form/',
-    component: require('./assets/vue/pages/example/form.vue')
-  },
-  {
-    path: '/dynamic-route/blog/:blogId/post/:postId/',
-    component: require('./assets/vue/pages/example/dynamic-route.vue')
-  },
-  {
-    path: '/panel-left/',
-    component: require('./assets/vue/pages/example/panel-left.vue')
-  },
-  {
-    path: '/color-themes/',
-    component: require('./assets/vue/pages/example/color-themes.vue')
-  },
-  {
-    path: '/chat/',
-    component: require('./assets/vue/pages/example/chat.vue')
-  },
-  {
-    path: '/vuex/',
-    component: require('./assets/vue/pages/example/vuex.vue')
-  },
 ]

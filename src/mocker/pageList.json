@@ -1,0 +1,1323 @@
+{
+    "result": [
+        {
+            "id": 1427,
+            "name": "page_426f8a00-6001-11e8-8427-c192fe7f634f",
+            "create_time": "2018-05-25 17:47:58",
+            "update_time": "2018-05-29 12:40:43",
+            "extra": {
+                "name": "page_426f8a00-6001-11e8-8427-c192fe7f634f",
+                "type": "analysis",
+                "title": "ceshi1111",
+                "configs": [
+                    {
+                        "cards": [
+                            {
+                                "graph": "chart_b8520900-581d-11e8-9284-255a576204d6",
+                                "vault": "graph",
+                                "filters": [],
+                                "chart_type": "radar"
+                            },
+                            {
+                                "graph": "chart_62c97010-581b-11e8-9dfe-fd4971ec626e",
+                                "vault": "graph",
+                                "filters": [],
+                                "chart_type": "pie"
+                            }
+                        ],
+                        "title": "测试-自定义名称",
+                        "is_static": true,
+                        "description": ""
+                    },
+                    {
+                        "cards": [
+                            {
+                                "graph": "chart_031396e0-2117-11e8-89d0-8543e5a36b17",
+                                "vault": "graph",
+                                "filters": [],
+                                "chart_type": "bar"
+                            },
+                            {
+                                "graph": "chart_fd052be0-4233-11e8-89f4-d9a61d33fed5",
+                                "vault": "graph",
+                                "filters": [
+                                    {
+                                        "db": "str",
+                                        "key": "name",
+                                        "h_type": "text",
+                                        "h_value": "名称"
+                                    },
+                                    {
+                                        "db": "str",
+                                        "key": "分类",
+                                        "h_type": "text",
+                                        "h_value": "分类"
+                                    },
+                                    {
+                                        "db": "str",
+                                        "key": "大类",
+                                        "h_type": "text",
+                                        "h_value": "大类"
+                                    }
+                                ],
+                                "chart_type": "bar"
+                            },
+                            {
+                                "graph": "geo_577eb610-4a93-11e8-b421-53b3297d5b7d",
+                                "thumb": "snapshot/41/349a639f34e8fc29b7da5b49e2a66c09.png",
+                                "vault": "interactive_map",
+                                "config": {
+                                    "name": "geo_577eb610-4a93-11e8-b421-53b3297d5b7d",
+                                    "type": "interactive_map",
+                                    "cards": [
+                                        {
+                                            "uid": "card_2584fac0-4a93-11e8-b421-53b3297d5b7d",
+                                            "items": [
+                                                {
+                                                    "source": "customer",
+                                                    "filters": [
+                                                        {
+                                                            "uid": "filter_488ba780-4a93-11e8-b421-53b3297d5b7d",
+                                                            "style": {
+                                                                "icon": {
+                                                                    "icon": "icon-location_1",
+                                                                    "content": "\\ue900"
+                                                                },
+                                                                "color": "#FF4F4F"
+                                                            },
+                                                            "filters": []
+                                                        }
+                                                    ],
+                                                    "packageId": "",
+                                                    "object_type": "公共设施;公共厕所;残障洗手间/无障碍洗手间",
+                                                    "geometry_type": "point"
+                                                }
+                                            ],
+                                            "geo_filters": {
+                                                "type": "4",
+                                                "source": "customer",
+                                                "filters": [
+                                                    {
+                                                        "id": "中海板块_264521",
+                                                        "oid": "264521",
+                                                        "pid": "中海板块",
+                                                        "name": "衡山路板块",
+                                                        "source": "customer",
+                                                        "packageId": ""
+                                                    },
+                                                    {
+                                                        "id": "中海板块_264535",
+                                                        "oid": "264535",
+                                                        "pid": "中海板块",
+                                                        "name": "龙华板块",
+                                                        "source": "customer",
+                                                        "packageId": ""
+                                                    },
+                                                    {
+                                                        "id": "中海板块_264548",
+                                                        "oid": "264548",
+                                                        "pid": "中海板块",
+                                                        "name": "张江板块",
+                                                        "source": "customer",
+                                                        "packageId": ""
+                                                    },
+                                                    {
+                                                        "id": "中海板块_264551",
+                                                        "oid": "264551",
+                                                        "pid": "中海板块",
+                                                        "name": "陆家嘴板块",
+                                                        "source": "customer",
+                                                        "packageId": ""
+                                                    },
+                                                    {
+                                                        "id": "中海板块_264555",
+                                                        "oid": "264555",
+                                                        "pid": "中海板块",
+                                                        "name": "三林板块",
+                                                        "source": "customer",
+                                                        "packageId": ""
+                                                    },
+                                                    {
+                                                        "id": "中海板块_264571",
+                                                        "oid": "264571",
+                                                        "pid": "中海板块",
+                                                        "name": "新场板块",
+                                                        "source": "customer",
+                                                        "packageId": ""
+                                                    },
+                                                    {
+                                                        "id": "中海板块_264572",
+                                                        "oid": "264572",
+                                                        "pid": "中海板块",
+                                                        "name": "惠南板块",
+                                                        "source": "customer",
+                                                        "packageId": ""
+                                                    },
+                                                    {
+                                                        "id": "中海板块_264574",
+                                                        "oid": "264574",
+                                                        "pid": "中海板块",
+                                                        "name": "金汇板块",
+                                                        "source": "customer",
+                                                        "packageId": ""
+                                                    },
+                                                    {
+                                                        "id": "中海板块_264575",
+                                                        "oid": "264575",
+                                                        "pid": "中海板块",
+                                                        "name": "奉城板块",
+                                                        "source": "customer",
+                                                        "packageId": ""
+                                                    }
+                                                ],
+                                                "packageId": "",
+                                                "object_type": "中海板块"
+                                            }
+                                        }
+                                    ],
+                                    "title": "ceshi点线面",
+                                    "map_info": {
+                                        "size": "400*400",
+                                        "zoom": 9,
+                                        "scale": 1,
+                                        "location": "121.629054,31.091412"
+                                    },
+                                    "geo_filter": {
+                                        "source": "customer",
+                                        "filters": [
+                                            {
+                                                "uid": "filter_2580b500-4a93-11e8-b421-53b3297d5b7d",
+                                                "style": {
+                                                    "color": "#00968e",
+                                                    "fillOpacity": 0,
+                                                    "strokeStyle": "solid",
+                                                    "strokeWeight": 1,
+                                                    "strokeOpacity": 1,
+                                                    "strokeDasharray": [
+                                                        0,
+                                                        0,
+                                                        0,
+                                                        0
+                                                    ]
+                                                }
+                                            }
+                                        ],
+                                        "packageId": "",
+                                        "object_type": "中海板块",
+                                        "geometry_type": "polygon"
+                                    },
+                                    "supp_filters": [
+                                        {
+                                            "source": "customer",
+                                            "packageId": "",
+                                            "object_type": "公共设施;公共厕所;残障洗手间/无障碍洗手间",
+                                            "geometry_type": "point"
+                                        },
+                                        {
+                                            "source": "customer",
+                                            "packageId": "",
+                                            "object_type": "小区",
+                                            "geometry_type": "polygon"
+                                        },
+                                        {
+                                            "source": "customer",
+                                            "packageId": "",
+                                            "object_type": "道路",
+                                            "geometry_type": "line"
+                                        }
+                                    ],
+                                    "buffer_filters": null
+                                },
+                                "chart_type": "filter_type_interactive_map"
+                            },
+                            {
+                                "graph": "chart_a1d5c150-ea16-11e7-a28f-dbe42640ae71",
+                                "vault": "graph",
+                                "filters": [
+                                    {
+                                        "db": "str",
+                                        "key": "级别",
+                                        "list": [
+                                            "社区级"
+                                        ],
+                                        "h_type": "text",
+                                        "h_value": "级别"
+                                    },
+                                    {
+                                        "db": "str",
+                                        "key": "设施分类",
+                                        "list": [
+                                            "菜场"
+                                        ],
+                                        "h_type": "text",
+                                        "h_value": "设施分类"
+                                    },
+                                    {
+                                        "db": "str",
+                                        "key": "大类",
+                                        "h_type": "text",
+                                        "h_value": "大类"
+                                    }
+                                ],
+                                "chart_type": "bar"
+                            }
+                        ],
+                        "title": "范德萨范德萨",
+                        "geo_info": {
+                            "thumb": "snapshot/41/349a639f34e8fc29b7da5b49e2a66c09.png",
+                            "map_info": {
+                                "size": "400*400",
+                                "zoom": 9,
+                                "scale": 1,
+                                "location": "121.629054,31.091412"
+                            },
+                            "geo_filters": {
+                                "type": "4",
+                                "source": "customer",
+                                "filters": [
+                                    {
+                                        "id": "中海板块_264521",
+                                        "oid": "264521",
+                                        "pid": "中海板块",
+                                        "name": "衡山路板块",
+                                        "source": "customer",
+                                        "packageId": ""
+                                    },
+                                    {
+                                        "id": "中海板块_264535",
+                                        "oid": "264535",
+                                        "pid": "中海板块",
+                                        "name": "龙华板块",
+                                        "source": "customer",
+                                        "packageId": ""
+                                    },
+                                    {
+                                        "id": "中海板块_264548",
+                                        "oid": "264548",
+                                        "pid": "中海板块",
+                                        "name": "张江板块",
+                                        "source": "customer",
+                                        "packageId": ""
+                                    },
+                                    {
+                                        "id": "中海板块_264551",
+                                        "oid": "264551",
+                                        "pid": "中海板块",
+                                        "name": "陆家嘴板块",
+                                        "source": "customer",
+                                        "packageId": ""
+                                    },
+                                    {
+                                        "id": "中海板块_264555",
+                                        "oid": "264555",
+                                        "pid": "中海板块",
+                                        "name": "三林板块",
+                                        "source": "customer",
+                                        "packageId": ""
+                                    },
+                                    {
+                                        "id": "中海板块_264571",
+                                        "oid": "264571",
+                                        "pid": "中海板块",
+                                        "name": "新场板块",
+                                        "source": "customer",
+                                        "packageId": ""
+                                    },
+                                    {
+                                        "id": "中海板块_264572",
+                                        "oid": "264572",
+                                        "pid": "中海板块",
+                                        "name": "惠南板块",
+                                        "source": "customer",
+                                        "packageId": ""
+                                    },
+                                    {
+                                        "id": "中海板块_264574",
+                                        "oid": "264574",
+                                        "pid": "中海板块",
+                                        "name": "金汇板块",
+                                        "source": "customer",
+                                        "packageId": ""
+                                    },
+                                    {
+                                        "id": "中海板块_264575",
+                                        "oid": "264575",
+                                        "pid": "中海板块",
+                                        "name": "奉城板块",
+                                        "source": "customer",
+                                        "packageId": ""
+                                    }
+                                ],
+                                "packageId": "",
+                                "object_type": "中海板块"
+                            }
+                        },
+                        "geo_filter": {
+                            "customers": [
+                                "264521",
+                                "264535",
+                                "264548",
+                                "264551",
+                                "264555",
+                                "264571",
+                                "264572",
+                                "264574",
+                                "264575"
+                            ]
+                        },
+                        "description": ""
+                    }
+                ],
+                "filter_type": "filter_type_mobile"
+            }
+        },
+        {
+            "id": 1340,
+            "name": "page_07f5dbf0-5cd6-11e8-880c-8f9279880c06",
+            "create_time": "2018-05-21 17:00:57",
+            "update_time": "2018-05-28 15:59:50",
+            "extra": {
+                "name": "page_07f5dbf0-5cd6-11e8-880c-8f9279880c06",
+                "type": "analysis",
+                "title": "fsa",
+                "configs": [
+                    {
+                        "cards": [
+                            {
+                                "graph": "chart_4e7507f0-ebb5-11e7-8579-7f158a2a0461",
+                                "vault": "graph",
+                                "filters": [],
+                                "chart_type": "pie_circle"
+                            },
+                            {
+                                "graph": "geo_577eb610-4a93-11e8-b421-53b3297d5b7d",
+                                "thumb": "snapshot/41/36c341abc0be248181054957fa94d8c3.png",
+                                "vault": "interactive_map",
+                                "config": {
+                                    "name": "geo_577eb610-4a93-11e8-b421-53b3297d5b7d",
+                                    "type": "interactive_map",
+                                    "cards": [
+                                        {
+                                            "uid": "card_2584fac0-4a93-11e8-b421-53b3297d5b7d",
+                                            "items": [
+                                                {
+                                                    "source": "customer",
+                                                    "filters": [
+                                                        {
+                                                            "uid": "filter_488ba780-4a93-11e8-b421-53b3297d5b7d",
+                                                            "style": {
+                                                                "icon": {
+                                                                    "icon": "icon-location_1",
+                                                                    "content": "\\ue900"
+                                                                },
+                                                                "color": "#FF4F4F"
+                                                            },
+                                                            "filters": []
+                                                        }
+                                                    ],
+                                                    "packageId": "",
+                                                    "object_type": "公共设施;公共厕所;残障洗手间/无障碍洗手间",
+                                                    "geometry_type": "point"
+                                                }
+                                            ],
+                                            "geo_filters": {
+                                                "type": "4",
+                                                "source": "customer",
+                                                "filters": [],
+                                                "packageId": "",
+                                                "object_type": "中海板块"
+                                            }
+                                        }
+                                    ],
+                                    "title": "ceshi点线面",
+                                    "map_info": {
+                                        "size": "400*400",
+                                        "zoom": 7,
+                                        "scale": 1,
+                                        "location": "121.42718,31.273592"
+                                    },
+                                    "geo_filter": {
+                                        "source": "customer",
+                                        "filters": [
+                                            {
+                                                "uid": "filter_2580b500-4a93-11e8-b421-53b3297d5b7d",
+                                                "style": {
+                                                    "color": "#00968e",
+                                                    "fillOpacity": 0,
+                                                    "strokeStyle": "solid",
+                                                    "strokeWeight": 1,
+                                                    "strokeOpacity": 1,
+                                                    "strokeDasharray": [
+                                                        0,
+                                                        0,
+                                                        0,
+                                                        0
+                                                    ]
+                                                }
+                                            }
+                                        ],
+                                        "packageId": "",
+                                        "object_type": "中海板块",
+                                        "geometry_type": "polygon"
+                                    },
+                                    "supp_filters": [
+                                        {
+                                            "source": "customer",
+                                            "packageId": "",
+                                            "object_type": "公共设施;公共厕所;残障洗手间/无障碍洗手间",
+                                            "geometry_type": "point"
+                                        },
+                                        {
+                                            "source": "customer",
+                                            "packageId": "",
+                                            "object_type": "小区",
+                                            "geometry_type": "polygon"
+                                        },
+                                        {
+                                            "source": "customer",
+                                            "packageId": "",
+                                            "object_type": "道路",
+                                            "geometry_type": "line"
+                                        }
+                                    ],
+                                    "buffer_filters": null
+                                },
+                                "chart_type": "filter_type_interactive_map"
+                            }
+                        ],
+                        "title": "地图测试2",
+                        "description": ""
+                    },
+                    {
+                        "cards": [
+                            {
+                                "graph": "chart_4e7507f0-ebb5-11e7-8579-7f158a2a0461",
+                                "vault": "graph",
+                                "filters": [],
+                                "chart_type": "pie_circle"
+                            }
+                        ],
+                        "title": "地图测试2",
+                        "description": ""
+                    },
+                    {
+                        "cards": [
+                            {
+                                "graph": "geo_c3625af0-422b-11e8-9e25-29b940dac4f7",
+                                "thumb": "preview/41/geo_visualization/geo_c3625af0-422b-11e8-9e25-29b940dac4f7_thumb.png",
+                                "vault": "geo_visualization",
+                                "chart_type": "geo_visualization"
+                            }
+                        ],
+                        "is_static": true
+                    },
+                    {
+                        "cards": [
+                            {
+                                "graph": "geo_43919010-49ed-11e8-a090-2b2e924536f6",
+                                "thumb": "preview/41/interactive_map/geo_43919010-49ed-11e8-a090-2b2e924536f6_thumb.png",
+                                "vault": "interactive_map",
+                                "chart_type": "interactive_map"
+                            }
+                        ],
+                        "is_static": true
+                    },
+                    {
+                        "cards": [
+                            {
+                                "graph": "geo_577eb610-4a93-11e8-b421-53b3297d5b7d",
+                                "thumb": "preview/41/interactive_map/geo_577eb610-4a93-11e8-b421-53b3297d5b7d_thumb.png",
+                                "vault": "interactive_map",
+                                "chart_type": "interactive_map"
+                            }
+                        ],
+                        "is_static": true
+                    },
+                    {
+                        "cards": [
+                            {
+                                "graph": "chart_4e7507f0-ebb5-11e7-8579-7f158a2a0461",
+                                "vault": "graph",
+                                "filters": [],
+                                "chart_type": "pie_circle"
+                            },
+                            {
+                                "graph": "geo_577eb610-4a93-11e8-b421-53b3297d5b7d",
+                                "thumb": "snapshot/41/f7cc9c97b9e39f98d9e91c8d21e39406.png",
+                                "vault": "interactive_map",
+                                "config": {
+                                    "name": "geo_577eb610-4a93-11e8-b421-53b3297d5b7d",
+                                    "type": "interactive_map",
+                                    "cards": [
+                                        {
+                                            "uid": "card_2584fac0-4a93-11e8-b421-53b3297d5b7d",
+                                            "items": [
+                                                {
+                                                    "source": "customer",
+                                                    "filters": [
+                                                        {
+                                                            "uid": "filter_488ba780-4a93-11e8-b421-53b3297d5b7d",
+                                                            "style": {
+                                                                "icon": {
+                                                                    "icon": "icon-location_1",
+                                                                    "content": "\\ue900"
+                                                                },
+                                                                "color": "#FF4F4F"
+                                                            },
+                                                            "filters": []
+                                                        }
+                                                    ],
+                                                    "packageId": "",
+                                                    "object_type": "公共设施;公共厕所;残障洗手间/无障碍洗手间",
+                                                    "geometry_type": "point"
+                                                }
+                                            ],
+                                            "geo_filters": {
+                                                "type": "4",
+                                                "source": "customer",
+                                                "filters": [
+                                                    {
+                                                        "id": "中海板块_264523",
+                                                        "oid": "264523",
+                                                        "pid": "中海板块",
+                                                        "name": "徐家汇板块",
+                                                        "source": "customer",
+                                                        "packageId": ""
+                                                    },
+                                                    {
+                                                        "id": "中海板块_264548",
+                                                        "oid": "264548",
+                                                        "pid": "中海板块",
+                                                        "name": "张江板块",
+                                                        "source": "customer",
+                                                        "packageId": ""
+                                                    },
+                                                    {
+                                                        "id": "中海板块_264565",
+                                                        "oid": "264565",
+                                                        "pid": "中海板块",
+                                                        "name": "浦江板块",
+                                                        "source": "customer",
+                                                        "packageId": ""
+                                                    },
+                                                    {
+                                                        "id": "中海板块_264572",
+                                                        "oid": "264572",
+                                                        "pid": "中海板块",
+                                                        "name": "惠南板块",
+                                                        "source": "customer",
+                                                        "packageId": ""
+                                                    },
+                                                    {
+                                                        "id": "中海板块_264575",
+                                                        "oid": "264575",
+                                                        "pid": "中海板块",
+                                                        "name": "奉城板块",
+                                                        "source": "customer",
+                                                        "packageId": ""
+                                                    }
+                                                ],
+                                                "packageId": "",
+                                                "object_type": "中海板块"
+                                            }
+                                        }
+                                    ],
+                                    "title": "ceshi点线面",
+                                    "map_info": {
+                                        "size": "400*400",
+                                        "zoom": 8,
+                                        "scale": 1,
+                                        "location": "121.515071,31.003244"
+                                    },
+                                    "geo_filter": {
+                                        "source": "customer",
+                                        "filters": [
+                                            {
+                                                "uid": "filter_2580b500-4a93-11e8-b421-53b3297d5b7d",
+                                                "style": {
+                                                    "color": "#00968e",
+                                                    "fillOpacity": 0,
+                                                    "strokeStyle": "solid",
+                                                    "strokeWeight": 1,
+                                                    "strokeOpacity": 1,
+                                                    "strokeDasharray": [
+                                                        0,
+                                                        0,
+                                                        0,
+                                                        0
+                                                    ]
+                                                }
+                                            }
+                                        ],
+                                        "packageId": "",
+                                        "object_type": "中海板块",
+                                        "geometry_type": "polygon"
+                                    },
+                                    "supp_filters": [
+                                        {
+                                            "source": "customer",
+                                            "packageId": "",
+                                            "object_type": "公共设施;公共厕所;残障洗手间/无障碍洗手间",
+                                            "geometry_type": "point"
+                                        },
+                                        {
+                                            "source": "customer",
+                                            "packageId": "",
+                                            "object_type": "小区",
+                                            "geometry_type": "polygon"
+                                        },
+                                        {
+                                            "source": "customer",
+                                            "packageId": "",
+                                            "object_type": "道路",
+                                            "geometry_type": "line"
+                                        }
+                                    ],
+                                    "buffer_filters": null
+                                },
+                                "chart_type": "filter_type_interactive_map"
+                            }
+                        ],
+                        "title": "地图测试2",
+                        "geo_filter": {
+                            "customers": [
+                                "264523",
+                                "264548",
+                                "264565",
+                                "264572",
+                                "264575"
+                            ]
+                        },
+                        "description": ""
+                    },
+                    {
+                        "cards": [
+                            {
+                                "graph": "chart_fd052be0-4233-11e8-89f4-d9a61d33fed5",
+                                "vault": "graph",
+                                "filters": [
+                                    {
+                                        "db": "str",
+                                        "key": "name",
+                                        "h_type": "text",
+                                        "h_value": "名称"
+                                    },
+                                    {
+                                        "db": "str",
+                                        "key": "分类",
+                                        "h_type": "text",
+                                        "h_value": "分类"
+                                    },
+                                    {
+                                        "db": "str",
+                                        "key": "大类",
+                                        "h_type": "text",
+                                        "h_value": "大类"
+                                    }
+                                ],
+                                "chart_type": "bar"
+                            },
+                            {
+                                "graph": "chart_031396e0-2117-11e8-89d0-8543e5a36b17",
+                                "vault": "graph",
+                                "filters": [],
+                                "chart_type": "bar"
+                            },
+                            {
+                                "graph": "chart_a1d5c150-ea16-11e7-a28f-dbe42640ae71",
+                                "vault": "graph",
+                                "filters": [
+                                    {
+                                        "db": "str",
+                                        "key": "级别",
+                                        "list": [
+                                            "社区级"
+                                        ],
+                                        "h_type": "text",
+                                        "h_value": "级别"
+                                    },
+                                    {
+                                        "db": "str",
+                                        "key": "设施分类",
+                                        "list": [
+                                            "菜场"
+                                        ],
+                                        "h_type": "text",
+                                        "h_value": "设施分类"
+                                    },
+                                    {
+                                        "db": "str",
+                                        "key": "大类",
+                                        "h_type": "text",
+                                        "h_value": "大类"
+                                    }
+                                ],
+                                "chart_type": "bar"
+                            }
+                        ],
+                        "title": "fdf",
+                        "geo_info": {
+                            "thumb": "snapshot/41/b7ebfa2642c16116b0a19ef146feb4fc.png",
+                            "map_info": {
+                                "size": "400*400",
+                                "zoom": 14,
+                                "scale": 1,
+                                "location": "121.430482,31.218383"
+                            },
+                            "geo_filters": {
+                                "type": "5",
+                                "filters": {
+                                    "info": {
+                                        "81aa62f542963aa10da26cbb4705a177": {
+                                            "name": "JSL居委",
+                                            "source": "customer",
+                                            "packageId": "",
+                                            "object_type": "JSL居委"
+                                        }
+                                    },
+                                    "selected": {
+                                        "81aa62f542963aa10da26cbb4705a177": [
+                                            {
+                                                "id": 258071,
+                                                "name": "北汪"
+                                            },
+                                            {
+                                                "id": 258076,
+                                                "name": "江苏"
+                                            },
+                                            {
+                                                "id": 258070,
+                                                "name": "东浜"
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "geo_filter_type": "big_screen"
+                        },
+                        "geo_filter": {
+                            "customers": [
+                                258071,
+                                258076,
+                                258070
+                            ]
+                        },
+                        "description": ""
+                    },
+                    {
+                        "cards": [
+                            {
+                                "graph": "chart_4e7507f0-ebb5-11e7-8579-7f158a2a0461",
+                                "vault": "graph",
+                                "filters": [],
+                                "chart_type": "pie_circle"
+                            },
+                            {
+                                "graph": "geo_577eb610-4a93-11e8-b421-53b3297d5b7d",
+                                "thumb": "snapshot/41/bc729b522cf8333d343c99c2cb2efb7c.png",
+                                "vault": "interactive_map",
+                                "config": {
+                                    "name": "geo_577eb610-4a93-11e8-b421-53b3297d5b7d",
+                                    "type": "interactive_map",
+                                    "cards": [
+                                        {
+                                            "uid": "card_2584fac0-4a93-11e8-b421-53b3297d5b7d",
+                                            "items": [
+                                                {
+                                                    "source": "customer",
+                                                    "filters": [
+                                                        {
+                                                            "uid": "filter_488ba780-4a93-11e8-b421-53b3297d5b7d",
+                                                            "style": {
+                                                                "icon": {
+                                                                    "icon": "icon-location_1",
+                                                                    "content": "\\ue900"
+                                                                },
+                                                                "color": "#FF4F4F"
+                                                            },
+                                                            "filters": []
+                                                        }
+                                                    ],
+                                                    "packageId": "",
+                                                    "object_type": "公共设施;公共厕所;残障洗手间/无障碍洗手间",
+                                                    "geometry_type": "point"
+                                                }
+                                            ],
+                                            "geo_filters": {
+                                                "type": "4",
+                                                "source": "customer",
+                                                "filters": [
+                                                    {
+                                                        "id": "中海板块_264492",
+                                                        "oid": "264492",
+                                                        "pid": "中海板块",
+                                                        "name": "淞宝板块",
+                                                        "source": "customer",
+                                                        "packageId": ""
+                                                    },
+                                                    {
+                                                        "id": "中海板块_264527",
+                                                        "oid": "264527",
+                                                        "pid": "中海板块",
+                                                        "name": "莘庄板块",
+                                                        "source": "customer",
+                                                        "packageId": ""
+                                                    },
+                                                    {
+                                                        "id": "中海板块_264538",
+                                                        "oid": "264538",
+                                                        "pid": "中海板块",
+                                                        "name": "不夜城板块",
+                                                        "source": "customer",
+                                                        "packageId": ""
+                                                    },
+                                                    {
+                                                        "id": "中海板块_264566",
+                                                        "oid": "264566",
+                                                        "pid": "中海板块",
+                                                        "name": "周康板块",
+                                                        "source": "customer",
+                                                        "packageId": ""
+                                                    }
+                                                ],
+                                                "packageId": "",
+                                                "object_type": "中海板块"
+                                            }
+                                        }
+                                    ],
+                                    "title": "ceshi点线面",
+                                    "map_info": {
+                                        "size": "400*400",
+                                        "zoom": 9,
+                                        "scale": 1,
+                                        "location": "121.480739,31.354546"
+                                    },
+                                    "geo_filter": {
+                                        "source": "customer",
+                                        "filters": [
+                                            {
+                                                "uid": "filter_2580b500-4a93-11e8-b421-53b3297d5b7d",
+                                                "style": {
+                                                    "color": "#00968e",
+                                                    "fillOpacity": 0,
+                                                    "strokeStyle": "solid",
+                                                    "strokeWeight": 1,
+                                                    "strokeOpacity": 1,
+                                                    "strokeDasharray": [
+                                                        0,
+                                                        0,
+                                                        0,
+                                                        0
+                                                    ]
+                                                }
+                                            }
+                                        ],
+                                        "packageId": "",
+                                        "object_type": "中海板块",
+                                        "geometry_type": "polygon"
+                                    },
+                                    "supp_filters": [
+                                        {
+                                            "source": "customer",
+                                            "packageId": "",
+                                            "object_type": "公共设施;公共厕所;残障洗手间/无障碍洗手间",
+                                            "geometry_type": "point"
+                                        },
+                                        {
+                                            "source": "customer",
+                                            "packageId": "",
+                                            "object_type": "小区",
+                                            "geometry_type": "polygon"
+                                        },
+                                        {
+                                            "source": "customer",
+                                            "packageId": "",
+                                            "object_type": "道路",
+                                            "geometry_type": "line"
+                                        }
+                                    ],
+                                    "buffer_filters": null
+                                },
+                                "chart_type": "filter_type_interactive_map"
+                            }
+                        ],
+                        "title": "地图测试2",
+                        "geo_info": {
+                            "thumb": "snapshot/41/bc729b522cf8333d343c99c2cb2efb7c.png",
+                            "map_info": {
+                                "size": "400*400",
+                                "zoom": 9,
+                                "scale": 1,
+                                "location": "121.480739,31.354546"
+                            },
+                            "geo_filters": {
+                                "type": "4",
+                                "source": "customer",
+                                "filters": [
+                                    {
+                                        "id": "中海板块_264492",
+                                        "oid": "264492",
+                                        "pid": "中海板块",
+                                        "name": "淞宝板块",
+                                        "source": "customer",
+                                        "packageId": ""
+                                    },
+                                    {
+                                        "id": "中海板块_264527",
+                                        "oid": "264527",
+                                        "pid": "中海板块",
+                                        "name": "莘庄板块",
+                                        "source": "customer",
+                                        "packageId": ""
+                                    },
+                                    {
+                                        "id": "中海板块_264538",
+                                        "oid": "264538",
+                                        "pid": "中海板块",
+                                        "name": "不夜城板块",
+                                        "source": "customer",
+                                        "packageId": ""
+                                    },
+                                    {
+                                        "id": "中海板块_264566",
+                                        "oid": "264566",
+                                        "pid": "中海板块",
+                                        "name": "周康板块",
+                                        "source": "customer",
+                                        "packageId": ""
+                                    }
+                                ],
+                                "packageId": "",
+                                "object_type": "中海板块"
+                            }
+                        },
+                        "geo_filter": {
+                            "customers": [
+                                "264492",
+                                "264527",
+                                "264538",
+                                "264566"
+                            ]
+                        },
+                        "description": ""
+                    },
+                    {
+                        "cards": [
+                            {
+                                "graph": "chart_5a612820-581e-11e8-9284-255a576204d6",
+                                "vault": "graph",
+                                "filters": [
+                                    {
+                                        "db": "float",
+                                        "key": "24小时人口.0",
+                                        "h_type": "number",
+                                        "h_value": "24小时人口.0"
+                                    },
+                                    {
+                                        "db": "float",
+                                        "key": "24小时人口.10",
+                                        "h_type": "number",
+                                        "h_value": "24小时人口.10"
+                                    },
+                                    {
+                                        "db": "float",
+                                        "key": "24小时人口.12",
+                                        "h_type": "number",
+                                        "h_value": "24小时人口.12"
+                                    }
+                                ],
+                                "chart_type": "index"
+                            },
+                            {
+                                "graph": "chart_3c55d720-581b-11e8-9dfe-fd4971ec626e",
+                                "vault": "graph",
+                                "filters": [],
+                                "chart_type": "gauge"
+                            }
+                        ],
+                        "title": "测试-自定义名称",
+                        "is_static": true,
+                        "description": ""
+                    },
+                    {
+                        "cards": [
+                            {
+                                "graph": "chart_b8520900-581d-11e8-9284-255a576204d6",
+                                "vault": "graph",
+                                "filters": [],
+                                "chart_type": "radar"
+                            }
+                        ],
+                        "title": "测试-自定义名称",
+                        "is_static": true,
+                        "description": ""
+                    },
+                    {
+                        "cards": [
+                            {
+                                "graph": "chart_fd052be0-4233-11e8-89f4-d9a61d33fed5",
+                                "vault": "graph",
+                                "filters": [
+                                    {
+                                        "db": "str",
+                                        "key": "name",
+                                        "h_type": "text",
+                                        "h_value": "名称"
+                                    },
+                                    {
+                                        "db": "str",
+                                        "key": "分类",
+                                        "h_type": "text",
+                                        "h_value": "分类"
+                                    },
+                                    {
+                                        "db": "str",
+                                        "key": "大类",
+                                        "h_type": "text",
+                                        "h_value": "大类"
+                                    }
+                                ],
+                                "chart_type": "bar"
+                            },
+                            {
+                                "graph": "geo_577eb610-4a93-11e8-b421-53b3297d5b7d",
+                                "thumb": "snapshot/41/25be7debbf4f8bb125dac98496d5e268.png",
+                                "vault": "interactive_map",
+                                "config": {
+                                    "name": "geo_577eb610-4a93-11e8-b421-53b3297d5b7d",
+                                    "type": "interactive_map",
+                                    "cards": [
+                                        {
+                                            "uid": "card_2584fac0-4a93-11e8-b421-53b3297d5b7d",
+                                            "items": [
+                                                {
+                                                    "source": "customer",
+                                                    "filters": [
+                                                        {
+                                                            "uid": "filter_488ba780-4a93-11e8-b421-53b3297d5b7d",
+                                                            "style": {
+                                                                "icon": {
+                                                                    "icon": "icon-location_1",
+                                                                    "content": "\\ue900"
+                                                                },
+                                                                "color": "#FF4F4F"
+                                                            },
+                                                            "filters": [],
+                                                            "config_3": {
+                                                                "extra.__by_count__": {
+                                                                    "type": "heatmap",
+                                                                    "module": {
+                                                                        "color": {
+                                                                            "type": "color",
+                                                                            "value": [
+                                                                                {
+                                                                                    "k": 0.14285714285714202,
+                                                                                    "v": "rgb(59, 102, 233)"
+                                                                                },
+                                                                                {
+                                                                                    "k": 0.28571428571428503,
+                                                                                    "v": "rgb(114, 144, 229)"
+                                                                                },
+                                                                                {
+                                                                                    "k": 0.42857142857142805,
+                                                                                    "v": "rgb(164, 179, 222)"
+                                                                                },
+                                                                                {
+                                                                                    "k": 0.5714285714285711,
+                                                                                    "v": "rgb(204, 197, 209)"
+                                                                                },
+                                                                                {
+                                                                                    "k": 0.7142857142857141,
+                                                                                    "v": "rgb(228, 192, 187)"
+                                                                                },
+                                                                                {
+                                                                                    "k": 0.8571428571428571,
+                                                                                    "v": "rgb(236, 164, 156)"
+                                                                                },
+                                                                                {
+                                                                                    "k": 1,
+                                                                                    "v": "rgb(235, 119, 118)"
+                                                                                }
+                                                                            ],
+                                                                            "column": ""
+                                                                        },
+                                                                        "radius": {
+                                                                            "type": "radius",
+                                                                            "value": 20,
+                                                                            "column": ""
+                                                                        }
+                                                                    },
+                                                                    "subType": "normal",
+                                                                    "blendMode": "",
+                                                                    "reverseColor": false,
+                                                                    "current_colors": [
+                                                                        "rgb(59, 102, 233)",
+                                                                        "rgb(114, 144, 229)",
+                                                                        "rgb(164, 179, 222)",
+                                                                        "rgb(204, 197, 209)",
+                                                                        "rgb(228, 192, 187)",
+                                                                        "rgb(236, 164, 156)",
+                                                                        "rgb(235, 119, 118)"
+                                                                    ],
+                                                                    "visualize_type": 3,
+                                                                    "selectExampleColor": 0
+                                                                }
+                                                            },
+                                                            "cur_visual": {
+                                                                "col": "extra.__by_count__",
+                                                                "type": 3,
+                                                                "title": "按点位"
+                                                            }
+                                                        }
+                                                    ],
+                                                    "packageId": "",
+                                                    "object_type": "公共设施;公共厕所;残障洗手间/无障碍洗手间",
+                                                    "geometry_type": "point"
+                                                }
+                                            ],
+                                            "geo_filters": {
+                                                "type": "4",
+                                                "source": "customer",
+                                                "filters": [],
+                                                "packageId": "",
+                                                "object_type": "中海板块"
+                                            }
+                                        }
+                                    ],
+                                    "title": "ceshi点线面",
+                                    "map_info": {
+                                        "size": "400*400",
+                                        "zoom": 7,
+                                        "scale": 1,
+                                        "location": "121.42718,31.273592"
+                                    },
+                                    "geo_filter": {
+                                        "source": "customer",
+                                        "filters": [
+                                            {
+                                                "uid": "filter_2580b500-4a93-11e8-b421-53b3297d5b7d",
+                                                "style": {
+                                                    "color": "#00968e",
+                                                    "fillOpacity": 0,
+                                                    "strokeStyle": "solid",
+                                                    "strokeWeight": 1,
+                                                    "strokeOpacity": 1,
+                                                    "strokeDasharray": [
+                                                        0,
+                                                        0,
+                                                        0,
+                                                        0
+                                                    ]
+                                                }
+                                            }
+                                        ],
+                                        "packageId": "",
+                                        "object_type": "中海板块",
+                                        "geometry_type": "polygon"
+                                    },
+                                    "supp_filters": [
+                                        {
+                                            "source": "customer",
+                                            "packageId": "",
+                                            "object_type": "公共设施;公共厕所;残障洗手间/无障碍洗手间",
+                                            "geometry_type": "point"
+                                        },
+                                        {
+                                            "source": "customer",
+                                            "packageId": "",
+                                            "object_type": "小区",
+                                            "geometry_type": "polygon"
+                                        },
+                                        {
+                                            "source": "customer",
+                                            "packageId": "",
+                                            "object_type": "道路",
+                                            "geometry_type": "line"
+                                        }
+                                    ],
+                                    "buffer_filters": null
+                                },
+                                "chart_type": "filter_type_interactive_map"
+                            }
+                        ],
+                        "title": "范德萨范德萨",
+                        "geo_info": {
+                            "thumb": "snapshot/41/25be7debbf4f8bb125dac98496d5e268.png",
+                            "map_info": {
+                                "size": "400*400",
+                                "zoom": 7,
+                                "scale": 1,
+                                "location": "121.42718,31.273592"
+                            },
+                            "geo_filters": {
+                                "type": "4",
+                                "source": "customer",
+                                "filters": [],
+                                "packageId": "",
+                                "object_type": "中海板块"
+                            }
+                        },
+                        "description": ""
+                    },
+                    {
+                        "cards": [
+                            {
+                                "graph": "chart_3c55d720-581b-11e8-9dfe-fd4971ec626e",
+                                "vault": "graph",
+                                "filters": [],
+                                "chart_type": "gauge"
+                            },
+                            {
+                                "graph": "chart_b8520900-581d-11e8-9284-255a576204d6",
+                                "vault": "graph",
+                                "filters": [],
+                                "chart_type": "radar"
+                            },
+                            {
+                                "graph": "chart_5a612820-581e-11e8-9284-255a576204d6",
+                                "vault": "graph",
+                                "filters": [
+                                    {
+                                        "db": "float",
+                                        "key": "24小时人口.0",
+                                        "h_type": "number",
+                                        "h_value": "24小时人口.0"
+                                    },
+                                    {
+                                        "db": "float",
+                                        "key": "24小时人口.10",
+                                        "h_type": "number",
+                                        "h_value": "24小时人口.10"
+                                    },
+                                    {
+                                        "db": "float",
+                                        "key": "24小时人口.12",
+                                        "h_type": "number",
+                                        "h_value": "24小时人口.12"
+                                    }
+                                ],
+                                "chart_type": "index"
+                            },
+                            {
+                                "graph": "chart_62c97010-581b-11e8-9dfe-fd4971ec626e",
+                                "vault": "graph",
+                                "filters": [],
+                                "chart_type": "pie"
+                            },
+                            {
+                                "graph": "chart_d0151770-5819-11e8-9dfe-fd4971ec626e",
+                                "vault": "graph",
+                                "filters": [],
+                                "chart_type": "bar"
+                            }
+                        ],
+                        "title": "测试-自定义名称",
+                        "is_static": true,
+                        "description": ""
+                    }
+                ],
+                "filter_type": "filter_type_mobile"
+            }
+        }
+    ]
+}
