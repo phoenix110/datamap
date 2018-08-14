@@ -1,33 +1,144 @@
-<?xml version='1.0' encoding='utf-8'?>
-<widget id="com.maicedata.datamap" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <hook src="hooks/hookers.js" type="before_prepare" />
-    <hook src="hooks/beforedep.js" type="before_deploy" />
-    <hook src="hooks/copy_build_extras.js" type="after_platform_add" />
-    <name>DataMap</name>
-    <description>
-        Brand new cordova project!
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<widget id="com.metrodata.datamap" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+  <feature name="cordova-fix-blackscreen">
+    <param name="android-package" value="cordova-fix-blackscreen"/>
+  </feature>
+  <feature name="HotCodePush">
+    <param name="android-package" value="com.nordnetab.chcp.main.HotCodePushPlugin"/>
+    <param name="onload" value="true"/>
+  </feature>
+  <feature name="File">
+    <param name="android-package" value="org.apache.cordova.file.FileUtils"/>
+    <param name="onload" value="true"/>
+  </feature>
+  <feature name="CordovaHttpPlugin">
+    <param name="android-package" value="com.synconset.cordovahttp.CordovaHttpPlugin"/>
+  </feature>
+  <feature name="AMapPlugin">
+    <param name="android-package" value="com.yxt.cordova.AMapPlugin"/>
+  </feature>
+  <feature name="BackbuttonPlugin">
+    <param name="android-package" value="com.badrit.Backbutton.BackbuttonPlugin"/>
+  </feature>
+  <feature name="Device">
+    <param name="android-package" value="org.apache.cordova.device.Device"/>
+  </feature>
+  <feature name="SplashScreen">
+    <param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen"/>
+    <param name="onload" value="true"/>
+  </feature>
+  <feature name="StatusBar">
+    <param name="android-package" value="org.apache.cordova.statusbar.StatusBar"/>
+    <param name="onload" value="true"/>
+  </feature>
+  <feature name="Wechat">
+    <param name="android-package" value="xu.li.cordova.wechat.Wechat"/>
+  </feature>
+  <feature name="Whitelist">
+    <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin"/>
+    <param name="onload" value="true"/>
+  </feature>
+  <feature name="Permissions">
+    <param name="android-package" value="com.android.plugins.Permissions"/>
+  </feature>
+  <feature name="ImagePicker">
+    <param name="android-package" value="com.giants.imagepicker.ImagePickerMain"/>
+  </feature>
+  <feature name="Keyboard">
+    <param name="android-package" onload="true" value="io.ionic.keyboard.IonicKeyboard"/>
+  </feature>
+  <feature name="Diagnostic">
+    <param name="android-package" value="cordova.plugins.Diagnostic"/>
+    <param name="onload" value="true"/>
+  </feature>
+  <feature name="Diagnostic_Location">
+    <param name="android-package" value="cordova.plugins.Diagnostic_Location"/>
+    <param name="onload" value="true"/>
+  </feature>
+  <feature name="Diagnostic_Bluetooth">
+    <param name="android-package" value="cordova.plugins.Diagnostic_Bluetooth"/>
+    <param name="onload" value="true"/>
+  </feature>
+  <feature name="Diagnostic_Wifi">
+    <param name="android-package" value="cordova.plugins.Diagnostic_Wifi"/>
+    <param name="onload" value="true"/>
+  </feature>
+  <feature name="Diagnostic_Camera">
+    <param name="android-package" value="cordova.plugins.Diagnostic_Camera"/>
+    <param name="onload" value="true"/>
+  </feature>
+  <feature name="Diagnostic_Notifications">
+    <param name="android-package" value="cordova.plugins.Diagnostic_Notifications"/>
+    <param name="onload" value="true"/>
+  </feature>
+  <feature name="Diagnostic_NFC">
+    <param name="android-package" value="cordova.plugins.Diagnostic_NFC"/>
+    <param name="onload" value="true"/>
+  </feature>
+  <feature name="Diagnostic_External_Storage">
+    <param name="android-package" value="cordova.plugins.Diagnostic_External_Storage"/>
+    <param name="onload" value="true"/>
+  </feature>
+  <allow-navigation href="cdvfile:*"/>
+  <allow-navigation href="*"/>
+  <hook src="hooks/hookers.js" type="before_prepare"/>
+  <hook src="hooks/beforedep.js" type="before_deploy"/>
+  <hook src="hooks/copy_build_extras.js" type="after_platform_add"/>
+  <name>Datamap</name>
+  <description>
+        Datamap mobile
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
+  <author email="service@metrodata.cn" href="http://www.metrodata.cn">
+        Shanghai Metrodata Tech Co., Ltd.
     </author>
-    <content src="index.html" />
-    <access origin="*" />
-    <allow-intent href="http://*/*" />
-    <allow-intent href="https://*/*" />
-    <allow-intent href="tel:*" />
-    <allow-intent href="sms:*" />
-    <allow-intent href="mailto:*" />
-    <allow-intent href="geo:*" />
-    <allow-navigation href="*" />
-    <allow-intent href="market:*" />
-    <preference name="loglevel" value="DEBUG" />
-    <preference name="android-minSdkVersion" value="19" />
-    <preference name="DisallowOverscroll" value="true" />
-    <preference name="StatusBarStyle" value="blacktranslucent" />
-    <preference name="StatusBarOverlaysWebView" value="true" />
-    <preference name="KeyboardResizeMode" value="true" />
-    <preference name="xwalkMultipleApk" value="true" />
-    <feature name="BackbuttonPlugin">
-        <param name="android-package" value="com.badrit.Backbutton.BackbuttonPlugin" />
-    </feature>
+  <content src="index.html"/>
+  <access origin="*"/>
+  <allow-intent href="http://*/*"/>
+  <allow-intent href="https://*/*"/>
+  <allow-intent href="tel:*"/>
+  <allow-intent href="sms:*"/>
+  <allow-intent href="mailto:*"/>
+  <allow-intent href="geo:*"/>
+  <allow-intent href="market:*"/>
+  <custom-preference name="android-manifest/application/activity/@android:theme" value="@style/WelcomeStyle"/>
+  <chcp>
+    <config-file url="http://127.0.0.1/chcp.json"/>
+    <native-interface version="1"/>
+    <auto-download enabled="false"/>
+    <auto-install enabled="false"/>
+  </chcp>
+  <icon density="ldpi" src="res/icon/android/mipmap-ldpi/ic_launcher.png"/>
+  <icon density="mdpi" src="res/icon/android/mipmap-mdpi/ic_launcher.png"/>
+  <icon density="hdpi" src="res/icon/android/mipmap-hdpi/ic_launcher.png"/>
+  <icon density="xhdpi" src="res/icon/android/mipmap-xhdpi/ic_launcher.png"/>
+  <icon density="xxhdpi" src="res/icon/android/mipmap-xxhdpi/ic_launcher.png"/>
+  <icon density="xxxhdpi" src="res/icon/android/mipmap-xxxhdpi/ic_launcher.png"/>
+  <splash density="land-hdpi" src="res/screen/android/drawable-land-hdpi.png"/>
+  <splash density="land-ldpi" src="res/screen/android/drawable-land-ldpi.png"/>
+  <splash density="land-mdpi" src="res/screen/android/drawable-land-mdpi.png"/>
+  <splash density="land-xhdpi" src="res/screen/android/drawable-land-xhdpi.png"/>
+  <splash density="land-xxhdpi" src="res/screen/android/drawable-land-xxhdpi.png"/>
+  <splash density="land-xxxhdpi" src="res/screen/android/drawable-land-xxxhdpi.png"/>
+  <splash density="port-hdpi" src="res/screen/android/drawable-port-hdpi.png"/>
+  <splash density="port-ldpi" src="res/screen/android/drawable-port-ldpi.png"/>
+  <splash density="port-mdpi" src="res/screen/android/drawable-port-mdpi.png"/>
+  <splash density="port-xhdpi" src="res/screen/android/drawable-port-xhdpi.png"/>
+  <splash density="port-xxhdpi" src="res/screen/android/drawable-port-xxhdpi.png"/>
+  <splash density="port-xxxhdpi" src="res/screen/android/drawable-port-xxxhdpi.png"/>
+  <preference name="loglevel" value="DEBUG"/>
+  <preference name="WECHATAPPID" value="wx876af3b122110aed"/>
+  <preference name="loadUrlTimeoutValue" value="60000"/>
+  <preference name="android-minSdkVersion" value="19"/>
+  <preference name="DisallowOverscroll" value="true"/>
+  <preference name="cdvStartInBackground" value="true"/>
+  <preference name="StatusBarBackgroundColor" value="#ffffff"/>
+  <preference name="StatusBarStyle" value="default"/>
+  <preference name="StatusBarOverlaysWebView" value="true"/>
+  <preference name="KeyboardResizeMode" value="true"/>
+  <preference name="xwalkMultipleApk" value="false"/>
+  <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine"/>
+  <preference name="ShowSplashScreen" value="true"/>
+  <preference name="AutoHideSplashScreen" value="false"/>
+  <preference name="SplashMaintainAspectRatio" value="true"/>
+  <preference name="ShowSplashScreenSpinner" value="false"/>
 </widget>

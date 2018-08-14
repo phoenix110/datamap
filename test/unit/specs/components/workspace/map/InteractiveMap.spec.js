@@ -1,5 +1,5 @@
 import { destroyVM } from '../../../../util'
-import { mount } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import InteractiveMap from 'components/workspace/map/interactive-map'
 
 describe('InteractiveMap.vue', () => {
@@ -10,9 +10,9 @@ describe('InteractiveMap.vue', () => {
   })
 
   it('should render correct contents', () => {
-    const wrapper = mount(InteractiveMap)
+    const wrapper = shallowMount(InteractiveMap, {propsData: {cData: {config: {cards: []}, thumb: ""}, isDetailPg: true}})
     vm = wrapper.vm
-    expect(wrapper.find(".static-map-show").exists()).to.be.true;
+    expect(wrapper.find(".interactive-map-show").exists()).to.be.true;
   })
 
 })

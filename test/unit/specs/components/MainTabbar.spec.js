@@ -12,6 +12,6 @@ describe('MainTabbar.vue', () => {
   it('should render correct contents', () => {
     vm = createTest(MainTabbar, { selectedIndex: 1 }, true)
     expect(vm.$el.querySelector('.toolbar-inner .tab-link-active span').textContent)
-      .to.equal('数据上传')
+      .to.equal('地图')
   })
 })

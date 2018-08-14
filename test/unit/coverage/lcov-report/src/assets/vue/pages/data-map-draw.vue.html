@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">80% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/4</span>
+        <span class='fraction'>4/5</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -30,18 +30,18 @@
         <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/1</span>
+        <span class='fraction'>1/1</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">80% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/4</span>
+        <span class='fraction'>4/5</span>
       </div>
     </div>
   </div>
-  <div class='status-line low'></div>
+  <div class='status-line high'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -92,7 +92,19 @@
 47
 48
 49
-50</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -110,7 +122,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -126,8 +141,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -145,9 +169,12 @@
     &lt;f7-page navbar-through toolbar-fixed&gt;
         &lt;f7-navbar&gt;
             &lt;f7-nav-left&gt;
-                &lt;f7-link back text="返回"&gt;&lt;/f7-link&gt;
+                &lt;f7-link @click="onClickCancel"&gt;
+                    &lt;i class="f7-icons"&gt;left&lt;/i&gt;
+                    &lt;span&gt;取消&lt;/span&gt;
+                &lt;/f7-link&gt;
             &lt;/f7-nav-left&gt;
-            &lt;div class="title"&gt;新建地块&lt;/div&gt;
+            &lt;div class="title"&gt;绘制数据&lt;/div&gt;
         &lt;/f7-navbar&gt;
         &lt;div class="map-panel"&gt;
             &lt;MapDrawPanel v-if="mapload" :mapProps="mapProps"&gt;&lt;/MapDrawPanel&gt;
@@ -159,10 +186,10 @@ import MapDrawPanel from '../components/upload/map-draw-panel.vue';
 export default {
     name: "DataMapDraw",
     data(){
-<span class="cstat-no" title="statement not covered" >        return {</span>
+        return {
             mapProps: {
-                map_id: 'map_upload',
-                mapStyle: "amap://styles/light",
+                map_id: 'map_upload_draw',
+                mapStyle: "amap://styles/d4e9338d74853aa23bedaf367126e113",
                 mapCenter: [121.3866647443, 31.1500060413],
                 zoom: 9,
                 setMapCenter: [110.3866647443, 34.1500060413],
@@ -175,13 +202,19 @@ export default {
         }
     },
     mounted(){
-        let timer = <span class="cstat-no" title="statement not covered" >setTimeout(()=&gt;<span class="fstat-no" title="function not covered" >{</span></span>
-<span class="cstat-no" title="statement not covered" >            clearTimeout(timer);</span>
-<span class="cstat-no" title="statement not covered" >            this.mapload = true;</span>
+        let timer = setTimeout(()=&gt;{
+            clearTimeout(timer);
+            this.mapload = true;
         }, 400)
     },
     components: {
         MapDrawPanel,
+    },
+    methods: {
+        onClickCancel(){
+            // this.$f7Router.navigate('/upload/');
+<span class="cstat-no" title="statement not covered" >            this.$f7Router.back('/upload/', {force: true})</span>
+        }
     }
 }
 &lt;/script&gt;
@@ -190,13 +223,16 @@ export default {
     height: 100%;
     width: 100%;
 }
+.map-draw-cancel {
+    color: #007aff;
+}
 &lt;/style&gt;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat Jun 09 2018 20:38:52 GMT+0800 (CST)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Jul 09 2018 17:22:40 GMT+0800 (CST)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>

@@ -4,7 +4,7 @@
                  tab-link
                  :href="item.href"
                  reload-all
-                 :icon-f7="index===selectedIndex ? item.icon+'_fill' : item.icon"
+                 :icon="index===selectedIndex ? item.icon_choose : item.icon"
                  :text="item.title"
                  :tab-link-active="index===selectedIndex"
                  :key="item.id"

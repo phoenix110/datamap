@@ -7,6 +7,10 @@
     "files": {}
   },
   "installed_plugins": {
+    "cordova-android-support-gradle-release": {
+      "ANDROID_SUPPORT_VERSION": "27.+",
+      "PACKAGE_NAME": "com.metrodata.datamap"
+    },
     "cordova-custom-config": {
       "PACKAGE_NAME": "com.metrodata.datamap"
     },
@@ -19,10 +23,20 @@
     "cordova-plugin-advanced-http": {
       "PACKAGE_NAME": "com.metrodata.datamap"
     },
+    "cordova-plugin-amap": {
+      "API_KEY_FOR_ANDROID": "e23582cba3a1680f5bd593d838b0fbdf",
+      "PACKAGE_NAME": "com.metrodata.datamap"
+    },
+    "cordova-plugin-android-permissions": {
+      "PACKAGE_NAME": "com.metrodata.datamap"
+    },
     "cordova-plugin-backbutton": {
       "PACKAGE_NAME": "com.metrodata.datamap"
     },
     "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.metrodata.datamap"
+    },
+    "cordova-plugin-imagepicker": {
       "PACKAGE_NAME": "com.metrodata.datamap"
     },
     "cordova-plugin-ionic-keyboard": {
@@ -42,6 +56,9 @@
       "PACKAGE_NAME": "com.metrodata.datamap"
     },
     "cordova-plugin-wkwebview-engine": {
+      "PACKAGE_NAME": "com.metrodata.datamap"
+    },
+    "cordova.plugins.diagnostic": {
       "PACKAGE_NAME": "com.metrodata.datamap"
     }
   },

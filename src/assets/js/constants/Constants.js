@@ -1,34 +1,42 @@
 import map from 'lodash/map';
 
-export const colors = ['#20C2E1','#23D561','#9CD523','#F1E229','#FFBF3A','#FB8C00','#FF5252'];
-
 export const tab_menus = [
-  {id: "tab_workspace", href: "/home/", icon: "home", title: '工作台'},
-  {id: "tab_upload", href: "/upload/", icon: "cloud", title: "数据上传"},
-  {id: "tab_data", href: "/data/", icon: "data", title: "数据"},
-  {id: "tab_profile", href: "/profile/", icon: "person", title: "我"},
-];
+    {id: "tab_workspace", href: "/home/", icon: "icon-workspace", icon_choose: "icon-workspace-choose", title: '工作台'},
+    {id: "tab_upload", href: "/upload/", icon: "icon-amap", icon_choose: "icon-amap-choose", title: "地图"},
+    {id: "tab_data", href: "/data/", icon: "icon-data", icon_choose: "icon-data-choose", title: "数据"},
+    {id: "tab_profile", href: "/profile/", icon: "icon-mine", icon_choose: "icon-mine-choose", title: "我的"},
+  ];
 
 export const paths = {
   login: '/',
-  home: '/home/',
-  upload: '/upload/',
-  data: '/data/',
-  profile: '/profile/',
-  chart_detail: '/chart_detail/vault_type/:vault_type/vault_id/:vault_id/',
-  my_data: '/my_data/',
-  map_draw: '/map_draw/',
+  home: '/home/',  //工作台页
+  upload: '/upload/', //上传页
+  data: '/data/',  //数据页
+  profile: '/profile/', //用户信息页
+  about: '/about/', //关于
+  chart_detail: '/chart_detail/', //数据详情页
+  my_data: '/my_data/',  //数据列表页面
+  map_draw: '/map_draw/', //上传数据绘制页
+  my_data_clause:'/my_data_clause/',//数据信息
+  my_data_detail:'/my_data_detail/',//数据详情
+  my_data_detail_cont:'/my_data_detail/my_data_detail_cont/',//数据详情明细
+  mydata_edit_page:'/my_data_detail/mydata_edit_page/',//数据详情明细编辑
+  add_feeds:'/my_data_detail/add_feeds/',
+  create_dataPkg: '/create_dataPkg/',
+  upload_edit: '/upload_edit/', //上传数据信息编辑页
+  more_data: '/more_data/',  //更多数据页
+  picture_list: '/picture_list/', //图片展示页
+  filters_page: '/filters_page/', //筛选器页
 };
 
-
-
 export const sort_desc = 'desc';
-
 export const self_select = "1"; // 自定义区域选择
 export const dis_select = "2"; // 自定义距离选择
 export const fence_select = "4"; // 自定义围栏选择
 export const packet_select = "5"; // 从数据包选择
 export const buffer_select = "6"; //buffer选择
+
+export const colors = ['#20C2E1','#23D561','#9CD523','#F1E229','#FFBF3A','#FB8C00','#FF5252'];
 
 export const visualization_colors = ['#FF4F4F','#FFA74F','#FFFF4F','#A7FF4F','#4FFF4F','#4FFFA7','#4FFFFF','#4FA7FF','#4F4FFF','#A74FFF','#FF4FFF','#FF4FA7']
 export const poi_icons = map(new Array(10), (_,i) => {
@@ -42,8 +50,8 @@ export const MapVisualTypes = {
   GEO_VISUAL: vault_geo_visualization,
   INTERACTIVE_MAP: vault_interactive_map
 }
-export const PolygonSourceKey = '__source__';
-export const PolygonPackageIdKey = '__packageId__';
+export const PolygonSourceKey = 'source';
+export const PolygonPackageIdKey = 'packageId';
 export const custom_card_menu = {
   info_cfg: 'info_cfg', //信息卡片配置
   show_col: 'show_col', //展示字段
@@ -51,6 +59,7 @@ export const custom_card_menu = {
   buffer_general: 'buffer_general', //生成buffer选区
 }
 export const geo_types = {point:'point',polygon:'polygon',line:'line',plain:'plain'};
+export const geo_types_map = {point:'Point',polygon:'Polygon',line:'LineString',plain:'Plain'};
 export const geoTypesMap = {
     [geo_types.point]: '点数据',
     [geo_types.polygon]: '面数据',
@@ -61,12 +70,10 @@ export const h_type_date = 'datetime';
 export const h_type_number = 'number';
 export const h_type_text = 'text';
 
-export const globalvals = {
-    drag_tree_menu: 'drag_tree_menu',
-}
-
 export const filter_type_interactive_map = 'filter_type_interactive_map';// 交互式地理分析
 
+export const progress_target_type_static = 'static';
+export const progress_target_type_column = 'column';
 export const chart_type_statistics = 'statistics';
 export const chart_type_display_table = 'display_table';
 export const chart_type_bar = 'bar';
@@ -80,6 +87,7 @@ export const chart_type_gauge = 'gauge';
 export const chart_type_index = 'index';
 export const chart_type_radar = 'radar';
 export const chart_type_file = 'file';
+export const chart_type_progress = 'progress';
 export const chart_type_hot_table = 'hot_table';
 export const map_type_interactive = 'interactive_map';
 export const map_type_geo_visualization = 'geo_visualization';
@@ -142,6 +150,7 @@ export const sort_asc = 'asc';
 export const chart_legend_top_right = 'top_right';
 export const Newchart_colors =  ['rgba(71,117,208,1)','rgba(137,182,90,1)','rgba(57,167,118,1)','rgba(206,85,85,1)','rgba(221,181,64,1)','rgba(230,130,66,1)',
             'rgba(186,86,193,1)','rgba(126,76,196,1)','rgba(81,85,184,1)','rgba(68,160,216,1)','rgba(86,179,185,1)','rgba(193,56,108,1)'];
+export const barMaxWidth = 18;
 export const defaultExtraValues = {
     legendSty: {
         position: chart_legend_top_right,
@@ -296,6 +305,35 @@ export const formulaWordMap = {
     ...editYAxiNumberMenus,
     formula: '公式'
 }
+export const chart_theme_default = 'default';
+export const chart_theme_color_map = {
+  [chart_theme_default]: [
+    'rgba(81,129,228,1)','rgba(155,204,102,1)','rgba(63,178,126,1)', 'rgba(243,83,81,1)',
+    'rgba(239,196,70,1)','rgba(247,141,72,1)', 'rgba(206,98,214,1)', 'rgba(136,84,212,1)',
+    'rgba(80,85,184,1)','rgba(81,180,241,1)','rgba(105,212,219,1)','rgba(212,46,106,1)'
+  ],
+  "blue_green": [
+    'rgba(53,146,253,1)','rgba(74,144,226,1)','rgba(90,200,250,1)', 'rgba(150,220,255,1)',
+    'rgba(1,110,149,1)','rgba(51,133,156,1)', 'rgba(67,138,180,1)', 'rgba(59,123,180,1)',
+    'rgba(55,113,179,1)','rgba(86,226,255,1)','rgba(2,208,193,1)','rgba(66,197,170,1)'
+  ],
+  "red_color": [
+    'rgba(215,136,231,1)','rgba(216,97,190,1)','rgba(220,79,147,1)', 'rgba(220,95,152,1)',
+    'rgba(171,101,128,1)','rgba(184,95,91,1)', 'rgba(216,97,190,1)', 'rgba(164,73,132,1)',
+    'rgba(252,91,120,1)','rgba(230,64,94,1)','rgba(203,46,74,1)','rgba(208,2,27,1)'
+  ],
+  "light_color": [
+    'rgba(255,255,153,1)','rgba(204,255,153,1)','rgba(153,255,153,1)', 'rgba(153,255,204,1)',
+    'rgba(255,204,153,1)','rgba(255,255,92,1)', 'rgba(153,204,255,1)', 'rgba(153,255,255,1)',
+    'rgba(255,153,153,1)','rgba(255,153,204,1)','rgba(204,153,255,1)','rgba(92,92,255,1)'
+  ],
+  "yellow_blue": [
+    'rgba(149,211,255,1)','rgba(244,224,161,1)','rgba(243,206,90,1)', 'rgba(10,208,227,1)',
+    'rgba(1,255,223,1)','rgba(163,140,54,1)', 'rgba(118,143,241,1)', 'rgba(255,190,142,1)',
+    'rgba(237,118,22,1)','rgba(72,231,255,1)','rgba(128,104,225,1)','rgba(146,146,146,1)'
+  ],
+}
+export const chart_theme_color_len = chart_theme_color_map[chart_theme_default].length;
 export const lineOnlyPoint = false;
 export const rotate_type_normal = 'normal';
 export const defaultLegendPosition = 'top_right';
@@ -314,6 +352,19 @@ export const defaultSortedFilter = {
     value: 10,
     percent: sorted_filter_percent_percent,
 };
+export const sign_of_split = '-';
+export const position_vertical_top = 'top';
+export const position_vertical_middle = 'middle';
+export const position_vertical_bottom = 'bottom';
+export const position_horizon_left = 'left';
+export const position_horizon_center = 'center';
+export const position_horizon_right = 'right';
+
+//进度条样式
+export const progress_shape_round = 'round';
+export const progress_shape_square = 'square';
+
+
 
 //柱状图图例默认样式
 export const defaultLegendStyle = {
@@ -452,6 +503,35 @@ export const defaultPieExtraValues = {
         labelPosition: defaultPieLabelPosition
     }
 }
+// 进度条默认属性值
+export  const defaultProgressExtraValues = {
+  legendExt: {
+    show: false,
+    position: defaultLegendPosition, // 图例位置
+    ...defaultLegendStyle
+  },
+  yAxisExt: {
+    showPercent: true, // 默认显示百分比
+    percentColor: '#fff', // 百分比颜色
+    percentForce: false, // 是否强制补充百分比小数位
+    percentRoundNum: 2, // 百分比小数位
+    percentPosition: `${position_vertical_top}${sign_of_split}${position_horizon_center}`, // 百分比位置
+
+    showValue: false, // 默认不显示当前值
+    valueColor: '#fff', // 当前值颜色
+    valueForce: false, // 是否强制补充当前值小数位
+    valueRoundNum: 2, // 当前值小数位
+
+    showTarget: false, // 默认不显示目标值
+    targetColor: 'rgba(255,255,255,.4)',
+    targetForce: false, // 是否强制补充目标值小数位
+    targetRoundNum: 2, // 目标值小数位
+
+    showBorder: false, // 是否显示描边
+    shape: progress_shape_round, // 样式风格
+    backgroundColor: 'rgba(255,255,255,.4)', // 背景颜色
+  }
+};
 // 指标卡默认属性
 export const defaultIndexExtraValues = {
     yAxisExt: {
@@ -469,6 +549,7 @@ export const defaultIndexExtraValues = {
 // 统计表格默认属性
 export const defaultStatisticsExtraValues = {
     yAxisExt: {
+        hideIndex: false,  // 是否隐藏序号列
         valueForce: false, // 是否强制补充具体数值小数位
         valueRoundNum: 2, // 具体数值小数位
     }
@@ -476,6 +557,7 @@ export const defaultStatisticsExtraValues = {
 // 明细表格默认属性
 export const defaultDisPlayExtraValues = {
     yAxisExt: {
+        hideIndex: false, // 是否隐藏序号列
         valueForce: false, // 是否强制补充具体数值小数位
         valueRoundNum: 2, // 具体数值小数位
     }
@@ -496,27 +578,106 @@ export const defaultHotTableExtraValues = {
 
 //请求地图服务器参数配置
 export const mapServerPointConfig = {
-    "marker": {
-        "file": "marker-15.svg",
-        "fill": "#5181E4",
-        "fill_opacity": 0.5,
-        "stroke_opacity":0,
-        "transform": {"scale": [1.5]},
+    "styles": {
+        "rules": [
+            {
+                "marker" : {
+                    "file": "marker-15.svg",
+                    "fill": "#5181E4",
+                    "fill_opacity": 0.5,
+                    "stroke_opacity":0,
+                    "transform": {"scale": [1.5]},
+                }
+            }
+        ]
     }
 }
 export const mapServerLineConfig = {
     "background_color": "#00000000",
-    "line": {
-        "stroke": "#F78D48",
-        "stroke_width": 3
+    "styles": {
+        "rules": [
+            {
+                "line": {
+                    "stroke": "#F78D48",
+                    "stroke_width": 3
+                },
+            }
+        ]
     }
 }
+// "fill": "#9BCC66"
 export const mapServerPolygonConfig = {
     "background_color": "#00000000",
-    "polygon": {
-        "fill": "#9BCC66"
-    },
-    "line": {
-        "stroke": "#F78D48"
+    "styles": {
+        "rules": [
+            {
+                "polygon": {
+                    "fill": "rgba(155, 204, 102, 0.5)"
+                },
+                "line": {
+                    "stroke": "#F78D48"
+                }
+            }
+        ]
     }
 }
+
+export const GlobalKeys = {
+    location_search_history: "location-search-history-",
+    data_select_history: "data-select-history-",
+    my_data_item: 'my_data_item',
+    package_id: 'package_id',
+    record_id: 'record_id',
+    my_data_info: 'my_data_info',
+};
+
+export const poiHeaderKey = [{
+    id: "address",
+    title: "地址",
+    editable: true,
+    selectable: false,
+    type: 'text',
+}, {
+    id: "lng",
+    title: "经度",
+    editable: true,
+    selectable: false,
+    type: 'lnglat',
+}, {
+    id: "lat",
+    title: "纬度",
+    editable: true,
+    selectable: false,
+    type: 'lnglat',
+}];
+export const mapHeaderEndKey = [{
+    id: 'user_name',
+    title: '修改用户',
+    editable: false,
+    selectable: false,
+    type: 'text',
+}];
+
+export const  sortMenus = [
+  {type: 'cus', title: '自定义分类'},
+  {type: 'type', title: '按类型分类'},
+];
+
+export const pageSize = 20;
+export const directory_cfg = 'directory_cfg';
+
+//工作台地图距离选择
+export const radiusPickCols = [
+    {
+        values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    },
+    {
+        values: ['公里']
+    },
+    {
+        values: [100, 200, 300, 400, 500, 600, 700, 800, 900]
+    },
+    {
+        values: ['米']
+    }
+]

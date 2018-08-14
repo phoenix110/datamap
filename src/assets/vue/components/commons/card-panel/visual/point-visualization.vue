@@ -29,9 +29,10 @@ export default {
         }
     },
     created(){
-        bus.$on('mapFetchData', ()=>{
-            this.setTemData();
-        })
+        bus.$on('mapFetchData', this.setTemData);
+    },
+    beforeDestroy() {
+        bus.$off('mapFetchData', this.setTemData);
     },
     mounted(){
         this.setTemData();
@@ -54,14 +55,18 @@ export default {
     .poi_visual_title {
         .poi_visual_title_text{
             width: 100%;
-            line-height: 17px;
-            font-size: 12px;
+            line-height: 20px;
+            font-size: 14px;
+            color: #38393c;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
         }
     }
     .poi_visual_list {
         width: 100%;
         margin-top: 12px;
-        height: 36px;
+        height: 48px;
         display: inline-flex;
         flex-wrap: nowrap;
         .poi_visual_item {
@@ -69,6 +74,7 @@ export default {
             .poi_visual_item_icon {
                 width: 100%;
                 text-align: center;
+                font-size: 16px;
             }
             .poi_visual_item_line {
                 width: 100%;
@@ -77,6 +83,8 @@ export default {
             }
             .poi_visual_item_val {
                 width: 100%;
+                font-size: 12px;
+                color: #6b7280;
                 text-align: center;
             }
         }

@@ -91,6 +91,10 @@ ext {
 }
 
 // PLUGIN GRADLE EXTENSIONS START
+apply from: "../cordova-hot-code-push-plugin/datamap-chcp.gradle"
+apply from: "../cordova-plugin-wechat/datamap-android-build.gradle"
+apply from: "../cordova-android-support-gradle-release/datamap-cordova-android-support-gradle-release.gradle"
+apply from: "../cordova-plugin-imagepicker/datamap-imagepicker.gradle"
 // PLUGIN GRADLE EXTENSIONS END
 
 def hasBuildExtras = file('build-extras.gradle').exists()
@@ -259,6 +263,9 @@ dependencies {
     implementation fileTree(dir: 'libs', include: '*.jar')
     // SUB-PROJECT DEPENDENCIES START
     implementation(project(path: ":CordovaLib"))
+    compile "com.squareup.okhttp3:okhttp-urlconnection:3.10.0"
+    compile "com.android.support:support-v4:27.+"
+    compile "com.android.support:appcompat-v7:27.+"
     // SUB-PROJECT DEPENDENCIES END
 }
 

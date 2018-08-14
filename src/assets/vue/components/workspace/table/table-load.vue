@@ -1,20 +1,27 @@
 
 <template>
     <div :class="['table-load-style', isDetailPg ? 'table-isDetailPg' : 'not-detail-pg']">
-        <div :class="['chart_loading', isDetailPg ? 'detailpg-loading' : '']" v-if="!loaded">
+        <div :class="['chart_loading', isDetailPg ? 'detailpg-loading' : '']" v-if="!loaded || !viewLoaded">
             <f7-preloader></f7-preloader>
-            <span class="ml5">努力加载中...</span>
+            <!-- <span class="ml5">努力加载中...</span> -->
         </div>
         <div class="content-area" v-else>
             <div class="table-title">{{title}}</div>
+            <div class="filter-area" v-if="isDetailPg">
+                <FiltersPanel 
+                    :geoFilters="geoFilters" 
+                    :title="chartTitle" 
+                    :filterParams="filterParams">
+                </FiltersPanel>
+            </div>
             <div class="table-content">
                 <div class="table-scroll">
                     <table border="0" cellspacing="0" cellpadding="0">
                         <tr class="table-header">
                             <th v-for="(vh, i) in header" :key="i">{{vh}}</th>
                         </tr>
-                        <tr class="table-content" v-for="(vd, j) in tableData" :key="j">
-                            <td v-for="(value, m) in vd" :key="m">{{!!value ? value : ''}}</td>
+                        <tr class="table-content-tr" v-for="(vd, j) in tableData" :key="j">
+                            <td v-for="(value, m) in vd" :key="m" :style="{textAlign: checkType(value) ? 'right' : 'left'}">{{!!value ? value : ''}}</td>
                         </tr>
                     </table>
                 </div>
@@ -29,14 +36,18 @@
 import MdPagination from '../../commons/md-pagination.vue';
 import round from 'lodash/round';
 import orderBy from 'lodash/orderBy';
+import cloneDeep from 'lodash/cloneDeep';
 import size from 'lodash/size';
+import bus from '../../../../js/utils/bus';
+import FiltersPanel from '../../commons/filters-panel.vue';
 import {editYAxiNumberMenus, roundNum, gauge_target_type_column,
-    guageExtraValues, tableLoadTableRef , disPlayTabelDefaultVal} from '../../../../js/constants/Constants.js';
+    guageExtraValues, tableLoadTableRef , disPlayTabelDefaultVal, defaultStatisticsExtraValues} from '../../../../js/constants/Constants.js';
 import fetchUtil from '../../../../js/utils/fetchUtil';
+import queryUrl from '../../../../js/utils/queryUrl';
 import {model_api_url, headers, paramFake} from '../../../../js/constants/ApiConfig'
 export default {
     name: "table-load-panel",
-    props: ['cData', 'isDetailPg'],
+    props: ['cData', 'isDetailPg', 'geoFilters', 'chartTitle', 'viewLoaded'],
     data(){
         return {
             header: [],
@@ -48,19 +59,52 @@ export default {
             pageSize: this.isDetailPg ? 20 : 10,
             total: 0,
             loaded: false,
+            filterParams: {},
+            geoFiltersBf: {},
+            alreadyListener: false,
         }
     },
     created(){
-        size(this.cData) ? this.getFillData() : null;
+        if(size(this.cData)){
+            let {cData, geoFilters, alreadyListener, isDetailPg} = this;
+            this.geoFiltersBf = geoFilters;
+            this.getFillData();
+            this.filterParams = {
+                source: cData.source,
+                object_type: cData.object_type,
+                geometry_type: cData.geometry_type,
+            }
+            //增加筛选器监听事件
+            if(!alreadyListener && size(geoFilters.filters) && isDetailPg){
+                this.alreadyListener = true;
+                bus.$on("graphFilterListener", this.refreshGraphFilter)
+            }
+        }
     },
     watch: {
         cData: function(){
             this.title = this.cData.title;
-            size(this.cData) ? this.getFillData() : null;
+            if(size(this.cData)){
+                let {cData, geoFilters, alreadyListener, isDetailPg} = this;
+                if(alreadyListener) return;
+                this.geoFiltersBf = geoFilters;
+                this.getFillData();
+                this.filterParams = {
+                    source: cData.source,
+                    object_type: cData.object_type,
+                    geometry_type: cData.geometry_type,
+                }
+                //增加筛选器监听事件
+                if(!alreadyListener && size(geoFilters.filters) && isDetailPg){
+                    this.alreadyListener = true;
+                    bus.$on("graphFilterListener", this.refreshGraphFilter)
+                }
+            }
         }
     },
     components: {
         MdPagination,
+        FiltersPanel,
     },
     methods: {
         onPageChange(currentPage){
@@ -72,17 +116,30 @@ export default {
             this.tableData = this.allDataList.slice(start, end);
         },
         getFillData(force_update=false){
-            fetchUtil(`${model_api_url}graph/config?force_update=${force_update}${paramFake}`,
-            {method: 'POST', headers, body: JSON.stringify(this.cData)})
+            let {cData: {name, filters}, geoFiltersBf} = this;
+            fetchUtil(queryUrl(`${model_api_url}graph/config`, {
+                force_update,
+                vault_name: name,
+            }),
+            {method: 'POST', headers, body: JSON.stringify(geoFiltersBf)})
             .then(resp=>{
-                this.setTableData(resp.result);
+                this.setTableData(resp.result || {});
                 this.loaded = true;
             })
         },
+        refreshGraphFilter(filters){
+            this.geoFiltersBf.filters = filters;
+            this.getFillData();
+        },
+        getExtraVal(key, extra) {
+            return cloneDeep(extra && extra[key] ? extra[key] :
+                defaultStatisticsExtraValues[key]);
+        },
         setTableData(chartData){
             let _this = this;
-            let {xAxis: yAlis, yAxis: xAlis, sortHeader, sortDire, xStatistics, xFunc, yStatistics, yFunc} = _this.cData;
-
+            let {xAxis: yAlis, yAxis: xAlis, sortHeader, sortDire, xStatistics, xFunc, yStatistics, yFunc, extra} = _this.cData;
+            let yAxisExt = this.getExtraVal('yAxisExt', extra || {});
+            let {hideIndex} = yAxisExt;
             let header = [];
             xAlis && xAlis.forEach(x=>{// 追加y轴列名
                 x.items && x.items.forEach(it=>{
@@ -117,7 +174,8 @@ export default {
             data[0].forEach((_, i)=>{
                 let tmp = [i + 1];
                 header.forEach((_,j)=>{
-                    tmp[j + 1] = data[j] ? data[j][i] : '';
+                    let count = hideIndex ? j : j+1;
+                    tmp[count] = data[j] ? data[j][i] : '';
                 })
                 list[i] = tmp;
                 if (xStatistics) {
@@ -128,17 +186,19 @@ export default {
             if (xStatistics) {
                 header.push(`总计-${editYAxiNumberMenus[xFunc]}`);
             }
-            header.unshift('序号');
+            if(!hideIndex) header.unshift('序号');
             _this.header = header;
             let index = header.indexOf(sortHeader);
             if (index !== -1) {
                 list = orderBy(list, (it)=>{
                     return it[index];
                 }, sortDire);
-                list = list.map((it, index)=>{
-                    it[0] = index + 1;
-                    return it;
-                })
+                if(!hideIndex){
+                    list = list.map((it, index)=>{
+                        it[0] = index + 1;
+                        return it;
+                    })
+                }
             }
 
             if (yStatistics) {
@@ -148,6 +208,10 @@ export default {
             _this.tableData = list.slice(0, _this.pageSize);
             _this.allDataList = this.isDetailPg ? list : [];
             return;
+        },
+        checkType(value){
+            let reg = /^[0-9]+.?[0-9]*$/;
+            return reg.test(value);
         }
     }
 }
@@ -155,6 +219,16 @@ export default {
 <style lang="scss" scoped>
 .not-detail-pg {
     max-height: 500px;
+    min-height: 100px;
+    th, td {
+        max-width: 150px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    .chart_loading {
+        min-height: 100px;
+    }
 }
 .table-load-style {
     width: 100%;
@@ -171,46 +245,52 @@ export default {
     .table-content{
         width: 100%;
         box-sizing: border-box;
-        padding: 20px 38px 32px 38px;
+        padding: 16px 24px;
         .table-scroll {
             width: 100%;
             max-height: 409px;
             overflow: auto;
+            -webkit-overflow-scrolling: touch;
             table{
                 min-width: 100%;
-                text-align: center;
                 font-family: PingFang SC;
                 font-size: 12px;
                 color: #555555;
                 .table-header {
-                    background-color: #F8F8FA;
+                    color: #a1a6b2;
+                    font-size: 12px;
+                    font-weight: 500;
+                    background-color: #f9f9f9;
                     th {
                         box-sizing: border-box;
-                        padding: 12px 17px;
-                        // line-height: 42px;
-                        border: solid 1px #C8C7CC;
+                        padding: 0 8px;
+                        line-height: 32px;
+                        border: solid 1px #efefef;
                         border-right: none;
                         white-space: nowrap;
                     }
                     &>th:last-child {
-                        border-right: solid 1px #C8C7CC;
+                        border-right: solid 1px #efefef;
                     }
                 }
-                .table-content {
+                .table-content-tr {
+                    color: #8b909e;
+                    font-size: 10px;
+                    font-weight: 400;
                     td {
-                        border-left: solid 1px #C8C7CC;
+                        border: solid 1px #efefef;
+                        border-top: none;
+                        border-right: none;
                         box-sizing: border-box;
-                        padding: 2px 0;
-                        white-space: nowrap;
+                        line-height: 24px;
+                        padding: 0 8px;
                     }
                     &>td:last-child {
-                        border-right: solid 1px #C8C7CC;
+                        border-right: solid 1px #efefef;
                     }
                 }
-                &>.table-content:last-child {
-                    td {
-                        border-bottom: solid 1px #C8C7CC;
-                    }
+                &>.table-content-tr:nth-of-type(odd) {
+                    background-color: #f7f7f9;
                 }
             }
         }
@@ -219,6 +299,7 @@ export default {
 .table-isDetailPg {
     width: 100%;
     height: 100%;
+    background-color: #fff;
     position: relative;
     .content-area{
         width: 100%;
@@ -232,16 +313,25 @@ export default {
             padding: 0;
             flex: 1;
             overflow: auto;
+            -webkit-overflow-scrolling: touch;
             .table-scroll {
                 max-height: none;
                 height: 100%;
+                table .table-content-tr {
+                    color: #5b5d65;
+                    font-size: 14px;
+                    font-weight: 300;
+                    td {
+                        line-height: 20px;
+                        padding: 8px 8px;
+                        max-width: 200px;
+                    }
+                }
             }
         }
         .pagination-area {
             width: 100%;
-            height: 30px;
             box-sizing: border-box;
-            padding-top: 5px;
             display: flex;
             flex-direction: row;
             justify-content: center;

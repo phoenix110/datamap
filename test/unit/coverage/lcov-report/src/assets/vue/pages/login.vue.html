@@ -20,24 +20,24 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">92.92% </span>
+        <span class="strong">90.43% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>105/113</span>
+        <span class='fraction'>104/115</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">76% </span>
+        <span class="strong">76.09% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>38/50</span>
+        <span class='fraction'>35/46</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">83.33% </span>
+        <span class="strong">75% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>15/18</span>
+        <span class='fraction'>15/20</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">93.75% </span>
+        <span class="strong">91.23% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>105/112</span>
+        <span class='fraction'>104/114</span>
       </div>
     </div>
   </div>
@@ -294,7 +294,19 @@
 249
 250
 251
-252</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+252
+253
+254
+255
+256
+257
+258
+259</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -356,6 +368,14 @@
 <span class="cline-any cline-yes">17×</span>
 <span class="cline-any cline-yes">17×</span>
 <span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -392,9 +412,6 @@
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -409,9 +426,6 @@
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -549,19 +563,24 @@
     &lt;f7-page login-screen @page:afterin="onPageAfterin" @page:beforeremove="onPageBeforeout"&gt;
         &lt;f7-login-screen-title&gt;&lt;/f7-login-screen-title&gt;
         &lt;div&gt;
-            &lt;f7-list form&gt;
-                &lt;f7-list-item&gt;
-                    &lt;f7-input type="text" placeholder="用户名" autocapitalize="off" :value="name" @change="onChangeName"&gt;&lt;/f7-input&gt;
+            &lt;f7-list form autocomplete="off"&gt;
+                &lt;f7-list-item class="username"&gt;
+                    &lt;span class="username-text"&gt;用户名&lt;/span&gt;
+                    &lt;f7-input type="text" 
+                        autocapitalize="off" autocomplete="off" 
+                        autocorrect="off" spellcheck="false"
+                        :value="name" @change="onChangeName"
+                        @keyup.native.enter="onLogin"&gt;&lt;/f7-input&gt;
                 &lt;/f7-list-item&gt;
-                &lt;f7-list-item&gt;
-                    &lt;f7-input type="password" placeholder="密码" :value="password" @change="onChangePass"&gt;&lt;/f7-input&gt;
+                &lt;f7-list-item class="password"&gt;
+                    &lt;span class="username-password"&gt;密码&lt;/span&gt;
+                    &lt;f7-input type="password" :value="password" @change="onChangePass"
+                        @keyup.native.enter="onLogin"&gt;&lt;/f7-input&gt;
                 &lt;/f7-list-item&gt;
             &lt;/f7-list&gt;
             &lt;f7-list&gt;
-                &lt;f7-list-button class="login_btn" @click.prevent="onLogin"&gt;登录平台&lt;/f7-list-button&gt;
-                &lt;div class="text-right pr28i block"&gt;
-                    &lt;f7-link class="wxlogin_btn" text="微信登陆" @click.prevent="onWechatLogin"&gt;&lt;/f7-link&gt;
-                &lt;/div&gt;
+                &lt;f7-list-button class="login_btn" @click.prevent="onLogin"&gt;账号登陆&lt;/f7-list-button&gt;
+                &lt;f7-list-button class="wxlogin_btn" @click.prevent="onWechatLogin"&gt;微信登陆&lt;/f7-list-button&gt;
             &lt;/f7-list&gt;
         &lt;/div&gt;
         &lt;div v-if="fetching" class="login-loading-panel" @click.stop.prevent&gt;
@@ -607,6 +626,14 @@ export default {
         bus.$on('401', this.alert401);
         document.removeEventListener("deviceready", this.onDeviceReady);
         document.addEventListener("deviceready", this.onDeviceReady, false);
+        document.addEventListener("keyboardWillShow", () =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >            this.$$(".login-screen-content")[0].style.paddingTop = "22.4vh";</span>
+        });
+        document.addEventListener("keyboardDidHide", () =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >            this.$$(".login-screen-content")[0].style.paddingTop = "6.2vh";</span>
+        });
+        <span class="missing-if-branch" title="if path not taken" >I</span>if(!!this.$$(".login-screen-content")[0])
+<span class="cstat-no" title="statement not covered" >            this.$$(".login-screen-content")[0].style.paddingTop = "22.4vh";</span>
     },
     methods: {
         alert401() {
@@ -641,9 +668,6 @@ export default {
         onPageAfterin() {
             console.log('login page after in');
             this.$$("html").addClass("no-statusbar");
-            <span class="missing-if-branch" title="else path not taken" >E</span>if (this.$device.ios &amp;&amp; window.StatusBar) {
-                window.StatusBar.styleLightContent();
-            }
             <span class="missing-if-branch" title="else path not taken" >E</span>if (tokenUtil.get()) {
                 this.$f7router.navigate(paths.home, {reloadCurrent:true});
                 this.$$("html").removeClass("no-statusbar");
@@ -660,9 +684,6 @@ export default {
             this.toastName &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >this.toastName.close();</span>
             this.toastPass &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >this.toastPass.close();</span>
             this.$$("html").removeClass("no-statusbar");
-            <span class="missing-if-branch" title="else path not taken" >E</span>if (window.StatusBar) {
-                window.StatusBar.styleDefault();
-            }
             console.log(this.$$("html").attr('class'));
         },
         onChangeName: function (e) {
@@ -802,7 +823,7 @@ export default {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat Jun 09 2018 20:38:52 GMT+0800 (CST)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Aug 09 2018 15:45:34 GMT+0800 (CST)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>

@@ -24,12 +24,14 @@
       "idiom": "universal",
       "scale": "2x",
       "width-class": "compact",
-      "height-class": "compact"
+      "height-class": "compact",
+      "filename": "Default@2x~universal~comcom.png"
     },
     {
       "idiom": "universal",
       "scale": "2x",
-      "width-class": "compact"
+      "width-class": "compact",
+      "filename": "Default@2x~universal~comany.png"
     },
     {
       "idiom": "universal",
@@ -50,16 +52,19 @@
     {
       "idiom": "universal",
       "scale": "3x",
-      "width-class": "compact"
+      "width-class": "compact",
+      "filename": "Default@3x~universal~comany.png"
     },
     {
       "idiom": "universal",
       "scale": "3x",
-      "height-class": "compact"
+      "height-class": "compact",
+      "filename": "Default@3x~universal~anycom.png"
     },
     {
       "idiom": "universal",
-      "scale": "3x"
+      "scale": "3x",
+      "filename": "Default@3x~universal~anyany.png"
     },
     {
       "idiom": "ipad",

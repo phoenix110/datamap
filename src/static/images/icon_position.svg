@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="31px" height="31px" viewBox="0 0 31 31" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50 (54983) - http://www.bohemiancoding.com/sketch -->
+    <title>Icon Copy 2</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="12.120643%" x2="50%" y2="83.4585337%" id="linearGradient-1">
+            <stop stop-color="#000000" stop-opacity="0" offset="0%"></stop>
+            <stop stop-color="#000000" offset="100%"></stop>
+        </linearGradient>
+        <filter x="-30.0%" y="-23.1%" width="160.0%" height="146.2%" filterUnits="objectBoundingBox" id="filter-2">
+            <feGaussianBlur stdDeviation="1.2" in="SourceGraphic"></feGaussianBlur>
+        </filter>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Overrides/Cell/Cell-Icon/Location" transform="translate(1.000000, 1.000000)">
+            <rect id="Icon-Copy-2" stroke="#DEDEDE" stroke-width="0.3" x="0" y="0" width="29" height="29" rx="6.5"></rect>
+            <g id="Misc/Elements/Map-Pin" transform="translate(10.000000, 3.000000)">
+                <g id="Group" transform="translate(0.078788, 0.086047)">
+                    <path d="M15.3382852,9.56619718 C16.2022005,7.92801171 14.857317,6.6 12.3344039,6.6 C9.81149085,6.6 7.06592399,7.92801171 6.20200871,9.56619718 C5.33809343,11.2043827 6.68297689,12.5323944 9.20588997,12.5323944 C11.7288031,12.5323944 14.4743699,11.2043827 15.3382852,9.56619718 Z M9.71346089,12.5323944 L4.61514183,22.2 L3.6,22.2 L8.69831906,12.5323944 L9.71346089,12.5323944 Z" id="Oval-4" fill="url(#linearGradient-1)" opacity="0.5" filter="url(#filter-2)"></path>
+                    <ellipse id="Oval-3" fill="#000000" cx="4.2" cy="21.6" rx="1.2" ry="1"></ellipse>
+                    <rect id="Rectangle-1" fill="#AAACAF" x="3.6" y="7.8" width="1.2" height="13.8"></rect>
+                    <circle id="Oval-1" fill="#FE3824" cx="4.2" cy="4.2" r="4.2"></circle>
+                    <circle id="Oval-2" fill="#FFFFFF" cx="3.3" cy="2.7" r="1"></circle>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,55 @@
+{
+    "logs": [
+        {
+            "outputFile": "/Users/qiushi.chen/Desktop/project/datamap_app/platforms/android/app/build/intermediates/res/merged/debug/values_values.arsc.flat",
+            "map": [
+                {
+                    "source": "/Users/qiushi.chen/Desktop/project/datamap_app/platforms/android/app/src/main/res/values/styles.xml",
+                    "from": {
+                        "startLines": "8,2",
+                        "startColumns": "4,4",
+                        "startOffsets": "446,55",
+                        "endLines": "9,7",
+                        "endColumns": "12,12",
+                        "endOffsets": "541,441"
+                    },
+                    "to": {
+                        "startLines": "8,10",
+                        "startColumns": "4,4",
+                        "startOffsets": "354,454",
+                        "endLines": "9,15",
+                        "endColumns": "12,12",
+                        "endOffsets": "449,840"
+                    }
+                },
+                {
+                    "source": "/Users/qiushi.chen/Desktop/project/datamap_app/platforms/android/app/src/main/res/values/strings.xml",
+                    "from": {
+                        "startLines": "4,2,3",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "159,55,100",
+                        "endColumns": "63,44,58",
+                        "endOffsets": "218,95,154"
+                    },
+                    "to": {
+                        "startLines": "5,6,7",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "186,250,295",
+                        "endColumns": "63,44,58",
+                        "endOffsets": "245,290,349"
+                    }
+                },
+                {
+                    "source": "/Users/qiushi.chen/Desktop/project/datamap_app/platforms/android/app/src/main/res/values/colors.xml",
+                    "from": {
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,97,144",
+                        "endColumns": "41,46,41",
+                        "endOffsets": "92,139,181"
+                    }
+                }
+            ]
+        }
+    ]
+}

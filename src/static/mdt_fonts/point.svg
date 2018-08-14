@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="74px" viewBox="0 0 60 74" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50 (54983) - http://www.bohemiancoding.com/sketch -->
+    <title>Group</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="41.0419308%" x2="50%" y2="224.845204%" id="linearGradient-1">
+            <stop stop-color="#000000" stop-opacity="0" offset="0%"></stop>
+            <stop stop-color="#000000" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard-Copy-18" transform="translate(-166.000000, -243.000000)">
+            <g id="Group" transform="translate(166.000000, 243.000000)">
+                <g id="Pin">
+                    <circle id="Dot" fill="#2096F3" cx="30" cy="71" r="3"></circle>
+                    <path d="M25.2131252,64.1967426 C10.9198405,63.1896541 0,57.7460656 0,51.1818182 C0,43.901701 13.4314575,38 30,38 C46.5685425,38 60,43.901701 60,51.1818182 C60,57.727179 49.1429062,63.1583202 34.9101647,64.1879397 C30.7468536,65.0411483 30,67 30,67 C30,67 28.1053223,64.6416723 25.2131252,64.1967426 Z" id="Shadow" fill-opacity="0.3" fill="url(#linearGradient-1)"></path>
+                    <path d="M25.2131252,59.6201729 C10.9198405,57.3281782 0,44.9393218 0,30 C0,13.4314575 13.4314575,0 30,0 C46.5685425,0 60,13.4314575 60,30 C60,44.8963384 49.1429062,57.2568667 34.9101647,59.6001387 C30.7468536,61.5419237 30,66 30,66 C30,66 28.1053223,60.6327714 25.2131252,59.6201729 Z" id="Oval" fill="#2096F3"></path>
+                </g>
+                <circle id="Oval-5" fill="#FFFFFF" cx="30" cy="31" r="7"></circle>
+            </g>
+        </g>
+    </g>
+</svg>

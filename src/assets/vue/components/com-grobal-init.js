@@ -8,6 +8,7 @@ import HotTable from './workspace/table/hot-table.vue';
 import TableLoadPanel from './workspace/table/table-load.vue';
 import FileLoadPanel from './workspace/file-panel/file-load.vue';
 import IndexLoadPanel from './workspace/index-panel';
+import ProgressLoadPanel from './workspace/progress/data-progress.vue';
 import GaugeLoadPanel from './workspace/gauge/gauge-panel.vue';
 import GeoVisualizationMap from './workspace/map/geo-visualization-map.vue';
 import InteractiveMap from './workspace/map/interactive-map.vue';
@@ -17,7 +18,7 @@ import PointVisualization from './commons/card-panel/visual/point-visualization.
 import PoiHotMap from './commons/card-panel/visual/point-hot-map.vue';
 import PolygonCard from './commons/card-panel/polygon-card.vue';
 import PolygonVisualization from './commons/card-panel/visual/polygon-visualization.vue';
-import PolygonVisualizationByType from './commons/card-panel/visual/polygon-visualization-type.vue';;
+import PolygonVisualizationByType from './commons/card-panel/visual/polygon-visualization-type.vue';
 import PolylineCard from './commons/card-panel/polyline-card.vue';
 import PolylineVisualization from './commons/card-panel/visual/polyline-visualization.vue';
 import PolylineVisualizationByType from './commons/card-panel/visual/polyline-visualization-type.vue';
@@ -32,6 +33,7 @@ let comInit = {
         Vue.component("TableLoadPanel", TableLoadPanel);
         Vue.component("FileLoadPanel", FileLoadPanel);
         Vue.component("IndexLoadPanel", IndexLoadPanel);
+        Vue.component("ProgressLoadPanel", ProgressLoadPanel);
         Vue.component("GaugeLoadPanel", GaugeLoadPanel);
         Vue.component('GeoVisualizationMap', GeoVisualizationMap);
         Vue.component('InteractiveMap', InteractiveMap);

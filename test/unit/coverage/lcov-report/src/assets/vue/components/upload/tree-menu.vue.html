@@ -20,14 +20,14 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">8.33% </span>
+        <span class="strong">7.69% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>1/12</span>
+        <span class='fraction'>1/13</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/6</span>
+        <span class='fraction'>0/12</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">8.33% </span>
+        <span class="strong">7.69% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>1/12</span>
+        <span class='fraction'>1/13</span>
       </div>
     </div>
   </div>
@@ -212,13 +212,7 @@
 167
 168
 169
-170
-171
-172
-173
-174
-175
-176</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+170</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -254,8 +248,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -272,15 +265,9 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -289,11 +276,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -396,26 +384,25 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
     &lt;div class="tree-menu"&gt;
         &lt;div class="tree-items-temp" v-for="(vl, idx) in data" :key="idx"&gt;
-            &lt;div class="tree-items" @click="onItemClick(vl, idx)"&gt;
+            &lt;div :class="['tree-items', vl.isParent ? 'is-folder-style' : '']" @click="onItemClick(vl, idx)"&gt;
                 &lt;div class="tree-items-temp-icon"&gt;
                     &lt;i class="item-icon" :style="{'backgroundImage': vl.isParent ? folder_icon : file_icon[vl.geo_type]}"&gt;&lt;/i&gt;
                 &lt;/div&gt;
-                &lt;div class="tree-items-temp-content"&gt;
+                &lt;div class="tree-items-temp-content line-split"&gt;
                     &lt;div class="tree-items-temp-name"&gt;
                         &lt;div&gt;{{vl.name}}&lt;/div&gt;
                     &lt;/div&gt;
                     &lt;div :ref="'opt'+idx" class="tree-items-temp-opt" v-if="vl.isParent"&gt;
-                        &lt;div class="opt-text"&gt;展开&lt;/div&gt;
                         &lt;div class="opt-icon"&gt;&lt;i class="icon-arrow-down"&gt;&lt;/i&gt;&lt;/div&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
             &lt;/div&gt;
-            &lt;div class="tree-children" :style="{'height': checkOpen(idx) ? (vl.children.length*44+'px') : 0, 'transitionDuration': vl.children ? vl.children.length*50+'ms' : 0}"&gt;
+            &lt;div class="tree-children" :style="treeListStyle(vl, idx)"&gt;
                 &lt;div class="tree-items-children" v-for="(vl2, idx2) in vl.children" :key="idx2"  @click="onItemClick(vl2, idx2)"&gt;
                     &lt;div class="tree-items-temp-icon"&gt;
                         &lt;i class="item-icon" :style="{'backgroundImage': file_icon[vl2.geo_type]}"&gt;&lt;/i&gt;
                     &lt;/div&gt;
-                    &lt;div class="tree-items-temp-content"&gt;
+                    &lt;div class="tree-items-temp-content line-split"&gt;
                         &lt;div class="tree-items-temp-name"&gt;
                             &lt;div&gt;{{vl2.name}}&lt;/div&gt;
                         &lt;/div&gt;
@@ -432,11 +419,11 @@ export default {
     data(){
         return {
             openList: [],
-            folder_icon: "url(./static/images/icon_folder.png)",
+            folder_icon: "url(./static/images/icon_folder.svg)",
             file_icon: {
-                "point": "url(./static/images/icon_point.png)",
-                "polygon": "url(./static/images/icon_polygon.png)",
-                "line": "url(./static/images/icon_line.png)",
+                "point": "url(./static/images/icon_point.svg)",
+                "polygon": "url(./static/images/icon_polygon.svg)",
+                "line": "url(./static/images/icon_line.svg)",
             }
         }
     },
@@ -446,13 +433,11 @@ export default {
 <span class="cstat-no" title="statement not covered" >                if(this.openList.indexOf(idx) != -1){</span>
                     let i = <span class="cstat-no" title="statement not covered" >this.openList.indexOf(idx);</span>
 <span class="cstat-no" title="statement not covered" >                    this.openList.splice(i, 1);</span>
-<span class="cstat-no" title="statement not covered" >                    this.$refs['opt'+idx][0].children[0].innerText = "展开";</span>
-<span class="cstat-no" title="statement not covered" >                    this.$refs['opt'+idx][0].children[1].classList.remove('icon_dir');</span>
+<span class="cstat-no" title="statement not covered" >                    this.$refs['opt'+idx][0].children[0].classList.remove('icon_dir');</span>
                 }
                 else{
 <span class="cstat-no" title="statement not covered" >                    this.openList.push(idx);</span>
-<span class="cstat-no" title="statement not covered" >                    this.$refs['opt'+idx][0].children[0].innerText = "收起";</span>
-<span class="cstat-no" title="statement not covered" >                    this.$refs['opt'+idx][0].children[1].classList.add('icon_dir');</span>
+<span class="cstat-no" title="statement not covered" >                    this.$refs['opt'+idx][0].children[0].classList.add('icon_dir');</span>
                 }
             }
             else{
@@ -461,6 +446,14 @@ export default {
         },
         checkOpen(idx){
 <span class="cstat-no" title="statement not covered" >            return this.openList.indexOf(idx) != -1 ? true : false;</span>
+        },
+        treeListStyle(vl, idx) {
+            let len = <span class="cstat-no" title="statement not covered" >vl.children ? vl.children.length : 0;</span>
+            let animateTime = <span class="cstat-no" title="statement not covered" >len &gt; 10 ? '500ms' : len*50+'ms';</span>
+<span class="cstat-no" title="statement not covered" >            return {</span>
+                'height': this.checkOpen(idx) ? (len*44+'px') : 0, 
+                'transitionDuration': animateTime,
+            }
         }
     },
 }
@@ -468,8 +461,11 @@ export default {
 &lt;style lang="scss" scoped&gt;
 .tree-menu {
     width: 100%;
+    height: 100%;
     box-sizing: border-box;
     padding-bottom: 20px;
+    overflow-x: hidden;
+    background-color: #fff;
     .tree-items-temp {
         width: 100%;
         .tree-children {
@@ -482,15 +478,16 @@ export default {
             width: 100%;
             height: 44px;
             box-sizing: border-box;
-            padding: 0 15px;
+            padding-left: 15px;
             display: inline-flex;
+            background-color: #fff;
+            position: relative;
             .tree-items-temp-icon {
                 width: 29px;
                 height: 29px;
                 border-radius: 4px;
-                // border: solid 1px #8C8C8C;
                 text-align: center;
-                margin-right: 14px;
+                margin-right: 15px;
                 margin-top: 7px;
                 .item-icon {
                     display: block;
@@ -502,7 +499,9 @@ export default {
             .tree-items-temp-content {
                 flex: 1;
                 display: inline-flex;
-                border-bottom: solid 1px #AAAAAA;
+                box-sizing: border-box;
+                padding-right: 15px;
+                position: relative;
                 .tree-items-temp-name {
                     flex: 1;
                     font-size: 17px;
@@ -510,29 +509,21 @@ export default {
                     line-height: 44px;
                     width: 0;
                     div {
-                        // width: 100%;
                         overflow: hidden;
                         white-space: nowrap;
                         text-overflow: ellipsis;
                     }
                 }
                 .tree-items-temp-opt {
-                    width: 96px;
                     line-height: 44px;
                     box-sizing: border-box;
-                    padding-left: 28px;
-                    .opt-text {
-                        font-size: 17px;
-                        color: #C7C7C7;
-                        display: inline-block;
-                    }
+                    padding-left: 16px;
                     .opt-icon {
                         display: inline-block;
-                        margin-left: 10px;
                         transition: all 0.5s;
                         i{
-                            font-size: 13px;
-                            color: #C7C7C7;
+                            font-size: 14px;
+                            color: #bfbfbf;
                         }
                     }
                     .icon_dir {
@@ -541,32 +532,23 @@ export default {
                 }
             }
         }
+        .is-folder-style {
+            height: 54px;
+            .tree-items-temp-icon {
+                margin-top: 12px;
+            }
+            .tree-items-temp-content {
+                position: relative;
+                .tree-items-temp-name, .tree-items-temp-opt {
+                    line-height: 54px;
+                }
+            }
+        }
         .tree-items-children{
-            // transition: all 0.5s;
-            // display: none;
-        }
-        .children-open{
-            // display: inline-flex;
-        }
-        .children-temp-enter, .type-panel-leave-active {
-            height: 0;
-            // opacity: 1;
-            overflow: hidden;
-        }
-        .children-temp-enter-to{
-            // height: ‘’;
-            // opacity: 1;
-            height: 44px;
-            
-        }
-        .children-temp-leave {
-            height: 44px;
-            overflow: hidden;
-        }
-        .children-temp-enter-active, .children-temp-leave-active {
-            transition: all 1000ms;
+            background-color: #FBFBFD;
         }
     }
+    
 }
 &lt;/style&gt;</pre></td></tr>
 </table></pre>
@@ -574,7 +556,7 @@ export default {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat Jun 09 2018 20:38:52 GMT+0800 (CST)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Aug 09 2018 15:45:34 GMT+0800 (CST)
 </div>
 </div>
 <script src="../../../../../prettify.js"></script>

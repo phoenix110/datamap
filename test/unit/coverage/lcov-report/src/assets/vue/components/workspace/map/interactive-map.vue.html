@@ -20,24 +20,24 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">1.4% </span>
+        <span class="strong">4.28% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>8/570</span>
+        <span class='fraction'>36/842</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0.25% </span>
+        <span class="strong">3.18% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>1/400</span>
+        <span class='fraction'>17/535</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/64</span>
+        <span class='fraction'>0/82</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">1.47% </span>
+        <span class="strong">4.2% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>8/543</span>
+        <span class='fraction'>34/809</span>
       </div>
     </div>
   </div>
@@ -1086,7 +1086,688 @@
 1041
 1042
 1043
-1044</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+1044
+1045
+1046
+1047
+1048
+1049
+1050
+1051
+1052
+1053
+1054
+1055
+1056
+1057
+1058
+1059
+1060
+1061
+1062
+1063
+1064
+1065
+1066
+1067
+1068
+1069
+1070
+1071
+1072
+1073
+1074
+1075
+1076
+1077
+1078
+1079
+1080
+1081
+1082
+1083
+1084
+1085
+1086
+1087
+1088
+1089
+1090
+1091
+1092
+1093
+1094
+1095
+1096
+1097
+1098
+1099
+1100
+1101
+1102
+1103
+1104
+1105
+1106
+1107
+1108
+1109
+1110
+1111
+1112
+1113
+1114
+1115
+1116
+1117
+1118
+1119
+1120
+1121
+1122
+1123
+1124
+1125
+1126
+1127
+1128
+1129
+1130
+1131
+1132
+1133
+1134
+1135
+1136
+1137
+1138
+1139
+1140
+1141
+1142
+1143
+1144
+1145
+1146
+1147
+1148
+1149
+1150
+1151
+1152
+1153
+1154
+1155
+1156
+1157
+1158
+1159
+1160
+1161
+1162
+1163
+1164
+1165
+1166
+1167
+1168
+1169
+1170
+1171
+1172
+1173
+1174
+1175
+1176
+1177
+1178
+1179
+1180
+1181
+1182
+1183
+1184
+1185
+1186
+1187
+1188
+1189
+1190
+1191
+1192
+1193
+1194
+1195
+1196
+1197
+1198
+1199
+1200
+1201
+1202
+1203
+1204
+1205
+1206
+1207
+1208
+1209
+1210
+1211
+1212
+1213
+1214
+1215
+1216
+1217
+1218
+1219
+1220
+1221
+1222
+1223
+1224
+1225
+1226
+1227
+1228
+1229
+1230
+1231
+1232
+1233
+1234
+1235
+1236
+1237
+1238
+1239
+1240
+1241
+1242
+1243
+1244
+1245
+1246
+1247
+1248
+1249
+1250
+1251
+1252
+1253
+1254
+1255
+1256
+1257
+1258
+1259
+1260
+1261
+1262
+1263
+1264
+1265
+1266
+1267
+1268
+1269
+1270
+1271
+1272
+1273
+1274
+1275
+1276
+1277
+1278
+1279
+1280
+1281
+1282
+1283
+1284
+1285
+1286
+1287
+1288
+1289
+1290
+1291
+1292
+1293
+1294
+1295
+1296
+1297
+1298
+1299
+1300
+1301
+1302
+1303
+1304
+1305
+1306
+1307
+1308
+1309
+1310
+1311
+1312
+1313
+1314
+1315
+1316
+1317
+1318
+1319
+1320
+1321
+1322
+1323
+1324
+1325
+1326
+1327
+1328
+1329
+1330
+1331
+1332
+1333
+1334
+1335
+1336
+1337
+1338
+1339
+1340
+1341
+1342
+1343
+1344
+1345
+1346
+1347
+1348
+1349
+1350
+1351
+1352
+1353
+1354
+1355
+1356
+1357
+1358
+1359
+1360
+1361
+1362
+1363
+1364
+1365
+1366
+1367
+1368
+1369
+1370
+1371
+1372
+1373
+1374
+1375
+1376
+1377
+1378
+1379
+1380
+1381
+1382
+1383
+1384
+1385
+1386
+1387
+1388
+1389
+1390
+1391
+1392
+1393
+1394
+1395
+1396
+1397
+1398
+1399
+1400
+1401
+1402
+1403
+1404
+1405
+1406
+1407
+1408
+1409
+1410
+1411
+1412
+1413
+1414
+1415
+1416
+1417
+1418
+1419
+1420
+1421
+1422
+1423
+1424
+1425
+1426
+1427
+1428
+1429
+1430
+1431
+1432
+1433
+1434
+1435
+1436
+1437
+1438
+1439
+1440
+1441
+1442
+1443
+1444
+1445
+1446
+1447
+1448
+1449
+1450
+1451
+1452
+1453
+1454
+1455
+1456
+1457
+1458
+1459
+1460
+1461
+1462
+1463
+1464
+1465
+1466
+1467
+1468
+1469
+1470
+1471
+1472
+1473
+1474
+1475
+1476
+1477
+1478
+1479
+1480
+1481
+1482
+1483
+1484
+1485
+1486
+1487
+1488
+1489
+1490
+1491
+1492
+1493
+1494
+1495
+1496
+1497
+1498
+1499
+1500
+1501
+1502
+1503
+1504
+1505
+1506
+1507
+1508
+1509
+1510
+1511
+1512
+1513
+1514
+1515
+1516
+1517
+1518
+1519
+1520
+1521
+1522
+1523
+1524
+1525
+1526
+1527
+1528
+1529
+1530
+1531
+1532
+1533
+1534
+1535
+1536
+1537
+1538
+1539
+1540
+1541
+1542
+1543
+1544
+1545
+1546
+1547
+1548
+1549
+1550
+1551
+1552
+1553
+1554
+1555
+1556
+1557
+1558
+1559
+1560
+1561
+1562
+1563
+1564
+1565
+1566
+1567
+1568
+1569
+1570
+1571
+1572
+1573
+1574
+1575
+1576
+1577
+1578
+1579
+1580
+1581
+1582
+1583
+1584
+1585
+1586
+1587
+1588
+1589
+1590
+1591
+1592
+1593
+1594
+1595
+1596
+1597
+1598
+1599
+1600
+1601
+1602
+1603
+1604
+1605
+1606
+1607
+1608
+1609
+1610
+1611
+1612
+1613
+1614
+1615
+1616
+1617
+1618
+1619
+1620
+1621
+1622
+1623
+1624
+1625
+1626
+1627
+1628
+1629
+1630
+1631
+1632
+1633
+1634
+1635
+1636
+1637
+1638
+1639
+1640
+1641
+1642
+1643
+1644
+1645
+1646
+1647
+1648
+1649
+1650
+1651
+1652
+1653
+1654
+1655
+1656
+1657
+1658
+1659
+1660
+1661
+1662
+1663
+1664
+1665
+1666
+1667
+1668
+1669
+1670
+1671
+1672
+1673</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1144,6 +1825,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1172,7 +1854,51 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1181,35 +1907,83 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -1220,6 +1994,7 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -1239,12 +2014,15 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -1273,13 +2051,11 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1294,15 +2070,14 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1319,11 +2094,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -1383,9 +2156,12 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -1393,13 +2169,13 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1598,59 +2374,104 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -1704,6 +2525,7 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1725,15 +2547,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -1760,13 +2580,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -1798,12 +2612,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -1824,34 +2633,35 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1944,7 +2754,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -1952,31 +2772,61 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -1984,14 +2834,34 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -2001,51 +2871,439 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -2131,22 +3389,69 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
     &lt;div :class="isDetailPg ? 'interactive-map-detailpg' : 'interactive-map-style'"&gt;
-        &lt;div class="dynamic-map-show" v-if="isDetailPg"&gt;
-            &lt;MapPanel :mapData="cData" @initMapOther="initMapOther" :loaded="loaded"&gt;&lt;/MapPanel&gt;
-            &lt;div class="page-btn"&gt;
-                &lt;div class="info-btn" @click="typePanel=true"&gt;&lt;i class="icon-wallet"&gt;&lt;/i&gt;
+        &lt;div class="interactive-map-show" v-if="isDetailPg"&gt;
+            &lt;MapPanel 
+                ref="interactive_map" 
+                :mapData="cData" 
+                @initMapOther="initMapOther" 
+                :loaded="loaded"
+            &gt;&lt;/MapPanel&gt;
+            &lt;div class="interactive-map-card" v-if="(currentClickBtn.length != 0) &amp;&amp; mapCardFlag"&gt;
+                &lt;MapCardPanel 
+                    :mapCardData="currentMapCardPanel" :filterIndex="filterIndex" :cardBtnWatch="cardBtnWatch"
+                &gt;&lt;/MapCardPanel&gt;
+            &lt;/div&gt;
+            &lt;div class="interactive-map-card-btn"&gt;
+                &lt;div class="interactive-map-card-btn-content"&gt;
+                    &lt;div class="map-card-btn-group" v-for="(vl1, dx1) in mapCardList" :key="dx1"&gt;
+                        &lt;div :class="['map-card-btn', currentClickBtn===(dx1 + '_' + dx2) ? 'map-card-btn-select' : '']" 
+                        v-for="(vl2, dx2) in vl1.filters" 
+                        :key="dx2" 
+                        @click="onClickCardBtn(vl1, dx1, dx2)"&gt;
+                            &lt;div :class="getCardIconClass(vl1, dx2)" :style="getCardIconStyle(vl1, dx2)"&gt;&lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
                 &lt;/div&gt;
             &lt;/div&gt;
-            &lt;transition name="type-panel"&gt;
-                &lt;div class="type-panel" v-if="typePanel"&gt;
-                    &lt;MapCardPanel :iData="cData" @modelClose="onModelClose"&gt;&lt;/MapCardPanel&gt;
+            &lt;transition name="setting-circle-radius"&gt;
+                &lt;div class="interactive-map-circle-radius" v-if="circleRadiusPanel"&gt;
+                    &lt;div class="panel-close-btn" @click="onClickRadiusPanel('cancel')"&gt;
+                        &lt;i class="f7-icons"&gt;close&lt;/i&gt;
+                    &lt;/div&gt;
+                    &lt;div class="panel-content-show" @click="openRadiusPicker"&gt;
+                        &lt;div class="content-text"&gt;距离选择&lt;/div&gt;
+                        &lt;div class="content-value"&gt;{{distanceConvert(circleRadius)+' km'}}&lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="panel-ok-btn" @click="onClickRadiusPanel('ok')"&gt;
+                        &lt;i class="f7-icons"&gt;check&lt;/i&gt;
+                    &lt;/div&gt;
                 &lt;/div&gt;
             &lt;/transition&gt;
+            &lt;div class="interactive-map-filter-btn" v-if="funBtnControl"&gt;
+                &lt;f7-link :class="['map-filter-rail-btn', railShow ? 'rail-show' : '']" @click="onClickRailBtn" v-if="haveRail"&gt;
+                    &lt;div&gt;&lt;/div&gt;
+                &lt;/f7-link&gt;
+                &lt;f7-link :class="['map-filter-draw-btn', drawing ? 'map-drawing' : '']"  @click="onClickDrawBtn"&gt;
+                    &lt;div&gt;&lt;/div&gt;
+                &lt;/f7-link&gt;
+                &lt;f7-link class="map-location-btn" @click="onClickLocation"&gt;
+                    &lt;f7-preloader v-if="positionLoading"&gt;&lt;/f7-preloader&gt;
+                    &lt;i v-else class="f7-icons position-icon"&gt;navigation_fill&lt;/i&gt;
+                &lt;/f7-link&gt;
+            &lt;/div&gt;
+            &lt;f7-link 
+                class="interactive-map-search-btn" 
+                @click="onClickFilterQuery" 
+                v-if="queryBtnFlag"&gt;
+                &lt;f7-preloader v-if="queryLoading" class="color-white"&gt;&lt;/f7-preloader&gt;
+                &lt;span v-else&gt;启动查询&lt;/span&gt;
+            &lt;/f7-link&gt;
         &lt;/div&gt;
-        &lt;div class="static-map-show" v-else&gt;
+        &lt;div class="interactive-map-static-show" v-else&gt;
             &lt;div class="map-title"&gt;{{cData ? cData.config.title : ""}}&lt;/div&gt;
             &lt;div class="map-img"&gt;
-                &lt;div class="img-bg" :style="{'backgroundImage': cData &amp;&amp; cData.thumb ? `url(${map_img_url+cData.thumb})` : 'url(./static/images/skeleton.png)'}"&gt;&lt;/div&gt;
+                &lt;div class="img-bg" :style="{'backgroundImage': staticBackgroundUrl}"&gt;&lt;/div&gt;
+                &lt;f7-link @click.prevent.stop="mapStateSwitch" v-if="mapBtnFlag"&gt;{{mapBtnStatus ? '复原' : '撤销'}}&lt;/f7-link&gt;
             &lt;/div&gt;
         &lt;/div&gt;
     &lt;/div&gt;
@@ -2160,19 +3465,24 @@ import size from 'lodash/size';
 import indexOf from 'lodash/indexOf';
 import cloneDeep from 'lodash/cloneDeep';
 import coordtransform from 'coordtransform';
-import uuidv1 from 'uuid/v1'
+import domtoimage from '../../../../js/lib/dom2image/dom-to-image';
+import html2canvas from 'html2canvas';
+import uuidv1 from 'uuid/v1';
 import fetchUtil from '../../../../js/utils/fetchUtil';
 import queryUrl from '../../../../js/utils/queryUrl';
 import amapUtil from '../../../../js/utils/amapUtil';
 import bus from '../../../../js/utils/bus'
+import {setIconClass, setIconStyle} from '../../../../js/utils/getIcon';
 import {model_api_url, headers, paramFake, static_map_url, fakeParamObj} from '../../../../js/constants/ApiConfig';
+import {geoMapLocation} from '../../../../js/utils/amapUtil';
+import {uploadFilePromise, cordovaDeviceType} from '../../upload_comp/util.js';
 import {
     fence_select, self_select, dis_select, buffer_select, visualization_colors, poi_icons,
     MapVisualTypes, source_customer, source_market, PolygonSourceKey, PolygonPackageIdKey,
-    custom_card_menu, packet_select, geo_types, h_type_date, h_type_number, h_type_text
+    custom_card_menu, packet_select, geo_types, h_type_date, h_type_number, h_type_text, radiusPickCols,
 } from '../../../../js/constants/Constants'
 import MapPanel from '../../commons/map-panel.vue';
-import MapCardPanel from '../../commons/map-card-panel.vue';
+import MapCardPanel from '../../commons/card-panel/map-card-panel.vue';
 const normalOpt = {
     strokeColor: '#00968e', strokeOpacity: 1, strokeWeight: 1,
     fillColor: '#00968e', fillOpacity: 0, zIndex: 10
@@ -2187,35 +3497,80 @@ const lineOpt = {
 }
 const unusedCols = ['id', 'address', 'lng', 'lat', 'name'];
 const fake_point = [122, 31];
+const uploadType = "snapshot";
 export default {
     name: "InteractiveMap",
     props: ['cData', 'isDetailPg'],
     data(){
         return {
-            map_img_url: static_map_url,
             map: {},
+            mapIns: {},
             drawpolygon: {},  //覆盖物集合
-            maplayers: {},
             mapState: '',
             columnTypes: {},
             massMarkers: {}, //点位
             heatMaps: {},  //热力
-            polygonLayers: {}, //围栏数据
+            polygonLayers: {}, //面数据
             lineLayers: {}, //线数据
             markValue: {},
             buffers: {}, //buffers geos
             buffersData: {},
             geo_filter: {},
-            typePanel: false,
             bgPolygonData: {},
             loaded: false,
             fetchDataFlag: false,
             getColumnTypesFlag: false,
+            polygonLayer: [],
+            circlesPolygon: [],   //pc端配置显示的距离选择区域集合
+&nbsp;
+&nbsp;
+            //新版地理卡片
+            active_layer_ids: {},
+            railShow: false,
+            haveRail: false,
+            drawing: false,
+            startDrawing: false,
+            positionLoading: false,
+            mapCardList: [],
+            cardBtnWatch: '',
+            currentClickBtn: "",
+            currentMapCardPanel: {},
+            filterIndex: 0,
+            circleRadius: 1000,
+            circleCenter: [],
+            queryBtnFlag: false,  //查询按钮
+            drawFilter: {},
+            firstRenderMap: true, //是否是首次执行renderMap
+            toastTop: {}, //    提示弹窗
+            pickerValues: ['0', '公里', '100', '米'],
+            circleRadiusPanel: false,
+            mapBtnFlag: false,  //是否显示首页地图按钮
+            mapBtnStatus: true, //地图按钮的状态
+            mapCardFlag: true,
+            staticBackgroundUrl: "",
+            deviceType: "",
+            queryLoading: false,
+            geoFilterFlag: false,
+            funBtnControl: false,
         }
     },
     watch: {
         cData: function()<span class="fstat-no" title="function not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >            this.init();</span>
+            let {cData} = <span class="cstat-no" title="statement not covered" >this;</span>
+<span class="cstat-no" title="statement not covered" >            this.getMapBtnStatus();</span>
+<span class="cstat-no" title="statement not covered" >            if(!cData.is_static){</span>
+<span class="cstat-no" title="statement not covered" >                this.funBtnControl = true;</span>
+            }
+<span class="cstat-no" title="statement not covered" >            if(!this.geoFilterFlag){</span>
+<span class="cstat-no" title="statement not covered" >                this.init();</span>
+<span class="cstat-no" title="statement not covered" >                this.getMapCardOptions();</span>
+            }
+<span class="cstat-no" title="statement not covered" >            if(cData.filter_img){</span>
+<span class="cstat-no" title="statement not covered" >                this.getMapPng();</span>
+            }
+            else{
+<span class="cstat-no" title="statement not covered" >                this.staticBackgroundUrl = cData &amp;&amp; cData.thumb ? `url(${static_map_url+cData.thumb})` : 'url(./static/images/skeleton.png)';</span>
+            }
         }
     },
     components: {
@@ -2223,15 +3578,61 @@ export default {
         MapCardPanel,
     },
     created(){
-        <span class="missing-if-branch" title="if path not taken" >I</span>if(this.cData){
-<span class="cstat-no" title="statement not covered" >            this.init();</span>
+        let {cData} = this;
+        <span class="missing-if-branch" title="else path not taken" >E</span>if(cData){
+            this.init();
+            this.getMapBtnStatus();
+            this.getMapCardOptions();
+            <span class="missing-if-branch" title="else path not taken" >E</span>if(!cData.is_static){
+                this.funBtnControl = true;
+            }
+            <span class="missing-if-branch" title="if path not taken" >I</span>if(this.cData.filter_img){
+<span class="cstat-no" title="statement not covered" >                this.getMapPng();</span>
+            }
+            else{
+                this.staticBackgroundUrl = cData &amp;&amp; cData.thumb ? <span class="branch-0 cbranch-no" title="branch not covered" >`url(${static_map_url+cData.thumb})` </span>: 'url(./static/images/skeleton.png)';
+            }
         }
     },
+    mounted(){
+        this.isDetailPg &amp;&amp; this.createPicker();
+        localStorage.setItem("mdt_map_edit", JSON.stringify({edit: false}));
+        bus.$on("interactiveMapFilterBack", (type) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+            let {toastTop, cData} = <span class="cstat-no" title="statement not covered" >this;</span>
+<span class="cstat-no" title="statement not covered" >            if(size(toastTop) &amp;&amp; !toastTop.destroyed){</span>
+<span class="cstat-no" title="statement not covered" >                toastTop.close();</span>
+            }
+<span class="cstat-no" title="statement not covered" >            if(type === "back"){</span>
+                let item = <span class="cstat-no" title="statement not covered" >`mdt_geo_filters_${cData.thumb}`;</span>
+                let local = <span class="cstat-no" title="statement not covered" >localStorage.getItem(item);</span>
+                let mapEdit = <span class="cstat-no" title="statement not covered" >localStorage.getItem("mdt_map_edit");</span>
+<span class="cstat-no" title="statement not covered" >                mapEdit = JSON.parse(mapEdit);</span>
+<span class="cstat-no" title="statement not covered" >                if(size(local) &amp;&amp; mapEdit.edit){</span>
+<span class="cstat-no" title="statement not covered" >                    localStorage.setItem("mdt_map_edit", JSON.stringify({edit: false}));</span>
+<span class="cstat-no" title="statement not covered" >                    localStorage.removeItem(item);</span>
+<span class="cstat-no" title="statement not covered" >                    bus.$emit("interactiveMapGetData");</span>
+<span class="cstat-no" title="statement not covered" >                    this.mapBtnFlag = false;</span>
+                }
+            }
+            else <span class="cstat-no" title="statement not covered" >if(type === "save"){</span>
+<span class="cstat-no" title="statement not covered" >                bus.$emit("interactiveMapGetData");</span>
+            }
+        });
+        this.deviceType = cordovaDeviceType();
+    },
+    beforeDestroy(){
+        bus.$off("interactiveMapFilterBack")
+    },
     methods: {
+        getState(key){
+<span class="cstat-no" title="statement not covered" >            return this[key];</span>
+        },
         init(){
-            let {cards, buffer_filters, geo_filter} = <span class="cstat-no" title="statement not covered" >this.cData.config,</span> active_layer_ids = <span class="cstat-no" title="statement not covered" >{};</span>
-<span class="cstat-no" title="statement not covered" >            this.geo_filter = geo_filter || {};</span>
-<span class="cstat-no" title="statement not covered" >            if(cards[0] &amp;&amp; cards[0].geo_filters){</span>
+            let {cards, buffer_filters, geo_filter} = this.cData.config, active_layer_ids = {};
+            this.geo_filter = geo_filter || {};
+            <span class="missing-if-branch" title="if path not taken" >I</span>if(cards[0] &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >cards[0].geo_filters)</span>{
+<span class="cstat-no" title="statement not covered" >                if(cards[0].geo_filters.type === fence_select)</span>
+<span class="cstat-no" title="statement not covered" >                    this.haveRail = true;</span>
 <span class="cstat-no" title="statement not covered" >                this.mapState = cards[0].geo_filters.type;</span>
 <span class="cstat-no" title="statement not covered" >                forEach(cards[0].geo_filters.filters, t =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
 <span class="cstat-no" title="statement not covered" >                    active_layer_ids[t.oid] = {</span>
@@ -2241,28 +3642,31 @@ export default {
                 });
 <span class="cstat-no" title="statement not covered" >                this.active_layer_ids = active_layer_ids;</span>
             };
-<span class="cstat-no" title="statement not covered" >            if(buffer_filters){</span>
+            <span class="missing-if-branch" title="if path not taken" >I</span>if(buffer_filters){
 <span class="cstat-no" title="statement not covered" >                this.mapState = buffer_select;</span>
             }
-<span class="cstat-no" title="statement not covered" >            this.buffersData = cloneDeep(buffer_filters &amp;&amp; buffer_filters.filters) || {};</span>
+            this.buffersData = cloneDeep(buffer_filters &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >buffer_filters.filters)</span> || {};
         },
         initMapOther(mapView){
-<span class="cstat-no" title="statement not covered" >            this.map = mapView;</span>
+            // this.map = mapView;
+<span class="cstat-no" title="statement not covered" >            this.mapIns = mapView;</span>
 <span class="cstat-no" title="statement not covered" >            if(this.cData){</span>
 <span class="cstat-no" title="statement not covered" >                this.renderMap();</span>
             }
         },
-        renderMap() {
-            var {cards, geo_filter, supp_filters} = <span class="cstat-no" title="statement not covered" >this.cData.config;</span>
-            var fence_geos = <span class="cstat-no" title="statement not covered" >[],</span> self_select_geos = <span class="cstat-no" title="statement not covered" >[],</span> dis_select_geos = <span class="cstat-no" title="statement not covered" >[]</span>
+        renderMap(source) {
+            let {cData: {config: {cards, geo_filter, supp_filters}}, startDrawing, mapIns, firstRenderMap} = <span class="cstat-no" title="statement not covered" >this;</span>
+            let fence_geos = <span class="cstat-no" title="statement not covered" >[],</span> self_select_geos = <span class="cstat-no" title="statement not covered" >[],</span> dis_select_geos = <span class="cstat-no" title="statement not covered" >[];</span>
 <span class="cstat-no" title="statement not covered" >            forEach(cards, c =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
 <span class="cstat-no" title="statement not covered" >                if (c.geo_filters) {</span>
-<span class="cstat-no" title="statement not covered" >                    if (c.geo_filters.type == self_select) {</span>
+<span class="cstat-no" title="statement not covered" >                    if (c.geo_filters.type == self_select) {  //获取自定义区域选择</span>
 <span class="cstat-no" title="statement not covered" >                        self_select_geos.push(c.geo_filters.geoJson)</span>
-                    } else <span class="cstat-no" title="statement not covered" >if (c.geo_filters.type == dis_select) {</span>
+                    } else <span class="cstat-no" title="statement not covered" >if (c.geo_filters.type == dis_select) {   //获取自定义距离选择</span>
 <span class="cstat-no" title="statement not covered" >                        dis_select_geos.push(c.geo_filters.circles)</span>
-                    } else <span class="cstat-no" title="statement not covered" >if (c.geo_filters.type == fence_select) {</span>
+                    } else <span class="cstat-no" title="statement not covered" >if (c.geo_filters.type == fence_select) {   //获取自定义围栏选择</span>
 <span class="cstat-no" title="statement not covered" >                        fence_geos.push(c)</span>
+<span class="cstat-no" title="statement not covered" >                        if(!startDrawing)</span>
+<span class="cstat-no" title="statement not covered" >                            this.railShow = true;</span>
                     }
                 }
 <span class="cstat-no" title="statement not covered" >                forEach(c.items, t =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
@@ -2271,23 +3675,26 @@ export default {
             })
 <span class="cstat-no" title="statement not covered" >            if (size(this.buffersData)) {</span>
 <span class="cstat-no" title="statement not covered" >                this.addBufferGeos(this.buffersData);</span>
-<span class="cstat-no" title="statement not covered" >                this.fetchData();</span>
+<span class="cstat-no" title="statement not covered" >                this.fetchData(source);</span>
             }else {
-<span class="cstat-no" title="statement not covered" >                if (size(self_select_geos)) {</span>
+<span class="cstat-no" title="statement not covered" >                if (size(self_select_geos) &amp;&amp; firstRenderMap) {</span>
 <span class="cstat-no" title="statement not covered" >                    this.addSelfGeo(self_select_geos)</span>
                 }
-<span class="cstat-no" title="statement not covered" >                if (size(dis_select_geos)) {</span>
+<span class="cstat-no" title="statement not covered" >                if (size(dis_select_geos) &amp;&amp; firstRenderMap) {</span>
 <span class="cstat-no" title="statement not covered" >                    this.addCircleGeo(dis_select_geos)</span>
                 }
-<span class="cstat-no" title="statement not covered" >                if (size(geo_filter) &gt;= 2) {</span>
+<span class="cstat-no" title="statement not covered" >                if (size(geo_filter) &gt;= 2 &amp;&amp; firstRenderMap) {</span>
 <span class="cstat-no" title="statement not covered" >                    this.fetchFenceGeo(() =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
-<span class="cstat-no" title="statement not covered" >                        this.fetchData()</span>
+<span class="cstat-no" title="statement not covered" >                        this.fetchData(source)</span>
                     });
-                } else {
-<span class="cstat-no" title="statement not covered" >                    this.fetchData()</span>
+                } 
+                else {
+<span class="cstat-no" title="statement not covered" >                    this.fetchData(source);</span>
                 }
             }
 <span class="cstat-no" title="statement not covered" >            this.getColumnTypes();</span>
+<span class="cstat-no" title="statement not covered" >            if(firstRenderMap)</span>
+<span class="cstat-no" title="statement not covered" >                this.firstRenderMap = false;</span>
         },
         addBufferGeos(buffers){
             let all = <span class="cstat-no" title="statement not covered" >[];</span>
@@ -2300,11 +3707,11 @@ export default {
 <span class="cstat-no" title="statement not covered" >                        layers = layers.concat(layer);</span>
                     })
 <span class="cstat-no" title="statement not covered" >                    this.buffers[card_id][filter_id] = layers;</span>
-<span class="cstat-no" title="statement not covered" >                    this.map.add(layers)</span>
+<span class="cstat-no" title="statement not covered" >                    this.mapIns.add(layers)</span>
 <span class="cstat-no" title="statement not covered" >                    all = all.concat(layers);</span>
                 })
             })
-<span class="cstat-no" title="statement not covered" >            this.map.setFitView(all);</span>
+<span class="cstat-no" title="statement not covered" >            this.mapIns.setFitView(all);</span>
 <span class="cstat-no" title="statement not covered" >            all.length = 0;</span>
         },
         addSelfGeo(geos) {
@@ -2315,15 +3722,13 @@ export default {
                 var uid = <span class="cstat-no" title="statement not covered" >'poly_' + uuidv1();</span>
 <span class="cstat-no" title="statement not covered" >                forEach(layers, shape =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
 <span class="cstat-no" title="statement not covered" >                    shape.setExtData({uid});</span>
-                    // shape.on('rightclick', this.onShapeRightClick)
                 })
-<span class="cstat-no" title="statement not covered" >                this.map.add(layers)</span>
+<span class="cstat-no" title="statement not covered" >                this.mapIns.add(layers)</span>
 <span class="cstat-no" title="statement not covered" >                this.drawpolygon[uid] = layers;</span>
 <span class="cstat-no" title="statement not covered" >                layersAll = layersAll.concat(layers);</span>
             })
 <span class="cstat-no" title="statement not covered" >            if (size(layersAll)) {</span>
-                // this.intMapTools();
-<span class="cstat-no" title="statement not covered" >                this.map.setFitView(layersAll);</span>
+<span class="cstat-no" title="statement not covered" >                this.mapIns.setFitView(layersAll);</span>
             }
         },
         //添加circle图层
@@ -2337,18 +3742,17 @@ export default {
                     var layer = <span class="cstat-no" title="statement not covered" >new AMap.Circle({radius: dis, center: ps, ...activeOpt})</span>
                     var uid = <span class="cstat-no" title="statement not covered" >'poly_' + uuidv1();</span>
 <span class="cstat-no" title="statement not covered" >                    layer.setExtData({uid});</span>
-                    // layer.on('rightclick', this.onShapeRightClick)
 <span class="cstat-no" title="statement not covered" >                    layers.push(layer)</span>
 <span class="cstat-no" title="statement not covered" >                    this.drawpolygon[uid] = layer;</span>
                 })
             })
-<span class="cstat-no" title="statement not covered" >            this.map.add(layers)</span>
+<span class="cstat-no" title="statement not covered" >            this.mapIns.add(layers)</span>
+<span class="cstat-no" title="statement not covered" >            this.circlesPolygon = layers;</span>
 <span class="cstat-no" title="statement not covered" >            if (size(layers)) {</span>
-                // this.intMapTools();
-<span class="cstat-no" title="statement not covered" >                this.map.setFitView(layers);</span>
+<span class="cstat-no" title="statement not covered" >                this.mapIns.setFitView(layers);</span>
             }
         },
-        fetchData(isClick) {
+        fetchData(source) {
             var {cards} = <span class="cstat-no" title="statement not covered" >this.cData.config;</span>
             let active_layer_ids = <span class="cstat-no" title="statement not covered" >this.active_layer_ids;</span>
             let bgdt = <span class="cstat-no" title="statement not covered" >{};</span>
@@ -2362,9 +3766,7 @@ export default {
                 })
                 var geoJson = <span class="cstat-no" title="statement not covered" >amapUtil.wrapMultiPolygon(cds)</span>
 <span class="cstat-no" title="statement not covered" >                buffer_geo = amapUtil.geoJsonToEwkb(geoJson);</span>
-                // buffer_filters = {type: buffer_select, filters: this.buffersData}
             }
-<span class="cstat-no" title="statement not covered" >            console.log('cards2222', cards);</span>
 <span class="cstat-no" title="statement not covered" >            forEach(cards, card =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
                 var {geo_filters, uid} = <span class="cstat-no" title="statement not covered" >card</span>
                 var geo_filter
@@ -2405,8 +3807,8 @@ export default {
                                 var {min, max} = <span class="cstat-no" title="statement not covered" >r</span>
 <span class="cstat-no" title="statement not covered" >                                return [r.key, r.h_type, [min === undefined ? null : min, max === undefined ? null : max]]</span>
                             } else <span class="cstat-no" title="statement not covered" >if (r.h_type === h_type_date) {</span>
-                                var {start, end} = <span class="cstat-no" title="statement not covered" >r</span>
-<span class="cstat-no" title="statement not covered" >                                return [r.key, r.h_type, [start, end]]</span>
+                                var {start, end, fast_type, end_is_today} = <span class="cstat-no" title="statement not covered" >r</span>
+<span class="cstat-no" title="statement not covered" >                                return [r.key, r.h_type, {start, end: end_is_today ? undefined : end, fast_type, end_is_today}]</span>
                             }
                         })
                         var params = <span class="cstat-no" title="statement not covered" >{object_type, geo_type: geometry_type,}</span>
@@ -2426,17 +3828,19 @@ export default {
 <span class="cstat-no" title="statement not covered" >                        this.loaded = true;</span>
                     }
 <span class="cstat-no" title="statement not covered" >                    this.fetchDataFlag = true;</span>
-                    // mapIns &amp;&amp; mapIns.setMapBlocking(false)
-<span class="cstat-no" title="statement not covered" >                    this.map = this.getMapInstance();</span>
-                    var allpoints = <span class="cstat-no" title="statement not covered" >[];</span>
 <span class="cstat-no" title="statement not covered" >                    forEach(resp, (r, idx) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
                         let [dataSet, points] = <span class="cstat-no" title="statement not covered" >this.dealDataSet(r, pssMap[idx].item.geometry_type);</span>
-<span class="cstat-no" title="statement not covered" >                        allpoints = allpoints.concat(points);</span>
 <span class="cstat-no" title="statement not covered" >                        pssMap[idx].filter.data = dataSet;</span>
 <span class="cstat-no" title="statement not covered" >                        this.addDataToMap(dataSet, pssMap[idx].card, pssMap[idx].item, pssMap[idx].filter);</span>
                     });
-                    // this.map &amp;&amp; this.map.setFitView();
 <span class="cstat-no" title="statement not covered" >                    bus.$emit('mapFetchData');</span>
+<span class="cstat-no" title="statement not covered" >                    if(source === "query"){</span>
+<span class="cstat-no" title="statement not covered" >                        localStorage.setItem("mdt_map_edit", JSON.stringify({edit: true}));</span>
+                        let timer = <span class="cstat-no" title="statement not covered" >setTimeout(()=&gt;<span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >                            this.saveFilters();</span>
+<span class="cstat-no" title="statement not covered" >                            clearTimeout(timer);</span>
+                        }, 1000);
+                    }
                 })
                 .catch(err =&gt; <span class="fstat-no" title="function not covered" >{</span>
 <span class="cstat-no" title="statement not covered" >                    console.error(err);</span>
@@ -2444,6 +3848,7 @@ export default {
 <span class="cstat-no" title="statement not covered" >                        this.loaded = true;</span>
                     }
 <span class="cstat-no" title="statement not covered" >                    this.fetchDataFlag = true;</span>
+<span class="cstat-no" title="statement not covered" >                    this.queryLoading = false;</span>
                 })
         },
         fetchFenceGeo(callback) {
@@ -2632,8 +4037,6 @@ export default {
             var active_layer_ids = <span class="cstat-no" title="statement not covered" >this.active_layer_ids;</span>
             var {geo_filter: {filters}} = <span class="cstat-no" title="statement not covered" >this.cData.config;</span>
             var layers = <span class="cstat-no" title="statement not covered" >[]</span>
-<span class="cstat-no" title="statement not covered" >            if (!this.maplayers) <span class="cstat-no" title="statement not covered" >return;</span></span>
-<span class="cstat-no" title="statement not covered" >            this.maplayers[source] = {[packageId]: {[object_type]: {}}};</span>
             var filter = <span class="cstat-no" title="statement not covered" >filters &amp;&amp; filters[0] || {};</span>
             var {cur_visual, hidden, style: robj} = <span class="cstat-no" title="statement not covered" >filter;</span>
             var visual_cfg = <span class="cstat-no" title="statement not covered" >null</span>
@@ -2669,31 +4072,78 @@ export default {
                 })
 &nbsp;
 <span class="cstat-no" title="statement not covered" >                layers = layers.concat(layer)</span>
-<span class="cstat-no" title="statement not covered" >                this.maplayers[source][packageId][object_type][id + ''] = layer</span>
             })
-            var mapIns = <span class="cstat-no" title="statement not covered" >this.getMapInstance()</span>
+            var mapIns = <span class="cstat-no" title="statement not covered" >this.mapIns;</span>
 <span class="cstat-no" title="statement not covered" >            if (size(layers)) {</span>
 <span class="cstat-no" title="statement not covered" >                mapIns &amp;&amp; mapIns.add(layers)</span>
-<span class="cstat-no" title="statement not covered" >                mapIns &amp;&amp; mapIns.setFitView(layers);</span>
             }
+<span class="cstat-no" title="statement not covered" >            this.polygonLayer = [];</span>
+<span class="cstat-no" title="statement not covered" >            this.polygonLayer = layers;</span>
         },
         dealPolygonAct(polygon) {
-            // // 移入
-            // polygon.on('mousemove', ({lnglat}) =&gt; {
-            //     let extData = polygon.getExtData() || {}
-            //     let text = extData.name
-            //     this.updateMapHelper(lnglat, text)
-            // })
-            // // 移除
-            // polygon.on('mouseout', (e) =&gt; {
-            //     this.hideMapHelper()
-            // })
-&nbsp;
-            // // polygon点击
-            // polygon.on('click', this.onClickPolygon)
+            // polygon点击
+<span class="cstat-no" title="statement not covered" >            polygon.on('click', this.onClickPolygon)</span>
         },
-        getMapInstance() {
-<span class="cstat-no" title="statement not covered" >            return this.map;</span>
+        onClickPolygon(e){
+            var polygon = <span class="cstat-no" title="statement not covered" >e.target</span>
+            let extData = <span class="cstat-no" title="statement not covered" >polygon.getExtData() || {}</span>
+            let {object_type, id, name, [PolygonSourceKey]: source, [PolygonPackageIdKey]: packageId, lastOpt} = <span class="cstat-no" title="statement not covered" >extData</span>
+            let {active_layer_ids, bgPolygonData} = <span class="cstat-no" title="statement not covered" >this;</span>
+            // let {bgPolygonData} = this, active_layer_ids = {};
+            var bgData = <span class="cstat-no" title="statement not covered" >bgPolygonData[source] &amp;&amp; bgPolygonData[source][packageId] &amp;&amp; bgPolygonData[source][packageId][object_type]</span>
+<span class="cstat-no" title="statement not covered" >            if (active_layer_ids[0]) { //全选;</span>
+<span class="cstat-no" title="statement not covered" >                delete active_layer_ids[0];</span>
+<span class="cstat-no" title="statement not covered" >                forEach(bgData, t =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >                    active_layer_ids[t.id] = {id: t.id + '', object_type, name: t.name, source, packageId}</span>
+                })
+<span class="cstat-no" title="statement not covered" >                delete active_layer_ids[id];</span>
+<span class="cstat-no" title="statement not covered" >                polygon.setOptions(lastOpt)</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >                if (active_layer_ids[id]) {</span>
+<span class="cstat-no" title="statement not covered" >                    polygon.setOptions(lastOpt)</span>
+<span class="cstat-no" title="statement not covered" >                    delete active_layer_ids[id]</span>
+                } else {
+<span class="cstat-no" title="statement not covered" >                    polygon.setOptions(activeOpt)</span>
+<span class="cstat-no" title="statement not covered" >                    active_layer_ids[id] = {id: id + '', object_type, name: name, source, packageId}</span>
+                    var allSelect = <span class="cstat-no" title="statement not covered" >true;</span>
+                    var fence_data = <span class="cstat-no" title="statement not covered" >bgData;</span>
+<span class="cstat-no" title="statement not covered" >                    forEach(fence_data, t =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >                        if (!active_layer_ids[t.id] &amp;&amp; t.id) {</span>
+<span class="cstat-no" title="statement not covered" >                            allSelect = false;</span>
+<span class="cstat-no" title="statement not covered" >                            return false;</span>
+                        }
+                    })
+<span class="cstat-no" title="statement not covered" >                    if (allSelect) {</span>
+<span class="cstat-no" title="statement not covered" >                        active_layer_ids = {0: {id: 0, name: `全部 ( ${object_type} )`, object_type, source, packageId}}</span>
+                    }
+                }
+            }
+            var {cards} = <span class="cstat-no" title="statement not covered" >this.cData.config;</span>
+<span class="cstat-no" title="statement not covered" >            if(size(active_layer_ids)){</span>
+<span class="cstat-no" title="statement not covered" >                this.queryBtnFlag = true;</span>
+<span class="cstat-no" title="statement not covered" >                if(size(this.toastTop) &amp;&amp; !this.toastTop.destroyed){</span>
+<span class="cstat-no" title="statement not covered" >                    this.toastTop.close();</span>
+                }
+            }
+            else{
+<span class="cstat-no" title="statement not covered" >                this.queryBtnFlag = false;</span>
+<span class="cstat-no" title="statement not covered" >                if(size(this.toastTop) &amp;&amp; this.toastTop.destroyed){</span>
+<span class="cstat-no" title="statement not covered" >                    this.createToast("开始选择围栏");</span>
+                }
+            }
+<span class="cstat-no" title="statement not covered" >            this.updateCardsGeoFilters(cards, active_layer_ids, object_type, source, packageId);</span>
+        },
+        updateCardsGeoFilters(cards, active_layer_ids, object_type, source, packageId) {
+            let geo_filters = <span class="cstat-no" title="statement not covered" >{</span>
+                type: fence_select,
+                object_type, source, packageId,
+                filters: map(active_layer_ids, t =&gt; <span class="fstat-no" title="function not covered" >{</span>
+                    var sid = <span class="cstat-no" title="statement not covered" >`${t.object_type}_${t.id}`;</span>
+<span class="cstat-no" title="statement not covered" >                    return {id: sid, pid: t.object_type, oid: t.id, name: t.name, source, packageId}</span>
+                }),
+            };
+<span class="cstat-no" title="statement not covered" >            this.geoFilterFlag = true;</span>
+<span class="cstat-no" title="statement not covered" >            this.cData.config.cards[0].geo_filters = geo_filters;</span>
         },
         fetchDataPromise(data, source) {
 <span class="cstat-no" title="statement not covered" >            source = source || source_customer;</span>
@@ -2747,10 +4197,11 @@ export default {
 <span class="cstat-no" title="statement not covered" >                    this.addLineToMapExt(dataSet, card, item, filter);</span>
 <span class="cstat-no" title="statement not covered" >                    break;</span>
             }
+<span class="cstat-no" title="statement not covered" >            this.mapIns &amp;&amp; this.mapIns.setFitView();</span>
 <span class="cstat-no" title="statement not covered" >            this.generateMarkCols();        </span>
         },
         addPoiToMapExt(dataSet, card, item, filter) {
-<span class="cstat-no" title="statement not covered" >            if (!this.map) <span class="cstat-no" title="statement not covered" >return</span></span>
+<span class="cstat-no" title="statement not covered" >            if (!size(this.mapIns)) <span class="cstat-no" title="statement not covered" >return;</span></span>
 <span class="cstat-no" title="statement not covered" >            this.removeLayerOrHeatMap(card.uid, filter.uid);</span>
             var {cur_visual, hidden} = <span class="cstat-no" title="statement not covered" >filter || {}</span>
 <span class="cstat-no" title="statement not covered" >            if (hidden) {</span>
@@ -2767,17 +4218,15 @@ export default {
 <span class="cstat-no" title="statement not covered" >                    option.fitView = false;</span>
                 }
 <span class="cstat-no" title="statement not covered" >                this.massMarkers[card.uid] = this.massMarkers[card.uid] || {};</span>
-<span class="cstat-no" title="statement not covered" >                this.massMarkers[card.uid][filter.uid] = amapUtil.createVisualMap(this.map, dataSet, visual_cfg, option)</span>
-                // this.massMarkers[card.uid][filter.uid].on('click', e =&gt; {
-                //     this.onMassClick(e, card.uid, filter.uid)
-                // })
+<span class="cstat-no" title="statement not covered" >                this.massMarkers[card.uid][filter.uid] = amapUtil.createVisualMap(this.mapIns, dataSet, visual_cfg, option)</span>
             } else <span class="cstat-no" title="statement not covered" >if (type == 3 || type == 4 || type == 5) {</span>
 <span class="cstat-no" title="statement not covered" >                this.heatMaps[card.uid] = this.heatMaps[card.uid] || {};</span>
-<span class="cstat-no" title="statement not covered" >                this.heatMaps[card.uid][filter.uid] = amapUtil.createHeatMap(this.map, dataSet, visual_cfg, col);</span>
+<span class="cstat-no" title="statement not covered" >                this.heatMaps[card.uid][filter.uid] = amapUtil.createHeatMap(this.mapIns, dataSet, visual_cfg, col);</span>
             }
         },
         addPolygonToMapExt(dataSet, card, item, filter) {
-<span class="cstat-no" title="statement not covered" >            if (!this.map) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >            if (!size(this.mapIns)) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >            this.removeDataOnMapFilter(card.uid, filter.uid);</span>
             var {cur_visual, hidden, style: robj} = <span class="cstat-no" title="statement not covered" >filter || {}</span>
             var visual_cfg = <span class="cstat-no" title="statement not covered" >null</span>
             var {type, col, title} = <span class="cstat-no" title="statement not covered" >cur_visual || {};</span>
@@ -2803,19 +4252,13 @@ export default {
                 })
 <span class="cstat-no" title="statement not covered" >                layersMap[id] = layer;</span>
 <span class="cstat-no" title="statement not covered" >                layers = layers.concat(layer);</span>
-                // forEach(layer, p =&gt; {
-                //     p.on('click',  e =&gt; {
-                //         this.onShowPolygonInfo(e, card.uid, filter.uid)
-                //     })
-                // })
             })
-<span class="cstat-no" title="statement not covered" >            this.map.add(layers);</span>
-<span class="cstat-no" title="statement not covered" >            this.map.setFitView(layers);</span>
+<span class="cstat-no" title="statement not covered" >            this.mapIns.add(layers);</span>
 <span class="cstat-no" title="statement not covered" >            this.polygonLayers[card.uid] = this.polygonLayers[card.uid] || {}</span>
 <span class="cstat-no" title="statement not covered" >            this.polygonLayers[card.uid][filter.uid] = layersMap;</span>
         },
         addLineToMapExt(dataSet, card, item, filter) {
-<span class="cstat-no" title="statement not covered" >            if (!this.map) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >            if (!size(this.mapIns)) <span class="cstat-no" title="statement not covered" >return;</span></span>
             var {cur_visual, hidden, style: robj} = <span class="cstat-no" title="statement not covered" >filter || {}</span>
             var visual_cfg = <span class="cstat-no" title="statement not covered" >null</span>
             var {type, col, title} = <span class="cstat-no" title="statement not covered" >cur_visual || {};</span>
@@ -2841,13 +4284,8 @@ export default {
                 })
 <span class="cstat-no" title="statement not covered" >                layersMap[id] = layer;</span>
 <span class="cstat-no" title="statement not covered" >                layers = layers.concat(layer);</span>
-                // forEach(layer, p =&gt; {
-                //     p.on('click',  e =&gt; {
-                //         this.onShowPolygonInfo(e, card.uid, filter.uid)
-                //     })
-                // })
             })
-<span class="cstat-no" title="statement not covered" >            this.map.add(layers);</span>
+<span class="cstat-no" title="statement not covered" >            this.mapIns.add(layers);</span>
 <span class="cstat-no" title="statement not covered" >            this.lineLayers[card.uid] = this.lineLayers[card.uid] || {}</span>
 <span class="cstat-no" title="statement not covered" >            this.lineLayers[card.uid][filter.uid] = layersMap;</span>
         },
@@ -2862,39 +4300,40 @@ export default {
 <span class="cstat-no" title="statement not covered" >                if (this.heatMaps[card_id][filter_id].destroy) {</span>
 <span class="cstat-no" title="statement not covered" >                    this.heatMaps[card_id][filter_id].destroy();</span>
                 }
-<span class="cstat-no" title="statement not covered" >                this.map &amp;&amp; this.map.remove(this.heatMaps[card_id][filter_id]);</span>
+<span class="cstat-no" title="statement not covered" >                this.mapIns &amp;&amp; this.mapIns.remove(this.heatMaps[card_id][filter_id]);</span>
 <span class="cstat-no" title="statement not covered" >                this.heatMaps[card_id][filter_id] = null;</span>
             }
         },
-        updatePoiOnMap(card_id, filter_id) {
-            var {cards} = <span class="cstat-no" title="statement not covered" >this.cData.config;</span>
-            var [card, fdItem, fdFilter] = <span class="cstat-no" title="statement not covered" >this.findCardAndFilter(cards, card_id, filter_id)</span>
-            var mapIns = <span class="cstat-no" title="statement not covered" >this.getMapInstance()</span>
-<span class="cstat-no" title="statement not covered" >            if (!mapIns) <span class="cstat-no" title="statement not covered" >return;</span></span>
-            //清除
-            // this.removeLayerOrHeatMap(card_id, filter_id);
-            var dataSet = <span class="cstat-no" title="statement not covered" >fdFilter.data || [];</span>
-<span class="cstat-no" title="statement not covered" >            if (fdFilter.hidden) { //隐藏</span>
-<span class="cstat-no" title="statement not covered" >                return</span>
+        removeLayer(layer) {
+<span class="cstat-no" title="statement not covered" >            layer &amp;&amp; layer.destroy()</span>
+<span class="cstat-no" title="statement not covered" >            layer = null</span>
+        },
+        removeDataOnMapFilter(card_id, filter_id) {
+<span class="cstat-no" title="statement not covered" >            if (this.massMarkers[card_id]) {</span>
+<span class="cstat-no" title="statement not covered" >                this.removeLayer(this.massMarkers[card_id][filter_id])</span>
+<span class="cstat-no" title="statement not covered" >                delete this.massMarkers[card_id][filter_id]</span>
             }
-            var {cur_visual} = <span class="cstat-no" title="statement not covered" >fdFilter</span>
-            var visual_cfg = <span class="cstat-no" title="statement not covered" >null</span>
-            var {type, col, title} = <span class="cstat-no" title="statement not covered" >cur_visual || {};</span>
-<span class="cstat-no" title="statement not covered" >            visual_cfg = fdFilter["config_" + type];</span>
-<span class="cstat-no" title="statement not covered" >            visual_cfg = visual_cfg || {};</span>
-<span class="cstat-no" title="statement not covered" >            visual_cfg = visual_cfg[col]</span>
-<span class="cstat-no" title="statement not covered" >            if (!type || type == 1 || type == 2) {</span>
-                var option = <span class="cstat-no" title="statement not covered" >amapUtil.getVisualMapOption(fdFilter.style)</span>
-<span class="cstat-no" title="statement not covered" >                option.fitView = false</span>
-<span class="cstat-no" title="statement not covered" >                this.massMarkers[card_id] = this.massMarkers[card_id] || {};</span>
-<span class="cstat-no" title="statement not covered" >                this.massMarkers[card_id][filter_id] = amapUtil.createVisualMap(mapIns, dataSet, visual_cfg, option)</span>
-                // this.massMarkers[card_id][filter_id].on('click', e =&gt; {
-                //     this.onMassClick(e, card_id, filter_id)
-                // })
-<span class="cstat-no" title="statement not covered" >                this.generateMarkCols();</span>
-            } else <span class="cstat-no" title="statement not covered" >if (type == 3 || type == 4 || type == 5) {</span>
-<span class="cstat-no" title="statement not covered" >                this.heatMaps[card_id] = this.heatMaps[card_id] || {};</span>
-<span class="cstat-no" title="statement not covered" >                this.heatMaps[card_id][filter_id] = amapUtil.createHeatMap(mapIns, dataSet, visual_cfg, col);</span>
+<span class="cstat-no" title="statement not covered" >            if (this.heatMaps[card_id]) {</span>
+<span class="cstat-no" title="statement not covered" >                this.removeLayerOrHeatMap(card_id, filter_id)</span>
+<span class="cstat-no" title="statement not covered" >                delete this.heatMaps[card_id][filter_id]</span>
+            }
+<span class="cstat-no" title="statement not covered" >            if (this.polygonLayers[card_id]) {</span>
+                var layersMap = <span class="cstat-no" title="statement not covered" >this.polygonLayers[card_id][filter_id];</span>
+                var layers = <span class="cstat-no" title="statement not covered" >[];</span>
+<span class="cstat-no" title="statement not covered" >                forEach(layersMap, t =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >                    t &amp;&amp; (layers = layers.concat(t));</span>
+                })
+<span class="cstat-no" title="statement not covered" >                this.mapIns &amp;&amp; layers &amp;&amp; this.mapIns.remove(layers);</span>
+<span class="cstat-no" title="statement not covered" >                delete this.polygonLayers[card_id][filter_id]</span>
+            }
+<span class="cstat-no" title="statement not covered" >            if (this.lineLayers[card_id]) {</span>
+                var layersMap = <span class="cstat-no" title="statement not covered" >this.lineLayers[card_id][filter_id];</span>
+                var lines = <span class="cstat-no" title="statement not covered" >[];</span>
+<span class="cstat-no" title="statement not covered" >                forEach(layersMap, t =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >                    t &amp;&amp; (lines = lines.concat(t));</span>
+                })
+<span class="cstat-no" title="statement not covered" >                this.mapIns &amp;&amp; lines &amp;&amp; this.mapIns.remove(lines);</span>
+<span class="cstat-no" title="statement not covered" >                delete this.lineLayers[card_id][filter_id]</span>
             }
         },
         findCardAndFilter(cards, card_id, filter_id) {
@@ -2920,7 +4359,7 @@ export default {
 <span class="cstat-no" title="statement not covered" >            this.createInfoWindow(fdFilter, pos, data);</span>
         },
         generateMarkCols() {
-            var map = <span class="cstat-no" title="statement not covered" >this.map;</span>
+            var map = <span class="cstat-no" title="statement not covered" >this.mapIns;</span>
             let {cards} = <span class="cstat-no" title="statement not covered" >this.cData.config;</span>
 <span class="cstat-no" title="statement not covered" >            this.markerData = [];</span>
 <span class="cstat-no" title="statement not covered" >            forEach(this.markValue, (c, card_id) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
@@ -2941,12 +4380,12 @@ export default {
             })
         },
         hideInfoWindow() {
-            var map = <span class="cstat-no" title="statement not covered" >this.getMapInstance();</span>
+            var map = <span class="cstat-no" title="statement not covered" >this.mapIns;</span>
 <span class="cstat-no" title="statement not covered" >            this.infoWindow &amp;&amp; map &amp;&amp; map.remove(this.infoWindow);</span>
         },
         createInfoWindow(fdFilter, pos, data) {
 <span class="cstat-no" title="statement not covered" >            if (size(fdFilter.info_cfg)) {</span>
-                var map = <span class="cstat-no" title="statement not covered" >this.getMapInstance();</span>
+                var map = <span class="cstat-no" title="statement not covered" >this.mapIns;</span>
                 var content = <span class="cstat-no" title="statement not covered" >document.createElement('div');</span>
 <span class="cstat-no" title="statement not covered" >                content.className = 'info_window_wrap'</span>
                 var close = <span class="cstat-no" title="statement not covered" >document.createElement('div');</span>
@@ -3023,7 +4462,7 @@ export default {
 <span class="cstat-no" title="statement not covered" >                if (!this.checkDisPoints(pois, pos)) {</span>
 <span class="cstat-no" title="statement not covered" >                    pois.push(pos);</span>
                     var marker = <span class="cstat-no" title="statement not covered" >new AMap.Marker({</span>
-                        map: this.map,
+                        map: this.mapIns,
                         position: pos,
                         content: valContent,
                         offSet: new AMap.Pixel(0, 0),
@@ -3078,7 +4517,7 @@ export default {
         },
         //是否有交叉，有则返回true
         checkDis(p1, p2) {
-            var map = <span class="cstat-no" title="statement not covered" >this.map;</span>
+            var map = <span class="cstat-no" title="statement not covered" >this.mapIns;</span>
 <span class="cstat-no" title="statement not covered" >            if (!map) <span class="cstat-no" title="statement not covered" >return true;</span></span>
             var zoom = <span class="cstat-no" title="statement not covered" >map.getZoom();</span>
             var pix1 = <span class="cstat-no" title="statement not covered" >map.lnglatToPixel(p1, zoom);</span>
@@ -3087,8 +4526,319 @@ export default {
             var disY = <span class="cstat-no" title="statement not covered" >pix1.getY() - pix2.getY()</span>
 <span class="cstat-no" title="statement not covered" >            return Math.abs(disX) &lt; 100 &amp;&amp; Math.abs(disY) &lt; 20</span>
         },
-        onModelClose(){
-<span class="cstat-no" title="statement not covered" >            this.typePanel = false;</span>
+&nbsp;
+&nbsp;
+&nbsp;
+        //新改版部分
+        onClickRailBtn(){
+            let {railShow, mapIns, polygonLayer, circleRail, centerMark, btnMark, toastTop} = <span class="cstat-no" title="statement not covered" >this;</span>
+<span class="cstat-no" title="statement not covered" >            this.railShow = !railShow;</span>
+<span class="cstat-no" title="statement not covered" >            if(this.railShow){</span>
+<span class="cstat-no" title="statement not covered" >                if(size(toastTop) &amp;&amp; !toastTop.destroyed){</span>
+<span class="cstat-no" title="statement not covered" >                    toastTop.close();</span>
+                }
+<span class="cstat-no" title="statement not covered" >                mapIns.add(polygonLayer);</span>
+<span class="cstat-no" title="statement not covered" >                this.drawing = false;</span>
+<span class="cstat-no" title="statement not covered" >                this.startDrawing = false;</span>
+<span class="cstat-no" title="statement not covered" >                size(btnMark) &amp;&amp; mapIns.remove(btnMark);</span>
+<span class="cstat-no" title="statement not covered" >                size(circleRail) &amp;&amp; mapIns.remove(circleRail);</span>
+<span class="cstat-no" title="statement not covered" >                size(centerMark) &amp;&amp; mapIns.remove(centerMark);</span>
+<span class="cstat-no" title="statement not covered" >                this.mapRemoveEvent("click");</span>
+<span class="cstat-no" title="statement not covered" >                this.createToast("开始选择围栏");</span>
+            }
+            else{
+<span class="cstat-no" title="statement not covered" >                mapIns.remove(polygonLayer);</span>
+<span class="cstat-no" title="statement not covered" >                if(size(toastTop) &amp;&amp; !toastTop.destroyed){</span>
+<span class="cstat-no" title="statement not covered" >                    toastTop.close();</span>
+                }
+            }
+<span class="cstat-no" title="statement not covered" >            this.queryBtnFlag = false;</span>
+        },
+        onClickDrawBtn(){
+            let {drawing, startDrawing, mapIns, polygonLayer, circlesPolygon} = <span class="cstat-no" title="statement not covered" >this;</span>
+<span class="cstat-no" title="statement not covered" >            this.drawing = !drawing;</span>
+<span class="cstat-no" title="statement not covered" >            this.queryBtnFlag = false;</span>
+<span class="cstat-no" title="statement not covered" >            if(this.drawing){</span>
+<span class="cstat-no" title="statement not covered" >                this.createToast("点击地图开始绘制");</span>
+<span class="cstat-no" title="statement not covered" >                this.mapAddEvent("click");</span>
+<span class="cstat-no" title="statement not covered" >                this.railShow = false;</span>
+<span class="cstat-no" title="statement not covered" >                this.startDrawing = false;</span>
+<span class="cstat-no" title="statement not covered" >                size(circlesPolygon) &amp;&amp; mapIns.remove(circlesPolygon);</span>
+<span class="cstat-no" title="statement not covered" >                mapIns.remove(polygonLayer);</span>
+            }
+            else{
+<span class="cstat-no" title="statement not covered" >                if(startDrawing)</span>
+<span class="cstat-no" title="statement not covered" >                    this.clearDrawMark();</span>
+                else
+<span class="cstat-no" title="statement not covered" >                    size(this.toastTop) &amp;&amp; this.toastTop.close();</span>
+<span class="cstat-no" title="statement not covered" >                this.mapRemoveEvent("click");</span>
+            }
+        },
+        onClickLocation(){
+<span class="cstat-no" title="statement not covered" >            geoMapLocation(this);</span>
+        },
+        getMapCardOptions(){
+            let {cards, geo_filter, supp_filters} = this.cData.config, mapCardList = [];
+            cards.map(vl1 =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >                mapCardList = mapCardList.concat(vl1.items);</span>
+            })
+            this.mapCardList = mapCardList;
+        },
+        onClickCardBtn(value, index1, index2){
+            let currentMapCardPanel;
+<span class="cstat-no" title="statement not covered" >            currentMapCardPanel = value;</span>
+<span class="cstat-no" title="statement not covered" >            this.mapCardFlag = true;</span>
+<span class="cstat-no" title="statement not covered" >            this.filterIndex = index2;</span>
+<span class="cstat-no" title="statement not covered" >            this.currentClickBtn = index1 + '_' + index2;</span>
+<span class="cstat-no" title="statement not covered" >            this.currentMapCardPanel = currentMapCardPanel;</span>
+<span class="cstat-no" title="statement not covered" >            this.cardBtnWatch = new Date();</span>
+        },
+        getCardIconClass(vl1, dx2){
+<span class="cstat-no" title="statement not covered" >            return setIconClass(vl1, dx2);</span>
+        },
+        getCardIconStyle(vl1, dx2){
+<span class="cstat-no" title="statement not covered" >            return setIconStyle(vl1, dx2);</span>
+        },
+        addMarkToMap(type){
+            let {circleRail, centerMark, btnMark, mapIns, circleCenter, circleRadius, btnMarklnglat} = <span class="cstat-no" title="statement not covered" >this;</span>
+<span class="cstat-no" title="statement not covered" >            if(type === "polygon"){</span>
+<span class="cstat-no" title="statement not covered" >                if(size(circleRail)){</span>
+<span class="cstat-no" title="statement not covered" >                    mapIns.remove(circleRail);</span>
+                }
+<span class="cstat-no" title="statement not covered" >                circleRail = new AMap.Circle({</span>
+                    center: circleCenter,
+                    radius: circleRadius,
+                    strokeColor: "#007AFF", //线颜色
+                    strokeOpacity: 0.9, //线透明度
+                    strokeWeight: 2,    //线宽
+                    fillOpacity: 0//填充透明度
+                });
+<span class="cstat-no" title="statement not covered" >                mapIns.add(circleRail);</span>
+<span class="cstat-no" title="statement not covered" >                this.circleRail = circleRail;</span>
+            }
+            else <span class="cstat-no" title="statement not covered" >if(type === "centerMark"){</span>
+<span class="cstat-no" title="statement not covered" >                if(size(centerMark)){</span>
+<span class="cstat-no" title="statement not covered" >                    mapIns.remove(centerMark);</span>
+                }
+<span class="cstat-no" title="statement not covered" >                centerMark = new AMap.Marker({</span>
+                    position: circleCenter,
+                    offset: new AMap.Pixel(-15, -36),
+                    icon: "./static/images/icon_search_fixed_small.svg",
+                });
+<span class="cstat-no" title="statement not covered" >                mapIns.add(centerMark);</span>
+<span class="cstat-no" title="statement not covered" >                this.centerMark = centerMark;</span>
+            }
+            else <span class="cstat-no" title="statement not covered" >if(type === "btnMark"){</span>
+<span class="cstat-no" title="statement not covered" >                if(size(btnMark)){</span>
+<span class="cstat-no" title="statement not covered" >                    mapIns.remove(btnMark);</span>
+                }
+<span class="cstat-no" title="statement not covered" >                btnMark = new AMap.Marker({</span>
+                    position: btnMarklnglat,
+                    draggable: true,
+                    offset: new AMap.Pixel(-14, -10),
+                    icon: "./static/images/icon_workspace/icon_move_btn.svg",
+                });
+<span class="cstat-no" title="statement not covered" >                btnMark.on('dragging', (e) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+                    let location = <span class="cstat-no" title="statement not covered" >e.target.getPosition();</span>
+<span class="cstat-no" title="statement not covered" >                    this.circleRadius = this.circleCenter.distance(location);</span>
+<span class="cstat-no" title="statement not covered" >                    this.setDrawCircleFilters();</span>
+                })
+<span class="cstat-no" title="statement not covered" >                mapIns.add(btnMark);</span>
+<span class="cstat-no" title="statement not covered" >                this.btnMark = btnMark;</span>
+            }
+        },
+        mapAddEvent(eventName){
+            let {mapIns, btnMark} = <span class="cstat-no" title="statement not covered" >this;</span>
+<span class="cstat-no" title="statement not covered" >            size(mapIns) &amp;&amp; mapIns.on(eventName, (e) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >                this.circleCenter = new AMap.LngLat(e.lnglat.lng, e.lnglat.lat);</span>
+<span class="cstat-no" title="statement not covered" >                this.btnMarklnglat = this.circleCenter.offset(707.1, -707.1);</span>
+<span class="cstat-no" title="statement not covered" >                this.startDrawing = true;</span>
+<span class="cstat-no" title="statement not covered" >                this.circleRadiusPanel = true;</span>
+<span class="cstat-no" title="statement not covered" >                if(size(this.toastTop) &amp;&amp; !this.toastTop.destroyed)</span>
+<span class="cstat-no" title="statement not covered" >                    this.toastTop.close();</span>
+<span class="cstat-no" title="statement not covered" >                this.circleRadius = 1000;</span>
+<span class="cstat-no" title="statement not covered" >                this.addMarkToMap('polygon');</span>
+<span class="cstat-no" title="statement not covered" >                this.addMarkToMap('centerMark');</span>
+<span class="cstat-no" title="statement not covered" >                this.addMarkToMap('btnMark');</span>
+<span class="cstat-no" title="statement not covered" >                this.setDrawCircleFilters();</span>
+<span class="cstat-no" title="statement not covered" >                mapIns.setFitView(this.circleRail);</span>
+            })
+        },
+        mapRemoveEvent(eventName){
+            let {mapIns} = <span class="cstat-no" title="statement not covered" >this;</span>
+<span class="cstat-no" title="statement not covered" >            size(mapIns) &amp;&amp; mapIns.off(eventName, (e) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >                this.btnMark = false;</span>
+            })
+        },
+        clearDrawMark(){
+            let {circleRail, centerMark, btnMark, mapIns, startDrawing} = <span class="cstat-no" title="statement not covered" >this;</span>
+<span class="cstat-no" title="statement not covered" >            mapIns.remove(circleRail);</span>
+<span class="cstat-no" title="statement not covered" >            mapIns.remove(centerMark);</span>
+<span class="cstat-no" title="statement not covered" >            mapIns.remove(btnMark);</span>
+<span class="cstat-no" title="statement not covered" >            this.startDrawing = false;</span>
+        },
+        createToast(text){
+<span class="cstat-no" title="statement not covered" >            this.toastTop = this.$f7.toast.create({</span>
+                text: text,
+                position: 'top',
+                cssClass: "map-card-toast",
+                destroyOnClose: true,
+            });
+<span class="cstat-no" title="statement not covered" >            this.toastTop.open();</span>
+        },
+        createPicker(){
+            let {testCancel} = this;
+            this.pickerRadius = this.$f7.picker.create({
+                inputEl: '&lt;input /&gt;',
+                rotateEffect: true,
+                renderToolbar: function()<span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >                    return `&lt;div class="toolbar"&gt;&lt;div class="toolbar-inner"&gt;&lt;div class="left"&gt;&lt;a href="#" class="link sheet-close radiusPickerCancel" click=${testCancel}&gt;取消&lt;/a&gt;&lt;/div&gt;&lt;div class="right"&gt;&lt;a href="#" class="link sheet-close popover-close radiusPickerOk"&gt;确定&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;`;</span>
+                },
+                cols: radiusPickCols,
+                on: {
+                    change: (picker, value, displayValue) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >                        this.pickerValues = value;</span>
+                    },
+                }
+            });
+        },
+        setDrawCircleFilters(){
+            let {circleCenter, circleRadius} = <span class="cstat-no" title="statement not covered" >this;</span>
+            let ps = <span class="cstat-no" title="statement not covered" >coordtransform.gcj02towgs84(circleCenter.lng, circleCenter.lat);</span>
+            let circles = <span class="cstat-no" title="statement not covered" >[];</span>
+<span class="cstat-no" title="statement not covered" >            circles.push([...ps, circleRadius])</span>
+<span class="cstat-no" title="statement not covered" >            this.addMarkToMap('polygon');</span>
+<span class="cstat-no" title="statement not covered" >            this.drawFilter = {</span>
+                type: dis_select,
+                circles,
+            };
+        },
+        onClickFilterQuery(){
+            let {drawFilter, startDrawing, circleRail, mapIns, queryLoading} = <span class="cstat-no" title="statement not covered" >this;</span>
+<span class="cstat-no" title="statement not covered" >            if(queryLoading) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >            this.queryLoading = true;</span>
+<span class="cstat-no" title="statement not covered" >            this.mapCardFlag = false;</span>
+<span class="cstat-no" title="statement not covered" >            if(startDrawing){</span>
+<span class="cstat-no" title="statement not covered" >                this.cData.config.cards[0].geo_filters = drawFilter;</span>
+<span class="cstat-no" title="statement not covered" >                this.renderMap("query");</span>
+            }
+            else
+<span class="cstat-no" title="statement not covered" >                this.renderMap("query");</span>
+        },
+        openRadiusPicker(){
+<span class="cstat-no" title="statement not covered" >            size(this.pickerRadius) &amp;&amp; this.pickerRadius.open();</span>
+<span class="cstat-no" title="statement not covered" >            this.$$('.radiusPickerOk')[0] &amp;&amp; this.$$('.radiusPickerOk')[0].addEventListener('click', () =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+                let {pickerValues, mapIns, circleCenter} = <span class="cstat-no" title="statement not covered" >this;</span>
+                let radius = <span class="cstat-no" title="statement not covered" >pickerValues[0]*1000 + pickerValues[2]*1;</span>
+<span class="cstat-no" title="statement not covered" >                this.circleRadius = radius;</span>
+                let scale = <span class="cstat-no" title="statement not covered" >radius*0.7071;</span>
+<span class="cstat-no" title="statement not covered" >                this.btnMarklnglat = circleCenter.offset(scale, -scale);</span>
+<span class="cstat-no" title="statement not covered" >                this.addMarkToMap('polygon');</span>
+<span class="cstat-no" title="statement not covered" >                this.addMarkToMap('btnMark');</span>
+<span class="cstat-no" title="statement not covered" >                this.setDrawCircleFilters();</span>
+<span class="cstat-no" title="statement not covered" >                mapIns.setFitView(this.circleRail);</span>
+<span class="cstat-no" title="statement not covered" >                this.$$('.radiusPickerOk')[0].removeEventListener('click', ()=&gt;<span class="fstat-no" title="function not covered" >{})</span>;</span>
+            });
+        },
+        onClickRadiusPanel(type){
+            let {circleRail, centerMark, btnMark, mapIns} = <span class="cstat-no" title="statement not covered" >this;</span>
+<span class="cstat-no" title="statement not covered" >            if(type === "ok"){</span>
+<span class="cstat-no" title="statement not covered" >                this.queryBtnFlag = true;</span>
+            }
+            else <span class="cstat-no" title="statement not covered" >if(type === "cancel"){</span>
+<span class="cstat-no" title="statement not covered" >                mapIns.remove(circleRail);</span>
+<span class="cstat-no" title="statement not covered" >                this.queryBtnFlag = false;</span>
+            }
+<span class="cstat-no" title="statement not covered" >            mapIns.remove(centerMark);</span>
+<span class="cstat-no" title="statement not covered" >            mapIns.remove(btnMark);</span>
+<span class="cstat-no" title="statement not covered" >            this.circleRadiusPanel = false;</span>
+        },
+        distanceConvert(value){
+<span class="cstat-no" title="statement not covered" >            return Math.ceil(value/10)/100;</span>
+        },
+        productMapPng(){
+            let node = <span class="cstat-no" title="statement not covered" >this.$refs.interactive_map,</span> {deviceType} = <span class="cstat-no" title="statement not covered" >this;</span>
+<span class="cstat-no" title="statement not covered" >            if(!node) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >            if(deviceType === "ios"){</span>
+<span class="cstat-no" title="statement not covered" >                return html2canvas(node.$refs.map_panel_tem);</span>
+            }
+            else{
+<span class="cstat-no" title="statement not covered" >                return domtoimage.toBlob(node.$refs.map_panel_tem, {quality: 1})</span>
+            }
+        },
+        saveFilters(){
+            let _this = <span class="cstat-no" title="statement not covered" >this;</span>
+            let {drawFilter, startDrawing, circleRail, mapIns, cData: {thumb}, deviceType} = <span class="cstat-no" title="statement not covered" >_this;</span>
+            let geo_filters = <span class="cstat-no" title="statement not covered" >_this.cData.config.cards[0].geo_filters;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            _this.productMapPng().then(function (dataUrl) <span class="fstat-no" title="function not covered" >{</span></span>
+                let path = 
+<span class="cstat-no" title="statement not covered" >                localStorage.setItem(`mdt_geo_filters_${_this.cData.thumb}`, JSON.stringify({filters: geo_filters, status: true}));</span>
+<span class="cstat-no" title="statement not covered" >                if(deviceType === "ios"){</span>
+                    let blob = <span class="cstat-no" title="statement not covered" >_this.canvasToBlob(dataUrl);</span>
+<span class="cstat-no" title="statement not covered" >                    _this.saveMapPng(blob);</span>
+                }
+                else
+<span class="cstat-no" title="statement not covered" >                    _this.saveMapPng(dataUrl);</span>
+<span class="cstat-no" title="statement not covered" >                _this.queryLoading = false;</span>
+            })
+            .catch(function (error) <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >                _this.queryLoading = false;</span>
+<span class="cstat-no" title="statement not covered" >                console.error('oops, something went wrong!', error);</span>
+            });
+        },
+        mapStateSwitch(){
+            let {mapBtnStatus, cData: {thumb}} = <span class="cstat-no" title="statement not covered" >this;</span>
+<span class="cstat-no" title="statement not covered" >            this.mapBtnStatus = !mapBtnStatus;</span>
+            let local = <span class="cstat-no" title="statement not covered" >localStorage.getItem(`mdt_geo_filters_${thumb}`);</span>
+<span class="cstat-no" title="statement not covered" >            local = JSON.parse(local);</span>
+<span class="cstat-no" title="statement not covered" >            local.status = this.mapBtnStatus;</span>
+<span class="cstat-no" title="statement not covered" >            localStorage.setItem(`mdt_geo_filters_${thumb}`, JSON.stringify(local));</span>
+<span class="cstat-no" title="statement not covered" >            bus.$emit("interactiveMapGetData");</span>
+        },
+        getMapBtnStatus(){
+            let local = localStorage.getItem(`mdt_geo_filters_${this.cData.thumb}`);
+            <span class="missing-if-branch" title="if path not taken" >I</span>if(size(local)){
+<span class="cstat-no" title="statement not covered" >                local = JSON.parse(local);</span>
+<span class="cstat-no" title="statement not covered" >                this.mapBtnFlag = true;</span>
+<span class="cstat-no" title="statement not covered" >                this.mapBtnStatus = local.status;</span>
+            }
+        },
+        saveMapPng: async function(dataUrl)<span class="fstat-no" title="function not covered" >{</span>
+            let {thumb} = <span class="cstat-no" title="statement not covered" >this.cData;</span>
+            let resp = <span class="cstat-no" title="statement not covered" >await uploadFilePromise(dataUrl, uploadType);</span>
+            let local = <span class="cstat-no" title="statement not covered" >localStorage.getItem(`mdt_geo_filters_${thumb}`);</span>
+<span class="cstat-no" title="statement not covered" >            local = JSON.parse(local);</span>
+<span class="cstat-no" title="statement not covered" >            if(!!resp.oss_path){</span>
+<span class="cstat-no" title="statement not covered" >                local.imgPath = resp.oss_path;</span>
+            }
+            else{
+<span class="cstat-no" title="statement not covered" >                local.imgPath = "";</span>
+<span class="cstat-no" title="statement not covered" >                console.error("缩略图保存失败");</span>
+            }
+<span class="cstat-no" title="statement not covered" >            localStorage.setItem(`mdt_geo_filters_${thumb}`, JSON.stringify(local));</span>
+            let mm = <span class="cstat-no" title="statement not covered" >localStorage.getItem(`mdt_geo_filters_${thumb}`);</span>
+        },
+&nbsp;
+        getMapPng(){
+            let {thumb} = <span class="cstat-no" title="statement not covered" >this.cData;</span>
+            let local = <span class="cstat-no" title="statement not covered" >localStorage.getItem(`mdt_geo_filters_${thumb}`);</span>
+<span class="cstat-no" title="statement not covered" >            local = JSON.parse(local);</span>
+            let imgPath = <span class="cstat-no" title="statement not covered" >local.imgPath;</span>
+<span class="cstat-no" title="statement not covered" >            if(size(imgPath)){</span>
+<span class="cstat-no" title="statement not covered" >                this.staticBackgroundUrl = `url(${imgPath})`;</span>
+            }
+            else{
+<span class="cstat-no" title="statement not covered" >                this.staticBackgroundUrl = 'url(./static/images/skeleton.png)';</span>
+            }
+        },
+        canvasToBlob(canvas) {
+            let dataurl = <span class="cstat-no" title="statement not covered" >canvas.toDataURL();</span>
+            let arr = <span class="cstat-no" title="statement not covered" >dataurl.split(','),</span> mime = <span class="cstat-no" title="statement not covered" >arr[0].match(/:(.*?);/)[1],</span> bstr = <span class="cstat-no" title="statement not covered" >atob(arr[1]),</span> n = <span class="cstat-no" title="statement not covered" >bstr.length,</span> u8arr = <span class="cstat-no" title="statement not covered" >new Uint8Array(n);</span>
+<span class="cstat-no" title="statement not covered" >            while (n--) {</span>
+<span class="cstat-no" title="statement not covered" >                u8arr[n] = bstr.charCodeAt(n);</span>
+            }
+<span class="cstat-no" title="statement not covered" >            return new Blob([u8arr], { type: mime });</span>
         }
     }
 }
@@ -3096,9 +4846,8 @@ export default {
 &lt;style lang="scss" scoped&gt;
 .interactive-map-style {
     width: 100%;
-    .static-map-show {
+    .interactive-map-static-show {
         width: 100%;
-        // height: 300px;
         .map-title {
             line-height: 18px;
             font-size: 15px;
@@ -3112,6 +4861,7 @@ export default {
             width: 100%;
             box-sizing: border-box;
             padding: 0 21px 30px 21px;
+            position: relative;
             .img-bg {
                 width: 100%;
                 height: 244px;
@@ -3119,56 +4869,193 @@ export default {
                 background-repeat: no-repeat;
                 background-position: center;
             }
+            img {
+                width: 100%;
+                height: 244px;
+                object-fit: cover;
+            }
+            a {
+                position: absolute;
+                width: 72px;
+                height: 32px;
+                bottom: 37px;
+                right: 28px;
+                color: #fff;
+                font-size: 14px;
+                font-family: PingFang SC;
+                border-radius: 10px;
+                background-color: #007aff;
+            }
         }
     }
 }
 .interactive-map-detailpg {
     width: 100%;
     height: 100%;
-    .dynamic-map-show {
+    .interactive-map-show {
         height: 100%;
         position: relative;
-        .page-btn {
+        .interactive-map-card {
             position: absolute;
-            width: 40px;
-            right: 14px;
-            top: 18px;
-            .info-btn, .map-switch {
-                width: 32px;
-                height: 32px;
-                border-radius: 50%;
-                background-color: #409eff;
-                margin-left: 4px;
-                text-align: center;
-                line-height: 32px;
-                i{
-                    color: #fff;
+            width: 100%;
+            bottom: 52px;
+            box-sizing: border-box;
+            padding: 0 8px 0 8px;
+            z-index: 10;
+        }
+        .interactive-map-card-btn {
+            width: 100%;
+            height: 48px;
+            bottom: 0;
+            position: absolute;
+            background-color: #fff;
+            overflow-x: auto;
+            .interactive-map-card-btn-content {
+                .map-card-btn-group {
+                    display: inline-block;
+                    vertical-align: top;
+                    .map-card-btn {
+                        width: 48px;
+                        height: 48px;
+                        margin-left: 8px;
+                        padding-top: 8px;
+                        box-sizing: border-box;
+                        display: inline-block;
+                        .icomoon, .icon-panel{
+                            text-align: center;
+                            font-size: 20px;
+                        }
+                        .icon-panel {
+                            margin-top: 4px;
+                        }
+                        .icon-polygon {
+                            margin-left: 12px;
+                        }
+                    }
+                    .map-card-btn-select {
+                        border: solid 1px rgba(0, 122, 255, 0.4);
+                        background-color: rgba(0, 122, 255, 0.1);
+                        box-shadow: 0 0 2px 0 rgba(0, 122, 255, 0.5);
+                    }
                 }
             }
-            .map-switch {
-                margin-top: 16px;
+        }
+        .interactive-map-circle-radius {
+            width: 100%;
+            height: 48px;
+            bottom: 0;
+            background-color: #fff;
+            position: absolute;
+            z-index: 10;
+            display: inline-flex;
+            .panel-close-btn, .panel-ok-btn {
+                height: 48px;
+                width: 48px;
+                text-align: center;
+                font-size: 16px;
+                i {
+                    line-height: 48px;
+                }
+            }
+            .panel-ok-btn i {
+                color: #007aff;
+            }
+            .panel-content-show {
+                flex: 1;
+                height: 48px;
+                text-align: center;
+                .content-text {
+                    line-height: 28px;
+                    font-size: 16px;
+                }
+                .content-value {
+                    line-height: 18px;
+                    font-size: 14px;
+                }
             }
         }
-        .type-panel {
-            position: absolute;
-            width: 320px;
-            // height: 344px;
-            max-height: 344px;
-            top: 7px;
-            right: 7px;
-            background-color: #fff;
+        .setting-circle-radius-enter, .setting-circle-radius-leave-active {
+            bottom: -50px;
         }
-&nbsp;
-        .type-panel-enter, .type-panel-leave-active {
-            opacity: 0;
-            right: -320px;
+        .setting-circle-radius-enter-to, .setting-circle-radius-leave {
+            bottom: 0;
         }
-        .type-panel-enter-to, .type-panel-leave {
-            opacity: 1;
-            right: 7px;
-        }
-        .type-panel-enter-active, .type-panel-leave-active {
+        .setting-circle-radius-enter-active, .setting-circle-radius-leave-active {
             transition: all 300ms;
+        }
+        .interactive-map-filter-btn {
+            width: 56px;
+            right: 16px;
+            bottom: 64px;
+            position: absolute;
+            a {
+                width: 56px;
+                height: 56px;
+                display: block;
+                box-sizing: border-box;
+                opacity: 85%;
+                margin-top: 16px;
+                border-radius: 50%;
+                background-color: #fff;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            }
+            .map-filter-rail-btn {
+                padding: 15px 19px;
+                div {
+                    width: 18px;
+                    height: 26px;
+                    background-size: 100% 100%;
+                    background: url('../../../../../static/images/icon_workspace/icon_rail_btn.svg') no-repeat;
+                }
+            }
+            .rail-show {
+                background-color: #007aff;
+                div {
+                    background: url('../../../../../static/images/icon_workspace/icon_rail_show_btn.svg') no-repeat;
+                }
+            }
+            .map-filter-draw-btn {
+                padding: 13px;
+                div {
+                    width: 30px;
+                    height: 30px;
+                    background-size: 100% 100%;
+                    background: url('../../../../../static/images/icon_workspace/icon_draw_btn.svg') no-repeat;
+                }
+            }
+            .map-drawing {
+                background-color: #007aff;
+                div {
+                    background: url('../../../../../static/images/icon_workspace/icon_start_draw_btn.svg') no-repeat;
+                }
+            }
+            .map-location-btn {
+                padding: 20px;
+                .position-icon {
+                    font-size: 20px;
+                    color: #007aff;
+                }
+            }
+        }
+        .interactive-map-search-btn {
+            position: absolute;
+            width: 120px;
+            height: 44px;
+            line-height: 44px;
+            border-radius: 24px;
+            left: 0;
+            right: 0;
+            bottom: 64px;
+            margin: auto;
+            z-index: 10;
+            color: #fff;
+            font-size: 14px;
+            text-align: center;
+            background-color: #007aff;
+            .preloader {
+                width: 24px;
+                height: 24px;
+            }
         }
     }
 }
@@ -3178,7 +5065,7 @@ export default {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat Jun 09 2018 20:38:52 GMT+0800 (CST)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Aug 09 2018 15:45:34 GMT+0800 (CST)
 </div>
 </div>
 <script src="../../../../../../prettify.js"></script>

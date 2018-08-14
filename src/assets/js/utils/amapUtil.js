@@ -1139,6 +1139,125 @@ function geoJsonToEwkbWrap(geometry) {
     return geoJsonToEwkb(wrapGeoJson(geometry));
 }
 
+/**
+ * 地图定位
+ * @param this
+ * @param dataSet
+ * @param conf
+ * @returns {*}
+ */
+function switchToSettings() {
+    let {platform} = device;
+    if (platform && platform.toLowerCase() === 'ios') {
+        cordova.plugins.diagnostic.switchToSettings();
+    }else{
+        cordova.plugins.diagnostic.switchToLocationSettings();
+    }
+}
+function showGoSettingDialog(_this) {
+    let dialog = _this.$f7.dialog.create({
+        title: '提示',
+        content: "需要开启存储及定位权限, 请到系统设置界面手动开启!",
+        buttons: [
+            {text:"取消"},{
+            text:"设置", onClick: () => {
+                switchToSettings();
+            }
+        }]
+    })
+    dialog.open();
+    _this.positionLoading = false;
+}
+function getCurrentPosition(mapIns, _this) {
+    AMapPlugin.getCurrentPosition(function (data) {
+        // alert('data'+JSON.stringify(data));
+        let {latitude, longitude} = data;
+        _this.customMarker && mapIns.remove(_this.customMarker);
+        _this.customMarker = new AMap.Marker({
+            position: new AMap.LngLat(longitude, latitude),
+            offset: new AMap.Pixel(-12, -12),//相对于基点的位置
+            icon: new AMap.Icon({  //复杂图标
+                size: new AMap.Size(23, 23),//图标大小
+                image: "http://webapi.amap.com/theme/v1.3/markers/n/loc.png", //大图地址
+            })
+        });
+        mapIns.add(_this.customMarker);
+        mapIns.setZoomAndCenter(15, [longitude, latitude]);
+        _this.positionLoading = false;
+    }, function (err) {
+        // alert("err" + JSON.stringify(err));
+        _this.$f7.dialog.alert('地图定位失败!', '提示');
+        _this.positionLoading = false;
+    })
+}
+function chargeLocationSetting(mapIns, _this) {
+    let {platform} = device;
+    console.log('chargeLocationSetting:,,,,,,');
+    let chechFunc = (platform && platform.toLowerCase() === 'android') ? 
+        cordova.plugins.diagnostic.isGpsLocationEnabled : 
+        cordova.plugins.diagnostic.isLocationEnabled;
+    chechFunc((status) => {
+        console.log('status:'+status);
+        if (status) {
+            getCurrentPosition(mapIns, _this);
+        }else {
+            showGoSettingDialog(_this);
+        }
+    }, (err) => {
+        console.log('err:'+JSON.stringify(err));
+        showGoSettingDialog(_this);
+    });
+}
+function geoMapLocation(_this){
+    let {mapIns, positionLoading} = _this;
+    if(positionLoading) return;
+    let {platform} = device;
+    if (platform && platform.toLowerCase() === 'ios') {
+        _this.positionLoading = true;
+        chargeLocationSetting(mapIns, _this);
+    }else if (platform && platform.toLowerCase() === 'android'){
+        _this.positionLoading = true;
+        var permissions = cordova.plugins.permissions;
+        permissions.requestPermissions([permissions.WRITE_EXTERNAL_STORAGE, permissions.ACCESS_COARSE_LOCATION], function(status) {
+            console.log('status: '+JSON.stringify(status));
+            if (status.hasPermission) {
+                chargeLocationSetting(mapIns, _this);
+            }else {
+                showGoSettingDialog(_this);
+            }
+        }, (err) => {
+            console.log('status err: '+JSON.stringify(status));
+            showGoSettingDialog(_this);
+        })
+    }else {
+        _this.positionLoading = true;
+        mapIns.plugin('AMap.Geolocation', function () {
+            _this.geolocation && mapIns.removeControl(_this.geolocation);     
+            let geolocation = new AMap.Geolocation({
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maximumAge: 0,
+                convert: true,
+                showButton: false,
+                showMarker: true,
+                showCircle: true,
+                panToLocation: true,
+                zoomToAccuracy:true,
+            });
+            mapIns.addControl(geolocation);
+            geolocation.getCurrentPosition();
+            AMap.event.addListener(geolocation, 'complete', () => {
+                _this.positionLoading = false;
+            });//返回定位信息
+            AMap.event.addListener(geolocation, 'error', () => {
+                _this.$f7.dialog.alert('地图定位失败!', '提示');
+                _this.positionLoading = false;
+            });
+                _this.geolocation = geolocation;
+        });
+    }
+}
+
 module.exports = {
     wgs84togcj02,
     gcj02towgs84,
@@ -1174,4 +1293,5 @@ module.exports = {
     setBounds,
     wrapGeoJson,
     geoJsonToEwkbWrap,
+    geoMapLocation,
 };

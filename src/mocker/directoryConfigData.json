@@ -1,0 +1,144 @@
+{
+    "result": [
+        {
+            "id": 859,
+            "extra": {
+                "dirs": [
+                    {
+                        "id": "b0301b30-2362-11e8-9696-c9a8822cc4b7",
+                        "name": "测试2",
+                        "children": [
+                            {
+                                "id": "point_2040居住地_customer_",
+                                "name": "2040居住地",
+                                "source": "customer",
+                                "geo_type": "point",
+                                "isParent": false,
+                                "packageId": ""
+                            },
+                            {
+                                "id": "point_居住地_customer_",
+                                "name": "居住地",
+                                "source": "customer",
+                                "geo_type": "point",
+                                "isParent": false,
+                                "packageId": ""
+                            },
+                            {
+                                "id": "point_金地水悦堂测试_customer_",
+                                "name": "金地水悦堂测试",
+                                "source": "customer",
+                                "geo_type": "point",
+                                "isParent": false,
+                                "packageId": ""
+                            }
+                        ],
+                        "isParent": true
+                    },
+                    {
+                        "id": "300116d0-e951-11e7-87de-d30db4d7c789",
+                        "name": "卓越四城市轨交数据",
+                        "children": [
+                            {
+                                "id": "line_4628d3ded7ffdb091e9e19531c08811c",
+                                "name": "南京地铁线（规划）",
+                                "geo_type": "line",
+                                "isParent": false
+                            }
+                        ],
+                        "isParent": true
+                    },
+                    {
+                        "id": "59e44d60-e3a6-11e7-a18c-05f15f0c65d4",
+                        "name": "测试",
+                        "children": [
+                            {
+                                "id": "point_24ae33441c8b53c16a4fb553b2fae77d",
+                                "name": "体育设施",
+                                "geo_type": "point",
+                                "isParent": false
+                            },
+                            {
+                                "id": "point_13ea898e7060ed9494a42719da52d0a6",
+                                "name": "生活服务;维修站点;维修站点",
+                                "geo_type": "point",
+                                "isParent": false
+                            },
+                            {
+                                "id": "point_673569e8acad647e5821290e878a89a0",
+                                "name": "餐饮服务;中餐厅;海鲜酒楼",
+                                "geo_type": "point",
+                                "isParent": false
+                            },
+                            {
+                                "id": "point_4501b4993c79523a845fd1a058cd3c98",
+                                "name": "餐饮服务;快餐厅;茶餐厅",
+                                "geo_type": "point",
+                                "isParent": false
+                            }
+                        ],
+                        "isParent": true
+                    },
+                    {
+                        "id": "121a5cb0-e16a-11e7-aa67-d1c23f0e54b9",
+                        "name": "新建文件夹",
+                        "children": [
+                            {
+                                "id": "point_285ed3de15c08036627b38db0ff83bdd",
+                                "name": "餐饮服务;咖啡厅;星巴克咖啡|购物服务;购物相关场所;购物相关场所",
+                                "geo_type": "point",
+                                "isParent": false
+                            },
+                            {
+                                "id": "point_a6d91ddec26da910808ba1f6c136c9a2",
+                                "name": "餐饮服务;咖啡厅;咖啡厅",
+                                "geo_type": "point",
+                                "isParent": false
+                            },
+                            {
+                                "id": "point_0bd63e2240466468a84bdbcb7dd735d2",
+                                "name": "上海 五角场 沙县",
+                                "geo_type": "point",
+                                "isParent": false
+                            },
+                            {
+                                "id": "point_e7818b5c1fa49555c7b249ddbf8d22cb",
+                                "name": "餐饮服务;外国餐厅;西餐厅(综合风味)",
+                                "geo_type": "point",
+                                "isParent": false
+                            },
+                            {
+                                "id": "point_acfb7dc67250cbcb85412d85d75e1569",
+                                "name": "生活服务;洗衣店;洗衣店",
+                                "geo_type": "point",
+                                "isParent": false
+                            },
+                            {
+                                "id": "point_d0bb50bdb0b28834b201fbbcb748af8c",
+                                "name": "餐饮服务;外国餐厅;日本料理",
+                                "geo_type": "point",
+                                "isParent": false
+                            },
+                            {
+                                "id": "point_0748de21e06355921f7477689c16ea40",
+                                "name": "餐饮服务;咖啡厅;星巴克咖啡",
+                                "geo_type": "point",
+                                "isParent": false
+                            },
+                            {
+                                "id": "point_0e6d9f3629b8aa2706c49e582dc4ccc1",
+                                "name": "点点点",
+                                "geo_type": "point",
+                                "isParent": false
+                            }
+                        ],
+                        "isParent": true
+                    }
+                ]
+            },
+            "create_time": "2017-12-15 15:32:07",
+            "update_time": "2018-07-06 16:43:57",
+            "status": "normal"
+        }
+    ]
+}

@@ -65,7 +65,7 @@ public class StatusBar extends CordovaPlugin {
                 // Read 'StatusBarStyle' from config.xml, default is 'lightcontent'.
                 setStatusBarStyle(preferences.getString("StatusBarStyle", "lightcontent"));
 
-                setStatusBarTransparent(preferences.getBoolean("StatusBarOverlaysWebView", true));
+                // setStatusBarTransparent(preferences.getBoolean("StatusBarOverlaysWebView", true));
             }
         });
     }

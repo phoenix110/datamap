@@ -1,10 +1,10 @@
 <template>
     <div class="map_center">
-        <mapPanelCom ref="upload_map" :mapProps="mapProps" :loading="mapLoading"></mapPanelCom>
+        <MapPanelCom ref="upload_map" :mapProps="mapProps" :loading="mapLoading"></MapPanelCom>
     </div>
 </template>
 <script>
-import mapPanelCom from '../../commons/map-panel-comp.vue';
+import MapPanelCom from '../../commons/map-panel-comp.vue';
 import amapUtil from '../../../../js/utils/amapUtil'
 import {forEach,filter,pull,find,indexOf,findIndex,slice,difference,assign,size,orderBy,pullAll,keys,cloneDeep,uniq, uniqBy,map,concat,has, merge,get, set, unset, isNaN, flatten, trimStart} from 'lodash'
 import {visualization_colors} from '../../../../js/constants/Constants';
@@ -49,7 +49,7 @@ export default {
         size(this.map) ? this.map.destroy() : null ;
     },
     components: {
-        mapPanelCom,
+        MapPanelCom,
     },
     watch: {
         mapData: function(){

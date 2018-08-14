@@ -38,10 +38,13 @@ export default {
         }
     },
     created(){
-        bus.$on('mapFetchData', ()=>{
-            this.setTemData();
-        })
+        bus.$on('mapFetchData', this.setTemData);
     },
+
+    beforeDestroy() {
+        bus.$off('mapFetchData', this.setTemData);
+    },
+
     mounted(){
         this.setTemData();
     },
@@ -85,8 +88,12 @@ export default {
     .point_card_title {
         .point_card_title_text{
             width: 100%;
-            line-height: 17px;
-            font-size: 12px;
+            line-height: 20px;
+            font-size: 14px;
+            color: #38393c;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
         }
     }
     .point_card_list {
@@ -96,12 +103,15 @@ export default {
         flex-wrap: wrap;
         .point_card_item {
             width: 50%;
-            line-height: 30px;
+            line-height: 17px;
             font-size: 12px;
+            color: #6b7280;
+            margin-top: 12px;
             .point_card_item_icon {
                 display: inline-block;
                 vertical-align: top;
                 margin-right: 5px;
+                font-size: 16px;
             }
             .point_card_item_text {
                 display: inline-block;

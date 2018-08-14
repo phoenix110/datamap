@@ -55,8 +55,14 @@ export default {
                     sub = `${min}以上`
                 }
             } else if (column.h_type === h_type_date) {
-                let {start, end} = column;
-                sub = start ? `${start} - ${end}` : '';
+                let {start, end, fast_type, end_is_today} = column;
+                if (end_is_today) {
+                    sub = `${start}至今`;
+                }else if (fast_type) {
+                    sub = fast_type;
+                }else {
+                    sub = start ? `${start} - ${end}` : '';
+                }
             }
             return sub;
         },

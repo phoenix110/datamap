@@ -3,18 +3,18 @@
         <div class="total">共 {{totalPage}} 页</div>
         <div class="size-select"></div>
         <div class="page-btn">
-            <div class="prepend-btn" @click="onPageChange('prepend')"><i class="icon-arrow-left" :style="{color: prependDis ? '#c0c4cc' : ''}"></i></div>
+            <div class="prepend-btn" @click="onPageChange('prepend')"><i class="f7-icons" :style="{color: prependDis ? '#c0c4cc' : ''}">left</i></div>
             <ul>
-                <li v-for="(vl, i) in selectList" :key="i" :style="{color: vl == currentPage ? '#409eff' : ''}">{{vl}}</li>
+                <li v-for="(vl, i) in selectList" :key="i" :style="{color: vl == currentPage ? '#007aff' : ''}">{{vl}}</li>
             </ul>
-            <div class="append-btn" @click="onPageChange('append')"><i class="icon-arrow-right" :style="{color: appendDis ? '#c0c4cc': ''}"></i></div>
+            <div class="append-btn" @click="onPageChange('append')"><i class="f7-icons" :style="{color: appendDis ? '#c0c4cc': ''}">right</i></div>
         </div>
         <div class="page-jump">
             <span class="text">前往 </span>
             <input v-model="inputPage" @input="onPageInput"/>
             <span class="text"> 页</span>
         </div>
-        <div class="skip-btn" @click="onPageChange('skip')" :style="{backgroundColor: skipBtnDis ? '#8cc5ff' : '#409eff'}">跳转</div>
+        <div class="skip-btn" @click="onPageChange('skip')" :style="{color: skipBtnDis ? '#8cc5ff' : '#007aff'}">跳转</div>
     </div>
 </template>
 <script>
@@ -148,13 +148,17 @@ export default {
 </script>
 <style scoped lang="scss">
 .md-pagination {
-    // width: 100%;
-    height: 20px;
+    width: 100%;
+    height: 52px;
+    font-family: PingFang SC;
+    font-size: 14px;
+    color: #a1a6b2;
+    padding: 16px 24px;
+    box-sizing: border-box;
     display: flex;
     flex-wrap: wrap;
-    font-family: PingFang SC;
-    font-size: 13px;
-    color: #606266;
+    justify-content: center;
+    background-color: #f9f9f9;
     .total {
         line-height: 20px;
         margin-right: 2px;
@@ -167,6 +171,11 @@ export default {
             box-sizing: border-box;
             padding: 0 3px 0 3px;
             vertical-align: top;
+        }
+        i {
+            font-size: 18px;
+            color: #a1a682;
+            line-height: 20px;
         }
         ul {
             display: inline-block;
@@ -199,16 +208,9 @@ export default {
         }
     }
     .skip-btn {
-        line-height: 18px;
-        height: 18px;
-        // background-color: #409eff;
-        border-radius: 4px;
-        color: #fff;
-        box-sizing: border-box;
-        padding: 0 3px;
+        line-height: 20px;
         margin-left: 10px;
-        font-size: 10px;
-        transform: translate3d(0, 2px, 0);
+        font-size: 14px;
     }
 }
 </style>

@@ -28,20 +28,17 @@ export default {
         // this.needStatusbarOverlay = true;
         // self.$$("html").addClass("isandroid");
         document.addEventListener("deviceready", function(){
-            console.log(`device.version: ${device.version}, isandroid: ${self.$device.android}`);
+            console.log('device:', device, `,isandroid: ${self.$device.android}`);
+            self.isAndroid = device.platform && device.platform.toLowerCase() === 'android';
             setTimeout(() => {
                 if (self.isAndroid && device.version >= '5.0') {
                     console.log(`device setoverlay`);
                     window.StatusBar && window.StatusBar.overlaysWebView(true);
                     self.needStatusbarOverlay = true;
                     self.$$("html").addClass("isandroid");
-                    if (tokenUtil.get()) {
-                        window.StatusBar && window.StatusBar.styleDefault();
-                    }
+                    // window.StatusBar && window.StatusBar.styleDefault();
                 }else if (!self.isAndroid) {
-                    if (tokenUtil.get()) {
-                        window.StatusBar && window.StatusBar.styleDefault();
-                    }
+                    // window.StatusBar && window.StatusBar.styleDefault();
                 }
             })
             window.addEventListener('keyboardDidShow', (ev) => {

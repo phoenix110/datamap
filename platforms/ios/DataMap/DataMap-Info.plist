@@ -5,7 +5,7 @@
     <key>CFBundleDevelopmentRegion</key>
     <string>English</string>
     <key>CFBundleDisplayName</key>
-    <string>DataMap</string>
+    <string>Datamap</string>
     <key>CFBundleExecutable</key>
     <string>${EXECUTABLE_NAME}</string>
     <key>CFBundleIcons</key>
@@ -13,7 +13,7 @@
     <key>CFBundleIcons~ipad</key>
     <dict/>
     <key>CFBundleIdentifier</key>
-    <string>com.maicedata.datamap</string>
+    <string>com.metrodata.datamap</string>
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
     <key>CFBundleName</key>
@@ -54,5 +54,45 @@
     </dict>
     <key>UILaunchStoryboardName</key>
     <string>CDVLaunchScreen</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>This app requires access to your location when the screen is on and the app is displayed.</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>This app requires constant access to your location in order to track your position, even when the screen is off or the app is in the background.</string>
+    <key>AMapApiKey</key>
+    <string>a31e39761afd0d35b15c3a3e5198ac77</string>
+    <key>NSCameraUsageDescription</key>
+    <string>This app requires camera access to function properly.</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>This app requires photo library access to function properly.</string>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+      <string>weixin</string>
+      <string>wechat</string>
+    </array>
+    <key>CFBundleURLTypes</key>
+    <array>
+      <dict>
+        <key>CFBundleURLName</key>
+        <string>weixin</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>wx876af3b122110aed</string>
+        </array>
+      </dict>
+    </array>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>This app requires constant access to your location in order to track your position, even when the screen is off or the app is in the background.</string>
+    <key>NSBluetoothPeripheralUsageDescription</key>
+    <string>This app requires bluetooth access to function properly.</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>This app requires microphone access to function properly.</string>
+    <key>NSContactsUsageDescription</key>
+    <string>This app requires contacts access to function properly.</string>
+    <key>NSCalendarsUsageDescription</key>
+    <string>This app requires calendar access to function properly.</string>
+    <key>NSRemindersUsageDescription</key>
+    <string>This app requires reminders access to function properly.</string>
+    <key>NSMotionUsageDescription</key>
+    <string>This app requires motion detection access to function properly.</string>
   </dict>
 </plist>

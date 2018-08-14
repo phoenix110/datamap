@@ -1,3 +1,3 @@
 export default [
-    {text: "数据上传采用地图服务器"},
+    {text: "大版本更新" },
 ]

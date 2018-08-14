@@ -1,17 +1,18 @@
 <template>
     <div :class="isDetailPg ? 'data-bar-isDetailPg' : 'data-bar-style'">
-        <div :class="['chart_loading', isDetailPg ? 'detailpg-loading' : '']" v-if="!loaded">
+        <div :class="['chart_loading', isDetailPg ? 'detailpg-loading' : '']" v-if="!loaded || !viewLoaded">
             <f7-preloader></f7-preloader>
-            <span class="ml5">努力加载中...</span>
+            <!-- <span class="ml5">努力加载中...</span> -->
         </div>
         <div class="content-area" v-else>
             <div class="chart-title">{{cData.title}}</div>
             <div class="detail-info" v-if="isDetailPg">
                 <div class="filter-area">
-                    <ul>
-                        <li v-for="(value, i1) in filterList" :key="i1">{{value.name}}、</li>
-                        <li class="open">展开</li>
-                    </ul>
+                    <FiltersPanel 
+                        :geoFilters="geoFiltersBf" 
+                        :title="chartTitle"
+                        :filterParams="filterParams">
+                    </FiltersPanel>
                 </div>
                 <div class="tooltip-info" v-if="legendInfo.list.length != 0">
                     <div class="tip-name">{{legendInfo.name}}</div>
@@ -33,18 +34,22 @@
 import echarts from 'echarts';
 import size from 'lodash/size';
 import map from 'lodash/map';
+import filter from 'lodash/filter';
 import forEach from 'lodash/forEach';
 import round from 'lodash/round';
 import orderBy from 'lodash/orderBy';
 import keys from 'lodash/keys';
 import cloneDeep from 'lodash/cloneDeep';
 import pick from 'lodash/pick';
+import bus from '../../../../js/utils/bus';
+import FiltersPanel from '../../commons/filters-panel.vue';
 import {defaultExtraValues, editYAxiNumberMenus} from '../../../../js/constants/Constants.js';
 import {h_type_text,formulaWordMap, new_chart_colors as chart_colors, sort_desc,sort_asc, defaultChartExtraValues, barMaxWidth, connectNulls,
-defaultSortedFilter, sorted_filter_all, sorted_filter_percent_percent,
-rotate_type_right, rotate_type_left, maxItemLen, defaultLegendStyle, lineOnlyPoint,
+defaultSortedFilter, sorted_filter_all, sorted_filter_percent_percent, rotate_type_right, rotate_type_left, maxItemLen, defaultLegendStyle,
+lineOnlyPoint, chart_theme_color_map, chart_theme_color_len as colorLen, chart_theme_default, paths
 } from '../../../../js/constants/Constants'
 import fetchUtil from '../../../../js/utils/fetchUtil';
+import queryUrl from '../../../../js/utils/queryUrl';
 import {model_api_url, headers, paramFake} from '../../../../js/constants/ApiConfig'
 const hide = {show: false};
 const stackMap = {
@@ -52,15 +57,20 @@ const stackMap = {
     per_stack: '纵轴百分比堆积'
 }
 const fixedColor = "#000000"; //由于设计稿背景白色，这里设置成固定值
-const colorLen = size(chart_colors);
+//const colorLen = size(chart_colors);
 const xKeys = keys(defaultChartExtraValues.xAxisExt);
 const yKeys = keys(defaultChartExtraValues.yAxisExt);
 const nyKeys = keys(defaultChartExtraValues.newYAxisExt);
+
 export default {
     name: "DataBar",
-    props: ['cData', 'isDetailPg'],
+    props: ['cData', 'isDetailPg', 'geoFilters', 'chartTitle', 'viewLoaded'],
+    components: {
+        FiltersPanel,
+    },
     data(){
         return {
+            geoFiltersBf: {},
             initOptions: {
                 renderer: 'canvas',
             },
@@ -70,24 +80,78 @@ export default {
             legendInfo: {name: '', list: []},
             loaded: false,
             preViewExtraValue: {},
+            filterParams: {},
+            alreadyListener: false,
         }
     },
     created(){
-        size(this.cData) ? this.getFillData() : null;
+        if(size(this.cData)){
+            let {cData, geoFilters, alreadyListener, isDetailPg} = this;
+            this.geoFiltersBf = geoFilters;
+            this.getFillData();
+            this.filterParams = {
+                source: cData.source,
+                object_type: cData.object_type,
+                geometry_type: cData.geometry_type,
+            }
+            //增加筛选器监听事件
+            if(!alreadyListener && size(geoFilters.filters) && isDetailPg){
+                this.alreadyListener = true;
+                bus.$on("graphFilterListener", this.refreshGraphFilter)
+            }
+        }
     },
     watch: {
         cData: function(){
-            size(this.cData) ? this.getFillData() : null;
+            if(size(this.cData)){
+                let {cData, geoFilters, alreadyListener, isDetailPg} = this;
+                if(alreadyListener) return;
+                this.geoFiltersBf = geoFilters;
+                this.getFillData();
+                this.filterParams = {
+                    source: cData.source,
+                    object_type: cData.object_type,
+                    geometry_type: cData.geometry_type,
+                }
+                //增加筛选器监听事件
+                if(!alreadyListener && size(geoFilters.filters) && isDetailPg){
+                    this.alreadyListener = true;
+                    bus.$on("graphFilterListener", this.refreshGraphFilter)
+                }
+            }
+        },
+        viewLoaded: function(){
+            this.$nextTick(() => {
+                this.isDetailPg && this.$refs.bar && this.$refs.bar.$refs.chartWrap.dispatchAction({
+                    type: 'showTip',
+                    seriesIndex: 0,
+                    dataIndex: 0,
+                });
+            })
         }
     },
     methods: {
         getFillData(force_update=false){
-            fetchUtil(`${model_api_url}graph/config?force_update=${force_update}${paramFake}`,
-            {method: 'POST', headers, body: JSON.stringify(this.cData)})
+            let {cData: {name, filters}, geoFiltersBf} = this;
+            fetchUtil(queryUrl(`${model_api_url}graph/config`, {
+                force_update,
+                vault_name: name,
+            }),{method: 'POST', headers, body: JSON.stringify(geoFiltersBf)})
             .then(resp=>{
                 this.getOption(resp.result);
                 this.loaded = true;
+                this.$nextTick(() => {
+                    this.$refs.bar && this.$refs.bar.$refs.chartWrap.dispatchAction({
+                        type: 'showTip',
+                        seriesIndex: 0,
+                        dataIndex: 0,
+                    });
+                })
             })
+        },
+        refreshGraphFilter(filters){
+            this.geoFiltersBf.filters = filters;
+            this.getFillData();
         },
         getExtraVal(key) {
             let val = this.preViewExtraValue;
@@ -101,9 +165,9 @@ export default {
             let formatter = [1, ''], w = 10000, k = 1000;
             // 第一个超过1w或有一半数字超过1w
             if (value >= w || Math.ceil(splitNum * 0.5) * value >= w) {
-                formatter = [w, 'w'];
+                formatter = [w, 'W'];
             } else if (value >= k || Math.ceil(splitNum * 0.5) * value >= k) {
-                formatter = [k, 'k'];
+                formatter = [k, 'K'];
             }
             return formatter;
         },
@@ -131,11 +195,10 @@ export default {
             let yAlis = yAxis_m[0].items;
             let newYAlis = [], newYAliType = '', showNewYAli = false;
             showNewYAli = size(yAxis_m) >= 2;
-            if (showNewYAli) {
+            if (showNewYAli){
                 newYAlis = yAxis_m[1].items;
                 newYAliType = yAxis_m[1].chart_type;
             }
-
             // 编辑属性
             let legendExt = this.getExtraVal('legendExt');
             // 新追加属性
@@ -211,18 +274,6 @@ export default {
                     return isContinue;
                 })
                 if (isContinue) {
-                    // xData = map((chartData[0] || {}).result, (_,key)=>key);
-                    // // 数量太多不建议用户自定义顺序
-                    // let xLen = size(xData);
-                    // if (xAlis[0].h_type === h_type_text && xLen <= maxItemLen) {
-                    //     defaultExtraValue.xAxisExt.sort = xData;// 默认值
-                    //     let oldSort = {}, i = xLen;
-                    //     forEach(xAxisExt.sort, (it,index)=>{oldSort[it] = index + 1});
-                    //     xData = orderBy(xData, it=>(oldSort[it] || ++i), 'asc');
-                    //     xAxisExt_new.sort = xData; // 预览值
-                    //     saveExtraValue.xAxisExt.sort = xData; // 存储值
-                    // }
-
                     xData = map((chartData[0] || {}).result, (_,key)=>key);
                     let isText = xAlis[0].h_type === h_type_text;
                     if (isText) {
@@ -261,6 +312,7 @@ export default {
                 isXYRotate = isPosLeft || isPosRight;
             let indexKey = isXYRotate ? 'xAxisIndex' : 'yAxisIndex';
             let labelPosition = isPosRight ? 'left' : isPosLeft ? 'right' : 'top';
+            let chartColors = chart_theme_color_map[legendExt.theme||chart_theme_default];//如果没有主题色，则取默认色
 
             forEach(yItems, ([type, list], i)=>{
                 let totals = {}, stack, allTotal = 0,  isFirst = i === 0,
@@ -305,6 +357,18 @@ export default {
                     color = yExt.colorMap || {};
                 let isLine = type === 'line';
                 let legendMap = {};
+
+                if (type === 'bar' || isLine) {//最大最小值设置
+                    yExt_new.showMaxMin = true;
+                    yExt_new.maxVal = yExt.maxVal;
+                    yExt_default.maxVal = undefined;
+                    yExt_save.maxVal = yExt.maxVal;
+
+                    yExt_new.minVal = yExt.minVal;
+                    yExt_default.minVal = undefined;
+                    yExt_save.minVal = yExt.minVal;
+                }
+
                 if (isLine && tipItem) {
                     let cIndex = 0, name = object_type;
                     if (i) {
@@ -312,7 +376,7 @@ export default {
                         name = `${object_type}-${i}`;
                     }
                     let nc = color[name];
-                    nc ? (colorMapTmp[name] = nc) : (nc = chart_colors[cIndex % colorLen] || chart_colors[0]);
+                    nc ? (colorMapTmp[name] = nc) : (nc = chartColors[cIndex % colorLen] || chartColors[0]);
                     colors.push(nc);
                     let nameVal = alias[name];
                     nameVal ? (aliasMapTmp[name] = nameVal) : (nameVal = name);
@@ -350,11 +414,6 @@ export default {
                     })
                 } else {
                     if (isLine) {
-                        // yExt_new.seriesType = 'line';
-                        // let lineVal = yExt.connectNulls || connectNulls;
-                        // yExt_new.connectNulls = lineVal; // 预览值
-                        // yExt_default.connectNulls = connectNulls;// 默认值
-                        // yExt_save.connectNulls = lineVal;// 存储值
                         yExt_new.seriesType = 'line';
                         let lineVal = yExt.connectNulls || connectNulls;
                         let lineVal2 = yExt.lineOnlyPoint || lineOnlyPoint;
@@ -411,23 +470,11 @@ export default {
                         let cIndex = isFirst ? j : (yItems[i-1][0] === 'line' ?
                             1 + j : size(yItems[i - 1][1]) + j);
                         let nc = color[name];
-                        nc ? (colorMapTmp[name] = nc) : (nc = chart_colors[cIndex % colorLen] || chart_colors[0]);
-                        // colors.push(nc);
-                        if (!isLine && !yExt.notGradient) {
-                            let ct = nc.split(',');
-                            ct.pop();
-                            let lg = isPosRight ? [0,0,1,0] : isPosLeft ? [1,0,0,0] : [0,0,0,1];
-                            colors.push(new echarts.graphic.LinearGradient(...lg, [
-                                {offset: 0.1, color: [...ct, '1)'].join(',')},
-                                {offset: 0.5, color: [...ct, '0.5)'].join(',')},
-                                {offset: 1.0, color: [...ct, '0.1)'].join(',')}
-                            ]));
-                        } else {
-                            colors.push(nc);
-                        }
+                        nc ? (colorMapTmp[name] = nc) : (nc = chartColors  &&  chartColors[cIndex % colorLen] || chart_colors[0]);
+                        colors.push(nc); //移动端不需要渐变
                         let nameVal = alias[name];
                         nameVal ? (aliasMapTmp[name] = nameVal) : (nameVal = name);
-                        legend.push({name: nameVal, icon: 'circle'});
+                        legend.push({name: nameVal, icon: 'rect'});
                         legendMap[name] = {color: nc, alias: nameVal};
 
                         let sd = {
@@ -483,18 +530,20 @@ export default {
                 type: 'value',
                 splitLine: {
                     show: yAxisExt_new.show,
-                    lineStyle: {color: '#39456A', type: 'dashed', opacity: 0.4}
+                    lineStyle: {
+                        color: '#EFEFEF',
+                    }
                 },
                 axisLine: hide,
                 axisTick: hide,
                 triggerEvent: true,
-                splitNumber: yAxisExt_new.splitNum,
+                splitNumber: isDetailPg ? yAxisExt_new.splitNum : 3,
                 inverse: isPosRight,
                 axisLabel:{
                     show: yAxisExt_new.show,
-                    fontSize: yAxisExt_new.fontSize,
-                    // color: yAxisExt_new.fontColor,
-                    color: "rgb(170, 170, 170)",
+                    fontSize: "10px",
+                    fontWeight: 300,
+                    color: "#A3A3A3"
                 }
             };
             if (yAxisExt_new.shortLabel) {
@@ -505,7 +554,14 @@ export default {
                     index && (value = `${value / model}${unit}`);
                     return value;
                 }
-            }
+            };
+
+            if (yAxisExt_new.showMaxMin) {
+                let {maxVal, minVal} = yAxisExt_new;
+                maxVal && (yOpt.max = maxVal);
+                minVal && (yOpt.min = minVal);
+            };
+
             yAxis.push(yOpt);
 
             if (showNewYAli) {
@@ -514,18 +570,20 @@ export default {
                     type: 'value',
                     splitLine: {
                         show: newYAxisExt_new.show,
-                        lineStyle: {color: '#39456A', type: 'dashed', opacity: 0.4}
+                        lineStyle: {
+                            color: '#EFEFEF',
+                        }
                     },
                     axisLine: hide,
                     axisTick: hide,
                     triggerEvent: true,
-                    splitNumber: newYAxisExt_new.splitNum,
+                    splitNumber: isDetailPg ? newYAxisExt_new.splitNum : 3,
                     inverse: isPosRight,
                     axisLabel:{
                         show: newYAxisExt_new.show,
-                        fontSize: newYAxisExt_new.fontSize,
-                        // color: newYAxisExt_new.fontColor,
-                        color: "rgb(170, 170, 170)",
+                        fontSize: "10px",
+                        fontWeight: 700,
+                        color: "#A3A3A3",
                     }
                 };
                 if (newYAxisExt_new.shortLabel) {
@@ -536,7 +594,13 @@ export default {
                         index && (value = `${value / model}${unit}`);
                         return value;
                     }
-                }
+                };
+
+                if (newYAxisExt_new.showMaxMin) {
+                    let {maxVal, minVal} = newYAxisExt_new;
+                    maxVal && (newYOpt.max = maxVal);
+                    minVal && (newYOpt.min = minVal);
+                };
                 yAxis.push(newYOpt);
             }
 
@@ -545,18 +609,19 @@ export default {
                 data: xData,
                 axisLine: {
                     show: xAxisExt_new.show,
-                    lineStyle: {color: '#39456A'}
+                    lineStyle: {
+                        color: '#DFE5E3'
+                    }
                 },
                 axisTick: hide,
                 triggerEvent: true,
                 axisLabel: {
                     show: xAxisExt_new.show,
                     interval: xAxisExt_new.showAllTick ? 0 : 'auto',
-                    rotate: xAxisExt_new.fontRotate,
                     textStyle: {
-                        color: "rgb(170, 170, 170)",
-                        // color: xAxisExt_new.fontColor,
-                        fontSize: xAxisExt_new.fontSize,
+                        fontSize: "10px",
+                        fontWeight: 700,
+                        color: "#A3A3A3",
                     }
                 }
             };
@@ -568,24 +633,21 @@ export default {
             let options = {
                 color: colors,
                 animationDuration: 1000,
-                textStyle: {
-                    color: '#AFB8DB',
-                    fontSize: 12
-                },
                 yAxis: isXYRotate ? xAxis : yAxis,
                 xAxis: isXYRotate ? yAxis : xAxis,
                 series: sData,
             };
             options.grid = {
                 containLabel: true,
-                right: 30,
-                left: 20,
-                top: 10,
-                bottom: isDetailPg && legendExt.show ? 40 : 20,
+                right: 15,
+                left: 15,
+                top: 5,
+                bottom: !isDetailPg && legend.length > 1 ? 30 : 10,
             };
             options.tooltip = isDetailPg ? {
                 trigger: tipItem ? 'item' : 'axis',
                 confine: true,
+                // alwaysShowContent: true,
                 axisPointer: {
                     handle: {
                         show: true,
@@ -597,12 +659,12 @@ export default {
                             return {
                                 "name": value.seriesName,
                                 "value": value.data.length === 0 ? 0 : value.data,
-                                "color": value.seriesType === 'line' ? value.color : (!!value.color.colorStops ? value.color.colorStops[0].color : '#555555'),
+                                "color": value.seriesType === 'line' ? value.color : (!!value.color.colorStops ? value.color.colorStops[0].color : value.color),
                             }
                         });
                         if (!_this.legendInfo.name) {
                             setTimeout(() => {
-                                _this.$refs.bar.resize();
+                                _this.$refs.bar && _this.$refs.bar.resize();
                             })
                         }
                         _this.legendInfo = {
@@ -619,7 +681,7 @@ export default {
                         })
                         if (!_this.legendInfo.name) {
                             setTimeout(() => {
-                                _this.$refs.bar.resize();
+                                _this.$refs.bar && _this.$refs.bar.resize();
                             })
                         }
                         _this.legendInfo = {
@@ -630,28 +692,23 @@ export default {
                     }
                 }
             } : hide;
-            options.textStyle = {
-                // color: '#AFB8DB',
-                color: "rgb(170, 170, 170)",
-                fontSize: 12
-            };
-            if(isDetailPg && legendExt.show){
+            if(!isDetailPg && legend.length > 1){
                 options.legend = {
                     animation: true,
                     data: legend,
                     orient: 'horizontal',
-                    bottom: 12,
+                    bottom: 0,
                     type: 'scroll',
-                    itemWidth: 10,
-                    itemHeight: 10,
-                    pageButtonGap: 10,
-                    padding: [0, 20, 0, 20],
+                    itemWidth: 6,
+                    itemHeight: 6,
+                    padding: [0, 20, 6, 20],
                     left: 'center',
-                    textStyle: {color: "rgb(170, 170, 170)"},
-                    pageTextStyle: {color: "rgb(170, 170, 170)"},
-                    pageIconColor: {color: "rgb(170, 170, 170)"},
-                    // left: 30,
-                    // right: 30,
+                    textStyle: {
+                        lineHeight: 16,
+                        color: "#6D737A",
+                        fontSize: "14px",
+                        fontWeight: 300,
+                    },
                 }
             }
             else{
@@ -669,21 +726,19 @@ export default {
     background-color: #FFFFFF;
     font-family: PingFang SC;
     .chart-title {
-        line-height: 18px;
-        font-size: 15px;
+        line-height: 20px;
+        font-size: 14px;
         font-weight: 700;
-        color: #4A4D51;
+        color: #38393C;
         box-sizing: border-box;
-        padding: 25px 21px;
-        word-wrap: break-word;
-        width: 100%;
+        padding: 24px 21px;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
     }
     .chart-draw {
         width: 100%;
-        height: 232px;
+        height: 182px;
         position: relative;
         .echarts_bar{
             width: 100%;
@@ -693,13 +748,13 @@ export default {
     .chart_loading {
         width: 100%;
         height: 100%;
-        min-height: 300px;
+        min-height: 250px;
     }
 }
 .data-bar-isDetailPg {
     width: 100%;
     height: 100%;
-    background-color: #FFFFFF;
+    background-color: #fcfcfc;
     position: relative;
     .detailpg-loading {
         position: absolute;
@@ -730,36 +785,24 @@ export default {
         .detail-info {
             width: 100%;
             .filter-area {
-                display: none;
                 width: 100%;
-                box-sizing: border-box;
-                padding-left: 24px;
-                ul {
-                    width: 100%;
-                    line-height: 39px;
-                    padding: 0;
-                    margin: 0;
-                    border-bottom: solid 1px #EAECEF;
-                    li {
-                        list-style-type: none;
-                        display: inline-block;
-                        font-size: 12px;
-                        color: #6D737A;
-                    }
-                    .open {
-                        color: #007AFF;
-                    }
-                }
             }
             .tooltip-info {
                 width: 100%;
+                height: 123px;
                 box-sizing: border-box;
-                padding: 14px 24px 0px 24px;
+                padding: 14px 0 0;
                 font-family: PingFang SC;
                 .tip-name {
-                    font-size: 14px;
-                    color: #555555;
-                    word-wrap: break-word;
+                    font-size: 16px;
+                    color: #57585C;
+                    font-weight: 600;
+                    max-width: 12em;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    box-sizing: border-box;
+                    padding-left: 16px;
                 }
                 .number-info {
                     width: 100%;
@@ -767,14 +810,13 @@ export default {
                     display: inline-flex;
                     flex-wrap: nowrap;
                     .ele-info {
-                        // height: 87px;
                         display: inline-table;
-                        // margin-right: 20px;
                         box-sizing: border-box;
-                        padding-right: 20px;
+                        padding-left: 16px;
                         .num {
                             line-height: 67px;
                             font-size: 48px;
+                            font-weight: 300;
                             white-space: nowrap;
                         }
                         .title {

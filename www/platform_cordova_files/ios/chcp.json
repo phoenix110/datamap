@@ -1,0 +1,9 @@
+{
+  "name": "datamap_app",
+  "update": "start",
+  "content_url": "http://127.0.0.1",
+  "ios_identifier": "com.metrodata.datamap",
+  "android_identifier": "com.metrodata.datamap",
+  "min_native_interface": 1,
+  "release": "2018.08.07-11.19.04"
+}

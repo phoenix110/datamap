@@ -89,6 +89,7 @@ export default {
             li {
                 list-style-type: none;
                 font-size: 12px;
+                color: #6b7280;
             }
         }
     }

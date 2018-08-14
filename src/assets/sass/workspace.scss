@@ -42,8 +42,8 @@
     margin: 0;
     padding: 12px 0 15px 0;
     background: rgba(255,255,255,0.95);
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    // border-bottom-left-radius: 10px;
+    // border-bottom-right-radius: 10px;
     ul {
       background: transparent;
       height: 265px;
@@ -65,7 +65,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
       display: inline-block;
-      padding-left: 60px;
+      padding-left: 64px;
     }
     .item-inner:after {
       display: none;
@@ -157,5 +157,57 @@
     height: 100%;
 }
 .ios .ws_nodata .ptr-no-navbar {
-    height: calc(100%+44px);
+    height: calc(100% + 44px);
 }
+
+//设置工作台地图卡片图表样式
+.icon-polygon {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid;
+  vertical-align: center;
+  display: inline-block;
+}
+//设置工作台地图详情页面提示框样式
+.map-card-toast {
+  top: 60px !important;
+  width: 50%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  border-radius: 4px;
+  position: absolute;
+}
+//设置工作台picker样式
+.picker {
+  .toolbar::before {
+    display: none !important;
+  }
+  .toolbar {
+    background-color: #E0E0E0;
+  }
+  .picker-columns {
+    font-size: 18px;
+    .picker-center-highlight {
+      &:before, &:after {
+        background-color: #DDDDDD;
+      }
+    }
+  }
+}
+.sheet-modal {
+  background-color: #fff !important;
+}
+//筛选器字段筛选搜索框样式
+.filter-field-search {
+  .searchbar-inner {
+    .searchbar-input-wrap {
+      input {
+        background-color: #fff;
+      }
+    }
+  }
+}
+
+

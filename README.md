@@ -13,8 +13,7 @@
     cordova run android`
 
 - 开发环境
-
-    `cordova run browser --deploy=dev -- --lr
+   `cordova run browser --deploy=dev -- --lr
     cordova run ios --deploy=dev
     cordova run android --deploy=dev`
 

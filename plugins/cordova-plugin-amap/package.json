@@ -1,0 +1,65 @@
+{
+  "_from": "cordova-plugin-amap@^2.0.0",
+  "_id": "cordova-plugin-amap@2.0.0",
+  "_inBundle": false,
+  "_integrity": "sha512-+a015l7xQSq1t0zZgAtBmtWcXF99RmRSAwADbLmwfSHe12Z7gZl1FV5lvwTQa/T71cudwffQJyRGLxSRBZarDQ==",
+  "_location": "/cordova-plugin-amap",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "cordova-plugin-amap@^2.0.0",
+    "name": "cordova-plugin-amap",
+    "escapedName": "cordova-plugin-amap",
+    "rawSpec": "^2.0.0",
+    "saveSpec": null,
+    "fetchSpec": "^2.0.0"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-amap/-/cordova-plugin-amap-2.0.0.tgz",
+  "_shasum": "1aa2044b1e85d0ed5cbf10c8b4f2fa4d1e9c2615",
+  "_spec": "cordova-plugin-amap@^2.0.0",
+  "_where": "/Users/hzzcc/projects/datamap_app",
+  "author": {
+    "name": "Silverbase-FE"
+  },
+  "bugs": {
+    "url": "https://github.com/Silverbase-FE/cordova-plugin-amap/issues"
+  },
+  "bundleDependencies": false,
+  "cordova": {
+    "id": "cordova-plugin-amap",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "deprecated": false,
+  "description": "Amap Maps native SDK for Android and iOS",
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=7.1.0"
+    }
+  ],
+  "homepage": "https://github.com/Silverbase-FE/cordova-plugin-amap",
+  "keywords": [
+    "amap",
+    "maps",
+    "geo",
+    "amap maps",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "license": "Apache 2.0",
+  "name": "cordova-plugin-amap",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Silverbase-FE/cordova-plugin-amap.git"
+  },
+  "version": "2.0.0"
+}

@@ -12,7 +12,7 @@ describe('GaugePanel.vue', () => {
   it('should render correct contents', () => {
     const wrapper = mount(GaugePanel)
     vm = wrapper.vm
-    expect(wrapper.find(".chart_loading").text()).to.equal("努力加载中...");
+    expect(wrapper.find('.chart_loading').exists()).to.be.true;
   })
 
 })

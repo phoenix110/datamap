@@ -65,7 +65,7 @@ describe('Workspace.vue', () => {
   })
 
   it('click page title should show select panel', () => {
-    const wrapper = mount(Workspace)
+    const wrapper = shallowMount(Workspace)
     vm = wrapper.vm
     wrapper.vm.getPageList([{title: 'pagename', id: 0}])
     const navTitle = wrapper.find('.workspace-nav-tit')
@@ -74,12 +74,10 @@ describe('Workspace.vue', () => {
     const searchBtn = wrapper.find('.searchbar-enable');
     searchBtn.trigger('click');
     expect(vm.open).to.be.false;
-    searchBtn.trigger('click');
-    expect(vm.open).to.be.false;
   })
 
   it('trigger methods should has no error', () => {
-    const wrapper = mount(Workspace)
+    const wrapper = shallowMount(Workspace)
     vm = wrapper.vm
     vm.onRefresh();
     expect(vm.reRandom).to.not.equal('');

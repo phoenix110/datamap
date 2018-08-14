@@ -1,19 +1,26 @@
 <template>
     <div :class="['hot-table-style', isDetailPg ? 'hot-table-isDetailPg' : 'not-detail-pg']">
-        <div :class="['chart_loading', isDetailPg ? 'detailpg-loading' : '']" v-if="!loaded">
+        <div :class="['chart_loading', isDetailPg ? 'detailpg-loading' : '']" v-if="!loaded || !viewLoaded">
             <f7-preloader></f7-preloader>
-            <span class="ml5">努力加载中...</span>
+            <!-- <span class="ml5">努力加载中...</span> -->
         </div>
         <div class="content-area" v-else>
             <div class="table-title">{{title}}</div>
+            <div class="filter-area" v-if="isDetailPg">
+                <FiltersPanel 
+                    :geoFilters="geoFilters" 
+                    :title="chartTitle" 
+                    :filterParams="filterParams">
+                </FiltersPanel>
+            </div>
             <div class="table-content">
                 <div class="table-scroll">
                     <table border="0" cellspacing="0" cellpadding="0">
                         <tr class="table-header">
                             <th v-for="(vh, i) in header" :key="i">{{vh}}</th>
                         </tr>
-                        <tr class="table-content" v-for="(vd, j) in tableData" :key="j">
-                            <td v-for="(value, m) in vd" :key="m" :style="{'backgroundColor': tab_bgColor[displayStart+j][m]}">{{value}}</td>
+                        <tr class="table-content-tr" v-for="(vd, j) in tableData" :key="j">
+                            <td v-for="(value, m) in vd" :key="m" :style="{'backgroundColor': tab_bgColor[displayStart+j][m], textAlign: checkType(value) ? 'right' : 'left'}">{{value}}</td>
                         </tr>
                     </table>
                 </div>
@@ -27,14 +34,17 @@
 <script>
 import {interpolateRgbBasis} from 'd3-interpolate'
 import fetchUtil from '../../../../js/utils/fetchUtil';
+import queryUrl from '../../../../js/utils/queryUrl';
 import cloneDeep from 'lodash/cloneDeep';
 import size from 'lodash/size';
+import bus from '../../../../js/utils/bus';
+import FiltersPanel from '../../commons/filters-panel.vue';
 import {tableLoadTableRef , disPlayTabelDefaultVal, example_colors, defaultHotTableExtraValues} from '../../../../js/constants/Constants.js';
 import {model_api_url, headers, paramFake} from '../../../../js/constants/ApiConfig';
 import MdPagination from '../../commons/md-pagination.vue';
 export default {
     name: "hot-table",
-    props: ['cData', 'isDetailPg'],
+    props: ['cData', 'isDetailPg', 'geoFilters', 'chartTitle', 'viewLoaded'],
     data(){
         return {
             header: [],
@@ -52,15 +62,47 @@ export default {
             reverseHotColor: false,
             hotColors: "",
             loaded: false,
+            filterParams: {},
+            geoFiltersBf: {},
+            alreadyListener: false,
         }
     },
     created(){
-        size(this.cData) ? this.getFillData() : null;
+        if(size(this.cData)){
+            let {cData, geoFilters, alreadyListener, isDetailPg} = this;
+            this.geoFiltersBf = geoFilters;
+            this.getFillData();
+            this.filterParams = {
+                source: cData.source,
+                object_type: cData.object_type,
+                geometry_type: cData.geometry_type,
+            }
+            //增加筛选器监听事件
+            if(!alreadyListener && size(geoFilters.filters) && isDetailPg){
+                this.alreadyListener = true;
+                bus.$on("graphFilterListener", this.refreshGraphFilter)
+            }
+        }
     },
     watch: {
         cData: function(){
             this.title = this.cData.title;
-            size(this.cData) ? this.getFillData() : null;
+            if(size(this.cData)){
+                let {cData, geoFilters, alreadyListener, isDetailPg} = this;
+                if(alreadyListener) return;
+                this.geoFiltersBf = geoFilters;
+                this.getFillData();
+                this.filterParams = {
+                    source: cData.source,
+                    object_type: cData.object_type,
+                    geometry_type: cData.geometry_type,
+                }
+                //增加筛选器监听事件
+                if(!alreadyListener && size(geoFilters.filters) && isDetailPg){
+                    this.alreadyListener = true;
+                    bus.$on("graphFilterListener", this.refreshGraphFilter)
+                }
+            }
         }
     },
     methods: {
@@ -77,12 +119,20 @@ export default {
             });
         },
         getFillData(force_update=false){
-            fetchUtil(`${model_api_url}graph/config?force_update=${force_update}${paramFake}`,
-            {method: 'POST', headers, body: JSON.stringify(this.cData)})
+            let {cData: {name, filters}, geoFiltersBf} = this;
+            fetchUtil(queryUrl(`${model_api_url}graph/config`, {
+                force_update,
+                vault_name: name,
+            }),
+            {method: 'POST', headers, body: JSON.stringify(geoFiltersBf)})
             .then(resp=>{
-                this.setTableData(resp.result);
+                this.setTableData(resp.result || {});
                 this.loaded = true;
             })
+        },
+        refreshGraphFilter(filters){
+            this.geoFiltersBf.filters = filters;
+            this.getFillData();
         },
         getExtraVal(val, key) {
             return cloneDeep(val && val[key] ? val[key] :
@@ -136,16 +186,31 @@ export default {
             else{
                 return 'rgba(FF, FF, FF, FF)';
             }
-        }
+        },
+        checkType(value){
+            let reg = /^[0-9]+.?[0-9]*$/;
+            return reg.test(value);
+        },
     },
     components: {
         MdPagination,
+        FiltersPanel,
     }
 }
 </script>
 <style lang="scss" scoped>
 .not-detail-pg {
     max-height: 500px;
+    min-height: 100px;
+    th, td {
+        max-width: 150px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    .chart_loading {
+        min-height: 100px;
+    }
 }
 .hot-table-style {
     width: 100%;
@@ -162,44 +227,47 @@ export default {
     .table-content{
         width: 100%;
         box-sizing: border-box;
-        padding: 20px 38px 32px 38px;
+        padding: 16px 24px;
+        color: #000;
         .table-scroll {
             width: 100%;
             max-height: 409px;
             overflow: auto;
+            -webkit-overflow-scrolling: touch;
             table{
                 min-width: 100%;
-                text-align: center;
                 font-family: PingFang SC;
                 font-size: 12px;
-                color: #555555;
                 .table-header {
-                    background-color: #F8F8FA;
+                    color: #a1a6b2;
+                    font-size: 12px;
+                    font-weight: 500;
+                    background-color: #f9f9f9;
                     th {
                         box-sizing: border-box;
-                        padding: 12px 17px;
-                        // line-height: 42px;
-                        border: solid 1px #C8C7CC;
+                        padding: 0 8px;
+                        line-height: 32px;
+                        border: solid 1px #efefef;
                         border-right: none;
                         white-space: nowrap;
                     }
                     &>th:last-child {
-                        border-right: solid 1px #C8C7CC;
+                        border-right: solid 1px #efefef;
                     }
                 }
-                .table-content {
+                .table-content-tr {
+                    font-size: 10px;
+                    font-weight: 400;
                     td {
-                        border-left: solid 1px #C8C7CC;
+                        border: solid 1px #efefef;
+                        border-top: none;
+                        border-right: none;
                         box-sizing: border-box;
-                        padding: 2px 0;
+                        line-height: 24px;
+                        padding: 0 8px;
                     }
                     &>td:last-child {
-                        border-right: solid 1px #C8C7CC;
-                    }
-                }
-                &>.table-content:last-child {
-                    td {
-                        border-bottom: solid 1px #C8C7CC;
+                        border-right: solid 1px #efefef;
                     }
                 }
             }
@@ -222,16 +290,24 @@ export default {
             padding: 0;
             flex: 1;
             overflow: auto;
+            -webkit-overflow-scrolling: touch;
             .table-scroll {
                 max-height: none;
                 height: 100%;
+                table .table-content-tr {
+                    font-size: 14px;
+                    font-weight: 300;
+                    td {
+                        line-height: 20px;
+                        padding: 8px 8px;
+                        max-width: 200px;
+                    }
+                }
             }
         }
         .pagination-area {
             width: 100%;
-            height: 30px;
             box-sizing: border-box;
-            padding-top: 5px;
             display: flex;
             flex-direction: row;
             justify-content: center;

@@ -1,43 +1,50 @@
 <template>
     <div class="map-draw-panel">
-        <div class="map-draw-load">
+        <div class="map-draw-canvas" v-show="upStep === 1">
             <div class="map-draw-btn">
                 <f7-link @click.prevent="onPageSkip('/my_data/')" :animate="false">
-                    <div class="mydraw-skip-btn">{{!!dataPg ? dataPg.name : '选择数据'}}</div>
+                    <div class="mydraw-skip-btn">{{!!dataPg.name ? dataPg.name : '选择数据'}}</div>
                 </f7-link>
             </div>
             <div class="map-draw-board">
-                <mapPanelCom ref="upload_map" :mapProps="mapProps" :loading="false"></mapPanelCom>
+                <MapPanelCom ref="upload_map" :mapProps="mapProps" :loading="false"></MapPanelCom>
             </div>
-            <div class="marker-clear" @click="clearMap">清除</div>
         </div>
+        <f7-link class="map-draw-location" @click="onClickLocation">
+            <f7-preloader v-if="positionLoading"></f7-preloader>
+            <i v-else class="f7-icons position-icon">navigation_fill</i>
+        </f7-link>
         <div class="map-draw-progress">
             <div class="progress-panel-operate">
-                <div class="cancel-btn">{{cancelText}}</div>
-                <div class="next-btn">{{nextText}}</div>
-            </div>
-            <div class="separate-line"></div>
-            <div class="progress-panel-display">
-                <div class="panel-explain-text">{{explainText}}</div>
-                <div class="panel-process">
-                </div>
+                <div class="cancel-btn" @click="onClickStepBtn('cancel')">{{cancelText}}</div>
+                <div class="next-btn" @click="onClickStepBtn('next')">{{nextText}}</div>
             </div>
         </div>
     </div>
 </template>
 <script>
+import MapPanelCom from '../commons/map-panel-comp.vue';
+import UploadInputPanel from './normal/upload-input-panel.vue';
+import {
+    checkAllContains, wrapMultiPolygon, getTransCoords,
+    wrapMultiPolyline, geoJsonToEwkb
+} from '../../../js/utils/amapUtil';
+import {model_api_url, map_api_url, headers} from '../../../js/constants/ApiConfig';
+import Steps from './normal/steps.vue';
 import coordtransform from 'coordtransform';
-import bus from '../../../js/utils/bus'
+import bus from '../../../js/utils/bus';
 import cloneDeep from 'lodash/cloneDeep';
 import size from 'lodash/size';
-import mapPanelCom from '../commons/map-panel-comp.vue';
+import {paths} from '../../../js/constants/Constants.js'
+
 let AMap = window.AMap;
+const type_polygon = 'polygon';
 export default {
     name: "MapDrawPanel",
     props: ["mapProps"],
     data(){
         return {
-            dataPg: null,
+            dataPg: {},
             cancelText: "撤销",
             nextText: "下一步",
             explainText: "拖动地图改变位置，单机地图在地图上绘制区域",
@@ -50,55 +57,100 @@ export default {
             deleteMarkerObj: {},
             initialLnglat: [],
             addMarkerIndex: 0,
+            upStep: 1,
+            stepList: [{value: 1, text: '绘制地块'}, {value: 2, text: '填写信息'}],
+            draw_type: 'polygon',
+            pointMarker: {},
+            positionLoading: false,
         }
     },
     components: {
-        mapPanelCom,
+        MapPanelCom,
+        UploadInputPanel,
+        Steps,
     },
     mounted(){
-        bus.$on('selectUploadData', this.selectUploadData)
+        bus.$on('dataListPageBackDraw', this.dataListPageBack);
         this.mapIns = this.getMapInstance();
+        let zoomCenter = this.$f7Route.context ? this.$f7Route.context.zoomCenter : {};
+        if(size(zoomCenter)){
+            this.mapIns.setZoomAndCenter(zoomCenter.zoom, zoomCenter.center);
+        }
+        this.dataPg = this.$f7Route.context ? this.$f7Route.context.item : {};
         size(this.mapIns) && this.mapIns.on('click', (e) => {
-            this.addMarkerIndex += 1;
-            let text = this.addMarkerIndex === 1 ? "起点" : "锚点" + (this.addMarkerIndex-1);
+            let {dataPg: {geo_type}} = this;
+            if(geo_type === 'point'){
+                this.clearMap();
+                this.addMarkerIndex = 1;
+            }
+            else{
+                this.addMarkerIndex += 1;
+            }
+            // let text = this.addMarkerIndex === 1 ? "起点" : "锚点" + (this.addMarkerIndex-1);
+            let text = this.addMarkerIndex === 1 ? "起点" : "锚点";
             this.addMarker(e, text);
         });
+    },
+    beforeDestroy() {
+        bus.$off('dataListPageBackDraw', this.dataListPageBack);
     },
     methods: {
         clearMap(){
             this.mapIns.clearMap();
             this.polygonArr = [];
             this.polygon = {};
+            this.pointMarker = {};
             this.polygonLnglatList = [];
             this.addMarkerIndex = 0;
         },
         onPageSkip(path){
-            this.$f7Router.navigate(path, {context: {prePage: 'MapDrawPanel'}});
+            this.$f7Router.navigate(path, {context: {prePage: 'MapDrawPanel', item: this.dataPg}});
         },
         getMapInstance(){
             return this.$refs.upload_map.map;
         },
-        selectUploadData(item){
+        dataListPageBack(item){
+            let {dataPg: {geo_type}} = this;
+            if(geo_type != item.geo_type){
+                this.clearMap();
+            }
             this.dataPg = item;
         },
         drawPolygon(){
-            let {polygonArr, mapIns, polygon} = this;
-            if(polygon){
+            let {polygonArr, mapIns, polygon, dataPg: {geo_type}} = this;
+            if(size(polygon)){
                 mapIns.remove(polygon);
             }
-            polygon = new AMap.Polygon({
-                path: polygonArr,//设置多边形边界路径
-                strokeColor: "#007AFF", //线颜色
-                strokeOpacity: 0.9, //线透明度
-                strokeWeight: 2,    //线宽
-                fillColor: "#1791fc", //填充色
-                fillOpacity: 0.35//填充透明度
-            });
+            if(geo_type === 'polygon'){
+                polygon = new AMap.Polygon({
+                    path: polygonArr,//设置多边形边界路径
+                    strokeColor: "#007AFF", //线颜色
+                    strokeOpacity: 0.9, //线透明度
+                    strokeWeight: 2,    //线宽
+                    fillColor: "#1791fc", //填充色
+                    fillOpacity: 0.35//填充透明度
+                });
+            }
+            else if(geo_type === 'line'){
+                 polygon = new AMap.Polyline({
+                    path: polygonArr,          //设置线覆盖物路径
+                    strokeColor: "#007AFF", //线颜色
+                    strokeOpacity: 1,       //线透明度
+                    strokeWeight: 2,        //线宽
+                    strokeStyle: "solid",   //线样式
+                    strokeDasharray: [10, 5] //补充线样式
+                });
+            }
             mapIns.add(polygon);
-            this.polygon = polygon;
+            // if(geo_type === "polygon" && polygonArr.length < 3){
+            //     this.polygon = {};
+            // }
+            // else{
+                this.polygon = polygon;
+            // }
         },
         addMarker(e, markerText){
-            let lnglat = [e.lnglat.lng, e.lnglat.lat];
+            let {dataPg: {geo_type}} = this, lnglat = [e.lnglat.lng, e.lnglat.lat];
             let marker = new AMap.Marker({
                 position: lnglat,
                 draggable: true,
@@ -122,6 +174,9 @@ export default {
                 this.drawPolygon();
             }
             this.lnglatList[`${lnglat[0]}${lnglat[1]}`] = '';
+            if(geo_type === 'point'){
+                this.pointMarker = marker;
+            }
         },
         updatePolygonLnglat(target, lnglat){
             let {lnglatList, polygonLnglatList} = this, newLnglat = [target.lng, target.lat];
@@ -202,7 +257,148 @@ export default {
             this.polygonLnglatList = polygonLnglatList;
             this.polygonArr = cloneDeep(this.polygonLnglatList);
             this.drawPolygon();
-        }
+        },
+        onClickStepBtn(type){
+            let {polygon, pointMarker, dataPg, polygonArr, dataPg: {geo_type}} = this;
+            if(type === "next"){
+                let up_object = geo_type === 'point' ? pointMarker : polygon;
+                // if(size(up_object)){
+                //     this.$f7Router.navigate(paths.upload_edit, {context: {up_object: up_object, tableInfo: dataPg}});
+                // }
+                // else{
+                //     this.$f7.dialog.alert("请将数据绘制完成!", "提示")
+                // }
+                if(!size(up_object) || (geo_type === 'polygon' && polygonArr.length < 3)){
+                    this.$f7.dialog.alert("请将数据绘制完成!", "提示")
+                }
+                else{
+                    this.$f7Router.navigate(paths.upload_edit, {context: {up_object: up_object, tableInfo: dataPg}});
+                }
+            }
+            else if(type === "cancel"){
+                this.clearMap();
+            }
+        },
+        listenUploadInput(){},
+        getCurrentPosition(mapIns) {
+            let _this = this;
+            AMapPlugin.getCurrentPosition(function (data) {
+                // alert('data'+JSON.stringify(data));
+                let {latitude, longitude} = data;
+                _this.customMarker && mapIns.remove(_this.customMarker);
+                _this.customMarker = new AMap.Marker({
+                    position: new AMap.LngLat(longitude, latitude),
+                    offset: new AMap.Pixel(-12, -12),//相对于基点的位置
+                    icon: new AMap.Icon({  //复杂图标
+                        size: new AMap.Size(23, 23),//图标大小
+                        image: "http://webapi.amap.com/theme/v1.3/markers/n/loc.png", //大图地址
+                    })
+                });
+                mapIns.add(_this.customMarker);
+                mapIns.setZoomAndCenter(15, [longitude, latitude]);
+                _this.positionLoading = false;
+            }, function (err) {
+                // alert("err" + JSON.stringify(err));
+                _this.$f7.dialog.alert('地图定位失败!', '提示');
+                _this.positionLoading = false;
+            })
+        },
+
+        switchToSettings() {
+            let {platform} = device;
+            if (platform && platform.toLowerCase() === 'ios') {
+                cordova.plugins.diagnostic.switchToSettings();
+            }else{
+                cordova.plugins.diagnostic.switchToLocationSettings();
+            }
+        },
+
+        chargeLocationSetting(mapIns) {
+            let {platform} = device;
+            let _this = this;
+            console.log('chargeLocationSetting:,,,,,,');
+            let chechFunc = (platform && platform.toLowerCase() === 'android') ? 
+                cordova.plugins.diagnostic.isGpsLocationEnabled : 
+                cordova.plugins.diagnostic.isLocationEnabled;
+            chechFunc((status) => {
+                console.log('status:'+status);
+                if (status) {
+                    _this.getCurrentPosition(mapIns);
+                }else {
+                    _this.showGoSettingDialog();
+                }
+            }, (err) => {
+                console.log('err:'+JSON.stringify(err));
+                _this.showGoSettingDialog();
+            });
+        },
+
+        showGoSettingDialog() {
+            let _this = this;
+            let dialog = this.$f7.dialog.create({
+                title: '提示',
+                content: "需要开启存储及定位权限, 请到系统设置界面手动开启!",
+                buttons: [
+                    {text:"取消"},{
+                    text:"设置", onClick: () => {
+                        _this.switchToSettings();
+                    }
+                }]
+            })
+            dialog.open();
+            _this.positionLoading = false;
+        },
+
+        onClickLocation(){
+            let {mapIns, positionLoading} = this;
+            let _this = this;
+            if(positionLoading) return;
+            let {platform} = device;
+            if (platform && platform.toLowerCase() === 'ios') {
+                _this.positionLoading = true;
+                _this.chargeLocationSetting(mapIns);
+            }else if (platform && platform.toLowerCase() === 'android'){
+                _this.positionLoading = true;
+                var permissions = cordova.plugins.permissions;
+                permissions.requestPermissions([permissions.WRITE_EXTERNAL_STORAGE, permissions.ACCESS_COARSE_LOCATION], function(status) {
+                    console.log('status: '+JSON.stringify(status));
+                    if (status.hasPermission) {
+                        _this.chargeLocationSetting(mapIns);
+                    }else {
+                        _this.showGoSettingDialog();
+                    }
+                }, (err) => {
+                    console.log('status err: '+JSON.stringify(status));
+                    _this.showGoSettingDialog();
+                })
+            }else {
+                _this.positionLoading = true;
+                mapIns.plugin('AMap.Geolocation', function () {
+                    _this.geolocation && mapIns.removeControl(_this.geolocation);     
+                    let geolocation = new AMap.Geolocation({
+                        enableHighAccuracy: true,
+                        timeout: 10000,
+                        maximumAge: 0,
+                        convert: true,
+                        showButton: false,
+                        showMarker: true,
+                        showCircle: true,
+                        panToLocation: true,
+                        zoomToAccuracy:true,
+                    });
+                    mapIns.addControl(geolocation);
+                    geolocation.getCurrentPosition();
+                    AMap.event.addListener(geolocation, 'complete', () => {
+                        _this.positionLoading = false;
+                    });//返回定位信息
+                    AMap.event.addListener(geolocation, 'error', () => {
+                        _this.$f7.dialog.alert('地图定位失败!', '提示');
+                        _this.positionLoading = false;
+                    });
+                     _this.geolocation = geolocation;
+                });
+            }
+        },
     }
 }
 </script>
@@ -212,27 +408,29 @@ export default {
     height: 100%;
     display: flex;
     flex-direction: column;
-    .map-draw-load {
+    position: relative;
+    .map-draw-canvas {
         flex: 1;
         position: relative;
         .map-draw-btn {
             .link{
                 position: absolute;
-                top: 25px;
-                left: 13px;
+                top: 16px;
+                left: 8px;
                 .mydraw-skip-btn{
                     line-height: 36px;
                     text-align: center;
-                    background-color: white;
+                    background-color: #fcfcfc;
+                    opacity: 90%;
                     border-radius: 8px;
                     font-size: 14px;
                     font-weight: 700;
                     font-family: PingFang SC;
-                    color: #006CFB;
-                    box-shadow: 0 2px 4px rgb(155, 155, 155);
+                    color: #007aff;
+                    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
                     box-sizing: border-box;
-                    padding: 0 15px;
-                    max-width: 8em;
+                    padding: 0 24px;
+                    max-width: 270px;
                     overflow: hidden;
                     white-space: nowrap;
                     text-overflow: ellipsis;
@@ -240,7 +438,11 @@ export default {
             }
         }
         .map-draw-board {
-            height: 100%;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
         }
         .marker-clear {
             position: absolute;
@@ -254,10 +456,33 @@ export default {
             color: #fff;
         }
     }
+    .map-draw-input {
+        flex: 1;
+        overflow-y: auto;
+    }
+    .map-draw-location {
+        position: absolute;
+        right: 16px;
+        bottom: 61px;
+        width: 56px;
+        height: 56px;
+        box-sizing: border-box;
+        padding: 20px;
+        background-color: #fff;
+        opacity: 85%;
+        border-radius: 50%;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        .position-icon {
+            font-size: 20px;
+            color: #007aff;
+        }
+    }
     .map-draw-progress {
         width: 100%;
-        height: 189px;
+        // height: 189px;
+        height: 45px;
         background-color: #fff;
+        border-top: 1px solid #dfdfdf;
         .progress-panel-operate {
             width: 100%;
             height: 44px;
@@ -280,7 +505,8 @@ export default {
             width: 100%;
             height: 144px;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
             box-sizing: border-box;
             padding-top: 22px;
             .panel-explain-text {
@@ -291,6 +517,10 @@ export default {
             }
             .panel-process {
                 margin-top: 18px;
+                width: 247px;
+                height: 41px;
+                box-sizing: border-box;
+                padding-left: 50px;
             }
         }
     }

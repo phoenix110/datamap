@@ -67,7 +67,7 @@ describe('Login.vue', () => {
     vm = wrapper.vm;
     triggerEvent(document, 'deviceready');
     triggerEvent(document, 'backbutton');
-    expect(wrapper.find('.login_btn').text()).to.equal('登录平台');
+    expect(wrapper.find('.login_btn').text()).to.equal('账号登陆');
   })
   it('trigger deviceready backbutton 返回主页', () => {
     const wrapper = mount(Login,{
@@ -87,7 +87,7 @@ describe('Login.vue', () => {
     }
     triggerEvent(document, 'deviceready');
     triggerEvent(document, 'backbutton');
-    expect(wrapper.find('.login_btn').text()).to.equal('登录平台');
+    expect(wrapper.find('.login_btn').text()).to.equal('账号登陆');
   })
   it('登陆界面时不提示401', done => {
     const wrapper = mount(Login, {
@@ -278,7 +278,7 @@ describe('Login.vue', () => {
         fail && fail();
       }
     }
-    wrapper.find('.wxlogin_btn').trigger("click");
+    wrapper.find('.wxlogin_btn .list-button').trigger("click");
     expect(wrapper.find('.toast.toast-center.modal-in').text()).to.equal("微信是否安装校验失败!");
   })
   it('微信登陆检查微信未安装', () => {
@@ -297,7 +297,7 @@ describe('Login.vue', () => {
             succ && succ(false);
       }
     }
-    wrapper.find('.wxlogin_btn').trigger("click");
+    wrapper.find('.wxlogin_btn .list-button').trigger("click");
     expect(wrapper.find('.toast.toast-center.modal-in').text()).to.equal("微信未安装!");
   })
   it('微信登陆微信授权失败', () => {
@@ -319,7 +319,7 @@ describe('Login.vue', () => {
         fail && fail();
       }
     }
-    wrapper.find('.wxlogin_btn').trigger("click");
+    wrapper.find('.wxlogin_btn .list-button').trigger("click");
     expect(wrapper.find('.toast.toast-center.modal-in').text()).to.equal("授权失败!");
   })
   it('微信登陆微信授权api请求出错', done => {
@@ -341,7 +341,7 @@ describe('Login.vue', () => {
         succ && succ({code: 'xxx'});
       }
     }
-    wrapper.find('.wxlogin_btn').trigger("click");
+    wrapper.find('.wxlogin_btn .list-button').trigger("click");
     setTimeout(() => {
       expect(wrapper.find('.toast.toast-center.modal-in').text()).to.equal("请求出错!");
       done()
@@ -366,7 +366,7 @@ describe('Login.vue', () => {
         succ && succ({code: '234'});
       }
     }
-    wrapper.find('.wxlogin_btn').trigger("click");
+    wrapper.find('.wxlogin_btn .list-button').trigger("click");
     setTimeout(() => {
       expect(wrapper.find('.toast.toast-center.modal-in').text()).to.equal("微信登陆失败");
       done()
@@ -393,7 +393,7 @@ describe('Login.vue', () => {
         succ && succ({code: '123'});
       }
     }
-    wrapper.find('.wxlogin_btn').trigger("click");
+    wrapper.find('.wxlogin_btn .list-button').trigger("click");
     setTimeout(() => {
       let customer = userUtil.get();
       expect(customer.name).to.equal("mdt");

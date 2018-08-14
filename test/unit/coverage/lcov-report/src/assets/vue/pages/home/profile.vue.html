@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">75% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>3/3</span>
+        <span class='fraction'>3/4</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -35,13 +35,13 @@
         <span class='fraction'>1/1</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">75% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>3/3</span>
+        <span class='fraction'>3/4</span>
       </div>
     </div>
   </div>
-  <div class='status-line high'></div>
+  <div class='status-line medium'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -88,7 +88,31 @@
 43
 44
 45
-46</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -129,28 +153,52 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
-    &lt;f7-page navbar-through toolbar-fixed tabs&gt;
+    &lt;f7-page navbar-through toolbar-through tabs&gt;
         &lt;f7-navbar&gt;
-            &lt;f7-nav-left&gt;
-                &lt;f7-link class="panel-open" open-panel="left" icon="fa fa-bars"&gt;&lt;/f7-link&gt;
-            &lt;/f7-nav-left&gt;
             &lt;div class="title"&gt;我的&lt;/div&gt;
             &lt;f7-nav-right&gt;
             &lt;/f7-nav-right&gt;
         &lt;/f7-navbar&gt;
+        &lt;div class="user_card"&gt;
+            &lt;img class="user_card_pic" :src="user.profile||'./static/images/D.svg'"/&gt;
+            &lt;div class="user_card_name"&gt;{{user.name}}&lt;/div&gt;
+        &lt;/div&gt;
         &lt;f7-list&gt;
 			&lt;f7-list-group v-if="user.name"&gt;
-				&lt;f7-list-item&gt;ID: {{user.id}}&lt;/f7-list-item&gt;
-			  &lt;f7-list-item&gt;用户名: {{user.name}}&lt;/f7-list-item&gt;
+			    &lt;f7-list-item title="关于" link="#" @click.native="gotoAboutPage"&gt;&lt;/f7-list-item&gt;
 			&lt;/f7-list-group&gt;
 		&lt;/f7-list&gt;
         &lt;f7-list&gt;
-            &lt;f7-list-item class="logout_btn" @click="logout"&gt;登出&lt;/f7-list-item&gt;
+            &lt;f7-list-item class="center_btn" @click="logout"&gt;退出登录&lt;/f7-list-item&gt;
         &lt;/f7-list&gt;
         &lt;main-tabbar :selected-index="3"&gt;&lt;/main-tabbar&gt;
     &lt;/f7-page&gt;
@@ -174,17 +222,41 @@
             logout() {
                 this.$f7router.navigate(paths.login, {reloadCurrent:true});
                 tokenUtil.set("");
+            },
+            gotoAboutPage() {
+<span class="cstat-no" title="statement not covered" >                this.$f7router.navigate(paths.abou</span>t);
             }
         }
     };
 &lt;/script&gt;
+&lt;style lang="scss" scoped&gt;
+.user_card {
+    height: 76px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    background: #fff;
+    margin-top: 24px;
+    .user_card_pic {
+        width: 45px;
+        height: 45px;
+        margin: 0 16px;
+        border-radius: 50%;
+    }
+    .user_card_name {
+        font-size: 18px;
+        // font-weight: 500;
+    }
+}
+&lt;/style&gt;
 &nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat Jun 09 2018 20:38:52 GMT+0800 (CST)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Aug 09 2018 15:45:34 GMT+0800 (CST)
 </div>
 </div>
 <script src="../../../../../prettify.js"></script>

@@ -1,20 +1,27 @@
 <template>
     <div :class="['display-table-style', isDetailPg ? 'display-table-isDetailPg' : 'not-detail-pg']">
-        <div :class="['chart_loading', isDetailPg ? 'detailpg-loading' : '']" v-if="!loaded">
+        <div :class="['chart_loading', isDetailPg ? 'detailpg-loading' : '']" v-if="!loaded || !viewLoaded">
             <f7-preloader></f7-preloader>
-            <span class="ml5">努力加载中...</span>
+            <!-- <span class="ml5">努力加载中...</span> -->
         </div>
         <div class="content-area" v-else>
             <div class="table-title">{{title}}</div>
+            <div class="filter-area"  v-if="isDetailPg">
+                <FiltersPanel 
+                    :geoFilters="geoFilters" 
+                    :title="chartTitle" 
+                    :filterParams="filterParams">
+                </FiltersPanel>
+            </div>
             <div class="table-content">
                 <div class="table-scroll">
-                    <table border="0" cellspacing="0" cellpadding="0">
+                    <table border="0" cellspacing="0" cellpadding="0" >
                         <tr class="table-header">
                             <th v-for="(vh, i) in header" :key="i">{{vh}}</th>
                         </tr>
-                        <tr class="table-content" v-for="(vd, j) in tableData" :key="j">
-                            <td>{{rowHeader[(currentPage-1)*pageSize+j]}}</td>
-                            <td v-for="(value, m) in vd" :key="m">{{!!value ? value : ''}}</td>
+                        <tr class="table-content-tr" v-for="(vd, j) in tableData" :key="j">
+                            <td v-if="!!rowHeader.length">{{rowHeader[(currentPage-1)*pageSize+j]}}</td>
+                            <td v-for="(value, m) in vd" :key="m" :style="{textAlign: checkType(value) ? 'right' : 'left'}">{{!!value ? value : ''}}</td>
                         </tr>
                     </table>
                 </div>
@@ -27,13 +34,17 @@
 </template>
 <script>
 import size from 'lodash/size';
+import cloneDeep from 'lodash/cloneDeep';
+import bus from '../../../../js/utils/bus';
 import MdPagination from '../../commons/md-pagination.vue';
 import fetchUtil from '../../../../js/utils/fetchUtil';
-import {tableLoadTableRef , disPlayTabelDefaultVal} from '../../../../js/constants/Constants.js';
+import queryUrl from '../../../../js/utils/queryUrl';
+import FiltersPanel from '../../commons/filters-panel.vue';
+import {tableLoadTableRef , disPlayTabelDefaultVal, defaultDisPlayExtraValues} from '../../../../js/constants/Constants.js';
 import {model_api_url, headers, paramFake} from '../../../../js/constants/ApiConfig'
 export default {
     name: "display-table",
-    props: ['cData', 'isDetailPg'],
+    props: ['cData', 'isDetailPg', 'geoFilters', 'chartTitle', 'viewLoaded'],
     data(){
         return {
             rowHeader: [],
@@ -46,15 +57,47 @@ export default {
             pageSize: this.isDetailPg ? 20 : 10,
             total: 0,
             loaded: false,
+            filterParams: {},
+            geoFiltersBf: {},
+            alreadyListener: false,
         }
     },
     created(){
-        size(this.cData) ? this.getFillData() : null;
+        if(size(this.cData)){
+            let {cData, geoFilters, alreadyListener, isDetailPg} = this;
+            this.geoFiltersBf = geoFilters;
+            this.getFillData();
+            this.filterParams = {
+                source: cData.source,
+                object_type: cData.object_type,
+                geometry_type: cData.geometry_type,
+            }
+            //增加筛选器监听事件
+            if(!alreadyListener && size(geoFilters.filters) && isDetailPg){
+                this.alreadyListener = true;
+                bus.$on("graphFilterListener", this.refreshGraphFilter)
+            }
+        }
     },
     watch: {
         cData: function(){
             this.title = this.cData.title;
-            size(this.cData) ? this.getFillData() : null;
+            if(size(this.cData)){
+                let {cData, geoFilters, alreadyListener, isDetailPg} = this;
+                if(alreadyListener) return;
+                this.geoFiltersBf = geoFilters;
+                this.getFillData();
+                this.filterParams = {
+                    source: cData.source,
+                    object_type: cData.object_type,
+                    geometry_type: cData.geometry_type,
+                }
+                //增加筛选器监听事件
+                if(!alreadyListener && size(geoFilters.filters) && isDetailPg){
+                    this.alreadyListener = true;
+                    bus.$on("graphFilterListener", this.refreshGraphFilter)
+                }
+            }
         }
     },
     methods: {
@@ -67,16 +110,31 @@ export default {
             this.tableData = this.allDataList.slice(start, end);
         },
         getFillData(force_update=false){
-            fetchUtil(`${model_api_url}graph/config?force_update=${force_update}${paramFake}`,
-            {method: 'POST', headers, body: JSON.stringify(this.cData)})
+            let {cData: {name, filters}, geoFiltersBf} = this;
+            fetchUtil(queryUrl(`${model_api_url}graph/config`, {
+                force_update,
+                vault_name: name,
+            }),
+            {method: 'POST', headers, body: JSON.stringify(geoFiltersBf)})
             .then(resp=>{
-                this.setTableData(resp.result);
+                this.setTableData(resp.result || {});
                 this.loaded = true;
             })
         },
+        refreshGraphFilter(filters){
+            this.geoFiltersBf.filters = filters;
+            this.getFillData();
+        },
+        getExtraVal(key, extra) {
+            return cloneDeep(extra && extra[key] ? extra[key] :
+                defaultDisPlayExtraValues[key]);
+        },
         setTableData(chartData){
             let {yAxis, extra} = this.cData;
-            let { titleVal} = extra || disPlayTabelDefaultVal;
+            let { titleVal} = extra || disPlayTabelDefaultVal || {};
+            titleVal = titleVal || {};
+            let yAxisExt = this.getExtraVal('yAxisExt', extra || {});
+            let {hideIndex} = yAxisExt;
             let items = (yAxis[0] || {items: []}).items;
             let header = items.map(it=>titleVal[it.h_value] || it.h_value);
             let hMap = {}, rowHeader = [];
@@ -84,28 +142,42 @@ export default {
                 hMap[it] = index;
             });
             let list = chartData['values'].map((it, i)=>{
-                rowHeader.push(i+1);
+                if(!hideIndex)
+                    rowHeader.push(i+1);
                 return items.map(im=>it[hMap[im.key]]);
             });
-            let hList = ['序号'];
+            let hList = hideIndex ? [] : ['序号'];
             this.header = hList.concat(header);
-            // this.tableData = list;
             this.total = list.length;
             this.rowHeader = rowHeader;
             this.tableData = list.slice(0, this.pageSize);
             this.allDataList = this.isDetailPg ? list : [];
             return;
-            // return [header, list, rowHeader];
+        },
+        checkType(value){
+            let reg = /^[0-9]+.?[0-9]*$/;
+            return reg.test(value);
         }
     },
     components: {
         MdPagination,
+        FiltersPanel,
     }
 }
 </script>
 <style lang="scss" scoped>
 .not-detail-pg {
     max-height: 500px;
+    min-height: 100px;
+    th, td {
+        max-width: 150px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    .chart_loading {
+        min-height: 100px;
+    }
 }
 .display-table-style {
     width: 100%;
@@ -122,45 +194,55 @@ export default {
     .table-content{
         width: 100%;
         box-sizing: border-box;
-        padding: 20px 38px 32px 38px;
+        padding: 16px 24px;
         .table-scroll {
             width: 100%;
             max-height: 409px;
             overflow: auto;
+            -webkit-overflow-scrolling: touch;
             table{
                 min-width: 100%;
-                text-align: center;
                 font-family: PingFang SC;
                 font-size: 12px;
                 color: #555555;
                 .table-header {
-                    background-color: #F8F8FA;
+                    color: #a1a6b2;
+                    font-size: 12px;
+                    font-weight: 500;
+                    background-color: #f9f9f9;
                     th {
                         box-sizing: border-box;
-                        padding: 12px 17px;
-                        // line-height: 42px;
-                        border: solid 1px #C8C7CC;
+                        padding: 0 8px;
+                        line-height: 32px;
+                        border: solid 1px #efefef;
                         border-right: none;
                         white-space: nowrap;
                     }
                     &>th:last-child {
-                        border-right: solid 1px #C8C7CC;
+                        border-right: solid 1px #efefef;
                     }
                 }
-                .table-content {
+                .table-content-tr {
+                    color: #8b909e;
+                    font-size: 10px;
+                    font-weight: 400;
                     td {
-                        border-left: solid 1px #C8C7CC;
+                        border: solid 1px #efefef;
+                        border-top: none;
+                        border-right: none;
                         box-sizing: border-box;
-                        padding: 2px 0;
+                        line-height: 24px;
+                        padding: 0 8px;
                     }
                     &>td:last-child {
-                        border-right: solid 1px #C8C7CC;
+                        border-right: solid 1px #efefef;
+                    }
+                    &>td:first-child {
+                        text-align: right;
                     }
                 }
-                &>.table-content:last-child {
-                    td {
-                        border-bottom: solid 1px #C8C7CC;
-                    }
+                &>.table-content-tr:nth-of-type(odd) {
+                    background-color: #f7f7f9;
                 }
             }
         }
@@ -169,6 +251,7 @@ export default {
 .display-table-isDetailPg {
     width: 100%;
     height: 100%;
+    background-color: #fff;
     position: relative;
     .content-area{
         width: 100%;
@@ -182,20 +265,38 @@ export default {
             padding: 0;
             flex: 1;
             overflow: auto;
+            -webkit-overflow-scrolling: touch;
             .table-scroll {
                 max-height: none;
                 height: 100%;
+                table .table-content-tr {
+                    color: #5b5d65;
+                    font-size: 14px;
+                    font-weight: 300;
+                    td {
+                        line-height: 20px;
+                        padding: 8px 8px;
+                        max-width: 200px;
+                    }
+                }
             }
         }
         .pagination-area {
             width: 100%;
-            height: 30px;
             box-sizing: border-box;
-            padding-top: 5px;
             display: flex;
             flex-direction: row;
             justify-content: center;
         }
+    }
+    .displayTable-enter, .displayTable-leave-active {
+        height: 0;
+    }
+    .displayTable-enter-to, .displayTable-leave {
+        height: 500px;
+    }
+    .displayTable-enter-active, .displayTable-leave-active {
+        transition: all 3000ms;
     }
     .detailpg-loading {
         position: absolute;

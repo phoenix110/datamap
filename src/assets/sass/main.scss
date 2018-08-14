@@ -2,6 +2,11 @@
 	user-select: none;
 }
 
+body {
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+}
+
 html.no-statusbar .framework7-root {
 	padding-top: 0!important;
 	.statusbar, .custom-statusbar {
@@ -30,6 +35,15 @@ html.isandroid .framework7-root {
 
 input {
 	user-select: element !important;
+	-webkit-appearance:none
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-transition: "color 99999999s ease-out, background-color 99999999s ease-out";
+    -webkit-transition-delay: 99999999s;
 }
 
 
@@ -190,6 +204,7 @@ input {
 }
 .chart_loading {
 	height: 100%;
+	width: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -225,8 +240,93 @@ input {
 .echarts > div:first-child {
 	height: 100%!important;
 }
-
 //hide amap logo
 .amap-logo,.amap-copyright{
 	display: none!important;
+}
+//set toast style
+.toast {
+	bottom: auto !important;
+	.toast-text {
+		width: 100%;
+		text-align: center;
+	}
+}
+//set main_tab icon
+.icon-workspace, .icon-workspace-choose, .icon-amap, .icon-amap-choose, .icon-data, .icon-data-choose, .icon-mine, .icon-mine-choose {
+	width: 22px;
+	height: 22px;
+	background-size: 100% 100%;
+}
+.icon-workspace {
+	background: url("../../static/images/icon_main_tab/icon_workspace.svg") no-repeat;
+}
+.icon-workspace-choose {
+	background: url("../../static/images/icon_main_tab/icon_workspace_choose.svg") no-repeat;
+}
+.icon-amap {
+	background: url("../../static/images/icon_main_tab/icon_map.svg") no-repeat;
+}
+.icon-amap-choose {
+	background: url("../../static/images/icon_main_tab/icon_map_choose.svg") no-repeat;
+}
+.icon-data {
+	background: url("../../static/images/icon_main_tab/icon_data.svg") no-repeat;
+}
+.icon-data-choose {
+	background: url("../../static/images/icon_main_tab/icon_data_choose.svg") no-repeat;
+}
+.icon-mine {
+	background: url("../../static/images/icon_main_tab/icon_mine.svg") no-repeat;
+}
+.icon-mine-choose {
+	background: url("../../static/images/icon_main_tab/icon_mine_choose.svg") no-repeat;
+}
+
+
+.no-data-content {
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.no-data-content-img {
+	background: url('../../static/images/no_data.svg') no-repeat;
+	background-size: contain; 
+	width: 72px;
+	height: 116px;
+	margin-bottom: 50px;
+}
+
+.ios .navbar:after{
+	transition: all 500ms;
+}
+
+*::-webkit-scrollbar{
+	display:none;
+}
+
+.line-split:after {
+	content: '';
+	position: absolute;
+	top: auto;
+	right: auto;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 1px;
+	background: #bfbfbf;
+	transform-origin: 50% 100%;
+	transform: scale(1, 0.5);
+	box-sizing: border-box;
+}
+
+.center_btn {
+	.item-content {
+		padding-right: 15px;
+	}
+    .item-inner {
+		justify-content: center;
+    }
 }

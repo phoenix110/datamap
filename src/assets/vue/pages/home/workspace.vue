@@ -1,5 +1,9 @@
 <template>
-    <f7-page class="ws_page" :class="{ws_nodata: !hasData}" navbar-through toolbar-fixed tabs  ptr @ptr:refresh="onRefresh" @page:afterin="onPageAfterin" @page:beforeout="onPageBeforeout">
+    <f7-page class="ws_page" :class="{ws_nodata: !hasData}" 
+        navbar-through toolbar-through tabs  
+        ptr @ptr:refresh="onRefresh" 
+        @page:afterin="onPageAfterin" 
+        @page:beforeout="onPageBeforeout">
         <f7-navbar v-if="hasData">
             <f7-nav-left>
                 <f7-link hidden></f7-link>
@@ -38,10 +42,12 @@
                 </f7-list>
             </div>
         </transition>
-        <div class="search-model" v-if="searchpage && searchContent.length === 0"></div>
+        <div class="search-model" v-if="searchpage && searchContent.length === 0" @click="onSearchDisable"></div>
         <div v-show="hasData" :class="searchpage && searchContent.length === 0 ? 'content-noscroll' : ''">
-            <div class="charts-draw-area">
-                <lazyload-echarts class="echart_card" @getPageList="getPageList" :selectPageIndex="selectedPageId" :searchContent="searchContent" :reRandom="reRandom"></lazyload-echarts>
+            <div class="charts-draw-area" @touchmove="onTouchContent">
+                <lazyload-echarts class="echart_card" @getPageList="getPageList"
+                @onClickItem="onClickItem"
+                 :selectPageIndex="selectedPageId" :searchContent="searchContent" :reRandom="reRandom"></lazyload-echarts>
             </div>
         </div>
         <main-tabbar :selected-index="0" v-if="!searchpage"></main-tabbar>
@@ -51,9 +57,9 @@
 import '../../../../assets/sass/workspace.scss'
 import mainTabbar from '../../components/main-tabbar.vue'
 import find from 'lodash/find'
+import size from 'lodash/size'
 import LazyloadEcharts from "src/assets/vue/components/lazyload-echarts";
 import bus from '../../../js/utils/bus'
-import { setTimeout } from 'timers';
 let CachedData = [];
 export default {
     components: {LazyloadEcharts, mainTabbar},
@@ -65,7 +71,7 @@ export default {
             titleShow: false,
             items: [],
             searchpage: false,
-            searchContent: '',
+            searchContent: "",
             searchHistory: [{name: '苏州', key: 'su'}, {name: '杭州', key: 'hang'}],
             searchList: [{name: '上海', key: 'shang'}, {name: '北京', key: 'bei'}],
             reRandom: '',
@@ -83,12 +89,19 @@ export default {
         onSearchDisable(){
             this.searchpage=false;
             this.searchContent = '';
+            this.$f7.searchbar.disable()
         },
         clearSearch(){
             this.searchContent = '';
         },
         onSearchInput(e){
             this.searchContent = e.target.value;
+        },
+        onClickItem(){
+            let {searchContent} = this;
+            if(size(searchContent)){
+                this.$refs.searchbarf7 && this.$refs.searchbarf7.f7Searchbar.toggle();
+            }
         },
         getPageList(list){
             this.pages = list;
@@ -107,6 +120,7 @@ export default {
                         self.$f7.ptr.refresh();
                     }
                 }, 350);
+
                 this.pageContent = self.$$('.ws_page .page-content').length === 1 ? self.$$('.ws_page .page-content')[0] : self.$$('.ws_page .page-content')[1];
                 // 监听这个dom的scroll事件
                 this.pageContent.addEventListener('scroll', self.onScroll, false);
@@ -136,6 +150,9 @@ export default {
         onScroll(e) {
             bus.$emit('page_scroll', e)
         },
+        onTouchContent(){
+            this.$refs.searchbarf7.f7Searchbar.$inputEl.blur();
+        }
     },
 };
 </script>

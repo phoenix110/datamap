@@ -104,5 +104,48 @@
     },
     "is_top_level": true,
     "variables": {}
+  },
+  "cordova-plugin-amap": {
+    "source": {
+      "type": "local",
+      "path": "/Users/hzzcc/projects/datamap_app/node_modules/cordova-plugin-amap"
+    },
+    "is_top_level": true,
+    "variables": {
+      "API_KEY_FOR_ANDROID": "e23582cba3a1680f5bd593d838b0fbdf",
+      "API_KEY_FOR_IOS": "a31e39761afd0d35b15c3a3e5198ac77"
+    }
+  },
+  "cordova-plugin-android-permissions": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-android-permissions"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova.plugins.diagnostic": {
+    "source": {
+      "type": "registry",
+      "id": "cordova.plugins.diagnostic"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-imagepicker": {
+    "source": {
+      "type": "local",
+      "path": "/Users/hzzcc/projects/datamap_app/node_modules/cordova-plugin-imagepicker"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-android-support-gradle-release": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-android-support-gradle-release"
+    },
+    "is_top_level": true,
+    "variables": {}
   }
 }

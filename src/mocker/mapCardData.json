@@ -1,0 +1,33 @@
+{
+    "geometry_type": "point",
+    "object_type": "上海 星巴克",
+    "packageId": "",
+    "source": "customer",
+    "filters": [
+        {
+            "filters": [],
+            "uid": "filter_79c764e0-90ae-11e8-a867-31cdb8091df7",
+            "style": {
+                "color": "#FF4F4F",
+                "icon": {
+                    "content": "\ue900",
+                    "icon": "icon-location_1"
+                }
+            },
+            "data": [
+                {
+                    "id": 13342,
+                    "lnglat": "121.41318132067669,31.234372594795126",
+                    "name": "星巴克(月星·环球港)",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [121.408530476, 31.2362059293]
+                    },
+                    "extra": {
+                        "标签": "餐饮服务;咖啡厅;星巴克咖啡"
+                    }
+                }
+            ]
+        }
+    ]
+}

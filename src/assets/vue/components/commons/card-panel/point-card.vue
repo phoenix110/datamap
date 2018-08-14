@@ -56,8 +56,14 @@ export default {
                     sub = `${min}以上`
                 }
             } else if (column.h_type === h_type_date) {
-                let {start, end} = column;
-                sub = start ? `${start} - ${end}` : '';
+                let {start, end, fast_type, end_is_today} = column;
+                if (end_is_today) {
+                    sub = `${start}至今`;
+                }else if (fast_type) {
+                    sub = fast_type;
+                }else {
+                    sub = start ? `${start} - ${end}` : '';
+                }
             }
             return sub;
         },
@@ -88,13 +94,14 @@ export default {
                 justify-content: space-between;
                 .header-icon {
                     flex: 1;
-                    .icon{
+                    .icomoon{
                         display: inline-block;
                         vertical-align: center;
                         font-size: 12px;
                     }
                     .tag-text {
                         font-size: 12px;
+                        vertical-align: top;
                         display: inline-block;
                     }
                 }

@@ -34,7 +34,7 @@ describe('Profile.vue', () => {
     })
     vm = wrapper.vm
     tokenUtil.set("test");
-    wrapper.find(".logout_btn .item-content").trigger("click")
+    wrapper.find(".center_btn .item-content").trigger("click")
     expect(tokenUtil.get()).to.equal("");
   })
 

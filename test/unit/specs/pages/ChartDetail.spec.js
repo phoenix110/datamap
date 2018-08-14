@@ -1,7 +1,7 @@
 import Vue from 'vue'
-import { destroyVM, createTest, createVue } from '../../util'
-import { mount } from '@vue/test-utils'
-import ChartDetail from 'pages/chart-detail'
+import { destroyVM } from '../../util'
+import { shallowMount } from '@vue/test-utils'
+import ChartDetail from 'pages/workspace/chart-detail'
 
 describe('ChartDetail.vue', () => {
   let vm
@@ -11,7 +11,7 @@ describe('ChartDetail.vue', () => {
   })
 
   it('should render correct contents', () => {
-    const wrapper = mount(ChartDetail, {mocks: {
+    const wrapper = shallowMount(ChartDetail, {mocks: {
         $f7Route: {
             context: {
                 isDetailPg: false,

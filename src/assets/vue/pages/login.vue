@@ -2,19 +2,24 @@
     <f7-page login-screen @page:afterin="onPageAfterin" @page:beforeremove="onPageBeforeout">
         <f7-login-screen-title></f7-login-screen-title>
         <div>
-            <f7-list form>
-                <f7-list-item>
-                    <f7-input type="text" placeholder="用户名" autocapitalize="off" :value="name" @change="onChangeName"></f7-input>
+            <f7-list form autocomplete="off">
+                <f7-list-item class="username">
+                    <span class="username-text">用户名</span>
+                    <f7-input type="text" 
+                        autocapitalize="off" autocomplete="off" 
+                        autocorrect="off" spellcheck="false"
+                        :value="name" @change="onChangeName"
+                        @keyup.native.enter="onLogin"></f7-input>
                 </f7-list-item>
-                <f7-list-item>
-                    <f7-input type="password" placeholder="密码" :value="password" @change="onChangePass"></f7-input>
+                <f7-list-item class="password">
+                    <span class="username-password">密码</span>
+                    <f7-input type="password" :value="password" @change="onChangePass"
+                        @keyup.native.enter="onLogin"></f7-input>
                 </f7-list-item>
             </f7-list>
             <f7-list>
-                <f7-list-button class="login_btn" @click.prevent="onLogin">登录平台</f7-list-button>
-                <div class="text-right pr28i block">
-                    <f7-link class="wxlogin_btn" text="微信登陆" @click.prevent="onWechatLogin"></f7-link>
-                </div>
+                <f7-list-button class="login_btn" @click.prevent="onLogin">账号登陆</f7-list-button>
+                <f7-list-button class="wxlogin_btn" @click.prevent="onWechatLogin">微信登陆</f7-list-button>
             </f7-list>
         </div>
         <div v-if="fetching" class="login-loading-panel" @click.stop.prevent>
@@ -60,6 +65,14 @@ export default {
         bus.$on('401', this.alert401);
         document.removeEventListener("deviceready", this.onDeviceReady);
         document.addEventListener("deviceready", this.onDeviceReady, false);
+        document.addEventListener("keyboardWillShow", () => {
+            this.$$(".login-screen-content")[0].style.paddingTop = "22.4vh";
+        });
+        document.addEventListener("keyboardDidHide", () => {
+            this.$$(".login-screen-content")[0].style.paddingTop = "6.2vh";
+        });
+        if(!!this.$$(".login-screen-content")[0])
+            this.$$(".login-screen-content")[0].style.paddingTop = "22.4vh";
     },
     methods: {
         alert401() {
@@ -94,9 +107,6 @@ export default {
         onPageAfterin() {
             console.log('login page after in');
             this.$$("html").addClass("no-statusbar");
-            if (this.$device.ios && window.StatusBar) {
-                window.StatusBar.styleLightContent();
-            }
             if (tokenUtil.get()) {
                 this.$f7router.navigate(paths.home, {reloadCurrent:true});
                 this.$$("html").removeClass("no-statusbar");
@@ -113,9 +123,6 @@ export default {
             this.toastName && this.toastName.close();
             this.toastPass && this.toastPass.close();
             this.$$("html").removeClass("no-statusbar");
-            if (window.StatusBar) {
-                window.StatusBar.styleDefault();
-            }
             console.log(this.$$("html").attr('class'));
         },
         onChangeName: function (e) {

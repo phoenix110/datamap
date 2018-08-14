@@ -90,7 +90,8 @@
     </platform>
     <custom-preference name="android-manifest/application/activity/@android:theme" value="@style/WelcomeStyle" />
     <allow-navigation href="*" />
-    <preference name="StatusBarStyle" value="blacktranslucent" />
+    <preference name="StatusBarBackgroundColor" value="#ffffff" />
+    <preference name="StatusBarStyle" value="default" />
     <preference name="StatusBarOverlaysWebView" value="true" />
     <preference name="KeyboardResizeMode" value="true" />
     <preference name="xwalkMultipleApk" value="false" />
@@ -118,7 +119,20 @@
         <auto-download enabled="false" />
         <auto-install enabled="false" />
     </chcp>
+    <plugin name="cordova-plugin-amap" spec="localPlugins/cordova-plugin-amap">
+        <variable name="API_KEY_FOR_ANDROID" value="e23582cba3a1680f5bd593d838b0fbdf" />
+        <variable name="API_KEY_FOR_IOS" value="a31e39761afd0d35b15c3a3e5198ac77" />
+    </plugin>
+    <plugin name="cordova-plugin-android-permissions" spec="^1.0.0" />
+    <plugin name="cordova.plugins.diagnostic" spec="^4.0.8" />
+    <plugin name="cordova-plugin-imagepicker" spec="localPlugins/cordova-plugin-ImagePicker">
+        <variable name="CAMERA_USAGE_DESCRIPTION" value=" " />
+        <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value=" " />
+    </plugin>
+    <plugin name="cordova-android-support-gradle-release" spec="^1.4.4">
+        <variable name="ANDROID_SUPPORT_VERSION" value="27.+" />
+    </plugin>
+    <engine name="browser" spec="^5.0.3" />
     <engine name="android" spec="^7.0.0" />
     <engine name="ios" spec="^4.5.4" />
-    <engine name="browser" spec="^5.0.3" />
 </widget>

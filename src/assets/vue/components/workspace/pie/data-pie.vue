@@ -1,28 +1,35 @@
 <template>
     <div :class="isDetailPg ? 'data-pie-detailpg' : 'data-pie-style'">
-        <div :class="['chart_loading', isDetailPg ? 'detailpg-loading' : '']" v-if="!loaded">
+        <div :class="['chart_loading', isDetailPg ? 'detailpg-loading' : '']" v-if="!loaded || !viewLoaded">
             <f7-preloader></f7-preloader>
-            <span class="ml5">努力加载中...</span>
+            <!-- <span class="ml5">努力加载中...</span> -->
         </div>
         <div class="content-area" v-else>
             <div class="pie-title">{{cData.title}}</div>
+            <div class="filter-area" v-if="isDetailPg">
+                <FiltersPanel 
+                    :geoFilters="geoFilters" 
+                    :title="chartTitle" 
+                    :filterParams="filterParams">
+                </FiltersPanel>
+            </div>
             <div class="detail-info" v-if="isDetailPg" :style="{'visibility': dataShow.number.length !=0 ? '' : 'hidden'}">
                 <div class="scroll-area">
                     <div class="info-template">
-                        <div class="number" :style="{'color': dataShow.color}">{{dataShow.number}}（{{dataShow.percent}}）</div>
                         <div class="text">{{dataShow.name}}</div>
+                        <div class="number" :style="{'color': dataShow.color}">{{dataShow.number}}（{{dataShow.percent}}）</div>
                     </div>
                 </div>
             </div>
             <div class="pie-draw">
                 <vchart ref="pie" :options="options" class="echarts_pie" :init-options="initOptions" />
-                <div ref="layer" class="mask-layer" v-if="!isDetailPg"></div>
             </div>
         </div>
     </div>
 </template>
 <script>
 import fetchUtil from '../../../../js/utils/fetchUtil';
+import queryUrl from '../../../../js/utils/queryUrl';
 import size from 'lodash/size';
 import map from 'lodash/map';
 import round from 'lodash/round';
@@ -32,18 +39,25 @@ import orderBy from 'lodash/orderBy';
 import difference from 'lodash/difference';
 import keys from 'lodash/keys';
 import pick from 'lodash/pick';
+import bus from '../../../../js/utils/bus';
+import FiltersPanel from '../../commons/filters-panel.vue';
 import {model_api_url, headers, paramFake} from '../../../../js/constants/ApiConfig';
-import {editYAxiNumberMenus, chart_type_pie_circle, chart_type_pie_rose, defaultPieExtraValues, pie_colors, maxItemLen, sorted_filter_all, sorted_filter_percent_column, formulaWordMap, defaultLegendStyle, 
+import {editYAxiNumberMenus, chart_type_pie_circle, chart_type_pie_rose, defaultPieExtraValues,
+    pie_colors, maxItemLen, sorted_filter_all, sorted_filter_percent_column, formulaWordMap,
+    defaultLegendStyle, chart_theme_color_map, chart_theme_color_len as colorLen, chart_theme_default
 } from '../../../../js/constants/Constants'
-const colorLen = size(pie_colors)
 const hide = {show: false};
 const yKeys = keys(defaultPieExtraValues.yAxisExt);
 const xKeys = keys(defaultPieExtraValues.xAxisExt);
 export default {
     name: "DataPie",
-    props: ['cData', 'isDetailPg'],
+    props: ['cData', 'isDetailPg', 'geoFilters', 'chartTitle', 'viewLoaded'],
+    components: {
+        FiltersPanel,
+    },
     data(){
         return {
+            geoFiltersBf: {},
             initOptions: {
                 renderer: 'canvas',
             },
@@ -56,30 +70,84 @@ export default {
             },
             loaded: false,
             preViewExtraValue: {},
+            filterParams: {},
+            alreadyListener: false,
         }
     },
     created(){
-        size(this.cData) ? this.getFillData() : null;
+        if(size(this.cData)){
+            let {cData, geoFilters, alreadyListener, isDetailPg} = this;
+            this.geoFiltersBf = geoFilters;
+            this.getFillData();
+            this.filterParams = {
+                source: cData.source,
+                object_type: cData.object_type,
+                geometry_type: cData.geometry_type,
+            }
+            //增加筛选器监听事件
+            if(!alreadyListener && size(geoFilters.filters) && isDetailPg){
+                this.alreadyListener = true;
+                bus.$on("graphFilterListener", this.refreshGraphFilter)
+            }
+        }
     },
     watch: {
         cData: function(){
-            size(this.cData) ? this.getFillData() : null;
+            if(size(this.cData)){
+                let {cData, geoFilters, alreadyListener, isDetailPg} = this;
+                if(alreadyListener) return;
+                this.geoFiltersBf = geoFilters;
+                this.getFillData();
+                this.filterParams = {
+                    source: cData.source,
+                    object_type: cData.object_type,
+                    geometry_type: cData.geometry_type,
+                }
+                //增加筛选器监听事件
+                if(!alreadyListener && size(geoFilters.filters) && isDetailPg){
+                    this.alreadyListener = true;
+                    bus.$on("graphFilterListener", this.refreshGraphFilter)
+                }
+            }
+        },
+        viewLoaded: function(){
+            this.$nextTick(() => {
+                this.isDetailPg && this.$refs.pie && this.$refs.pie.$refs.chartWrap.dispatchAction({
+                    type: 'showTip',
+                    seriesIndex: 0,
+                    dataIndex: 0,
+                });
+            })
         }
     },
     methods: {
         getFillData(force_update=false){
-            fetchUtil(`${model_api_url}graph/config?force_update=${force_update}${paramFake}`,
-            {method: 'POST', headers, body: JSON.stringify(this.cData)})
+            let {cData: {name, filters}, geoFiltersBf} = this;
+            fetchUtil(queryUrl(`${model_api_url}graph/config`, {
+                force_update,
+                vault_name: name,
+            }),
+            {method: 'POST', headers, body: JSON.stringify(geoFiltersBf)})
             .then(resp=>{
-                // this.getOpt(resp.result);
                 if(resp.result){
-                    this.getOption(resp.result);
+                    this.getOption(resp.result || {});
                     this.loaded = true;
+                    this.$nextTick(() => {
+                        this.$refs.pie && this.$refs.pie.$refs.chartWrap.dispatchAction({
+                            type: 'showTip',
+                            seriesIndex: 0,
+                            dataIndex: 0,
+                        });
+                    })
                 }
                 else{
                     console.error(resp.Msg);
                 }
             })
+        },
+        refreshGraphFilter(filters){
+            this.geoFiltersBf.filters = filters;
+            this.getFillData();
         },
         getExtraVal(key) {
             let val = this.preViewExtraValue;
@@ -154,7 +222,18 @@ export default {
                     value && (data.push({name: '余留汇总', value}));
                 }
                 settingRemain = true;
-            }
+            };
+            //自定义排序
+            if (xAxisExt.showCustom) {
+                defaultExtraValue.xAxisExt.sort = data.map(it => it.name);
+                let oldSort = {}, xi = size(data);
+                forEach(xAxisExt.sort, (it,index)=>{oldSort[it] = index + 1});
+                data = orderBy(data, it=>(oldSort[it.name] || ++xi), 'asc');
+                let names = data.map(it => it.name);
+                preViewExtraValue.xAxisExt.sort = names;
+                saveExtraValue.xAxisExt.sort = names;
+            };
+
             xAxisExt_new.showSetting = showSetting;
             xAxisExt_new.settingRemain = settingRemain;
 
@@ -162,15 +241,17 @@ export default {
                 alias = yAxisExt.aliasMap || {},
                 color = yAxisExt.colorMap || {},
                 aliasMapTmp = {}, colorMapTmp = {},
-                {valueRoundNum, valueForce} = yAxisExt;
+                {valueRoundNum, valueForce} = yAxisExt,
+                chartColors = chart_theme_color_map[legendExt.theme||chart_theme_default];//取值，若没有设置主题色，则取默认颜色
+
             forEach(data, (it, i)=>{
                 let {name, value} = it;
                 let nc = color[name];
-                nc ? (colorMapTmp[name] = nc) : (nc = pie_colors[i % colorLen] || pie_colors[0]);
+                nc ? (colorMapTmp[name] = nc) : (nc = chartColors[i % colorLen] || chartColors[0]);
                 colors.push(nc);
                 let nameVal = alias[name];
                 nameVal ? (aliasMapTmp[name] = nameVal) : (nameVal = name);
-                legend.push({name: nameVal, icon: 'circle'});
+                legend.push({name: nameVal, icon: 'rect'});
                 legendMap[name] = {color: nc, alias: nameVal};
                 it.name = nameVal;
                 it.value = _this.getDataVal(value, valueForce, valueRoundNum, 0);
@@ -191,6 +272,9 @@ export default {
                     data,
                     label: {normal: {show:false}},
                     type: 'pie',
+                    center: ['50%', '45%'],
+                    // radius: isDetailPg ? [0, '74.4%'] : [0, '92.6%'],
+                    radius: isDetailPg ? [0, '80%'] : [0, '75%'],
                     hoverAnimation: isDetailPg ? true : false,
                     silent: isDetailPg ? false : true,
                     stillShowZeroSum: false,
@@ -200,7 +284,7 @@ export default {
                 }
             }
             if (chart_type === chart_type_pie_circle) {
-                options.series.radius = ['40%', '55%'];
+                options.series.radius = isDetailPg ? ['60%', '80%'] : ['50%', '75%'];
             }
             if (chart_type === chart_type_pie_rose) {
                 options.series.roseType = 'area';
@@ -223,32 +307,26 @@ export default {
                     };
                 }
             } : hide;
-
-            if(isDetailPg && legendExt.show){
+            if(!isDetailPg && legend.length > 1){
                 options.legend = {
+                    show: true,
                     animation: true,
                     data: legend,
                     orient: 'horizontal',
-                    // type: 'plain',
                     type: 'scroll',
-                    itemWidth: 10,
-                    itemHeight: 10,
-                    pageButtonGap: 10,
-                    padding: [0, 20, 0, 20],
+                    itemWidth: 6,
+                    itemHeight: 6,
+                    padding: [0, 20, 6, 20],
                     left: 'center',
-                    bottom:30,
+                    bottom:0,
+                    pageIconColor: "#6D737A",
+                    textStyle: {
+                        lineHeight: 16,
+                        color: "#6D737A",
+                        fontSize: "14px",
+                        fontWeight: 300,
+                    },
                 };
-            }
-            options.grid = {
-                containLabel: true,
-                right: 30,
-                left: 30,
-                top: 10,
-                bottom: isDetailPg ? 0 : 50,
-            }
-            options.textStyle = {
-                color: '#AFB8DB',
-                fontSize: 12
             };
 
             _this.options = options;
@@ -261,17 +339,20 @@ export default {
 .data-pie-style {
     width: 100%;
     .pie-title {
-        line-height: 18px;
-        font-size: 15px;
+        line-height: 20px;
+        font-family: PingFang SC;
+        font-size: 14px;
         font-weight: 700;
-        color: #4A4D51;
+        color: #38393C;
         box-sizing: border-box;
-        padding: 25px 21px;
-        word-wrap: break-word;
+        padding: 24px 21px 4px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
     .pie-draw {
         width: 100%;
-        height: 232px;
+        height: 202px;
         position: relative;
         overflow: hidden;
         .echarts_pie{
@@ -282,7 +363,7 @@ export default {
     .chart_loading {
         width: 100%;
         height: 100%;
-        min-height: 300px;
+        min-height: 250px;
     }
 }
 .data-pie-detailpg {
@@ -301,21 +382,25 @@ export default {
         }
         .detail-info {
             width: 100%;
-            height: 102px;
-            box-sizing: border-box;
-            padding: 15px 24px 0 24px;
+            height: 95px;
             font-family: PingFang SC;
             .scroll-area{
                 width: 100%;
                 overflow: auto;
+                -webkit-overflow-scrolling: touch;
                 .info-template {
+                    padding: 8px 0 0 16px;
+                    box-sizing: border-box;
+                    font-family: PingFang SC;
                     .number {
                         font-size: 48px;
+                        font-weight: 300;
                         line-height: 67px;
                     }
                     .text {
-                        font-size: 14px;
-                        color: #6D737A;
+                        font-size: 16px;
+                        color: #57585c;
+                        font-weight: 600;
                         line-height: 20px;
                     }
                 }

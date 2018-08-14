@@ -17,7 +17,7 @@
  under the License.
  */
 //
-// Prefix header for all source files of the 'DataMap' target in the 'DataMap' project
+// Prefix header for all source files of the 'Datamap' target in the 'Datamap' project
 //
 
 #ifdef __OBJC__

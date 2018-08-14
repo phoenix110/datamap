@@ -12,7 +12,7 @@ describe('IndexPanel.vue', () => {
   it('should render correct contents', () => {
     const wrapper = mount(IndexPanel)
     vm = wrapper.vm
-    expect(wrapper.find(".chart_loading").text()).to.equal("努力加载中...");
+    expect(wrapper.find('.index-load-panel').exists()).to.be.true;
   })
 
 })

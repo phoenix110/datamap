@@ -11,7 +11,7 @@ import {
 const baseHost = window.location.host;
 const hosts = baseHost + window.location.pathname;
 let base_api = 'http://m.lite.maicedata.com/';
-let model_api = base_api + 'algo/';
+let model_api = base_api + 'datamap/';
 let map_api = base_api + 'map/';
 let static_map = 'http://mdt-prod-public.oss-cn-hangzhou.aliyuncs.com/';
 
@@ -21,16 +21,16 @@ let api_url = process.env.API_URL || '192.168.1.240:8889';
 if (__JUMP__) {
     base_api = 'http://localhost:8889/';
     model_api = base_api;
-    map_api = 'http://localhost:8891';
+    map_api = 'http://localhost:8891/';
     static_map = 'http://mdt-dev-public.oss-cn-hangzhou.aliyuncs.com/';
 } else if (__DEV__) {
     base_api = `http://${api_url}/`;
     model_api = base_api;
-    map_api = 'http://192.168.1.240:8891';
+    map_api = 'http://192.168.1.240:8891/';
     static_map = 'http://mdt-dev-public.oss-cn-hangzhou.aliyuncs.com/';
 } else if (__STABLE__) {
     base_api = 'http://ms.lite.maicedata.com/';
-    model_api = base_api + 'algo/';
+    model_api = base_api + 'datamap/';
     map_api = base_api + 'map/';
     static_map = 'http://mdt-staging-public.oss-cn-hangzhou.aliyuncs.com/';
 }

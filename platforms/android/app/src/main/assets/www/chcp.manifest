@@ -1,0 +1,242 @@
+[
+  {
+    "file": "31e1156da7a898c07ab1.main.js",
+    "hash": "a51c4d03510e513939262def4b3f41e6"
+  },
+  {
+    "file": "home.png",
+    "hash": "6b6c3eee2ac11503151412bfae5d8433"
+  },
+  {
+    "file": "index.html",
+    "hash": "4d3779f2f077a589392a7f45ad07db7e"
+  },
+  {
+    "file": "loading-sprite.png",
+    "hash": "e129f87eb69e27e3ceb0098a3d1d3b18"
+  },
+  {
+    "file": "normal.png",
+    "hash": "dc76bf57d85357d0df00bc8d09663470"
+  },
+  {
+    "file": "static/favicon.ico",
+    "hash": "68a083a0d2554dbe30ab9e3cf36a5a3c"
+  },
+  {
+    "file": "static/framework7-icons/css/framework7-icons.css",
+    "hash": "d447b786918f2e9e42353d83fb3580cc"
+  },
+  {
+    "file": "static/framework7-icons/fonts/Framework7Icons-Regular.eot",
+    "hash": "c0087d4d5ddd32ec52f1859b42956db6"
+  },
+  {
+    "file": "static/framework7-icons/fonts/Framework7Icons-Regular.ttf",
+    "hash": "4348368ab857cb57b18e1a87ba8ff284"
+  },
+  {
+    "file": "static/framework7-icons/fonts/Framework7Icons-Regular.woff",
+    "hash": "2e9a0313ed02aed1e206340feb36ec5c"
+  },
+  {
+    "file": "static/framework7-icons/fonts/Framework7Icons-Regular.woff2",
+    "hash": "ae8767ca8ecf4b090af58eff5dd6d3a7"
+  },
+  {
+    "file": "static/images/datamap_logo.svg",
+    "hash": "d73213837973626e73ad2f10d9bbf007"
+  },
+  {
+    "file": "static/images/edit_icon.svg",
+    "hash": "9fb09fe95b878ae750d3f0d5869c642f"
+  },
+  {
+    "file": "static/images/heat_icon/heat_icon_0.png",
+    "hash": "d61c69aa61f8b5ec2097cab6cd35d673"
+  },
+  {
+    "file": "static/images/heat_icon/heat_icon_1.png",
+    "hash": "0eead879e18f7f061a52b5cb2ce4c4bc"
+  },
+  {
+    "file": "static/images/heat_icon/heat_icon_2.png",
+    "hash": "444e245d8b7f36ffaec5e15639e12078"
+  },
+  {
+    "file": "static/images/heat_icon/heat_icon_3.png",
+    "hash": "80ababe27780f498b08ede132cf1482f"
+  },
+  {
+    "file": "static/images/heat_icon/heat_icon_4.png",
+    "hash": "51141d8267a1ffa634de27338aeec29e"
+  },
+  {
+    "file": "static/images/heat_icon/heat_icon_5.png",
+    "hash": "2ff2fba6a129fe8d5d2f11695e9b7cf6"
+  },
+  {
+    "file": "static/images/heat_icon/heat_icon_6.png",
+    "hash": "631ee5a58d2b4bc753e7e370042f96d2"
+  },
+  {
+    "file": "static/images/heat_icon/heat_icon_7.png",
+    "hash": "4552354c3c1b38017279f65ec76e04af"
+  },
+  {
+    "file": "static/images/heat_icon/heat_icon_8.png",
+    "hash": "0c624498d3c6f59d240b5a64076d2841"
+  },
+  {
+    "file": "static/images/home.png",
+    "hash": "6b6c3eee2ac11503151412bfae5d8433"
+  },
+  {
+    "file": "static/images/icon_add_btn.svg",
+    "hash": "490496bf5ab8cd04bbd8a3b2d2f5d1e1"
+  },
+  {
+    "file": "static/images/icon_filter.svg",
+    "hash": "4fe68c5c8f47a7af8cfc76de9ca3554a"
+  },
+  {
+    "file": "static/images/icon_folder.svg",
+    "hash": "a48f8251700dbb393172493278017dd5"
+  },
+  {
+    "file": "static/images/icon_line.svg",
+    "hash": "9f1841f9c9d7b020a9cbceeef51585f3"
+  },
+  {
+    "file": "static/images/icon_main_tab/icon_data_choose.svg",
+    "hash": "0e15718c9f1aa00907a92d29e65dc6cc"
+  },
+  {
+    "file": "static/images/icon_main_tab/icon_data.svg",
+    "hash": "9945fe1436667c1eb816efcbf6fed792"
+  },
+  {
+    "file": "static/images/icon_main_tab/icon_map_choose.svg",
+    "hash": "13385a2a4530f2b5ca1759cb0abc2292"
+  },
+  {
+    "file": "static/images/icon_main_tab/icon_map.svg",
+    "hash": "3aee44c2ef7f0315edf9606ffdbe4a1d"
+  },
+  {
+    "file": "static/images/icon_main_tab/icon_mine_choose.svg",
+    "hash": "5e642532d9cf0aaf0bfc6ff4305673a0"
+  },
+  {
+    "file": "static/images/icon_main_tab/icon_mine.svg",
+    "hash": "e07b08aeddd364541a757ec4967295f4"
+  },
+  {
+    "file": "static/images/icon_main_tab/icon_workspace_choose.svg",
+    "hash": "118b601936a123292a6671d339f4bbbb"
+  },
+  {
+    "file": "static/images/icon_main_tab/icon_workspace.svg",
+    "hash": "887220af1535b42829a824978b81e192"
+  },
+  {
+    "file": "static/images/icon_point.svg",
+    "hash": "80a33d8a736d9888bf3c45766d438ae1"
+  },
+  {
+    "file": "static/images/icon_polygon.svg",
+    "hash": "393081d3e3bc9b1b18b644520f0b17a8"
+  },
+  {
+    "file": "static/images/icon_position.svg",
+    "hash": "a68549887d50bb91d383830774ba3f0f"
+  },
+  {
+    "file": "static/images/icon_search_fixed.svg",
+    "hash": "4bc2a409b4f8c4886a3d4e615f7663a3"
+  },
+  {
+    "file": "static/images/img_loading_failed.svg",
+    "hash": "839be66363fbb3ba1368de0177ecaf2d"
+  },
+  {
+    "file": "static/images/loading-sprite.png",
+    "hash": "e129f87eb69e27e3ceb0098a3d1d3b18"
+  },
+  {
+    "file": "static/images/no_data.svg",
+    "hash": "06b9183d318fec77e9d3489a8851a2b1"
+  },
+  {
+    "file": "static/images/no_picture_item.svg",
+    "hash": "06b9183d318fec77e9d3489a8851a2b1"
+  },
+  {
+    "file": "static/images/normal.png",
+    "hash": "dc76bf57d85357d0df00bc8d09663470"
+  },
+  {
+    "file": "static/images/position_icon.png",
+    "hash": "be29039d5b3851fa6bd56dcdb996b05f"
+  },
+  {
+    "file": "static/images/skeleton.png",
+    "hash": "ae64b8f75b30cdb9d09adbb79a1ffb71"
+  },
+  {
+    "file": "static/images/skip_icon.png",
+    "hash": "dbe0c7d077d9ef2e9eb232a46e032694"
+  },
+  {
+    "file": "static/mdt_fonts/icomoon.css",
+    "hash": "141bdbd1d057482f34dd9b29b2dc1aae"
+  },
+  {
+    "file": "static/mdt_fonts/icomoon.eot",
+    "hash": "63d64fa228ed5c1d311922a21c6a3a94"
+  },
+  {
+    "file": "static/mdt_fonts/icomoon.svg",
+    "hash": "6fdc49f1c1bcdb6870c3883a265fea3a"
+  },
+  {
+    "file": "static/mdt_fonts/icomoon.ttf",
+    "hash": "63f8d538296d3637525de18f698682de"
+  },
+  {
+    "file": "static/mdt_fonts/icomoon.woff",
+    "hash": "1d0728c89b16b5587c0367555b31ba06"
+  },
+  {
+    "file": "static/mdt_fonts/point.svg",
+    "hash": "dbf72cd2211a9ca104975e0f83e69a67"
+  },
+  {
+    "file": "static/simple-line-icons/css/simple-line-icons.css",
+    "hash": "093ca662394ed698fdb5835e425d28dd"
+  },
+  {
+    "file": "static/simple-line-icons/fonts/Simple-Line-Icons.eot",
+    "hash": "f33df365d6d0255b586f2920355e94d7"
+  },
+  {
+    "file": "static/simple-line-icons/fonts/Simple-Line-Icons.svg",
+    "hash": "2fe2efe63441d830b1acd106c1fe8734"
+  },
+  {
+    "file": "static/simple-line-icons/fonts/Simple-Line-Icons.ttf",
+    "hash": "d2285965fe34b05465047401b8595dd0"
+  },
+  {
+    "file": "static/simple-line-icons/fonts/Simple-Line-Icons.woff",
+    "hash": "78f07e2c2a535c26ef21d95e41bd7175"
+  },
+  {
+    "file": "static/simple-line-icons/fonts/Simple-Line-Icons.woff2",
+    "hash": "0cb0b9c589c0624c9c78dd3d83e946f6"
+  },
+  {
+    "file": "styles.css",
+    "hash": "a6dfb1f6be2c6ba8bb6a8e39ff299de9"
+  }
+]

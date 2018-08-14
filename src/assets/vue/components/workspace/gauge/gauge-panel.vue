@@ -1,11 +1,29 @@
 <template>
     <div :class="isDetailPg ? 'gauge-panel-isDetailPg' : 'gauge-panel-style'">
-        <div :class="['chart_loading', isDetailPg ? 'detailpg-loading' : '']" v-if="!loaded">
+        <div :class="['chart_loading', isDetailPg ? 'detailpg-loading' : '']" v-if="!loaded || !viewLoaded">
             <f7-preloader></f7-preloader>
-            <span class="ml5">努力加载中...</span>
+            <!-- <span class="ml5">努力加载中...</span> -->
         </div>
         <div class="content-area" v-else>
-            <div class="gauge-title">{{cData.title}}</div>
+            <div class="gauge-title" v-if="!isDetailPg">{{cData.title}}</div>
+            <div v-else>
+                <div class="filter-area">
+                    <FiltersPanel 
+                        :geoFilters="geoFilters" 
+                        :title="chartTitle" 
+                        :filterParams="filterParams">
+                    </FiltersPanel>
+                </div>
+                <div class="guage-detail-info" :style="{'visibility': dataShow.data.length !=0 ? '' : 'hidden'}">
+                    <div class="title">{{dataShow.title}}</div>
+                    <div class="scroll-area">
+                        <div class="info-template" v-for="(vl, dx) in dataShow.data" :key="dx" :style="{'color': dataShow.color}">
+                            <div class="value">{{vl.value}}</div>
+                            <div class="name">{{vl.name}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="gauge-draw">
                 <vchart ref="gauge" :options="options" class="echarts_gauge" theme="ovilia-green" :init-options="initOptions" />
             </div>
@@ -13,7 +31,6 @@
     </div>
 </template>
 <script>
-import {guageExtraValues} from '../../../../js/constants/Constants.js';
 import round from 'lodash/round';
 import size from 'lodash/size';
 import keys from 'lodash/keys';
@@ -21,18 +38,25 @@ import forEach  from 'lodash/forEach';
 import isArray  from 'lodash/isArray';
 import cloneDeep from 'lodash/cloneDeep';
 import pick from 'lodash/pick';
+import bus from '../../../../js/utils/bus';
+import FiltersPanel from '../../commons/filters-panel.vue';
 import fetchUtil from '../../../../js/utils/fetchUtil';
+import queryUrl from '../../../../js/utils/queryUrl';
 import {model_api_url, headers, paramFake} from '../../../../js/constants/ApiConfig';
 import {editYAxiNumberMenus, roundNum, gauge_target_type_column,
-    defaultGaugeExtraValues, gauge_target_type_static, formulaWordMap, new_chart_colors as chart_colors, defaultLegendStyle,
+    defaultGaugeExtraValues, gauge_target_type_static, formulaWordMap, new_chart_colors as chart_colors, defaultLegendStyle, guageExtraValues,
 } from '../../../../js/constants/Constants'
 const hide = {show: false};
 const yKeys = keys(defaultGaugeExtraValues.yAxisExt);
 export default {
     name: "GaugeLoadPanel",
-    props: ["cData", "isDetailPg"],
+    props: ["cData", "isDetailPg", 'geoFilters', 'chartTitle', 'viewLoaded'],
+    components: {
+        FiltersPanel,
+    },
     data(){
         return {
+            geoFiltersBf: {},
             initOptions: {
                 renderer: 'canvas',
                 mData: "",
@@ -40,24 +64,67 @@ export default {
             options: {},
             width: 184,
             loaded: false,
+            dataShow: {
+                title: "",
+                data: []
+            },
+            filterParams: {},
+            alreadyListener: false,
         }
     },
     created(){
-        size(this.cData) ? this.getFillData() : null;
+        if(size(this.cData)){
+            let {cData, geoFilters, alreadyListener, isDetailPg} = this;
+            this.geoFiltersBf = geoFilters;
+            this.getFillData();
+            this.filterParams = {
+                source: cData.source,
+                object_type: cData.object_type,
+                geometry_type: cData.geometry_type,
+            }
+            //增加筛选器监听事件
+            if(!alreadyListener && size(geoFilters.filters) && isDetailPg){
+                this.alreadyListener = true;
+                bus.$on("graphFilterListener", this.refreshGraphFilter)
+            }
+        }
     },
     watch: {
         cData: function(){
-            size(this.cData) ? this.getFillData() : null;
+            if(size(this.cData)){
+                let {cData, geoFilters, alreadyListener, isDetailPg} = this;
+                if(alreadyListener) return;
+                this.geoFiltersBf = geoFilters;
+                this.getFillData();
+                this.filterParams = {
+                    source: cData.source,
+                    object_type: cData.object_type,
+                    geometry_type: cData.geometry_type,
+                }
+                //增加筛选器监听事件
+                if(!alreadyListener && size(geoFilters.filters) && isDetailPg){
+                    this.alreadyListener = true;
+                    bus.$on("graphFilterListener", this.refreshGraphFilter)
+                }
+            }
         }
     },
     methods: {
         getFillData(force_update=false){
-            fetchUtil(`${model_api_url}graph/config?force_update=${force_update}${paramFake}`,
-            {method: 'POST', headers, body: JSON.stringify(this.cData)})
+            let {cData: {name, filters}, geoFiltersBf} = this;
+            fetchUtil(queryUrl(`${model_api_url}graph/config`, {
+                force_update,
+                vault_name: name,
+            }),
+            {method: 'POST', headers, body: JSON.stringify(geoFiltersBf)})
             .then(resp=>{
-                this.getOption(resp.result);
+                this.getOption(resp.result || {});
                 this.loaded = true;
             })
+        },
+        refreshGraphFilter(filters){
+            this.geoFiltersBf.filters = filters;
+            this.getFillData();
         },
         getExtraVal(key) {
             let val = this.preViewExtraValue;
@@ -129,7 +196,7 @@ export default {
             nc ? (colorMapTmp[name] = nc) : (nc = chart_colors[0]);
             let nameVal = alias[name];
             nameVal ? (aliasMapTmp[name] = nameVal) : (nameVal = name);
-            legend.push({name: nameVal, icon: 'circle'});
+            legend.push({name: nameVal, icon: 'ract'});
             legendMap[name] = {color: nc, alias: nameVal};
             yExt_new.aliasMap = aliasMapTmp;// 预览值
             yExt_new.colorMap = colorMapTmp;
@@ -150,7 +217,6 @@ export default {
             let gaugeColor = nc, bgColor = '#38497B';
             if (isArray(nc)) {
                 let [points, colors] = nc;
-                // bgColor = 'rgba(255,255,255,0.2)';
                 bgColor = 'rgba(0, 0, 0, 0.2)';
                 gaugeColor = colors[colors.length - 1];
                 forEach(points, (it, index)=>{
@@ -160,14 +226,15 @@ export default {
                     }
                 });
             }
-            let lineWidth = isDetailPg ? 50 : width * 0.12;
+            // let lineWidth = isDetailPg ? 50 : width * 0.12;
+            let lineWidth =  isDetailPg ? 48 : 28;
             let options = {
                 animationDuration: 5000,
                 series: {
-                    radius: isDetailPg ? "80%" : width * 0.5,
+                    radius: isDetailPg ? "85%" : "90%",
                     name: nameVal,
                     type: "gauge",
-                    center: !isDetailPg ? ['50%', '50%'] : ['50%', '45%'],
+                    center: ['50%', '50%'],
                     min: 0,
                     max: target,
                     splitNumber:1,
@@ -198,19 +265,29 @@ export default {
             if ((showPercent || showValue) || isDetailPg) {
                 let formatter = [], rich = {}, fontSize = width * 0.12;
                 if (showPercent || isDetailPg) {
+                    if(isDetailPg){
+                        percent = percent.length > 7 ? percent.slice(0, 5)+'...' : percent;
+                    }
+                    else{
+                        percent = percent.length > 4 ? percent.slice(0, 3)+'...' : percent;
+                    }
                     formatter.push(`{percent|${percent}%}`);
                     rich.percent = {
-                        // color: yExt_new.percentColor,
-                        color: gaugeColor, 
-                        fontSize,
+                        color: isDetailPg ? '#57585C' : '#38393C', 
+                        fontSize: isDetailPg ? 32 : 24,
                     }
                 }
                 if (showValue || isDetailPg) {
+                    if(isDetailPg){
+                        value = value.length > 6 ? value.slice(0, 5)+'...' : value;
+                    }
+                    else{
+                        value = value.length > 4 ? value.slice(0, 3)+'...' : value;
+                    }
                     formatter.push(`{value|${value}}`);
                     rich.value = {
-                        // color: yExt_new.valueColor, 
-                        color: "rgb(170, 170, 170)",
-                        fontSize,
+                        color: "#57585C",
+                        fontSize: 16,
                     }
                 }
                 if ((showPercent && showValue) || isDetailPg) {
@@ -227,43 +304,36 @@ export default {
 
             // 处理label
             if (yExt_new.showTarget) {
+                let str = target.length > 5 ? target.slice(0, 3)+'...' : target;
                 options.series.axisLabel = {
                     distance: -8,
-                    formatter:(v)=>`{a|${v ? target : 0}}`,
+                    formatter:(v)=>`{a|${v ? str : 0}}`,
                     rich:{
                         a: {
                             padding:[0, 15, 0, 15],
-                            // color: yExt_new.targetColor,
-                            color: "rgb(170, 170, 170)",
-                            fontSize: 12
+                            color: "#57585C",
+                            fontSize: 16
                         }
                     }
                 };
             }
 
-            if (isDetailPg && legendExt.show) {
-                let [top, left] = legendExt.position.split('_');
-                let orient = top === 'top' || top === 'bottom' ? 'horizontal' : 'vertical';
-                options.series.itemStyle = {normal: {color: gaugeColor}};
+            if (!isDetailPg && legend.length > 1) {
                 options.legend = {
-                    show: true,
-                    type: 'scroll',
-                    width: '50%',
-                    // orient: orient,
-                    orient: 'horizontal',
-                    // top: top,
-                    // left: left,
+                    animation: true,
                     data: legend,
-                    bottom: 12,
-                    itemWidth: 10,
-                    itemHeight: 10,
-                    pageButtonGap: 10,
-                    padding: [0, 20, 0, 20],
-                    left: 'center',
-                    textStyle: {color: "rgb(170, 170, 170)"},
-                    pageTextStyle: {color: "rgb(170, 170, 170)"},
-                    pageIconColor: {color: "rgb(170, 170, 170)"},
-                    // selectedMode: true, tooltip: {show: true, formatter:e=>''}
+                    orient: 'horizontal',
+                    bottom: 0,
+                    type: 'scroll',
+                    itemWidth: 6,
+                    itemHeight: 6,
+                    padding: [0, 20, 6, 20],
+                    textStyle: {
+                        lineHeight: 16,
+                        color: "#6D737A",
+                        fontSize: "14px",
+                        fontWeight: 300,
+                    },
                 };
             }
             options.grid = {
@@ -273,7 +343,14 @@ export default {
                 top: 10,
                 bottom: legendExt.show ? 20 : 40,
             };
-
+            this.dataShow = {
+                title: title,
+                color: gaugeColor,
+                data: [
+                    {name: "具体数值", value: value},
+                    {name: "百分比", value: percent+'%'}
+                ]
+            }
             this.options = options;
             return "";
         }
@@ -284,17 +361,20 @@ export default {
 .gauge-panel-style {
     width: 100%;
     .gauge-title {
-        line-height: 18px;
-        font-size: 15px;
+        line-height: 20px;
+        font-size: 14px;
         font-weight: 700;
-        color: #4A4D51;
+        color: #38393C;
         box-sizing: border-box;
-        padding: 25px 21px;
+        padding: 24px 21px;
         word-wrap: break-word;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
     .gauge-draw {
         width: 100%;
-        height: 232px;
+        height: 182px;
         position: relative;
         overflow: hidden;
         .echarts_gauge {
@@ -305,7 +385,7 @@ export default {
     .chart_loading {
         width: 100%;
         height: 100%;
-        min-height: 300px;
+        min-height: 250px;
     }
 }
 .gauge-panel-isDetailPg {
@@ -316,12 +396,47 @@ export default {
     .content-area {
         width: 100%;
         height: 100%;
-        .gauge-title {
-            display: none;
+        display: flex;
+        flex-direction: column;
+        .guage-detail-info {
+            width: 100%;
+            height: 120px;
+            box-sizing: border-box;
+            padding: 5px 0 0 0;
+            font-family: PingFang SC;
+            .scroll-area{
+                width: 100%;
+                height: 87px;
+                overflow-x: auto;
+                display: inline-flex;
+                flex-wrap: nowrap;
+                .info-template {
+                    display: inline-block;
+                    padding-left: 16px;
+                    box-sizing: border-box;
+                    .value {
+                        font-size: 48px;
+                        line-height: 67px;
+                    }
+                    .name {
+                        font-size: 14px;
+                        line-height: 20px;
+                        color: #6D737A;
+                    }
+                }
+            };
+            .title{
+                width: 100%;
+                line-height: 22px;
+                font-size: 16px;
+                color: #57585C;
+                padding-left: 16px;
+                box-sizing: border-box;
+            }
         }
         .gauge-draw {
-            height: 100%;
             width: 100%;
+            flex: 1;
             .echarts_gauge {
                 width: 100%;
                 height: 100%;

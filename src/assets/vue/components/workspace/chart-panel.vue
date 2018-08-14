@@ -1,7 +1,8 @@
 <template>
     <div class="chart_wrap" ref="dom">
         <div class="chart_inner">
-            <EleChart v-if="!delayShow" :chartData="listData" :isDetailPg="!!isDetailPg ? true : false" :isStatic="isStatic" :cpRandom="cpRandom" @setTitle="setTitle"></EleChart>
+            <EleChart
+                :chartData="listData" :isDetailPg="!!isDetailPg ? true : false" :isStatic="isStatic" :cpRandom="cpRandom" :geoFilters="geoFilters" @setTitle="setTitle" :viewLoaded="loaded"></EleChart>
         </div>
     </div>
 </template>
@@ -12,10 +13,11 @@ import {chart_type_statistics, chart_type_bar,
     chart_type_stack, chart_type_per_stack, chart_type_line,
     chart_type_pie_rose, chart_type_pie, chart_type_pie_circle,
     chart_type_gauge, chart_type_index, chart_type_radar,
-    chart_type_display_table, chart_type_file, chart_type_hot_table,
+    chart_type_display_table, chart_type_file, chart_type_hot_table, chart_type_progress,
     map_type_interactive, map_type_geo_visualization,filter_type_interactive_map, vault_geo_visualization, vault_interactive_map
 } from '../../../js/constants/Constants.js';
 import {model_api_url, headers, paramFake, static_map_url} from '../../../js/constants/ApiConfig';
+import size from 'lodash/size';
 const viewConfig = {
     [chart_type_statistics]: "TableLoadPanel",
     [chart_type_bar]: "DataBar",
@@ -27,6 +29,7 @@ const viewConfig = {
     [chart_type_pie_circle]: "DataPie",
     [chart_type_gauge]: "GaugeLoadPanel",
     [chart_type_index]: "IndexLoadPanel",
+    [chart_type_progress]: "ProgressLoadPanel",
     [chart_type_radar]: "DataRadar",
     [chart_type_display_table]: "DisplayTable",
     [chart_type_file]: "FileLoadPanel",
@@ -36,12 +39,12 @@ const viewConfig = {
 };
 export default {
     name: "chart-panel",
-    props: ["listData", "isDetailPg", "isStatic", "rfRandom"],
+    props: ["listData", "isDetailPg", "isStatic", "rfRandom", "geoFilters"],
     data(){
         return {
             loaded: false,
             testData: [],
-            delayShow: true,
+            delayShow: false,
             cpRandom: this.rfRandom,
         }
     },
@@ -50,31 +53,31 @@ export default {
             this.cpRandom = newVl;
         }
     },
-    created(){
-        if(this.listData.vault != 'graph' && this.isDetailPg){
-            setTimeout(()=>{
-                this.delayShow = false;
-            }, 500)
-        }
-        else{
-            this.delayShow = false;
-        }
-    },
     mounted(){
         let self = this;
+        bus.$on('page_scroll', self.onPageScroll)
+        this.onPageScroll();
     },
     beforeDestroy(){
         let self = this;
-        clearTimeout(this.timeoutId);
+        this.timeoutId && clearTimeout(this.timeoutId);
+        this.timeoutId = null;
+        bus.$off('page_scroll', self.onPageScroll)
     },
     methods: {
         onPageScroll: function() {
             let dom = this.$refs.dom;
             let top = this.$$(dom).offset().top;
-            if (!this.loaded && top + 50 < this.$f7.height ) {
-                this.timeoutId = setTimeout(() => {
-                    this.loaded = true;
-                }, 250);
+            if (!this.loaded && (top + 50 < this.$f7.height) && (dom.clientHeight + top > 0)) {
+                if (!this.timeoutId) {
+                    this.timeoutId = setTimeout(() => {
+                        this.loaded = true;
+                        this.timeoutId = null;
+                    }, 250);
+                }
+            }else {
+                this.timeoutId && clearTimeout(this.timeoutId);
+                this.timeoutId = null;
             }
         },
         setTitle(vl){
@@ -83,11 +86,12 @@ export default {
     },
     components: {
         'EleChart': {
-            props: ["chartData", "isDetailPg", "isStatic", "cpRandom"],
+            props: ["chartData", "isDetailPg", "isStatic", "cpRandom", "geoFilters", "viewLoaded"],
             data(){
                 return {
                     setProps: null,
                     panel_type: null,
+                    chartTitle: "",
                 }
             },
             watch: {
@@ -96,12 +100,13 @@ export default {
                 }
             },
             created(){
+
                 this.getConfig();
             },
             methods: {
                 getConfig(){
                     let _this = this;
-                    let {chartData: {vault, graph, chart_type}} = _this;
+                    let {chartData: {vault, graph, chart_type}, geoFilters} = _this;
                     if (vault === vault_interactive_map) {
                         if(_this.isStatic){
                             fetchUtil(`${model_api_url}vault/interactive_map/${graph}`)
@@ -110,8 +115,10 @@ export default {
                                     _this.setProps = {
                                         'config': resp.result[0] ? resp.result[0].extra : [],
                                         'thumb': _this.chartData.thumb,
+                                        'is_static': true,
                                     };
                                     if(_this.isDetailPg){
+                                        _this.chartTitle = _this.setProps.config.title;
                                         _this.$emit('setTitle', _this.setProps.config.title);
                                     }
                                 }
@@ -124,6 +131,7 @@ export default {
                         else{
                             _this.setProps = _this.chartData;
                             if(_this.isDetailPg){
+                                _this.chartTitle = _this.setProps.config.title;
                                 _this.$emit('setTitle', _this.setProps.config.title);
                             }
                         }
@@ -135,6 +143,7 @@ export default {
                                     let getData = resp.result[0] ? resp.result[0].extra : {};
                                     _this.setProps = Object.assign({}, _this.chartData, getData);
                                     if(_this.isDetailPg){
+                                        _this.chartTitle = _this.setProps.title;
                                         _this.$emit('setTitle', _this.setProps.title);
                                     }
                                 }
@@ -148,7 +157,11 @@ export default {
                             .then(resp => {
                                 if(!resp.Status){
                                     _this.setProps = resp.result[0] ? resp.result[0].extra : [];
+                                    if(!size(geoFilters.filters)){
+                                        _this.geoFilters.filters = (resp.result[0] && resp.result[0].extra.filters) ? resp.result[0].extra.filters : [];
+                                    }
                                     if(_this.isDetailPg){
+                                        _this.chartTitle = _this.setProps.title;
                                         _this.$emit('setTitle', _this.setProps.title);
                                     }
                                 }
@@ -161,12 +174,9 @@ export default {
                 }
             },
             render: function(createElement){
-                // this.chartData.cbData = this.cbData;
-                // let type = this.chartData.vault === "graph" ? this.panel_type : this.chartData.vault;
-                // return !!type ? createElement(viewConfig[type], {props: {"cData": this.setProps, "isDetailPg": this.isDetailPg}}) : null;
                 //根据vault/page接口返回的数据加载组件
                 let type = this.chartData.vault === "graph" ? this.chartData.chart_type : this.chartData.vault;
-                return createElement(viewConfig[type], {props: {"cData": this.setProps, "isDetailPg": this.isDetailPg}});
+                return createElement(viewConfig[type], {props: {"cData": this.setProps, "isDetailPg": this.isDetailPg, "geoFilters": this.geoFilters, chartTitle: this.chartTitle, viewLoaded: this.viewLoaded && this.loaded}});
             }
         },
     }

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bgColor">#439aea</color>
+    <color name="colorPrimary">#298cef</color>
+    <color name="colorWhite">#fff</color>
+    <string name="activity_name">@string/launcher_name</string>
+    <string name="app_name">Datamap</string>
+    <string name="launcher_name">@string/app_name</string>
+    <style name="Appwelcome" parent="android:Theme.Translucent.NoTitleBar.Fullscreen">
+    </style>
+    <style name="WelcomeStyle" parent="@android:style/Theme.DeviceDefault.NoActionBar.Fullscreen">
+        <item name="android:windowBackground">@drawable/splash</item>
+        <item name="android:colorPrimary">@color/colorPrimary</item>
+        <item name="android:textColorPrimary">@color/colorWhite</item>
+        <!--<item name="android:windowDisablePreview">true</item>-->
+    </style>
+</resources>

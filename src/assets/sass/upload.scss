@@ -5,3 +5,24 @@
         position: relative;
     }
 }
+
+.upload-double-input {
+    .item-input-with-value {
+        .input-clear-button {
+            opacity: 0;
+            pointer-events: none;
+            visibility: hidden;
+        }
+        .upload-item-input-with-value .input-clear-button {
+            opacity: 1;
+            pointer-events: auto;
+            visibility: visible;
+        }
+    }
+}
+
+
+.upload-add-param-btn .item-inner {
+    padding-top: 0;
+    padding-bottom: 0; 
+}

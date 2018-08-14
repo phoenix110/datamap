@@ -20,14 +20,14 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">77.78% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>21/21</span>
+        <span class='fraction'>14/18</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">61.11% </span>
+        <span class="strong">41.67% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>11/18</span>
+        <span class='fraction'>5/12</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -35,13 +35,13 @@
         <span class='fraction'>5/5</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">77.78% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>21/21</span>
+        <span class='fraction'>14/18</span>
       </div>
     </div>
   </div>
-  <div class='status-line high'></div>
+  <div class='status-line medium'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -96,10 +96,7 @@
 51
 52
 53
-54
-55
-56
-57</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+54</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -132,16 +129,13 @@
 <span class="cline-any cline-yes">6×</span>
 <span class="cline-any cline-yes">6×</span>
 <span class="cline-any cline-yes">6×</span>
-<span class="cline-any cline-yes">3×</span>
-<span class="cline-any cline-yes">3×</span>
-<span class="cline-any cline-yes">3×</span>
-<span class="cline-any cline-yes">3×</span>
-<span class="cline-any cline-yes">3×</span>
-<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3×</span>
-<span class="cline-any cline-yes">3×</span>
-<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">6×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -185,20 +179,17 @@ export default {
         // this.needStatusbarOverlay = true;
         // self.$$("html").addClass("isandroid");
         document.addEventListener("deviceready", function(){
-            console.log(`device.version: ${device.version}, isandroid: ${self.$device.android}`);
+            console.log('device:', device, `,isandroid: ${self.$device.android}`);
+            self.isAndroid = device.platform &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >device.platform.toLowerCase() === 'android';</span>
             setTimeout(() =&gt; {
-                if (self.isAndroid &amp;&amp; device.version &gt;= '5.0') {
-                    console.log(`device setoverlay`);
-                    window.StatusBar &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >window.StatusBar.overlaysWebView(true);</span>
-                    self.needStatusbarOverlay = true;
-                    self.$$("html").addClass("isandroid");
-                    <span class="missing-if-branch" title="else path not taken" >E</span>if (tokenUtil.get()) {
-                        window.StatusBar &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >window.StatusBar.styleDefault();</span>
-                    }
+                <span class="missing-if-branch" title="if path not taken" >I</span>if (self.isAndroid &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >device.version &gt;= '5.0')</span> {
+<span class="cstat-no" title="statement not covered" >                    console.log(`device setoverlay`);</span>
+<span class="cstat-no" title="statement not covered" >                    window.StatusBar &amp;&amp; window.StatusBar.overlaysWebView(true);</span>
+<span class="cstat-no" title="statement not covered" >                    self.needStatusbarOverlay = true;</span>
+<span class="cstat-no" title="statement not covered" >                    self.$$("html").addClass("isandroid");</span>
+                    // window.StatusBar &amp;&amp; window.StatusBar.styleDefault();
                 }else <span class="missing-if-branch" title="else path not taken" >E</span>if (!self.isAndroid) {
-                    <span class="missing-if-branch" title="else path not taken" >E</span>if (tokenUtil.get()) {
-                        window.StatusBar &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >window.StatusBar.styleDefault();</span>
-                    }
+                    // window.StatusBar &amp;&amp; window.StatusBar.styleDefault();
                 }
             })
             window.addEventListener('keyboardDidShow', (ev) =&gt; {
@@ -217,7 +208,7 @@ export default {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat Jun 09 2018 20:38:52 GMT+0800 (CST)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Aug 09 2018 15:45:34 GMT+0800 (CST)
 </div>
 </div>
 <script src="../prettify.js"></script>

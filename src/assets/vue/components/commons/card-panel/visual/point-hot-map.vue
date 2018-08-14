@@ -30,11 +30,13 @@ export default {
     },
     methods: {
         getSilderData(){
-            let type = 'config_' + this.hotType;
-            let {cur_visual} = this.mData;
-            let config = this.mData[type];
+            let {mData} = this;
+            let hotType = mData.cur_visual.type;
+            let type = 'config_' + hotType;
+            let {cur_visual} = mData;
+            let config = mData[type];
             let poiVisualCol = cur_visual.col;
-            let value = config[poiVisualCol] || {};
+            let value = !!config[poiVisualCol] || {};
             this.hRadius = value.module && value.module.radius && value.module.radius.value;
             this.selectExampleColor = value.selectExampleColor || 0;
         }
@@ -45,12 +47,16 @@ export default {
 .point_hot_map {
     .point_hot_title {
         width: 100%;
-        line-height: 17px;
-        font-size: 12px;
-        margin-bottom: 12px;
+        line-height: 20px;
+        font-size: 14px;
+        color: #38393c;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
     .point_hot_slider {
         width: 100%;
+        margin-top: 20px;
     }
 }
 </style>

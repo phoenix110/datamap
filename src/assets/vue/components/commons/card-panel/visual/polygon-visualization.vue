@@ -39,12 +39,16 @@ export default {
 .poly_visual_map {
     .poly_visual_title {
         width: 100%;
-        line-height: 17px;
-        font-size: 12px;
-        margin-bottom: 12px;
+        line-height: 20px;
+        font-size: 14px;
+        color: #38393c;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
     .poly_visual_slider {
         width: 100%;
+        margin-top: 20px;
     }
 }
 </style>

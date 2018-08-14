@@ -1,0 +1,27 @@
+.ios .my-data-detail .list{
+  margin:5px 0px;
+}
+
+.ios .my-data-detail .list ul{
+  background:rgba(255,255,255,0.09);
+}
+.ios .my-data-detail .page-content{
+  z-index: 11;
+}
+.feedSucessTip{
+  width: 150px;
+  background: rgba(0,0,0,.60);
+  border-radius: 5px;
+  top: calc(100% - 94px);
+  left: calc(50% - 75px) !important;
+  &.toast.toast-bottom {
+    transform: translate3d(0,200%,0);
+  }
+  &.toast.toast-bottom.modal-in {
+    transform: translate3d(0,0,0);
+  }
+  .toast-text{
+    font-size: 14px;
+    font-weight:400;
+  }
+}

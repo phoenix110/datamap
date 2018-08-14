@@ -1,4 +1,4 @@
-var serialize = function (obj, unEncode = true, prefix) {
+var serialize = function (obj, unEncode = false, prefix) {
     var str = [];
     for (var p in obj) {
         if (obj.hasOwnProperty(p)) {

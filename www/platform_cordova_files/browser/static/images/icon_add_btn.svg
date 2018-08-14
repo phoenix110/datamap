@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="113px" height="114px" viewBox="0 0 113 114" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50 (54983) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 2 Copy 2</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M0,0.6592 L112.896,0.6592 L112.896,113.5552 L0,113.5552 L0,0.6592 Z" id="path-1"></path>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="112.896" height="112.896" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-2-Copy-2" stroke="#ABABAB">
+            <use id="Rectangle-8" mask="url(#mask-2)" stroke-width="1.8816" stroke-dasharray="5.644800224304199,5.644800224304199" xlink:href="#path-1"></use>
+            <g id="Group" transform="translate(35.750400, 37.350400)" stroke-linecap="square" stroke-width="0.9408">
+                <path d="M0.279513043,18.3456 L38.293287,18.3456" id="Line"></path>
+                <path d="M18.816,0.279513043 L18.816,38.293287" id="Line-Copy"></path>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -12,7 +12,7 @@ describe('Upload.vue', () => {
   })
 
   it('should render', () => {
-    const wrapper = shallowMount(Upload)
+    const wrapper = shallowMount(Upload, {propsData:{testModel: true}})
     vm = wrapper.vm
     expect(wrapper.find(".up-page-content").exists()).to.be.true;
   })
@@ -24,7 +24,8 @@ describe('Upload.vue', () => {
         $f7Route: {
           context: {}
         }
-      }
+      },
+      propsData:{testModel: true},
     })
     vm = wrapper.vm
     const pageWrapper = wrapper.find(Vue.options.components.f7Page);

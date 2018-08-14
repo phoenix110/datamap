@@ -1,0 +1,959 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/assets/vue/components/upload_comp/util.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../../index.html">all files</a> / <a href="index.html">src/assets/vue/components/upload_comp/</a> util.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">10.57% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>13/123</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">6.06% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>4/66</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">4.76% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>2/42</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">10.57% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>13/123</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import SparkMD5 from '../../../js/utils/spark-md5';
+import fetchUtil from '../../../js/utils/fetchUtil';
+import queryUrl from '../../../js/utils/queryUrl';
+import forEach from 'lodash/forEach'
+import {model_api_url} from '../../../js/constants/ApiConfig'
+&nbsp;
+/**
+ * native端返回true。web端返回false
+ */
+export const isCordovaDevice = function() {
+    return device &amp;&amp; device.platform &amp;&amp; <span class="branch-2 cbranch-no" title="branch not covered" >device.platform.toLowerCase() !== "browser";</span>
+}
+&nbsp;
+/**
+ * 返回设备类型
+ */
+export const cordovaDeviceType = function() {
+    return device &amp;&amp; device.platform &amp;&amp; <span class="branch-2 cbranch-no" title="branch not covered" >device.platform.toLowerCase();</span>
+}
+&nbsp;
+/**
+ * blob转换file对象
+ * @param {*} theBlob 
+ * @param {*} fileName 
+ */
+function blobToFile(theBlob, fileName)<span class="fstat-no" title="function not covered" >{</span>
+    //A Blob() is almost a File() - it's just missing the two properties below which we will add
+<span class="cstat-no" title="statement not covered" >    theBlob.lastModifiedDate = new Date();</span>
+<span class="cstat-no" title="statement not covered" >    theBlob.name = fileName;</span>
+<span class="cstat-no" title="statement not covered" >    return theBlob;</span>
+}
+&nbsp;
+/**
+ * 本地读取
+ * @param {*} picUrl 
+ */
+export const getFileFromPath = function(picUrl) <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >    console.log('picUrl:', picUrl)</span>
+<span class="cstat-no" title="statement not covered" >    picUrl = 'file://' + picUrl;</span>
+<span class="cstat-no" title="statement not covered" >    return new Promise((resolve) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >        window.resolveLocalFileSystemURL(picUrl, function(fileEntry) <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >            fileEntry.file(function (file) <span class="fstat-no" title="function not covered" >{</span></span>
+                var reader = <span class="cstat-no" title="statement not covered" >new FileReader();</span>
+<span class="cstat-no" title="statement not covered" >                reader.onloadend = function() <span class="fstat-no" title="function not covered" >{</span></span>
+                    // Create a blob based on the FileReader "result", which we asked to be retrieved as an ArrayBuffer
+                    var blob = <span class="cstat-no" title="statement not covered" >new Blob([new Uint8Array(this.result)], { type: file.type });</span>
+                    let fileNew = <span class="cstat-no" title="statement not covered" >blobToFile(blob, file.name);</span>
+<span class="cstat-no" title="statement not covered" >                    console.log("convert blob to file",JSON.stringify(fileNew))</span>
+<span class="cstat-no" title="statement not covered" >                    resolve({file: fileNew});</span>
+                };
+                // Read the file as an ArrayBuffer
+<span class="cstat-no" title="statement not covered" >                reader.readAsArrayBuffer(file);</span>
+            }, function (err) <span class="fstat-no" title="function not covered" >{ </span>
+<span class="cstat-no" title="statement not covered" >                console.error('error getting fileentry file!' + JSON.stringify(err)); </span>
+<span class="cstat-no" title="statement not covered" >                resolve({err});</span>
+            });
+        }, function (err) <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >            console.error('error resolve file:' + JSON.stringify(err));</span>
+<span class="cstat-no" title="statement not covered" >            resolve({err});</span>
+        })
+    })
+}
+&nbsp;
+/**
+ * 转换ObjectURL，用于展示图片
+ * @param {*} file 
+ */
+export const readFileAsImageWeb = function(file) <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >    return new Promise((resolve) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+        // var reader = new FileReader();
+        // reader.onload = function (evt) {
+        //     let base64image = evt.target.result;
+        //     resolve(base64image);
+        // }
+        // reader.readAsDataURL(file);
+        let blob = <span class="cstat-no" title="statement not covered" >new Blob([file]),</span> // 文件转化成二进制文件
+            url = <span class="cstat-no" title="statement not covered" >URL.createObjectURL(blob);</span>
+<span class="cstat-no" title="statement not covered" >        resolve(url); </span>
+    })
+}
+&nbsp;
+/**
+ * 转换图片为链接，展示用，各平台通用处理
+ * @param {*} fileOrPath 
+ */
+export const readFileAsImageAllPlatform = function(fileOrPath) <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >    return new Promise((resolve) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >        if (isCordovaDevice()) {</span>
+<span class="cstat-no" title="statement not covered" >            resolve('file://' + fileOrPath.path);</span>
+        }else {
+<span class="cstat-no" title="statement not covered" >            readFileAsImageWeb(fileOrPath).then((objectUrl) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >                resolve(objectUrl)</span>
+            })
+        }
+    })
+}
+&nbsp;
+/**
+ * 获取文件 md5
+ * @param {*} file 
+ * @param {*} callback 
+ */
+export const getFileMd5 = function(file, callback) <span class="fstat-no" title="function not covered" >{</span>
+    let chunkSize = <span class="cstat-no" title="statement not covered" >2097152,</span>                             // Read in chunks of 2MB
+        chunks = <span class="cstat-no" title="statement not covered" >Math.ceil(file.size / chunkSize),</span>
+        currentChunk = <span class="cstat-no" title="statement not covered" >0,</span>
+        spark = <span class="cstat-no" title="statement not covered" >new SparkMD5.ArrayBuffer(),</span>
+        fileReader = <span class="cstat-no" title="statement not covered" >new FileReader();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    fileReader.onload = function (e) <span class="fstat-no" title="function not covered" >{</span></span>
+        // console.log('read chunk nr', currentChunk + 1, 'of', chunks);
+<span class="cstat-no" title="statement not covered" >        spark.append(e.target.result); </span>                  // Append array buffer
+<span class="cstat-no" title="statement not covered" >        currentChunk++;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (currentChunk &lt; chunks) {</span>
+            let progress = <span class="cstat-no" title="statement not covered" >(currentChunk / chunks * 100).toFixed();</span>
+<span class="cstat-no" title="statement not covered" >            loadNext();</span>
+        } else {
+            const fileMd5 = <span class="cstat-no" title="statement not covered" >spark.end();</span>
+<span class="cstat-no" title="statement not covered" >            console.log('finished loading');</span>
+<span class="cstat-no" title="statement not covered" >            console.info('computed hash', fileMd5); </span> // Compute hash
+<span class="cstat-no" title="statement not covered" >            callback &amp;&amp; callback(fileMd5);</span>
+        }
+    };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    fileReader.onerror = function (err) <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >        console.warn('oops, something went wrong.');</span>
+<span class="cstat-no" title="statement not covered" >        callback &amp;&amp; callback(null, err);</span>
+    };
+&nbsp;
+    function loadNext() <span class="fstat-no" title="function not covered" >{</span>
+        let start = <span class="cstat-no" title="statement not covered" >currentChunk * chunkSize,</span>
+            end = <span class="cstat-no" title="statement not covered" >((start + chunkSize) &gt;= file.size) ? file.size : start + chunkSize;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        fileReader.readAsArrayBuffer(file.slice(start, end));</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    loadNext();</span>
+}
+&nbsp;
+/**
+ * 获取文件md5，各平台通用处理
+ * @param {*} fileOrPath 
+ * @param {*} callback 
+ */
+export const getFileMd5AllPlatform = function(fileOrPath, callback) <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >    if (isCordovaDevice()) {</span>
+<span class="cstat-no" title="statement not covered" >        getFileFromPath(fileOrPath.path).then(({file, err}) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >            if (file) {</span>
+<span class="cstat-no" title="statement not covered" >                getFileMd5(file, (md5, MD5err) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >                    callback &amp;&amp; callback(file, md5, MD5err)</span>
+                })
+            }else {
+<span class="cstat-no" title="statement not covered" >                callback &amp;&amp; callback(file, null, err)</span>
+            }
+        })
+    }else {
+<span class="cstat-no" title="statement not covered" >        getFileMd5(fileOrPath, (md5, MD5err) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >            callback &amp;&amp; callback(fileOrPath, md5, MD5err)</span>
+        })
+    }
+}
+&nbsp;
+&nbsp;
+/**
+ * 获取blob的md5
+ */
+export const getBlobMd5 = function(blob, callback)<span class="fstat-no" title="function not covered" >{</span>
+    let name = <span class="cstat-no" title="statement not covered" >(new Date()).getTime();</span>
+    let fileNew = <span class="cstat-no" title="statement not covered" >blobToFile(blob, name);</span>
+<span class="cstat-no" title="statement not covered" >    getFileMd5(fileNew, (md5, MD5err) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >        callback &amp;&amp; callback(fileNew, md5, MD5err)</span>
+    })
+}
+&nbsp;
+/**
+ * 上传 ali oss
+ * @param {*} file
+ * @param {*} host
+ * @param {*} params
+ * @param {*} progressCallback
+ * @param {*} succ
+ * @param {*} fail
+ */
+function upload(file, host, params, progressCallback, succ, fail) <span class="fstat-no" title="function not covered" >{</span>
+    var formData = <span class="cstat-no" title="statement not covered" >new FormData();</span>
+<span class="cstat-no" title="statement not covered" >    forEach(params, (val, key) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >        formData.append(key, val);</span>
+    })
+<span class="cstat-no" title="statement not covered" >    formData.append("file", file);</span>
+    var request = <span class="cstat-no" title="statement not covered" >new XMLHttpRequest();</span>
+<span class="cstat-no" title="statement not covered" >    request.upload.onprogress = function(evt) <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >        if (evt.lengthComputable) {</span>
+            var percentComplete = <span class="cstat-no" title="statement not covered" >evt.loaded / evt.total;</span>
+<span class="cstat-no" title="statement not covered" >            progressCallback &amp;&amp; progressCallback(percentComplete);</span>
+        } else {
+            // Unable to compute progress information since the total size is unknown
+        }
+    }
+<span class="cstat-no" title="statement not covered" >    request.onload = function(evt) <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >        if (request.status == 200) {</span>
+<span class="cstat-no" title="statement not covered" >            console.log('uploaded');</span>
+<span class="cstat-no" title="statement not covered" >            succ &amp;&amp; succ({oss_path: `${host}/${params.key}`});</span>
+        }else{
+<span class="cstat-no" title="statement not covered" >            console.log('upload err status: ' + this.responseText);</span>
+<span class="cstat-no" title="statement not covered" >            fail &amp;&amp; fail(this.responseText)</span>
+        }
+    }
+<span class="cstat-no" title="statement not covered" >    request.onerror = function(err) <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >        console.log('upload err: ' + JSON.stringify(err))</span>
+<span class="cstat-no" title="statement not covered" >        fail &amp;&amp; fail(err)</span>
+    }
+<span class="cstat-no" title="statement not covered" >    request.open("POST", host);</span>
+<span class="cstat-no" title="statement not covered" >    request.send(formData);</span>
+}
+&nbsp;
+/**
+ * 获取图片评论上传的签名
+ */
+export const getUploadAuth = function(file, md5, succ, fail, uploadType) <span class="fstat-no" title="function not covered" >{</span>
+    let params = <span class="cstat-no" title="statement not covered" >{</span>
+        md5,
+        file_name: file.name,
+    }
+<span class="cstat-no" title="statement not covered" >    fetchUtil(queryUrl(`${model_api_url}upload/signature/public/${uploadType}`, params, false))</span>
+        .then(resp =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >            if (resp &amp;&amp; !resp.Status) {</span>
+<span class="cstat-no" title="statement not covered" >                succ &amp;&amp; succ(resp);</span>
+            }else {
+<span class="cstat-no" title="statement not covered" >                fail &amp;&amp; fail(resp);</span>
+            }
+        }).catch(err =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >            fail &amp;&amp; fail(err);</span>
+        })
+}
+&nbsp;
+/**
+ * 上传图片评论
+ */
+export const uploadFile = function(fileOrPath, uploadType, progressCallback, succ, fail) <span class="fstat-no" title="function not covered" >{</span>
+    let deviceType = <span class="cstat-no" title="statement not covered" >cordovaDeviceType();</span>
+<span class="cstat-no" title="statement not covered" >    if(uploadType === "snapshot" &amp;&amp; deviceType === "ios"){</span>
+<span class="cstat-no" title="statement not covered" >        getBlobMd5(fileOrPath, (file, md5, err) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >            if (file &amp;&amp; md5 !== null) {</span>
+<span class="cstat-no" title="statement not covered" >                getUploadAuth(file, md5, (resp) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+                    let {path, policy, accessid, signature, host} = <span class="cstat-no" title="statement not covered" >resp;</span>
+                    let name = <span class="cstat-no" title="statement not covered" >file.name;</span>
+                    let params = <span class="cstat-no" title="statement not covered" >{</span>
+                        'name': name,
+                        'key': path,
+                        'policy': policy,
+                        'OSSAccessKeyId': accessid,
+                        'success_action_status': '200', //让服务端返回200,不然，默认会返回204
+                        'signature': signature,
+                    };
+<span class="cstat-no" title="statement not covered" >                    upload(file, host, params, progressCallback, succ, fail);</span>
+                }, fail, uploadType)
+            }else {
+<span class="cstat-no" title="statement not covered" >                fail &amp;&amp; fail(err);</span>
+            }
+        })
+    }
+    else{
+<span class="cstat-no" title="statement not covered" >        getFileMd5AllPlatform(fileOrPath, (file, md5, err) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >            if (file &amp;&amp; md5 !== null) {</span>
+<span class="cstat-no" title="statement not covered" >                getUploadAuth(file, md5, (resp) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+                    let {path, policy, accessid, signature, host} = <span class="cstat-no" title="statement not covered" >resp;</span>
+                    let name = <span class="cstat-no" title="statement not covered" >file.name;</span>
+                    let params = <span class="cstat-no" title="statement not covered" >{</span>
+                        'name': name,
+                        'key': path,
+                        'policy': policy,
+                        'OSSAccessKeyId': accessid,
+                        'success_action_status': '200', //让服务端返回200,不然，默认会返回204
+                        'signature': signature,
+                    };
+<span class="cstat-no" title="statement not covered" >                    upload(file, host, params, progressCallback, succ, fail);</span>
+                }, fail, uploadType)
+            }else {
+<span class="cstat-no" title="statement not covered" >                fail &amp;&amp; fail(err);</span>
+            }
+        })
+    }
+}
+&nbsp;
+/**
+ * 上传图片评论promise
+ */
+export const uploadFilePromise = function(fileOrPath, uploadType, progressCallback) <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >    return new Promise((resolve) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >        uploadFile(fileOrPath, uploadType, progressCallback, (resp) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >            resolve(resp);</span>
+        }, (err) =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >            resolve({err})</span>
+        })
+    })
+    
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Aug 09 2018 15:45:34 GMT+0800 (CST)
+</div>
+</div>
+<script src="../../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../../sorter.js"></script>
+</body>
+</html>

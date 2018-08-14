@@ -301,6 +301,30 @@ module.exports = [
         "clobbers": [
             "Wechat"
         ]
+    },
+    {
+        "file": "plugins/cordova-plugin-amap/www/amap.js",
+        "id": "cordova-plugin-amap.AMapPlugin",
+        "pluginId": "cordova-plugin-amap",
+        "clobbers": [
+            "window.AMapPlugin"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-android-permissions/www/permissions-dummy.js",
+        "id": "cordova-plugin-android-permissions.Permissions",
+        "pluginId": "cordova-plugin-android-permissions",
+        "clobbers": [
+            "cordova.plugins.permissions"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-imagepicker/www/ImagePicker.js",
+        "id": "cordova-plugin-imagepicker.ImagePicker",
+        "pluginId": "cordova-plugin-imagepicker",
+        "clobbers": [
+            "ImagePicker"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -318,7 +342,12 @@ module.exports.metadata =
     "cordova-plugin-statusbar": "2.4.1",
     "cordova-plugin-wechat": "2.3.0",
     "cordova-plugin-whitelist": "1.3.3",
-    "cordova-plugin-wkwebview-engine": "1.1.5-dev"
+    "cordova-plugin-wkwebview-engine": "1.1.5-dev",
+    "cordova-plugin-amap": "2.0.0",
+    "cordova-plugin-android-permissions": "1.0.0",
+    "cordova.plugins.diagnostic": "4.0.8",
+    "cordova-plugin-imagepicker": "1.1.5",
+    "cordova-android-support-gradle-release": "1.4.4"
 }
 // BOTTOM OF METADATA
 });

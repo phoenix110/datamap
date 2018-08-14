@@ -1,0 +1,9 @@
+{
+  "name": "datamap_app",
+  "update": "start",
+  "content_url": "http://ms.lite.maicedata.com",
+  "ios_identifier": "com.metrodata.datamap",
+  "android_identifier": "com.metrodata.datamap",
+  "min_native_interface": 1,
+  "release": "2018.08.14-09.34.11"
+}

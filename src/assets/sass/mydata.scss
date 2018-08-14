@@ -1,0 +1,24 @@
+.ios  .data-sort-list .item-inner:after{
+  height:0px;
+}
+.ios .popover-angle:after{
+  height:0px;
+}
+.ios .data-sort-list li{
+  max-height:62px;
+}
+.ios .data-sort-list .item-inner{
+  min-height:44px;
+}
+
+.ios .mydata {
+  .searchbar {
+    top: auto!important;
+    position: relative;
+  }
+  .tabbar {
+    position: fixed!important;
+    bottom: 0;
+  }
+  
+}

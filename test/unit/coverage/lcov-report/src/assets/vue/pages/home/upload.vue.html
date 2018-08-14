@@ -20,14 +20,14 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">40% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>4/4</span>
+        <span class='fraction'>4/10</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">50% </span>
+        <span class="strong">25% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>1/2</span>
+        <span class='fraction'>1/4</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -35,13 +35,13 @@
         <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
+        <span class="strong">40% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>4/4</span>
+        <span class='fraction'>4/10</span>
       </div>
     </div>
   </div>
-  <div class='status-line high'></div>
+  <div class='status-line low'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -108,7 +108,23 @@
 63
 64
 65
-66</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -160,22 +176,30 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
-    &lt;f7-page class="upload_page" navbar-through toolbar-fixed tabs
-        @page:afterin="onPageAfterin"&gt;
+    &lt;f7-page class="upload_page" navbar-through toolbar-through tabs
+        @page:afterin="onPageAfterin" &gt;
         &lt;f7-navbar&gt;
             &lt;f7-subnavbar&gt;
                 &lt;f7-searchbar key="upload_searchbar"
@@ -183,14 +207,17 @@
                               search-container=".up-searchbar-comp-list"
                               disable-button-text="取消"
                               placeholder="搜索"
+                              @searchbar:enable="enableTest"
+                              @searchbar:disable="onSearchDisable"
+                              @input="onSearchInput"
                               backdrop
                 &gt;&lt;/f7-searchbar&gt;
             &lt;/f7-subnavbar&gt;
         &lt;/f7-navbar&gt;
         &lt;div class="up-page-content"&gt;
-            &lt;mapPanel :mapProps="mapProps" v-if="initmap"&gt;&lt;/mapPanel&gt;
+            &lt;mapPanel :mapProps="mapProps" v-if="initmap &amp;&amp; !testModel" :searchContent="searchContent" :searchEnable="searchEnable" @panelCallBack="panelCallBack"&gt;&lt;/mapPanel&gt;
         &lt;/div&gt;
-        &lt;main-tabbar v-if="tabbarStatus" :selected-index="1"&gt;&lt;/main-tabbar&gt;
+        &lt;main-tabbar v-if="tabbarStatus &amp;&amp; !searchEnable" :selected-index="1"&gt;&lt;/main-tabbar&gt;
     &lt;/f7-page&gt;
 &lt;/template&gt;
 &lt;script&gt;
@@ -204,15 +231,14 @@ export default {
         'main-tabbar':mainTabbar,
         mapPanel,
     },
+    props: ["testModel"],
     data() {
         return {
             tabbarStatus: true,
             initmap: false,
             mapProps: {
                 map_id: 'map_panel_1',
-                // mapStyle: "amap://styles/d65140aa79f193e1cd49a4142a54fb94",
-                // mapStyle: "amap://styles/normal",
-                mapStyle: "amap://styles/light",
+                mapStyle: "amap://styles/d4e9338d74853aa23bedaf367126e113",
                 mapCenter: [121.3866647443, 31.1500060413],
                 zoom: 9,
                 setMapCenter: [110.3866647443, 34.1500060413],
@@ -220,21 +246,31 @@ export default {
                 zooms: [4, 18],
                 scrollWheel: true,
                 userLocation: true,
-            }
+            },
+            searchEnable: false,
+            searchContent: "",
         }
     },
-    // mounted(){
-    //     bus.$on('setUploadTabbar', this.setUploadTabbar)
-    // },
     methods: {
         onPageAfterin() {
             this.initmap = true
             let nav_dom = this.$$(".navbar-current")[0];
             nav_dom &amp;&amp; (<span class="branch-1 cbranch-no" title="branch not covered" >nav_dom.style.height = 0)</span>;
         },
-        // setUploadTabbar(vl){
-        //     this.tabbarStatus = vl;
-        // }
+        onSearchDisable(){
+<span class="cstat-no" title="statement not covered" >            this.searchEnable = false;</span>
+<span class="cstat-no" title="statement not covered" >            this.searchContent = "";</span>
+        },
+        onSearchInput(e){
+<span class="cstat-no" title="statement not covered" >            this.searchContent = e.target.value;</span>
+        },
+        enableTest(e){
+<span class="cstat-no" title="statement not covered" >            this.targetff = e;</span>
+<span class="cstat-no" title="statement not covered" >            this.searchEnable=true;</span>
+        },
+        panelCallBack(){
+<span class="cstat-no" title="statement not covered" >            this.targetff &amp;&amp; this.targetff.disable();</span>
+        },
     }
 };
 &lt;/script&gt;
@@ -244,7 +280,7 @@ export default {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat Jun 09 2018 20:38:52 GMT+0800 (CST)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Aug 09 2018 15:45:34 GMT+0800 (CST)
 </div>
 </div>
 <script src="../../../../../prettify.js"></script>

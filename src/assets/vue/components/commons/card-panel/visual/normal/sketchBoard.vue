@@ -21,29 +21,32 @@ export default {
     display: inline-flex;
     position: relative;
     font-size: 12px;
-    color: #000;
+    color: #6b7280;
     .sketch-board-temp {
-        height: 41px;
+        height: 32px;
         flex: 1;
         .sketch-board-temp-color {
             height: 10px;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
         }
         .sketch-board-temp-text {
             transform: translate3d(-50%, 0, 0);
             text-align: center;
+            line-height: 17px;
         }
     }
     &>.sketch-board-temp:last-child {
         position: absolute;
-        height: 23px;
+        height: 18px;
         right: -13px;
         bottom: 0;
         .sketch-board-temp-color {
             display: none;
+            margin-bottom: 5px;
         }
         .sketch-board-temp-text {
             transform: translate3d(0, 0, 0);
+            line-height: 17px;
         }
     }
 }

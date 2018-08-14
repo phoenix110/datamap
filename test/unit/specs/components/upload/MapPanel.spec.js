@@ -3,7 +3,7 @@ import { shallowMount, createLocalVue } from '@vue/test-utils'
 import MapPanel from 'components/upload/map-panel'
 const localVue = createLocalVue()
 
-describe('MapPanel.vue', () => {
+describe('UploadMapPanel.vue', () => {
   let vm
 
   afterEach(() => {
@@ -14,7 +14,7 @@ describe('MapPanel.vue', () => {
     AMap.Map.prototype.setZoomAndCenter = function() {}
     const wrapper = shallowMount(MapPanel, {
       localVue,
-      propsData: {mapProps: {map_id: 'mapid',mapStyle: "light", zoom: 12, mapCenter: [121,31]}},
+      propsData: {mapProps: {map_id: 'mapid',mapStyle: "light", zoom: 12, mapCenter: [121,31]}, searchEnable: false, searchContent: ""},
       mocks: {
         $f7Route: {
           context: {item: {}},

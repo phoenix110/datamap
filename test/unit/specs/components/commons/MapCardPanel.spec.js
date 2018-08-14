@@ -5,7 +5,7 @@ import pageList from 'src/mocker/pageList.json'
 
 describe('MapCardPanel.vue', () => {
   let vm
-  
+
   afterEach(() => {
     destroyVM(vm)
   })

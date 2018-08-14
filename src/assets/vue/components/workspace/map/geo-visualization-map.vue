@@ -1,21 +1,34 @@
 <template>
     <div :class="isDetailPg ? 'geo-map-detailpg' : 'geo-map-style'">
         <div class="dynamic-map-show" v-if="isDetailPg">
-            <MapPanel ref="mappanel" :mapData="cData" @initMapOther="initMapOther" :loaded="loaded"></MapPanel>
-            <div class="page-btn">
-                <div class="info-btn" @click="typePanel=true"><i class="icon-wallet"></i>
+            <MapPanel 
+                ref="mappanel" 
+                :mapData="cData" 
+                @initMapOther="initMapOther" 
+                :loaded="loaded"
+            ></MapPanel>
+            <div class="geo-map-card" v-if="currentClickBtn.length != 0">
+                <MapCardPanel 
+                    :mapCardData="currentMapCardPanel" :filterIndex="filterIndex" :cardBtnWatch="cardBtnWatch"
+                ></MapCardPanel>
+            </div>
+            <div class="geo-map-card-btn">
+                <div class="geo-map-card-btn-content">
+                    <div class="map-card-btn-group" v-for="(vl1, dx1) in mapCardList" :key="dx1">
+                        <div :class="['map-card-btn', currentClickBtn===(dx1 + '_' + dx2) ? 'map-card-btn-select' : '']" 
+                        v-for="(vl2, dx2) in vl1.filters" 
+                        :key="dx2" 
+                        @click="onClickCardBtn(vl1, dx1, dx2)">
+                            <div :class="getCardIconClass(vl1, dx2)" :style="getCardIconStyle(vl1, dx2)"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <transition name="type-panel">
-                <div class="type-panel" v-if="typePanel">
-                    <MapCardPanel :iData="mapCardData" @modelClose="onModelClose"></MapCardPanel>
-                </div>
-            </transition>
         </div>
         <div class="static-map-show" v-else>
             <div class="map-title">{{cData ? cData.title : ''}}</div>
             <div class="map-img">
-                <div class="img-bg" :style="{'backgroundImage': cData && cData.thumb ? `url(${map_img_url+cData.thumb})` : 'url(./static/images/skeleton.png)'}"></div>
+                <div class="img-bg" :style="{'backgroundImage': cData && cData.thumb ? `url(${map_img_url+cData.thumb})` : 'url(./static/images/icon_map_default.png)'}"></div>
             </div>
         </div>
     </div>
@@ -34,15 +47,16 @@ import uuidv1 from 'uuid/v1'
 import fetchUtil from '../../../../js/utils/fetchUtil';
 import queryUrl from '../../../../js/utils/queryUrl';
 import amapUtil from '../../../../js/utils/amapUtil';
-import bus from '../../../../js/utils/bus'
-import {model_api_url, headers, paramFake, static_map_url, fakeParamObj} from '../../../../js/constants/ApiConfig';
+import bus from '../../../../js/utils/bus';
+import {setIconClass, setIconStyle} from '../../../../js/utils/getIcon';
+import {model_api_url, headers, static_map_url} from '../../../../js/constants/ApiConfig';
 import {
     fence_select, self_select, dis_select, buffer_select, visualization_colors, poi_icons,
     MapVisualTypes, source_customer, source_market, PolygonSourceKey, PolygonPackageIdKey,
     custom_card_menu, packet_select, geo_types, h_type_date, h_type_number, h_type_text
 } from '../../../../js/constants/Constants'
 import MapPanel from '../../commons/map-panel.vue';
-import MapCardPanel from '../../commons/map-card-panel.vue';
+import MapCardPanel from '../../commons/card-panel/map-card-panel.vue';
 
 const spatial_relations = {
     '1': 'intersects', //包含交叉区域
@@ -69,7 +83,6 @@ export default {
         return {
             mapCardData: {},
             map_img_url: static_map_url,
-            // staticMapSrc: (static_map_url+this.cData.thumb),
             map: {},
             drawpolygon: {},  //覆盖物集合
             maplayers: {},
@@ -77,7 +90,6 @@ export default {
             columnTypes: {},
             massMarkers: {}, //点位
             heatMaps: {},  //热力
-            polygonLayers: {}, //围栏数据
             lineLayers: {}, //线数据
             markValue: {},
             buffers: {}, //buffers geos
@@ -86,6 +98,13 @@ export default {
             typePanel: false,
             bgPolygonData: {},
             loaded: false,
+
+            //新版地理卡片
+            mapCardList: [],  //地理card数组
+            currentClickBtn: "",  //确认当前点击的card btn
+            filterIndex: 0,  //当前地理卡片filter序号
+            currentMapCardPanel: {},  //当前地理卡片配置信息
+            cardBtnWatch: '', //用于MapCardPanel组件检测数据更新
         }
     },
     components: {
@@ -95,11 +114,13 @@ export default {
     watch: {
         cData: function(){
             this.init();
+            this.getMapCardOptions();
         }
     },
     created(){
         if(this.cData){
             this.init();
+            this.getMapCardOptions();
         }
     },
     methods: {
@@ -213,8 +234,8 @@ export default {
                                 var {min, max} = r
                                 return [r.key, r.h_type, [min === undefined ? null : min, max === undefined ? null : max]]
                             } else if (r.h_type === h_type_date) {
-                                var {start, end} = r
-                                return [r.key, r.h_type, [start, end]]
+                                var {start, end, fast_type, end_is_today} = r
+                                return [r.key, r.h_type, {start, end: end_is_today ? undefined : end, fast_type, end_is_today}]
                             }
                         })
                         var {spatial_relation} = filter;
@@ -231,26 +252,18 @@ export default {
                     })
                 })
             })
-            // this.massMarks = [];
-            // this.heatMaps = [];
-            // let mapIns = this.$refs.mappanel
-            // mapIns && mapIns.setMapBlocking(true)
             Promise.all(pss)
                 .then(resp => {
                     _this.loaded = true;
-                    // mapIns && mapIns.setMapBlocking(false)
                     var allpoints = [];
                     forEach(resp, (r, idx) => {
                         let [dataSet, points] = this.dealDataSet(r, pssMap[idx].item.geometry_type);
                         allpoints = allpoints.concat(points);
-                        // debugger;
                         pssMap[idx].filter.data = dataSet;
                         this.addDataToMap(dataSet, pssMap[idx].card, pssMap[idx].item, pssMap[idx].filter);
                     });
-                    // this.map && this.map.setFitView();
                     bus.$emit('mapFetchData');
                 }).catch(err => {
-                // mapIns && mapIns.setMapBlocking(false)
                     console.log(err);
                     _this.loaded = true;
                 })
@@ -300,7 +313,6 @@ export default {
         
         fetchCustomerDataWithOutFilter(object_type, geometry_type, source) {
             var params = {
-                ...fakeParamObj,
                 geo_type: geometry_type,
                 check_geometry: false,
             }
@@ -409,9 +421,7 @@ export default {
         },
         fetchData(data, source) {
             source = source || source_customer;
-            var params = {
-                ...fakeParamObj
-            }
+            var params = {}
             var postdata = JSON.stringify(data)
             return new Promise((resolve, reject) => {
                 return fetchUtil(queryUrl(`${model_api_url}datamap/poi/v2/${source}/query`, params), {
@@ -519,15 +529,8 @@ export default {
                 })
                 layersMap[id] = layer;
                 layers = layers.concat(layer);
-                // forEach(layer, p => {
-                //     p.on('click',  e => {
-                //         this.onShowPolygonInfo(e, card.uid, filter.uid)
-                //     })
-                // })
             })
             this.map.add(layers);
-            this.polygonLayers[card.uid] = this.polygonLayers[card.uid] || {}
-            this.polygonLayers[card.uid][filter.uid] = layersMap;
         },
         addLineToMapExt(dataSet, card, item, filter) {
             if (!this.map) return;
@@ -774,7 +777,30 @@ export default {
         },
         onModelClose(){
             this.typePanel = false;
-        }
+        },
+
+        //新版地理卡片
+        getMapCardOptions(){
+            let {cards, geo_filter, supp_filters} = this.cData.config, mapCardList = [];
+            cards.map(vl1 => {
+                mapCardList = mapCardList.concat(vl1.items);
+            })
+            this.mapCardList = mapCardList;
+        },
+        onClickCardBtn(value, index1, index2){
+            let currentMapCardPanel;
+            currentMapCardPanel = value;
+            this.filterIndex = index2;
+            this.currentClickBtn = index1 + '_' + index2;
+            this.currentMapCardPanel = currentMapCardPanel;
+            this.cardBtnWatch = new Date();
+        },
+        getCardIconClass(vl1, dx2){
+            return setIconClass(vl1, dx2);
+        },
+        getCardIconStyle(vl1, dx2){
+            return setIconStyle(vl1, dx2);
+        },
     }
 }
 </script>
@@ -812,47 +838,50 @@ export default {
     .dynamic-map-show {
         height: 100%;
         position: relative;
-        .page-btn {
+        .geo-map-card {
             position: absolute;
-            width: 40px;
-            right: 14px;
-            top: 18px;
-            .info-btn, .map-switch {
-                width: 32px;
-                height: 32px;
-                border-radius: 50%;
-                background-color: #409eff;
-                margin-left: 4px;
-                text-align: center;
-                line-height: 32px;
-                i{
-                    color: #fff;
+            width: 100%;
+            bottom: 52px;
+            box-sizing: border-box;
+            padding: 0 8px 0 8px;
+            z-index: 10;
+        }
+        .geo-map-card-btn {
+            width: 100%;
+            height: 48px;
+            bottom: 0;
+            position: absolute;
+            background-color: #fff;
+            overflow-x: auto;
+            .geo-map-card-btn-content {
+                .map-card-btn-group {
+                    display: inline-block;
+                    vertical-align: top;
+                    .map-card-btn {
+                        width: 48px;
+                        height: 48px;
+                        margin-left: 8px;
+                        padding-top: 8px;
+                        box-sizing: border-box;
+                        display: inline-block;
+                        .icomoon, .icon-panel{
+                            text-align: center;
+                            font-size: 20px;
+                        }
+                        .icon-panel {
+                            margin-top: 4px;
+                        }
+                        .icon-polygon {
+                            margin-left: 12px;
+                        }
+                    }
+                    .map-card-btn-select {
+                        border: solid 1px rgba(0, 122, 255, 0.4);
+                        background-color: rgba(0, 122, 255, 0.1);
+                        box-shadow: 0 0 2px 0 rgba(0, 122, 255, 0.5);
+                    }
                 }
             }
-            .map-switch {
-                margin-top: 16px;
-            }
-        }
-        .type-panel {
-            position: absolute;
-            width: 320px;
-            // height: 344px;
-            max-height: 344px;
-            top: 7px;
-            right: 7px;
-            background-color: #fff;
-        }
-
-        .type-panel-enter, .type-panel-leave-active {
-            opacity: 0;
-            right: -320px;
-        }
-        .type-panel-enter-to, .type-panel-leave {
-            opacity: 1;
-            right: 7px;
-        }
-        .type-panel-enter-active, .type-panel-leave-active {
-            transition: all 300ms;
         }
     }
 }

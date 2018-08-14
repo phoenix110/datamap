@@ -53,6 +53,8 @@ let theme = 'ios';
 
 console.log(process.env);
 
+window.console.clear = () => {}
+
 // Init Vue App
 export default new Vue({
   // Root Element

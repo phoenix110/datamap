@@ -1,0 +1,1313 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/assets/vue/pages/dataUpload/my-data-page.vue</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../../index.html">all files</a> / <a href="index.html">src/assets/vue/pages/dataUpload/</a> my-data-page.vue
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">50.63% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>81/160</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">49.4% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>41/83</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">53.33% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>16/30</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">51.61% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>80/155</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line medium'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">100×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">34×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">100×</span>
+<span class="cline-any cline-yes">100×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">34×</span>
+<span class="cline-any cline-yes">34×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">37×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">1171×</span>
+<span class="cline-any cline-yes">1171×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1171×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">589×</span>
+<span class="cline-any cline-yes">2296×</span>
+<span class="cline-any cline-yes">2296×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2296×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">151×</span>
+<span class="cline-any cline-yes">135×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
+    &lt;f7-page class="upload-data-page" navbar-through toolbar-through&gt;
+        &lt;f7-navbar ref="uploadNavbar"&gt;
+            &lt;f7-nav-left&gt;
+                &lt;f7-link back @click="onDataPageBack" text="返回" icon-f7="left"&gt;&lt;/f7-link&gt;
+            &lt;/f7-nav-left&gt;
+            &lt;div class="title"&gt;数据列表&lt;/div&gt;
+            &lt;f7-nav-right&gt;
+                &lt;div class="data-table-ope" @click="onClickNavbar"&gt;{{prePage==='MapPanel' ? '' : '新建'}}&lt;/div&gt;
+            &lt;/f7-nav-right&gt;
+        &lt;/f7-navbar&gt;
+        &lt;f7-searchbar
+            key="upload-my-data-search"
+            class="upload-my-data-search"
+            placeholder="搜索"
+            disable-button-text="取消"
+            :clear-button="false"
+            @input="onSearchInput"
+            @searchbar:enable="onSearchEnable"
+            @searchbar:disable="onSearchDisable"
+        &gt;&lt;/f7-searchbar&gt;
+        &lt;div :class="['page-content-list', searchContent.length === 0 &amp;&amp; searchEnable ? 'page-search-model' : '']" &gt;
+            &lt;div class="search-layer" @click="onSearchDisable"&gt;&lt;/div&gt;
+            &lt;TreeMenu :data="currentList" @onItemClick="onSelectDataPg" v-show="hasData"&gt;&lt;/TreeMenu&gt;
+            &lt;div class="no-data-content" v-show="noData"&gt;
+                &lt;div class="no-data-content-img"&gt;&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="no-data-content" v-show="loading"&gt;
+                &lt;f7-preloader&gt;&lt;/f7-preloader&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/f7-page&gt;
+&lt;/template&gt;
+&lt;script&gt;
+import map from 'lodash/map'
+import cloneDeep from 'lodash/cloneDeep'
+import forEach from 'lodash/forEach'
+import forEachRight from 'lodash/forEachRight'
+import size from 'lodash/size'
+import find from 'lodash/find'
+import findIndex from 'lodash/findIndex'
+import slice from 'lodash/slice'
+import filter from 'lodash/filter'
+import pick from 'lodash/pick'
+import merge from 'lodash/merge'
+import uniqWith from 'lodash/uniqWith';
+import queryUrl from '../../../js/utils/queryUrl';
+import bus from '../../../js/utils/bus';
+import userUtil from '../../../js/utils/userUtil';
+import { getResourcesData, fetchDirectoryConfigData } from 'src/assets/apis/myData';
+import {filter_tree, get_node, render_pid} from '../../../js/utils/filter_util'
+import {model_api_url, headers, paramFake} from '../../../js/constants/ApiConfig';
+import {geo_types, geoTypesMap, market_level_5,
+    source_customer, source_market, market_label_tip, GlobalKeys, paths} from '../../../js/constants/Constants';
+import global from '../../../js/utils/global'
+import TreeMenu from "../../components/upload/tree-menu.vue";
+import PinYin from '../../../js/utils/PinYin';
+const directory_cfg = 'directory_cfg';
+const sortMenus = [
+    {type: 'cus', title: '自定义分类'},
+    {type: 'type', title: '按类型分类'},
+    // {type: 'date', title: '按上传日期分类'},
+    // {type: 'source', title: '按来源分类'},
+]
+const pageSize = 30;
+export default {
+    data(){
+        return{
+            currentItem: null,
+            allResource: {},
+            resourceList: [],
+            currentList: [],
+            directoryCfg: {},
+            curPageAll: 1,
+            countAll: 0,
+            sortType: sortMenus[0],
+            searchContent: '',
+            user: {},
+            prePage: '',
+            searchEnable: false,
+            loading: true,
+        }
+    },
+    computed:{
+        hasData: function() {
+            return this.currentList.length &amp;&amp; !this.loading
+        },
+        noData: function() {
+            return !this.currentList.length &amp;&amp; !this.loading
+        }
+    },
+    created(){
+        setTimeout(() =&gt; {
+            this.prePage = size(this.$f7Route.context) ? this.$f7Route.context.prePage : <span class="branch-1 cbranch-no" title="branch not covered" >"";</span>
+            this.currentItem = size(this.$f7Route.context) ? this.$f7Route.context.item : <span class="branch-1 cbranch-no" title="branch not covered" >null;</span>
+            this.user = userUtil.get();
+            this.fetchDirectoryConfig();
+        }, 200)
+    },
+    mounted(){
+        
+    },
+    components: {
+        TreeMenu,
+    },
+    methods: {
+        onSearchInput(e){
+<span class="cstat-no" title="statement not covered" >            console.log('list', this.resourceList)</span>
+<span class="cstat-no" title="statement not covered" >            this.searchContent = e.target.value;</span>
+<span class="cstat-no" title="statement not covered" >            this.currentList = this.getAllByFilter(this.resourceList);</span>
+        },
+        onSelectDataPg(vl){
+<span class="cstat-no" title="statement not covered" >            this.currentItem = vl;</span>
+<span class="cstat-no" title="statement not covered" >            if(this.prePage === "MapDrawPanel"){</span>
+<span class="cstat-no" title="statement not covered" >                bus.$emit("dataListPageBackDraw", this.currentItem);</span>
+<span class="cstat-no" title="statement not covered" >                this.$f7Router.back();</span>
+            }
+            else <span class="cstat-no" title="statement not covered" >if(this.prePage === "MapPanelToDrawPage"){</span>
+                let zoomCenter = <span class="cstat-no" title="statement not covered" >this.$f7Route.context ? this.$f7Route.context.zoomCenter : {};</span>
+<span class="cstat-no" title="statement not covered" >                this.$f7Router.navigate(paths.map_draw, {context: {item: this.currentItem, zoomCenter: zoomCenter}});</span>
+            }
+            else <span class="cstat-no" title="statement not covered" >if(this.prePage === "MapPanel"){</span>
+<span class="cstat-no" title="statement not covered" >                bus.$emit("dataListPageBack", this.currentItem);</span>
+<span class="cstat-no" title="statement not covered" >                this.$f7Router.back();</span>
+            }
+            let id = <span class="cstat-no" title="statement not covered" >this.user &amp;&amp; this.user.id;</span>
+<span class="cstat-no" title="statement not covered" >            if(this.prePage != "MapPanel")</span>
+<span class="cstat-no" title="statement not covered" >                global.set(GlobalKeys.data_select_history + id, JSON.stringify(vl));</span>
+        },
+        onDataPageBack(){
+<span class="cstat-no" title="statement not covered" >            bus.$emit("dataListPageBack", this.currentItem);</span>
+        },
+        onClickNavbar(){
+<span class="cstat-no" title="statement not covered" >            if(this.prePage === "MapPanel"){</span>
+                // this.currentItem = {};
+                // bus.$emit("dataListPageBack", this.currentItem);
+                // this.$f7Router.back();
+            }
+            else <span class="cstat-no" title="statement not covered" >if(this.prePage === "MapDrawPanel" || this.prePage === "MapPanelToDrawPage"){</span>
+<span class="cstat-no" title="statement not covered" >                this.$f7Router.navigate(paths.create_dataPkg);</span>
+            }
+        },
+        getResources() {
+            getResourcesData().then(resp =&gt; {
+                let res = {
+                    "customer": resp ? resp : <span class="branch-1 cbranch-no" title="branch not covered" >{}</span>
+                }
+                this.allResource = this.getAllRss(res);
+                this.getCurResourcesBySortType();
+                this.loading = false;
+            })
+            .catch(err =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >                console.error(err);</span>
+<span class="cstat-no" title="statement not covered" >                this.loading = false; </span>
+            })
+        },
+        fetchDirectoryConfig() {
+            let id =  this.user &amp;&amp; this.user.id;
+            this.loading = true;
+            fetchDirectoryConfigData(directory_cfg, id).then(resp =&gt; {
+                <span class="missing-if-branch" title="else path not taken" >E</span>if(!resp.Status){
+                    this.directoryCfg = resp.result &amp;&amp; resp.result[0] &amp;&amp; resp.result[0].extra || <span class="branch-3 cbranch-no" title="branch not covered" >{};</span>
+                    render_pid(this.directoryCfg.dirs);
+                    let dirs = cloneDeep(this.directoryCfg.dirs);
+                    dirs.forEach((vl, dx, input) =&gt; {
+                        input[dx].children = [];
+                    })
+                    this.resourceList = dirs;
+                    this.currentList = dirs;
+                    this.getResources();
+                }
+                else{
+<span class="cstat-no" title="statement not covered" >                    this.getResources();</span>
+                }
+            }).catch(err =&gt; <span class="fstat-no" title="function not covered" >{</span>
+<span class="cstat-no" title="statement not covered" >                console.error(err);</span>
+<span class="cstat-no" title="statement not covered" >                this.getResources();</span>
+            })
+        },
+        getAllRss(resp) {
+            var rss = [];
+            <span class="missing-if-branch" title="else path not taken" >E</span>if (5 === market_level_5) {
+                let {customer, market} = resp || <span class="branch-1 cbranch-no" title="branch not covered" >{};</span>
+                <span class="missing-if-branch" title="else path not taken" >E</span>if (customer) {
+                    let {point, polygon, line, plain} = customer;
+                    forEach(point, (p, k) =&gt; {
+                        rss.push(this.getPoiNode(k, p[0]));
+                    })
+                    forEach(polygon, (p, k) =&gt; {
+                        rss.push(this.getPolygonNode(k, p[0]));
+                    })
+                    forEach(line, (p, k) =&gt; {
+                        rss.push(this.getLineNode(k, p[0]));
+                    })
+                    // forEach(plain, (p, k) =&gt; {
+                    //     rss.push(this.getPlainNode(k));
+                    // })
+                }
+                <span class="missing-if-branch" title="if path not taken" >I</span>if (market) {
+                    let {point, polygon, line, plain} = <span class="cstat-no" title="statement not covered" >market;</span>
+<span class="cstat-no" title="statement not covered" >                    forEach(point, p =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >                        rss.push(this.getPoiNode(`${p.object_type}${market_label_tip}`, source_market, p.id));</span>
+                    })
+<span class="cstat-no" title="statement not covered" >                    forEach(polygon, p =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >                        rss.push(this.getPolygonNode(`${p.object_type}${market_label_tip}`, source_market, p.id));</span>
+                    })
+<span class="cstat-no" title="statement not covered" >                    forEach(line, p =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >                        rss.push(this.getLineNode(`${p.object_type}${market_label_tip}`, source_market, p.id));</span>
+                    })
+<span class="cstat-no" title="statement not covered" >                    forEach(plain, p =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >                        rss.push(this.getPlainNode(`${p.object_type}${market_label_tip}`, source_market, p.id));</span>
+                    })
+                }
+            } else {
+                let {point, polygon, line, plain} = <span class="cstat-no" title="statement not covered" >resp || {};</span>
+<span class="cstat-no" title="statement not covered" >                forEach(point, (p, k) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >                    rss.push(this.getPoiNode(k));</span>
+                })
+<span class="cstat-no" title="statement not covered" >                forEach(polygon, (p, k) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >                    rss.push(this.getPolygonNode(k));</span>
+                })
+<span class="cstat-no" title="statement not covered" >                forEach(line, (p, k) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >                    rss.push(this.getLineNode(k));</span>
+                })
+<span class="cstat-no" title="statement not covered" >                forEach(plain, (p, k) =&gt; <span class="fstat-no" title="function not covered" >{</span></span>
+<span class="cstat-no" title="statement not covered" >                    rss.push(this.getPlainNode(k));</span>
+                })
+            }
+            return rss;
+        },
+        getRssByGeoType() {
+            var all = <span class="cstat-no" title="statement not covered" >[];</span>
+            var pois = <span class="cstat-no" title="statement not covered" >filter(this.allResource, t =&gt; <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >t.geo_type == geo_types.point)</span></span>;</span>
+            var polygons = <span class="cstat-no" title="statement not covered" >filter(this.allResource, t =&gt; <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >t.geo_type == geo_types.polygon)</span></span>;</span>
+            var lines = <span class="cstat-no" title="statement not covered" >filter(this.allResource, t =&gt; <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >t.geo_type == geo_types.line)</span></span>;</span>
+            var plains = <span class="cstat-no" title="statement not covered" >filter(this.allResource, t =&gt; <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >t.geo_type == geo_types.plain)</span></span>;</span>
+<span class="cstat-no" title="statement not covered" >            all.push({</span>
+                id: 0,
+                name: geoTypesMap[geo_types.point],
+                geometry_type: geo_types.point,
+                children: pois,
+                isParent: true,
+            })
+<span class="cstat-no" title="statement not covered" >            all.push({</span>
+                id: 1,
+                name: geoTypesMap[geo_types.polygon],
+                geometry_type: geo_types.polygon,
+                children: polygons,
+                isParent: true,
+            })
+<span class="cstat-no" title="statement not covered" >            all.push({</span>
+                id: 2,
+                name: geoTypesMap[geo_types.line],
+                geometry_type: geo_types.line,
+                children: lines,
+                isParent: true,
+            })
+<span class="cstat-no" title="statement not covered" >            all.push({</span>
+                id: 3,
+                name: geoTypesMap[geo_types.plain],
+                geometry_type: geo_types.plain,
+                children: plains,
+                isParent: true,
+            })
+<span class="cstat-no" title="statement not covered" >            return all</span>
+        },
+        getPoiNode(name, ids, source=source_customer, packageId='') {
+            let id = `${geo_types.point}_${name}_${source}_${packageId}`;
+            return {id, ids, name, source, packageId, geo_type: geo_types.point, iconSkin: 'tree_poi_icon', isParent: false};
+        },
+        getPolygonNode(name, ids, source=source_customer, packageId='') {
+            let id = `${geo_types.polygon}_${name}_${source}_${packageId}`;
+            return {id, ids, name, source, packageId, geo_type: geo_types.polygon, iconSkin: 'tree_polygon_icon', isParent: false};
+        },
+        getLineNode(name, ids, source=source_customer, packageId='') {
+            let id = `${geo_types.line}_${name}_${source}_${packageId}`;
+            return {id, ids, name, source, packageId, geo_type: geo_types.line, iconSkin: 'tree_polyline_icon', isParent: false};
+        },
+        getPlainNode(name, ids, source=source_customer, packageId='') {
+            let id = <span class="cstat-no" title="statement not covered" >`${geo_types.plain}_${name}_${source}_${packageId}`;</span>
+<span class="cstat-no" title="statement not covered" >            return {id, ids, name, source, packageId, geo_type: geo_types.plain, iconSkin: 'tree_plain_icon', isParent: false};</span>
+        },
+        getCurResourcesBySortType() {
+            var {curPageAll} = this;
+            var all = this.getAllResourcesBySortType();
+            this.resourceList = all;
+            this.currentList = all;
+        },
+        //根据sorttype 获取 tree menu
+        getAllResourcesBySortType() {
+            var {sortType} = this;
+            var type = sortType.type;
+            let all = [];
+            <span class="missing-if-branch" title="else path not taken" >E</span>if (type == sortMenus[0].type) { // 文件夹分类
+                var leftRss = []; //剩余未分类
+                var dirs = this.directoryCfg &amp;&amp; this.directoryCfg.dirs || <span class="branch-2 cbranch-no" title="branch not covered" >[];</span>
+                dirs = cloneDeep(dirs);
+                <span class="missing-if-branch" title="else path not taken" >E</span>if (size(dirs)) {
+                    forEach(dirs, d =&gt; {
+                        var s = [];
+                        d.children = uniqWith(d.children, (t,m) =&gt; {
+                            return t.name == m.name &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >t.source == m.source </span>&amp;&amp; <span class="branch-2 cbranch-no" title="branch not covered" >t.packageId == m.packageId </span>&amp;&amp; <span class="branch-3 cbranch-no" title="branch not covered" >t.geo_type == m.geo_type;</span>
+                        })
+                        forEach(d.children, t =&gt; {
+                            let fd = find(this.allResource, a =&gt; {
+                                let isGeo = a.name === t.name &amp;&amp; a.geo_type === t.geo_type;
+                                <span class="missing-if-branch" title="if path not taken" >I</span>if (isGeo &amp;&amp; a.source === source_market) {
+<span class="cstat-no" title="statement not covered" >                                    return a.packageId === t.packageId;</span>
+                                }
+                                return isGeo;
+                            });
+                            <span class="missing-if-branch" title="else path not taken" >E</span>if (fd) {
+                                s.push(fd);
+                            }
+                        })
+                        d.children = s;
+                    })
+                    forEach(this.allResource, t =&gt; {
+                        let hasF = find(dirs, d =&gt; find(d.children, c =&gt; {
+                            let isGeo = c.name == t.name &amp;&amp; c.geo_type == t.geo_type;
+                            <span class="missing-if-branch" title="if path not taken" >I</span>if (isGeo &amp;&amp; c.source === source_market) {
+<span class="cstat-no" title="statement not covered" >                                return c.packageId === t.packageId;</span>
+                            }
+                            return isGeo;
+                        }));
+                        if (!hasF) {
+                            leftRss.push(t);
+                        }
+                    })
+                }else {
+<span class="cstat-no" title="statement not covered" >                    leftRss = this.allResource;</span>
+                }
+                all = [...dirs, ...leftRss];
+            }else <span class="cstat-no" title="statement not covered" >if (type == sortMenus[1].type){ // 类型分类</span>
+<span class="cstat-no" title="statement not covered" >                all = this.getRssByGeoType();</span>
+            }
+            return all
+        },
+        getAllByFilter(rss) {
+            var {searchContent} = <span class="cstat-no" title="statement not covered" >this;</span>
+            var filterRss = <span class="cstat-no" title="statement not covered" >filter_tree(rss, 'name', searchContent);</span>
+<span class="cstat-no" title="statement not covered" >            return filterRss;</span>
+        },
+        getCurPageSource(src, curPage) {
+<span class="cstat-no" title="statement not covered" >            return slice(src, (curPage-1)*pageSize, pageSize * curPage);</span>
+        },
+        onSearchDisable(){
+<span class="cstat-no" title="statement not covered" >            this.searchEnable=false;</span>
+<span class="cstat-no" title="statement not covered" >            this.searchContent = "";</span>
+<span class="cstat-no" title="statement not covered" >            this.currentList = this.getAllByFilter(this.resourceList);</span>
+<span class="cstat-no" title="statement not covered" >            this.$f7.navbar.show(this.$$(".navbar"));</span>
+<span class="cstat-no" title="statement not covered" >            this.$f7.searchbar.disable(this.$$(".upload-data-page .searchbar"));</span>
+<span class="cstat-no" title="statement not covered" >            this.$$(".upload-data-page .searchbar")[0].style.top = '44px';</span>
+<span class="cstat-no" title="statement not covered" >            this.$$(".upload-data-page .page-content")[0].style.paddingTop = '88px';</span>
+        },
+        onSearchEnable(){
+<span class="cstat-no" title="statement not covered" >            this.searchEnable=true;</span>
+<span class="cstat-no" title="statement not covered" >            this.$f7.navbar.hide(this.$$(".navbar"));</span>
+<span class="cstat-no" title="statement not covered" >            this.$$(".upload-data-page .searchbar")[0].style.top = 0;</span>
+<span class="cstat-no" title="statement not covered" >            this.$$(".upload-data-page .page-content")[0].style.paddingTop = '44px';</span>
+        },
+    }
+}
+&lt;/script&gt;
+&lt;style lang='scss' scoped&gt;
+.data-table-ope {
+    line-height: 44px;
+    color: #007aff;
+}
+.list {
+  margin-top: 0;
+  margin-bottom: 0;
+  &amp; &gt; .list-group:first-child {
+    .list-group-title {
+      display: none;
+    }
+  }
+}
+.search-layer {
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    height: calc(100vh - 44px);
+    background-color: rgba(0,0,0,0.5);
+}
+.page-content-list {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-color: #fff;
+    .search-layer {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(0,0,0,0.5);
+    }
+}
+.page-search-model {
+    overflow: hidden;
+    .search-layer {
+        display: block;
+    }
+}
+.searchbar {
+    transition: top 200ms;
+}
+.my-data-search {
+    background-color: #f2f2f5;
+}
+.my-data-search:after {
+    display: none;
+}
+&lt;/style&gt;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Aug 09 2018 15:45:34 GMT+0800 (CST)
+</div>
+</div>
+<script src="../../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../../sorter.js"></script>
+</body>
+</html>

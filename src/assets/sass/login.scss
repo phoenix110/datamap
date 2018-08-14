@@ -1,21 +1,35 @@
 .ios, .md {
   .login-screen-content {
-    background-image: url("../../static/images/m_login_bg.png");
-    background-size: cover;
-    padding-top: 144px!important;
-    color: #fff;
+    background-color: #f2f2f5;
+    transition: padding-top 200ms;
 
     .login-screen-title {
-      width: 240px;
-      height: 74px;
-      background-image: url("../../static/images/datamap_logo.png");
+      width: 254px;
+      height: 59px;
+      background-image: url("../../static/images/datamap_logo.svg");
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
     }
 
+    .username, .password {
+      .username-text, .username-password {
+        font-family: Pingfang SC;
+        font-size: 14px;
+        color: #89919a;
+        line-height: 20px;
+        margin-bottom: 5px;
+      }
+      input {
+        padding: 0;
+      }
+      .item-inner {
+        padding: 0;
+      }
+    }
+
     input {
-      color: #fff !important;
+      color: #000 !important;
     }
     input[type="text"]::placeholder, input[type="password"]::placeholder, input[type="search"]::placeholder, input[type="email"]::placeholder, input[type="tel"]::placeholder, input[type="url"]::placeholder, input[type="date"]::placeholder, input[type="datetime-local"]::placeholder, input[type="time"]::placeholder, input[type="number"]::placeholder, select::placeholder {
       color: rgba(255, 255, 255, 0.5) !important;
@@ -25,17 +39,30 @@
       background: #2196f3;
     }
 
-    .login_btn {
-      margin: 40px 28px 0;
-      background: #2D9FEA;
-      border-radius: 2px;
-      //&:hover,&:active,&:focus {
-      //  background: #61C0FF;
-      //}
+    .login_btn, .wxlogin_btn {
+      margin: 32px 32px 16px;
       a.list-button {
+        border-radius: 10px;
         color: #fff !important;
+        background-color: #1f89f2;
+        transition: all 0.3s;
         &.active-state {
-          background: #61C0FF;
+          background-color: #61C0FF;
+        }
+      }
+      .list-button::after {
+        display: none;
+      }
+    }
+  
+    .wxlogin_btn {
+      margin-top: 16px;
+      a.list-button {
+        border: 1px solid #1f89f2;
+        background-color: #f2f2f5;
+        color: #1f89f2 !important;
+        &.active-state {
+          color: #fff !important;
         }
       }
     }
@@ -52,16 +79,29 @@
 .ios {
   .login-screen-content {
     .list .item-content {
-      padding-left: 28px;
-      padding-right: 28px;
+      padding-left: 32px;
+      padding-right: 32px;
+    }
+    .list {
+      margin-top: 32px;
+      margin-bottom: 32px;
+    }
+    ul {
+      &>li:not(first-child) {
+        margin-top: 16px;
+      }
     }
   }
 }
 .md {
   .login-screen-content {
+    .list {
+      margin-top: 32px;
+      margin-bottom: 32px;
+    }
     .list .item-content {
-      padding-left: 28px;
-      padding-right: 14px;
+      padding-left: 32px;
+      padding-right: 32px;
     }
     .item-input-wrap:after {
       content: '';

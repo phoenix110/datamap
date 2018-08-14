@@ -1,19 +1,29 @@
 <template>
     <div :class="isDetailPg ? 'data-radar-isDetailPg' : 'data-radar-style'">
-        <div :class="['chart_loading', isDetailPg ? 'detailpg-loading' : '']" v-if="!loaded">
+        <div :class="['chart_loading', isDetailPg ? 'detailpg-loading' : '']" v-if="!loaded || !viewLoaded">
             <f7-preloader></f7-preloader>
-            <span class="ml5">努力加载中...</span>
+            <!-- <span class="ml5">努力加载中...</span> -->
         </div>
         <div class="content-area" v-else>
             <div class="radar-title" v-if="!isDetailPg">{{cData.title}}</div>
+            <div class="filter-area" v-else>
+                <FiltersPanel 
+                    :geoFilters="geoFilters" 
+                    :title="chartTitle" 
+                    :filterParams="filterParams">
+                </FiltersPanel>
+            </div>
             <div class="radar-detail-info" v-if="isDetailPg" :style="{'visibility': dataShow.data.length !=0 ? '' : 'hidden'}">
+                <div class="title">{{dataShow.title}}</div>
                 <div class="scroll-area">
-                    <div class="info-template" v-for="(value, index) in dataShow.data" :key="index" :style="{'color': dataShow.color}">{{value}}{{index===dataShow.data.length-1 ? '' : '，'}}</div>
+                    <div class="info-template" v-for="(value, index) in dataShow.data" :key="index" :style="{'color': dataShow.color}">
+                        <div class="value">{{value}}{{index===dataShow.data.length-1 ? '' : '，'}}</div>
+                        <div class="name">{{dataShow.name[index].name}}</div>
+                    </div>
                 </div>
-                <div class="text">{{dataShow.name}}</div>
             </div>
             <div class="radar-draw">
-                <vchart class="echarts_radar" :options="options" :init-options="initOptions" />
+                <vchart ref="radar" class="echarts_radar" :options="options" :init-options="initOptions" />
             </div>
         </div>
     </div>
@@ -27,19 +37,27 @@ import max from 'lodash/max';
 import cloneDeep from 'lodash/cloneDeep';
 import keys from 'lodash/keys';
 import pick from 'lodash/pick';
+import bus from '../../../../js/utils/bus';
 import fetchUtil from '../../../../js/utils/fetchUtil';
+import queryUrl from '../../../../js/utils/queryUrl';
+import FiltersPanel from '../../commons/filters-panel.vue';
 import {model_api_url, headers, paramFake} from '../../../../js/constants/ApiConfig';
 import {radar_colors, radarMenus, defaultRadarExtraValues,
-    max_setting_type_1, maxItemLen, h_type_formula, defaultLegendStyle} from '../../../../js/constants/Constants'
+    max_setting_type_1, maxItemLen, h_type_formula, defaultLegendStyle , chart_theme_color_map,
+    chart_theme_color_len as colorLen, chart_theme_default} from '../../../../js/constants/Constants'
 const hide = {show: false};
-const colorLen = size(radar_colors);
+//const colorLen = size(radar_colors);
 const xKeys = keys(defaultRadarExtraValues.xAxisExt);
 const yKeys = keys(defaultRadarExtraValues.yAxisExt);
 export default {
     name: 'data-radar',
-    props: ['cData', 'isDetailPg'],
+    props: ['cData', 'isDetailPg', 'geoFilters', 'chartTitle', 'viewLoaded'],
+    components: {
+        FiltersPanel,
+    },
     data() {
         return {
+            geoFiltersBf: {},
             initOptions: {
                 renderer: "canvas"
             },
@@ -50,24 +68,63 @@ export default {
                 color: '',
             },
             loaded: false,
+            filterParams: {},
+            alreadyListener: false,
         };
     },
     created(){
-        size(this.cData) ? this.getFillData() : null;
+        if(size(this.cData)){
+            let {cData, geoFilters, alreadyListener, isDetailPg} = this;
+            this.geoFiltersBf = geoFilters;
+            this.getFillData();
+            this.filterParams = {
+                source: cData.source,
+                object_type: cData.object_type,
+                geometry_type: cData.geometry_type,
+            }
+            //增加筛选器监听事件
+            if(!alreadyListener && size(geoFilters.filters) && isDetailPg){
+                this.alreadyListener = true;
+                bus.$on("graphFilterListener", this.refreshGraphFilter)
+            }
+        }
     },
     watch: {
         cData: function(){
-            size(this.cData) ? this.getFillData() : null;
+            if(size(this.cData)){
+                let {cData, geoFilters, alreadyListener, isDetailPg} = this;
+                if(alreadyListener) return;
+                this.geoFiltersBf = geoFilters;
+                this.getFillData();
+                this.filterParams = {
+                    source: cData.source,
+                    object_type: cData.object_type,
+                    geometry_type: cData.geometry_type,
+                }
+                //增加筛选器监听事件
+                if(!alreadyListener && size(geoFilters.filters) && isDetailPg){
+                    this.alreadyListener = true;
+                    bus.$on("graphFilterListener", this.refreshGraphFilter)
+                }
+            }
         }
     },
     methods: {
         getFillData(force_update=false){
-            fetchUtil(`${model_api_url}graph/config?force_update=${force_update}${paramFake}`,
-            {method: 'POST', headers, body: JSON.stringify(this.cData)})
+            let {cData: {name, filters}, geoFiltersBf} = this;
+            fetchUtil(queryUrl(`${model_api_url}graph/config`, {
+                force_update,
+                vault_name: name,
+            }),
+            {method: 'POST', headers, body: JSON.stringify(geoFiltersBf)})
             .then(resp=>{
-                this.getOption(resp.result);
+                this.getOption(resp.result || {});
                 this.loaded = true;
             })
+        },
+        refreshGraphFilter(filters){
+            this.geoFiltersBf.filters = filters;
+            this.getFillData();
         },
         omitColor(t) {
             if (typeof t === 'object') {
@@ -113,6 +170,8 @@ export default {
 
             let data = [], legend = [], indicator = [],
                 colors = [], legendMap = {};
+
+            ;
             if (size(xAlis) >= 3 && size(yAlis)) {
                 let names = chartData[yAlis[0].key] || [];
                 let {type, settingValue} = yAxisExt_new.maxSetting;
@@ -133,7 +192,9 @@ export default {
                 let {valueForce:force, valueRoundNum:roundNum} = yAxisExt_new;
                 let alias = yAxisExt.aliasMap || {},
                     color = yAxisExt.colorMap || {},
-                    aliasMapTmp = {}, colorMapTmp = {};
+                    aliasMapTmp = {}, colorMapTmp = {},
+                    chartColors = chart_theme_color_map[legendExt.theme||chart_theme_default];
+                    //取值，如果没有主题色，则取默认值
                 data = map(names, (name, i)=>{
                     let value = [];
                     forEach(xAlis, it=>{
@@ -141,11 +202,11 @@ export default {
                         value.push(_this.getDataVal(val, force, roundNum, 0));
                     })
                     let nc = color[name];
-                    nc ? (colorMapTmp[name] = nc) : (nc = radar_colors[i % colorLen] || radar_colors[0]);
+                    nc ? (colorMapTmp[name] = nc) : (nc = chartColors[i % colorLen] || chartColors[0]);
                     colors.push(nc);
                     let nameVal = alias[name];
                     nameVal ? (aliasMapTmp[name] = nameVal) : (nameVal = name);
-                    legend.push({name: nameVal, icon: 'circle'});
+                    legend.push({name: nameVal, icon: 'rect'});
                     legendMap[name] = {color: nc, alias: nameVal};
                     // return {name: nameVal, value, areaStyle: {emphasis: {color: nc, opacity: 0.3}}};
                     return {name: nameVal, value};
@@ -164,35 +225,47 @@ export default {
                 color: colors,
                 animationDuration: 1000,
                 textStyle: {
-                    color: '#AFB8DB',
-                    fontSize: 12
+                    color: '#A8ADB8',
+                    fontSize: 10,
+                    fontWeight: 300,
                 },
                 radar:{
-                    // triggerEvent: true,
                     splitArea: {show:false},
-                    center: ['50%', '45%'],
-                    radius: '60%',
-                    splitLine: {lineStyle: {color: '#6C7692'}},
-                    axisLine: {lineStyle: {color: '#6C7692'}},
+                    center: ['50%', '55%'],
+                    radius: isDetailPg ? '80%' : '85%',
+                    splitLine: {
+                        lineStyle: {
+                            color: '#DFE5E3'
+                        }
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            width: 0.5,
+                            color: '#DFE5E3'
+                        }
+                    },
                     indicator: indicator,
-                    name: {show: false, color:'#AFB8DB'},
+                    name: {
+                        color:'#AFB8DB',
+                        fontSize: isDetailPg ? 12 : 10,
+                        fontWeight: 300,
+                    },
+                    nameGap: 8,
                 },
                 series: {
                     data,
                     type: 'radar',
-                    symbol: 'roundRect',
+                    splitArea: {show:false},
+                    symbol: 'circle',
                     silent: _this.isDetailPg ? false : true,
-                    label: {
-                        show: false,
-                    }
-                }
+                },
             }
             options.grid = {
                 containLabel: true,
-                right: 30,
-                left: 30,
-                top: 10,
-                bottom: isDetailPg ? 40 : 20,
+                right: 15,
+                left: 15,
+                top: 15,
+                bottom: !isDetailPg && legend.length > 1 ? 20 : 10,
             }
             options.tooltip = _this.isDetailPg ? {
                 trigger: 'item',
@@ -204,34 +277,37 @@ export default {
                 },
                 formatter: function(params, ticket, callback){
                     _this.dataShow = {
-                        name: params.data ? params.data.name : '',
+                        title: params.data ? params.data.name : '',
                         data: params.data ? params.data.value : [],
+                        name: size(indicator) ? indicator : [],
                         color: params.color,
                     };
                 }
             } : hide;
-            options.series.title = {
-                show: true,
-                offsetCenter: [0, "85%"], //标题位置设置
-                textStyle: { //标题样式设置
-                    color: "#fff",
-                    fontSize: 15
-                }
-            };
-            if(isDetailPg && legendExt.show){
+            if(!isDetailPg && legend.length > 1){
                 options.legend = {
-                    type: 'scroll',
-                    orient: 'horizontal',
-                    bottom: _this.isDetailPg ? 30 : 12,
-                    itemWidth:10,
-                    itemHeight:10,
+                    animation: true,
                     data: legend,
-                    pageButtonGap: 10,
-                    padding: [0, 20, 0, 20],
-                    left: 'center',
+                    orient: 'horizontal',
+                    bottom: 0,
+                    type: 'scroll',
+                    itemWidth: 6,
+                    itemHeight: 6,
+                    padding: [0, 20, 6, 20],
+                    textStyle: {
+                        lineHeight: 16,
+                        color: "#6D737A",
+                        fontSize: "14px",
+                        fontWeight: 300,
+                    },
                 }
             }
-
+            this.dataShow = {
+                title: size(data) ? data[0].name : "",
+                data: size(data) ? data[0].value : [],
+                name: size(indicator) ? indicator : [],
+                color: size(colors) ? colors[0] : "",
+            };
             this.options = options;
             return "";
         },
@@ -242,17 +318,19 @@ export default {
 .data-radar-style {
     width: 100%;
     .radar-title {
-        line-height: 18px;
-        font-size: 15px;
+        line-height: 20px;
+        font-size: 14px;
         font-weight: 700;
-        color: #4A4D51;
+        color: #38393C;
         box-sizing: border-box;
-        padding: 25px 21px;
-        word-wrap: break-word;
+        padding: 24px 21px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
     .radar-draw {
         width: 100%;
-        height: 232px;
+        height: 182px;
         position: relative;
         overflow: hidden;
         .echarts_radar {
@@ -263,12 +341,13 @@ export default {
     .chart_loading {
         width: 100%;
         height: 100%;
-        min-height: 300px;
+        min-height: 250px;
     }
 }
 .data-radar-isDetailPg {
     width: 100%;
     height: 100%;
+    background-color: #fff;
     position: relative;
     .content-area {
         width: 100%;
@@ -277,27 +356,38 @@ export default {
         flex-direction: column;
         .radar-detail-info {
             width: 100%;
-            height: 100px;
+            height: 120px;
             box-sizing: border-box;
-            padding: 15px 24px 0 24px;
+            padding: 5px 0 0 0;
             font-family: PingFang SC;
             .scroll-area{
                 width: 100%;
-                height: 67px;
+                height: 87px;
                 overflow-x: auto;
                 display: inline-flex;
                 flex-wrap: nowrap;
                 .info-template {
                     display: inline-block;
-                    height: 67px;
-                    font-size: 48px;
-                    line-height: 67px;
+                    padding-left: 16px;
+                    box-sizing: border-box;
+                    .value {
+                        font-size: 48px;
+                        line-height: 67px;
+                    }
+                    .name {
+                        font-size: 14px;
+                        line-height: 20px;
+                        color: #6D737A;
+                    }
                 }
             };
-            .text{
-                line-height: 20px;
-                font-size: 14px;
-                color: #6D737A;
+            .title{
+                width: 100%;
+                line-height: 22px;
+                font-size: 16px;
+                color: #57585C;
+                padding-left: 16px;
+                box-sizing: border-box;
             }
         }
         .radar-draw {

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import { destroyVM, createTest, createVue } from '../../../util'
-import { mount } from '@vue/test-utils'
+import { shallowMount } from '@vue/test-utils'
 import MapPanelComp from 'components/commons/map-panel-comp.vue'
 
 describe('MapPanelComp.vue', () => {
@@ -11,7 +11,7 @@ describe('MapPanelComp.vue', () => {
   })
 
   it('should render correct contents', () => {
-    const wrapper = mount(MapPanelComp, {propsData: {
+    const wrapper = shallowMount(MapPanelComp, {propsData: {
         mapProps: {
             map_id: 'map_panel_1',
             mapStyle: "amap://styles/light",

@@ -15,6 +15,7 @@ describe('PointHotMap.vue', () => {
         cur_visual: {
             title: "按面积",
             col: "area",
+            type: 4,
         },
         style: {
             icon: 'icon-location_1'

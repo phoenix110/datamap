@@ -4,6 +4,9 @@ import slackHooks from './slackHooks'
 import {stripObjAll} from './numberUtil'
 import {paths} from '../constants/Constants'
 import bus from './bus'
+import {
+    __PROD__,
+} from '../dev-config';
 
 let deviceready = false;
 document.addEventListener("deviceready", function () {
@@ -27,12 +30,12 @@ function httpPromise(url, options) {
             }
             resolve(resp);
         }, (resp) => {
-            console.log(JSON.stringify(resp));            
+            console.log("httpPromise:",JSON.stringify(resp));            
             resp.json = function() {
-                return JSON.parse(resp.data);
+                return JSON.parse(resp.error);
             }
             resp.text = function() {
-                return resp.data;
+                return resp.error;
             }
             resolve(resp);
         })
@@ -112,20 +115,18 @@ export default function(url, opt) {
             } else if (rep.status == 304) {
                 resp = {Status: 304, Msg: "内容无修改"};
             } else {
-                resp = {Status: "1", status: rep.status, Msg: "网络错误: ".concat(rep.status, " ", rep.statusText)};
                 errPromise = rep.text();
                 errStatus = rep.status;
-                errMsg = rep.statusText;
+                errMsg = errPromise;
+                resp = { Status: "1", status: rep.status, Msg: __PROD__ ? "网络异常，请检查网络":"网络错误: ".concat(rep.status || "", " ", errPromise), text: errPromise};
             }
-            rep.headers.get && rep.headers.get('Authorization') && token.set(rep.headers.get('Authorization'));
-            rep.headers.authorization && token.set(rep.headers.authorization);
+            rep.headers && rep.headers.get && rep.headers.get('Authorization') && token.set(rep.headers.get('Authorization'));
+            rep.headers && rep.headers.authorization && token.set(rep.headers.authorization);
             return [resp, errPromise, errStatus, errMsg];
         }).then(([resp, errPromise, errStatus, errMsg]) => {
             if (errPromise && url.indexOf('index.php') !== -1) {
-                errPromise.then(errRsp => {
-                    let err = new Error([errStatus, errMsg, errRsp].join(", "));
-                    slackHooks.sendToSlack({url: url, options: JSON.stringify(opt), err: err});
-                })
+                let err = new Error([errStatus, errMsg].join(", "));
+                slackHooks.sendToSlack({url: url, options: JSON.stringify(opt), err: err});
             }
             resolve(resp);
         }).catch(err => {

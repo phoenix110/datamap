@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/assets/vue/pages/myData/my-data-detail-cont.vue</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../../index.html">all files</a> / <a href="index.html">src/assets/vue/pages/myData/</a> my-data-detail-cont.vue
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/17</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/6</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/2</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/17</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
+    &lt;f7-page class="detail-con"
+             data-page="detail-con"
+             navbar-through
+             toolbar-fixed
+             @page:afterin="onPageAfterin"&gt;
+        &lt;f7-navbar&gt;
+            &lt;f7-nav-left&gt;
+                &lt;f7-link back text="返回" icon-f7="left"&gt;&lt;/f7-link&gt;
+            &lt;/f7-nav-left&gt;
+            &lt;f7-nav-left&gt;
+                &lt;f7-link   text="编辑" @click="navigateToEdit"&gt;&lt;/f7-link&gt;
+            &lt;/f7-nav-left&gt;
+        &lt;/f7-navbar&gt;
+        &lt;div slot="fixed" class="map-contents"&gt;
+            &lt;map-panel-comp
+                    ref="my_data_detailInfo"
+                    :mapProps="mapProps"
+                    :showCover="true"
+                    :loading="false"
+            &gt;&lt;/map-panel-comp&gt;
+        &lt;/div&gt;
+        &lt;div class="pageItemList"&gt;
+            &lt;div class="upload-edit-base"&gt;
+                &lt;div class="base-info-name-input"&gt;
+                    &lt;div class="title-text"&gt;地块名称&lt;/div&gt;
+                    &lt;input :value="detailConData.name" disabled/&gt;
+                &lt;/div&gt;
+                &lt;div class="base-info-lng"  v-if="pointType"&gt;
+                    &lt;div class="title-text"&gt;经度&lt;/div&gt;
+                    &lt;input :value="pointLng" disabled/&gt;
+                &lt;/div&gt;
+                &lt;div class="base-info-lat"  v-if="pointType"&gt;
+                    &lt;div class="title-text" &gt;纬度&lt;/div&gt;
+                    &lt;input :value="pointLat" disabled/&gt;
+                &lt;/div&gt;
+                &lt;div class="base-info-lat"&gt;
+                    &lt;div class="title-text"&gt;用地性质&lt;/div&gt;
+                    &lt;input :value="detailConData.object_type" disabled/&gt;
+                &lt;/div&gt;
+                &lt;div class="base-info-lat" v-for="(item , key) in detailConData.extra" :key="key"&gt;
+                    &lt;div class="title-text"&gt;{{key}}&lt;/div&gt;
+                    &lt;input :value="item" disabled/&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/f7-page&gt;
+&lt;/template&gt;
+&lt;script&gt;
+    import MapPanelCom from '../../components/commons/map-panel-comp.vue';
+    import { getCenterLngLat } from '../../../js/utils/mapPanel'
+    import { paths, GlobalKeys } from '../../../js/constants/Constants';
+    import queryUrl from '../../../js/utils/queryUrl';
+    import fetchUtil from '../../../js/utils/fetchUtil';
+    import {model_api_url, } from '../../../js/constants/ApiConfig';
+    import bus from '../../../js/utils/bus';
+    import global from '../../../js/utils/global';
+    export default {
+        name:'my_data_detail_con',
+        props:[ ],
+        data() {
+<span class="cstat-no" title="statement not covered" >            return {</span>
+                mapProps:{
+                    map_id: 'mdt' + new Date(),
+                    mapStyle: "amap://styles/d4e9338d74853aa23bedaf367126e113",
+                    mapCenter: [121.3866647443, 31.1500060413],
+                    zoom: 9,
+                    setMapCenter: [110.3866647443, 34.1500060413],
+                    setZoom: 5,
+                    zooms: [4, 18],
+                    scrollWheel: true,
+                    userLocation: true,
+                },
+                detailConData:{},
+                pointType:false,
+                pointLng:'',
+                pointLat:'',
+                package_id:"",
+                record_id:'',
+&nbsp;
+            }
+        },
+        components: {
+            'map-panel-comp' : MapPanelCom,
+        },
+        created(){
+<span class="cstat-no" title="statement not covered" >            this.package_id = JSON.parse(global.get(GlobalKeys.package_id</span>));
+<span class="cstat-no" title="statement not covered" >            this.record_id = JSON.parse(global.get(GlobalKeys.record_id</span>));
+<span class="cstat-no" title="statement not covered" >            this.getSingleData</span>();
+<span class="cstat-no" title="statement not covered" >            bus.$on('forceDetailData', this.getSingleDa</span>ta)
+        },
+        beforeDestroy(){
+<span class="cstat-no" title="statement not covered" >            bus.$off('forceDetailData', this.getSingleDat</span>a);
+        },
+        methods:{
+            onPageAfterin(){
+<span class="cstat-no" title="statement not covered" >                this.pointType  = this.detailConData.geometry.type === 'Point' ? true : fal</span>se;
+<span class="cstat-no" title="statement not covered" >                if(this.pointType){</span>
+                    let po<span class="cstat-no" title="statement not covered" >i = getCenterLngLat(this.detailConDa</span>ta);
+<span class="cstat-no" title="statement not covered" >                    this.pointLng = poi[</span>0];
+<span class="cstat-no" title="statement not covered" >                    this.pointLat = poi[</span>1];
+                };
+<span class="cstat-no" title="statement not covered" >                this.$refs.my_data_detailInfo.addcoverExtraToMap(this.detailConDat</span>a);
+            },
+            navigateToEdit(){
+<span class="cstat-no" title="statement not covered" >                this.$f7router.navigate(paths.mydata_edit_page,{ context:{coverExtra : this.detailConData</span>}})
+            },
+            getSingleData(){
+<span class="cstat-no" title="statement not covered" >                fetchUtil(queryUrl(`${model_api_url}data/customer/${this.package_id}/records/${this.record_id}`))</span>
+                    .then(resp<span class="fstat-no" title="function not covered" > =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                        if(resp.result){</span>
+<span class="cstat-no" title="statement not covered" >                            this.detailConData = resp.resu</span>lt;
+                        }
+                    })
+                    .catch(err<span class="fstat-no" title="function not covered" > =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                        console.error(er</span>r);
+                    })
+            },
+        },
+    };
+&lt;/script&gt;
+&lt;style lang="scss" scoped&gt;
+    .map-contents{
+        position: absolute;
+        width:100%;
+        height:400px;
+    }
+    .pageItemList{
+        position: absolute;
+        width: 100%;
+        top: 300px;
+        bottom: 0;
+        background: #fff;
+        .upload-edit-text {
+            line-height: 36px;
+            box-sizing: border-box;
+            padding-left: 16px;
+            color: #8e8e93;
+&nbsp;
+            span {
+                color: #ff6464;
+            }
+&nbsp;
+        }
+        .upload-edit-base {
+            width: 100%;
+            box-sizing: border-box;
+            padding-left: 16px;
+            border-top: 1px solid #C8C7CC;
+            border-bottom: 1px solid #C8C7CC;
+            background-color: #fff;
+        .title-text {
+            line-height: 25px;
+            color: #8e8e93;
+            width: 100px;
+        }
+        input {
+            flex: 1;
+            border: none;
+            font-size: 14px;
+            color: #000;
+            background-color: #fff;
+            padding: 0;
+        }
+        .base-info-name-input, .base-info-lng, .base-info-lat {
+            width: 100%;
+            height: 45px;
+            box-sizing: border-box;
+            padding: 10px 0;
+            display: inline-flex;
+            align-items: center;
+        }
+        .base-info-lng{
+            border-bottom: 1px solid #c8c7cc;
+            }
+        }
+        .base-info-lat{
+            border-bottom: 1px solid #c8c7cc;
+&nbsp;
+        }
+        .base-info-lat:last-child{
+            border:none;
+        }
+        .base-info-name-input{
+            border-bottom:1px solid #c8c7cc;
+        }
+&nbsp;
+&nbsp;
+    }
+&lt;/style&gt;
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Aug 09 2018 15:45:34 GMT+0800 (CST)
+</div>
+</div>
+<script src="../../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../../sorter.js"></script>
+</body>
+</html>

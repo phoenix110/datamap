@@ -48,10 +48,22 @@
          nodes[i]._pid = pid;
      }
  }
+
+ function filter_list(nodes, value = ''){
+     if(value === '') return nodes;
+     if(!nodes) return [];
+     var result = [];
+     for (let i = 0; i < nodes.length; i += 1) {
+         if (nodes[i].toLowerCase().indexOf(value.toLowerCase()) >= 0 || value.trim() === '') 
+             result.push(nodes[i]);
+     }
+     return result;
+ }
  
  module.exports = {
      filter_tree,
      get_node,
      render_pid,
+     filter_list,
  }
  

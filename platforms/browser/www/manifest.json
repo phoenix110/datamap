@@ -7,5 +7,6 @@
   "description": "Datamap mobile",
   "author": "Shanghai Metrodata Tech Co., Ltd.",
   "icons": [],
-  "start_url": "index.html"
+  "start_url": "index.html",
+  "theme_color": "#ffffff"
 }

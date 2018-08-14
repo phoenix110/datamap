@@ -86,7 +86,7 @@ var app = {
             console.log(error.description);
         } else {
           console.log('Update installed!');
-          localStorage.setItem("show_changelog","true");
+        //   localStorage.setItem("show_changelog","true");
         }
     },
 
